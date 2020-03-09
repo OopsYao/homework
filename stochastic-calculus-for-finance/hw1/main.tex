@@ -1,0 +1,75 @@
+\documentclass[cn]{homework}
+
+\title{第2周作业}
+
+\begin{document}
+    \maketitle
+
+    \section{题1}
+    \begin{proof}
+    设随机变量$Y=(X-\mu)/\sigma\sim N(0,1)$，故
+    \begin{align*}
+        E\e^{uX}&=E\e^{u(\mu+\sigma Y)}\\
+                &=\e^{u\mu}E\e^{u\sigma Y}\\
+                &=\e^{u\mu}
+                    \int_{-\infty}^\infty
+                      \e^{u\sigma x}\frac{\e^{-\frac{x^2}{2}}}{\sqrt{2\pi}}
+                    \diff x\\
+                &=\e^{u\mu}\cdot\e^\frac{u^2\sigma^2}{2}
+                    \int_{-\infty}^\infty
+                    \frac{\e^{-\frac{(x-u\sigma)^2}{2}}}{\sqrt{2\pi}}
+                    \diff x\\
+                &=\e^{u\mu+\frac{u^2\sigma^2}{2}}
+    \end{align*}
+    \end{proof}
+
+    \section{题2}
+    \begin{proof}
+        由测度变换公式
+        \begin{equation}
+            \label{eq:p2}
+            \begin{aligned}
+            \tilde E\e^{uY}&=E(\e^{uY}Z)\\
+                           &=E\e^{uY-\theta X-\theta^2/2}\\
+                           &=E\e^{u\theta-\theta^2/2+(u-\theta)X}
+            \end{aligned}
+        \end{equation}
+        由于$X$服从$P$测度下的标准正态分布，故
+        \[E\e^{(u-\theta)X}=\e^{(u-\theta)^2/2}\]
+        因此\cref{eq:p2}变为
+        \[\tilde E\e^{uY}=\e^{u\theta-\theta^2/2}
+        \cdot\e^{(u-\theta)^2/2}=\e^{u^2/2}\]
+        即$Y$在$\tilde P$下服从标准正态分布。
+    \end{proof}
+
+    \section{题3}
+    \begin{subproblem}
+        \item
+        \begin{proof}
+        由于
+        \[\tilde P(\Omega)=\int_\Omega Z\diff P=EZ\]
+        故证明$EZ=1$即可。
+
+        由于$X$在$P$下服从参数$\lambda$的指数分布，故
+        \begin{align*}
+            EZ&=\int_0^\infty\frac{\bar\lambda}{\lambda}\e^{-(\bar\lambda-\lambda)x}
+            \cdot\lambda\e^{-\lambda x}\diff x\\
+            &=\int_0^\infty\bar\lambda\e^{-\bar\lambda x}\diff x\\
+            &=1
+        \end{align*}
+        因此$\tilde P(\Omega)=1$。
+        \end{proof}
+        
+        \item
+        同样地，由于$X$在$P$下的分布已知，故$\tilde P$下的分布函数
+        \begin{align*}
+            \tilde P\{X\leq a\}&=\int_{X\leq a}Z\diff P\\
+            &=\int_0^a\frac{\bar\lambda}{\lambda}\e^{-(\bar\lambda-\lambda)x}
+              \cdot\lambda\e^{-\lambda x}\diff x\\
+            &=\int_0^a\bar\lambda\e^{-\bar\lambda x}\diff x\\
+            &=1-\e^{-\bar\lambda a}\quad\forall a\geq 0
+        \end{align*}
+    \end{subproblem}
+    \sdfjljdldksjf
+
+\end{document}
