@@ -32,6 +32,8 @@
 % Subproblem environment
 \newenvironment{subproblem}{\begin{enumerate}[leftmargin=0pt,label=(\roman*)]}{\end{enumerate}}
 
+% Some useful math macros
+\input{math-macros.tex}
 
 % External author (.author.tex)
 \if@tweaktufte

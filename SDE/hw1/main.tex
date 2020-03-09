@@ -1,0 +1,54 @@
+\documentclass{homework}
+
+\usepackage{lipsum}
+
+\title{Homework 1}
+
+\begin{document}
+    \maketitle
+
+    \section{Problem 1}
+    \begin{subproblem}
+        \item
+        \begin{proof}
+            \lipsum[1]
+            \[P(\omega;X(\omega)\geq\lambda)\leq\frac{E\mathrm e^{tX}}{\mathrm e^{\lambda t}}\]
+
+            \lipsum[2]
+        \end{proof}
+
+        \item
+        \begin{proof}
+            \lipsum[4-6]
+        \end{proof}
+    \end{subproblem}
+
+    \section{Problem 2}
+    \begin{proof}
+        Since $X\sim N(\mu,\sigma^2)$,
+        denote $Y=(X-\mu)/\sigma\sim N(0,1)$, therefore
+        the mgf\sidenote{Moment generating function} of $X$ is
+        \begin{align*}
+            E\e^{tx}&=E\e^{t(\mu+\sigma Y)}\\
+                    &=\e^{t\mu}\int_{-\infty}^\infty\e^{t\sigma x}
+                      \cdot\frac{\e^{-\frac{x^2}2}}{\sqrt{2\pi}}\diff x\\
+                    &=\e^{t\mu}\cdot\e^{\frac{t^2\sigma^2}{2}}\int_{-\infty}^{\infty}
+                      \frac{1}{\sqrt{2\pi}}\e^{-\frac{(x-t\sigma)^2}{2}}
+                      \diff x\\
+                    &=\e^{t\mu+\frac{t^2\sigma^2}{2}}
+        \end{align*}
+        Hence
+        \begin{align*}
+            \frac{E\e^{tx}}{\e^{\lambda t}}&=\e^{t(\mu-\lambda)+\frac{t^2\sigma^2}{2}}\\
+            &=\e^{\frac{\sigma^2}{2}\left(t+\frac{\mu-\lambda}{\sigma^2}\right)^2}
+              \cdot\e^{-\frac{(\mu-\lambda)^2}{2\sigma^2}}\\
+            &\leq\e^{-\frac{(\mu-\lambda)^2}{2\sigma^2}}
+        \end{align*}
+
+        Applying Chernoff bounds we obtain
+        \begin{align*}
+            P(w,X(w)\geq\lambda)&\leq\frac{E\e^{tx}}{\e^{\lambda t}}
+            \leq\e^{-\frac{(\mu-\lambda)^2}{2\sigma^2}}
+        \end{align*}
+    \end{proof}
+\end{document}
