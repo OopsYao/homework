@@ -1,0 +1,117 @@
+\documentclass[cn]{homework}
+
+\title{作业1}
+
+\begin{document}
+    \maketitle
+    \section{题1}
+    \begin{proof}
+        非负性以及对称性是显然的，所以我们只需证明三角不等式的成立，
+        可以考虑函数
+        \[f(t)=\frac{t}{1+t},\quad t\geq 0\]
+        则$\rho(x,y)=f(d(x,y))$。
+        倘若我们证明了\sidenote{也就是凹性}
+        \begin{align*}
+            \forall u,v\geq 0\quad
+            f(u)+f(v)\geq f(u+v)
+        \end{align*}
+        则由于原距离的三角不等式可得
+        \begin{align*}
+            d(x,y)+d(y,z)\geq d(x,z)
+        \end{align*}
+        再由$f$的单调递增性
+        \begin{align*}
+            f\big(d(x,y)+d(y,z)\big)\geq f\big(d(x,z)\big)
+        \end{align*}
+        即得
+        \begin{align*}
+            f\big(d(x,y)\big)+f\big(d(y,z)\big)
+            \geq f\big(d(x,y)+d(y,z)\big)
+            \geq f\big(d(x,z)\big)
+        \end{align*}
+
+        而由于$f$为初等函数，二阶导数存在且连续，故由凹（凸）性的
+        等价定义，由$f''(t)\leq 0$，可以得到$f$是凹的。故
+        \begin{fullwidth}
+        \begin{align*}
+            f\left(\frac{u}{u+v}(u+v)\right)+f\left(\frac{v}{u+v}(u+v)\right)
+            \leq\frac{u}{u+v}f(u+v)+\frac{v}{u+v}f(u+v)
+            =f(u+v)
+        \end{align*}
+        \end{fullwidth}
+        
+        因此，$\rho=f(d)$满足距离公理，因此$(X,\rho)$亦为距离空间
+    \end{proof}
+    \section{题2}
+    \begin{subproblem}
+        \item
+        \begin{proof}
+        对称性是显然的，由于
+        \begin{align*}
+            \sup d_i=0\Leftrightarrow d_i=0,\forall i=1,2,3,\dots
+        \end{align*}
+        故非负性亦证得。下面考虑三角不等式，记\sidenote{对于数字下标
+        记法类似：$d_{1x},d_{2x},\ldots$}
+        \begin{align*}
+            d_x=d(y,z),\quad d_y=d(x,z),\quad d_z=d(x,y)
+        \end{align*}
+        则三角不等式可以表示为
+        \begin{align*}
+            d_x+d_y\geq d_z
+        \end{align*}
+
+        由确界的三角不等式，
+        \begin{multline*}
+            \sup\left\{d_{iz}-\left(d_{ix}+d_{iy}\right)+\left(d_{ix}+d_{iy}\right)\right\}\\
+            \leq\sup\left\{d_{iz}-\left(d_{ix}+d_{iy}\right)\right\}
+            +\sup\left\{d_{ix}+d_{iy}\right\}
+        \end{multline*}
+        即
+        \[
+            \sup\left\{d_{iz}\right\}
+            \leq\sup\left\{d_{iz}-\left(d_{ix}+d_{iy}\right)\right\}
+            +\sup\left\{d_{ix}+d_{iy}\right\}
+        \]
+        下面证明$\sup\left\{d_{iz}-\left(d_{ix}+d_{iy}\right)\right\}\leq 0$。
+
+        由于$d_i$为距离，故
+        \[d_{iz}\leq d_{ix}+d_{iy}\]
+        记上确界$\alpha=\sup\left\{d_{iz}-\left(d_{ix}+d_{iy}\right)\right\}$。
+        倘若$\alpha>0$，由确界定义，对于$\varepsilon=\alpha>0$，存在
+        $d_{iz}-\left(d_{ix}+d_{iy}\right)>\alpha-\varepsilon=0$，矛盾。
+        故$\alpha\leq 0$。因此
+        \[\sup\left\{d_{iz}\right\}\leq\sup\left\{d_{ix}+d_{iy}\right\}\]
+        即
+        \[d_z\leq d_x+d_y\]
+        三角不等式得证。故$d$为距离。
+        \end{proof}
+
+        \item
+        \begin{proof}
+        首先
+        \[\sum_{k=1}^\infty\frac{1}{2^k}\frac{d_k}{1+d_k}
+        \leq\sum_{k=1}^\infty\frac{1}{2^k}<\infty\]
+        结合距离非负知，级数绝对收敛。
+
+        由题1知$d_k/\left(1+d_k\right)$为距离，故
+        \[\frac{1}{2^k}\frac{d_{kx}}{1+d_{kx}}
+        +\frac{1}{2^k}\frac{d_{ky}}{1+d_{ky}}
+        \leq \frac{1}{2^k}\frac{d_{kz}}{1+d_{kz}}\]
+        因此
+        \[
+            \sum_{k=1}^\infty\frac{1}{2^k}\frac{d_{kx}}{1+d_{kx}}
+            +\sum_{k=1}^\infty\frac{1}{2^k}\frac{d_{ky}}{1+d_{ky}}
+            \leq\sum_{k=1}^\infty\frac{1}{2^k}\frac{d_{kz}}{1+d_{kz}}
+        \]
+        三角不等式得证。
+
+        由于
+        \[\sum_{k=1}^n\frac{1}{2^k}\frac{d_k}{1+d_k}
+        \leq\sum_{k=1}^\infty\frac{1}{2^k}\frac{d_k}{1+d_k}
+        \quad\forall n=1,2,3,\ldots\]
+        故
+        \[d=0\Leftrightarrow d_n=0,n=1,2,\ldots\]
+        由此非负性得证，同时对称性显然，故$d$为距离。
+        \end{proof}
+    \end{subproblem}
+\end{document}

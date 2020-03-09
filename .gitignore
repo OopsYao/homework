@@ -1,0 +1,16 @@
+*.aux
+*.fdb_latexmk
+*.fls
+*.out
+main.pdf
+*.synctex.gz
+*.xdv
+*.log
+
+# Ignore homework.cls emitted during build in proj dirs
+homework.cls
+!latex-template/homework.cls
+
+# Private file
+.author.tex
+.author.cn.tex

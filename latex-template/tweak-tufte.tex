@@ -1,0 +1,48 @@
+\RequirePackage{amssymb} % Maybe `unicode-math' should after this
+\RequirePackage{titlesec} % Tweak section
+\RequirePackage{unicode-math} % To setmathfont
+\RequirePackage{xparse} % NewDocumentCommand
+\RequirePackage{letltxmacro} % LetLtxMacro
+\RequirePackage{ctex} % Chinese
+
+% Restyle section
+\titleformat*{\section}{\Large\bfseries}
+
+% Font setting under xetex
+\setmainfont{TeX Gyre Pagella}
+\setmathfont{TeX Gyre Pagella Math} % Specific package needed. `unicode-math` satisfies
+
+% Reformat title, author and date
+\LetLtxMacro{\OldTitle}{\title}
+\RenewDocumentCommand{\title}{ o m }{%
+    \IfNoValueTF{#1}{%
+        \OldTitle[#2]{\textnormal{\textbf{#2}}}
+    }{%
+        \OldTitle[#1]{\textnormal{\textbf{#2}}}
+    }
+}
+
+\LetLtxMacro{\OldAuthor}{\author}
+\RenewDocumentCommand{\author}{ o m }{%
+    \IfNoValueTF{#1}{%
+        \OldAuthor[#2]{\small{#2}}
+    }{%
+        \OldAuthor[#1]{\small{#2}}
+    }
+}
+
+% The following code seems to hava something wrong
+% \LetLtxMacro{\OldDate}{\date}
+% \RenewDocumentCommand{\date}{ o }{%
+%     \IfNoValueTF{#1}{ \OldDate{} }{ \OldDate{\small{#1}} }
+% }
+\date{\today} % Default date
+\date{}
+
+% Try to fix some error
+% It seems to be a bug under `xetex'
+% See https://github.com/Tufte-LaTeX/tufte-latex/issues/64
+% 
+% Set up the spacing using fontspec features
+\renewcommand\allcapsspacing[1]{{\addfontfeature{LetterSpace=15}#1}}
+\renewcommand\smallcapsspacing[1]{{\addfontfeature{LetterSpace=10}#1}}
