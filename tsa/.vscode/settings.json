@@ -4,4 +4,6 @@
         "DOC=%DOC%",
         "OUTDIR=%OUTDIR%"
     ],
+    "latex-workshop.latex.outDir": "..",
+    "python.pythonPath": "envs/bin/python3.8",
 }

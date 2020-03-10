@@ -15,3 +15,6 @@ homework.cls
 # Private file
 .author.tex
 .author.cn.tex
+
+# Virtual envs
+envs/

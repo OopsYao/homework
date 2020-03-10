@@ -8,7 +8,6 @@ build: homework.cls
 	  -interaction=nonstopmode \
 	  -file-line-error \
 	  -pdfxe \
-	  -outdir=${OUTDIR} \
 	  ${DOC}
 	rm $<
 homework.cls: ${TEMPLATE}/homework.cls
