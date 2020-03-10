@@ -1,4 +1,3 @@
-OUTDIR ?= hw1
 DOC ?= hw1/main
 TEMPLATE = ../latex-template
 
@@ -8,7 +7,6 @@ build: homework.cls
 	  -interaction=nonstopmode \
 	  -file-line-error \
 	  -pdf \
-	  -outdir=${OUTDIR} \
 	  ${DOC}
 	rm $<
 homework.cls: ${TEMPLATE}/homework.cls

@@ -27,7 +27,7 @@
     \begin{proof}
         Since $X\sim N(\mu,\sigma^2)$,
         denote $Y=(X-\mu)/\sigma\sim N(0,1)$, therefore
-        the mgf\sidenote{Moment generating function} of $X$ is
+        the mgf of $X$ is
         \begin{align*}
             E\e^{tx}&=E\e^{t(\mu+\sigma Y)}\\
                     &=\e^{t\mu}\int_{-\infty}^\infty\e^{t\sigma x}
@@ -50,5 +50,25 @@
             P(w,X(w)\geq\lambda)&\leq\frac{E\e^{tx}}{\e^{\lambda t}}
             \leq\e^{-\frac{(\mu-\lambda)^2}{2\sigma^2}}
         \end{align*}
+    \end{proof}
+
+    \section{Problem 3}
+    \begin{proof}
+        Note that $P(|X(\omega)-\mu|/\sigma\geq\lambda)
+        =P(|X(\omega)-\mu|^2/\sigma^2)$,
+        we start from the definition of $E|X(\omega)-\mu|^2$,
+        \begin{align*}
+            E|X(\omega)-\mu|^2
+            &\geq\int_{|X-\mu|\geq\lambda\sigma}|X-\mu|^2\diff P\\
+            &\geq\int_{|X-\mu|\geq\lambda\sigma}\lambda^2\sigma^2\diff P\\
+            &=\lambda^2\sigma^2 P(\omega;|X-\mu|\geq \lambda\sigma)
+        \end{align*}
+
+        Also note that $\mathrm{Var}(X):=E|X-EX|^2$,
+        with $EX=\mu,\mathrm{Var}(X)=\sigma^2$ we have that
+        \[E|X(w)-\mu|^2=\sigma^2\]
+        It follows that
+        \[P\left(\omega;\frac{|X(\omega)-\mu|}{\sigma}\geq\lambda\right)
+        \leq\frac{1}{\lambda^2}\]
     \end{proof}
 \end{document}
