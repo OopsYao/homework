@@ -11,10 +11,31 @@
     \begin{subproblem}
         \item
         \begin{proof}
-            \lipsum[1]
-            \[P(\omega;X(\omega)\geq\lambda)\leq\frac{E\mathrm e^{tX}}{\mathrm e^{\lambda t}}\]
+            For $E(\e^{tX})$ we have that
+            \begin{align*}
+                E(\e^{tX})&\geq\int_{X(\omega)\geq\lambda}\e^{tX}\diff P\\
+                &\geq\e^{\lambda t}\int_{X(\omega)\geq\lambda}\diff P\\
+                &=\e^{\lambda t}P(\omega;X(\omega)\geq\lambda)
+            \end{align*}
+            Then we obtain
+            \[P(\omega;X(\omega)\geq\lambda)\leq\frac{E(\e^{tX})}{\e^{\lambda t}}\]
 
-            \lipsum[2]
+            Similarly we have\sidenote{It seems like there is something wrong in
+            the questions. This inequality can not hold for an arbitrary random varibale
+            $X$
+            \[P(X\leq\lambda)\leq\frac{E(\e^{tX})}{\e^{\lambda t}}
+            \leq P(X\geq\lambda)\]
+            
+            So I just proved another inequality which is probably the one you
+            really mean to.}
+
+            \begin{align*}
+                E(\e^{-tX})&\geq\int_{X(\omega)\leq\lambda}\e^{-tX}\diff P\\
+                &\geq\e^{-\lambda t}\int_{X(\omega)\leq\lambda}\diff P\\
+                &=\e^{-\lambda t}P(\omega;X(\omega)\leq\lambda)
+            \end{align*}
+            and so,
+            \[P(\omega;X(\omega)\leq\lambda)\leq\e^{\lambda t}E(\e^{-tX})\]
         \end{proof}
 
         \item
@@ -71,4 +92,38 @@
         \[P\left(\omega;\frac{|X(\omega)-\mu|}{\sigma}\geq\lambda\right)
         \leq\frac{1}{\lambda^2}\]
     \end{proof}
+
+    \section{Problem 5}
+    First we will show that $X_n\xrightarrow{\mathrm{s.t.}}0$.
+    \begin{proof}
+        For any $\delta\in(0,1]$, we have that $P(\omega;|X_n|\geq\delta)
+        =1/n\to 0$ as $n\to\infty$. And for $\delta>1$, $P(\omega;|X_n|\geq\delta)
+        =0$ which is trival. Therefore $X_n\xrightarrow{\mathrm{s.t.}}0$ as
+        $n\to\infty$.
+    \end{proof}
+
+    Then we will deal with $X_n\not\to 0$ a.e.
+    \begin{proof}
+    We adopt the definition of
+    \[P\left(\omega;\lim_{n\to\infty}X_n(\omega)=0\right)<1\]
+
+    Note that we have an equivalent definition of limit stated as
+    \[
+        \left\{\omega;\lim_{n\to\infty}X_n(\omega)=0\right\}
+        =\bigcap_{\varepsilon>0}\bigcup_{n=1}^\infty\bigcap_{m\geq n}
+         \mathcal B_m^\varepsilon
+    \]
+    where $\mathcal B_m^\varepsilon:=\{\omega;|X(\omega)|<\varepsilon\}$.
+
+    It follows that
+    \begin{align*}
+        P\left(\omega;\lim_{n\to\infty}X_n(\omega)=0\right)
+        \leq P\left(\bigcup_{n=1}^\infty\bigcap_{m\geq n}\mathcal B_m^\varepsilon\right)
+    \end{align*}
+
+    Also note that any union of subsets is still a subset, i.e.,
+    \[\bigcup_{n=1}^\infty\bigcap_{m\geq n}\mathcal B_m^\varepsilon
+    \subset\]
+    \end{proof}
+
 \end{document}
