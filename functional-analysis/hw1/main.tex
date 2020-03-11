@@ -8,7 +8,7 @@
     \begin{proof}
         非负性以及对称性是显然的，所以我们只需证明三角不等式的成立，
         可以考虑函数
-        \[f(t)=\frac{t}{1+t},\quad t\geq 0\]
+        \[f(t)=\frac{t}{1+t}\quad t\geq 0\]
         则$\rho(x,y)=f(d(x,y))$。
         倘若我们证明了\sidenote{也就是凹性}
         \begin{align*}
@@ -32,13 +32,11 @@
 
         而由于$f$为初等函数，二阶导数存在且连续，故由凹（凸）性的
         等价定义，由$f''(t)\leq 0$，可以得到$f$是凹的。故
-        \begin{fullwidth}
-        \begin{align*}
-            f\left(\frac{u}{u+v}(u+v)\right)+f\left(\frac{v}{u+v}(u+v)\right)
+        \begin{multline*}
+            f\left(\frac{u}{u+v}(u+v)\right)+f\left(\frac{v}{u+v}(u+v)\right)\\
             \leq\frac{u}{u+v}f(u+v)+\frac{v}{u+v}f(u+v)
             =f(u+v)
-        \end{align*}
-        \end{fullwidth}
+        \end{multline*}
         
         因此，$\rho=f(d)$满足距离公理，因此$(X,\rho)$亦为距离空间
     \end{proof}
@@ -84,6 +82,40 @@
         即
         \[d_z\leq d_x+d_y\]
         三角不等式得证。故$d$为距离。
+        \end{proof}
+
+        \item
+        \begin{proof}
+        同样地非负性与对称性是显然的，只需证明
+        \[\sqrt{\sum_{i=1}^m d_{ix}^2}
+        +\sqrt{\sum_{i=1}^m d_{iy}^2}
+        \leq\sqrt{\sum_{i=1}^m d_{iz}^2}  
+        \]
+
+        由于$d_i$为距离，故
+        \[d_{ix}+d_{iy}\geq d_{iz}\]
+        因此
+        \[\sum_{i=1}^m \left(d_{ix}+d_{iy}\right)^2
+        \geq\sum_{i=1}^m d_{iz}^2\]
+        等价化为
+        \[\sum_{i=1}^m d_{ix}^2+\sum_{i=1} d_{iy}^2
+        +2\sum_{i=1}^m d_{ix}d_{iy}\geq\sum_{i=1} d_{iz}^2\]
+
+        又由Cauchy不等式
+        \[\sqrt{\sum_{i=1}^m d_{ix}^2\sum_{i=1}^m d_{iy}^2}
+        \geq\sum_{i=1}^m d_{ix}d_{iy}\]
+        故
+        \begin{align*}
+        \left(\sqrt{\sum_{i=1}^m d_{ix}^2}
+        +\sqrt{\sum_{i=1}^m d_{iy}^2}\right)^2
+        &=\sum_{i=1}^m d_{ix}^2+\sum_{i=1}^m d_{iy}^2
+        +2\sqrt{\sum_{i=1}^m d_{ix}^2\sum_{i=1}^m d_{iy}^2}\\
+        &\geq
+        \sum_{i=1}^m d_{ix}^2+\sum_{i=1} d_{iy}^2
+        +2\sum_{i=1}^m d_{ix}d_{iy}\\
+        &\geq\sum_{i=1} d_{iz}^2
+        \end{align*}
+        由此三角不等式得证，故$d$为距离。
         \end{proof}
 
         \item
@@ -180,7 +212,5 @@
         \[|\delta_1|+|\delta_2|\leq 2(|\delta_1|^p+|\delta_2|^p)^\frac{1}{p}\]
         即$d_1\leq 2d_p$。
         \end{proof}
-        
-
     \end{subproblem}
 \end{document}

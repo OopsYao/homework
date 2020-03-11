@@ -11,6 +11,8 @@
 \ProcessOptions\relax
 \if@tweaktufte
   \input{tweak-tufte.tex}
+  \RequirePackage{cleveref}
+  \crefformat{equation}{式~(#2#1#3)}
 \fi
 
 
