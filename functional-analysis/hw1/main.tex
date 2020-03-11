@@ -114,4 +114,73 @@
         由此非负性得证，同时对称性显然，故$d$为距离。
         \end{proof}
     \end{subproblem}
+
+    \section{题3}
+    \begin{subproblem}
+        \item
+        \begin{proof}
+        为简单起见，我们记$\delta_i=x_i-y_i,i=1,2$。
+        因为$y=x^{-p},x>0(p\geq 1)$为凹函数，则由Jensen不等式
+        \sidenote{这里假设了$\delta_i\neq 0$，
+        对于存在某些项为0的情况，只需将其剔除即可，这对于不等式
+        右半部分的证明没有影响}，
+        \begin{equation*}
+            \frac{1}{2}\left(
+                \left(\frac{1}{|\delta_1|}\right)^{-p}
+                +\left(\frac{1}{|\delta_2|}\right)^{-p}
+            \right)
+            \leq\left(\frac{1}{2}\left(
+                \frac{1}{|\delta_1|}
+                +\frac{1}{|\delta_2|}
+            \right)\right)^{-p}
+        \end{equation*}
+        又由调和均值不等式
+        \[\frac{2}{\frac{1}{|\delta_1}+\frac{1}{|\delta_2|}}
+        \leq\frac{1}{2}(|\delta_1|+|\delta_2|)\]
+        故
+        \[\frac{1}{2}(|\delta_1|^p+|\delta_2|^p)
+        \leq\left(\frac{|\delta_1|+|\delta_2|}{2}\right)^p\]
+        即
+        \[2^{1-\frac{1}{p}}d_p\leq d_1\]
+        故再由$1-\frac{1}{p}>0$得
+        \[d_p\leq d_1\]
+        证得不等式右半部分。
+
+        注意到\sidenote{$\max|\delta_i|=0$的情况是平凡的，因此只考虑非零}
+        \[
+            1\leq\frac{|\delta_1|^p+|\delta_2|^p}{\left(\max|\delta_i|\right)^p}\leq 2
+        \]
+        则
+        \begin{equation}
+            \label{eq:p2 infty max}
+            \max|\delta_i|\leq\left(|\delta_1|^p+|\delta_2|^p\right)^\frac 1 p
+            \leq 2^\frac 1 p\max|\delta_i|
+        \end{equation}
+        \end{proof}
+        即$d_\infty\leq d_p$，
+        于是证明了不等式的左半部分。
+
+        \item
+        \begin{proof}
+        直接由\cref{eq:p2 infty max}右端即得。
+        \end{proof}
+
+        \item
+        \begin{proof}
+        同样地，由于$y=x^p,x\geq 0$为凸函数，于是由Jensen不等式
+        \begin{equation*}
+            \label{eq:p2 Jensen}
+            \frac{|\delta_1|^p+|\delta_2|^p}{2}
+            \geq\left(\frac{|\delta_1|+|\delta_2|}{2}\right)^p
+        \end{equation*}
+        等价变形为
+        \[2^{1-\frac{1}{p}}(|\delta_1|^p+|\delta_2|^p)^\frac{1}{p}
+        \geq |\delta_1|+|\delta_2|\]
+        而$p>1$，故$2^{1-1/p}\leq 2$，因此
+        \[|\delta_1|+|\delta_2|\leq 2(|\delta_1|^p+|\delta_2|^p)^\frac{1}{p}\]
+        即$d_1\leq 2d_p$。
+        \end{proof}
+        
+
+    \end{subproblem}
 \end{document}
