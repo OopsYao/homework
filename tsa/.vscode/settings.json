@@ -1,9 +1,28 @@
 {
-    "latex-workshop.latex.external.build.command": "make",
-    "latex-workshop.latex.external.build.args": [
-        "DOC=%DOC%",
-        "OUTDIR=%OUTDIR%"
+    "latex-workshop.latex.tools": [
+        {
+            "name": "latexmk",
+            "command": "latexmk",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-pdfxe",
+                "-outdir=%OUTDIR%",
+                "%DOC%"
+            ],
+            "env": {
+                "TEXINPUTS": "../../latex-template:"
+            }
+        },
     ],
-    "latex-workshop.latex.outDir": "..",
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "latexmk 🔃",
+            "tools": [
+                "latexmk"
+            ]
+        }
+    ],
     "python.pythonPath": "envs/bin/python3.8",
 }
