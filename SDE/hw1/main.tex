@@ -16,7 +16,10 @@
                 &=\e^{\lambda t}P(\omega;X(\omega)\geq\lambda)
             \end{align*}
             Then we obtain
-            \[P(\omega;X(\omega)\geq\lambda)\leq\frac{E(\e^{tX})}{\e^{\lambda t}}\]
+            \begin{equation}
+                \label{eq:Chernoff bound}
+                P(\omega;X(\omega)\geq\lambda)\leq\frac{E(\e^{tX})}{\e^{\lambda t}}
+            \end{equation}
 
             Similarly we have\sidenote{It seems like there is something wrong in
             the questions. This inequality can not hold for an arbitrary random varibale
@@ -38,7 +41,10 @@
 
         \item
         \begin{proof}
-            TODO
+            Since $\prod_i^n\e^{tX_i}=\e^{t\sum_i^n X_i}=\e^{tX}$,
+            it falls to prove \cref{eq:Chernoff bound} at $t<0$.
+
+            \emph{But I have no idea about how to achieve this. :(}
         \end{proof}
     \end{subproblem}
 
