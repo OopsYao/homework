@@ -126,7 +126,7 @@
     \end{proof}
 
     \section{Problem 5}
-    First we will show that $X_n\xrightarrow{\mathrm{s.t.}}0$.
+    \subsection{Convergence In Probability}
     \begin{proof}
         For any $\delta\in(0,1]$, we have that $P(\omega;|X_n|\geq\delta)
         =1/n\to 0$ as $n\to\infty$. And for $\delta>1$, $P(\omega;|X_n|\geq\delta)
@@ -134,28 +134,21 @@
         $n\to\infty$.
     \end{proof}
 
-    Then we will deal with $X_n\not\to 0$ a.e.
+    \subsection{But not a.s.}
     \begin{proof}
-    We adopt the definition of
-    \[P\left(\omega;\lim_{n\to\infty}X_n(\omega)=0\right)<1\]
+        Since $\sum P(X_n(\omega)=1)=\infty$, and $\{X_n=1\}$ is
+        independent\sidenote{In my opinion the condition in question
+        is not sufficient, so I add the independency.},
+        then the B.C. second lemma yields 
+        \[P\left(\limsup_{n\to\infty}\{\omega;X_n(\omega)=1\}\right)=1\]
 
-    Note that we have an equivalent definition of limit stated as
-    \[
-        \left\{\omega;\lim_{n\to\infty}X_n(\omega)=0\right\}
-        =\bigcap_{\varepsilon>0}\bigcup_{n=1}^\infty\bigcap_{m\geq n}
-         \mathcal B_m^\varepsilon
-    \]
-    where $\mathcal B_m^\varepsilon:=\{\omega;|X(\omega)|<\varepsilon\}$.
-
-    It follows that
-    \begin{align*}
-        P\left(\omega;\lim_{n\to\infty}X_n(\omega)=0\right)
-        \leq P\left(\bigcup_{n=1}^\infty\bigcap_{m\geq n}\mathcal B_m^\varepsilon\right)
-    \end{align*}
-
-    Also note that any union of subsets is still a subset, i.e.,
-    \[\bigcup_{n=1}^\infty\bigcap_{m\geq n}\mathcal B_m^\varepsilon
-    \subset\]
+        And for any $0<\varepsilon\leq 1$, we have that
+        \[\{\omega;X_n(\omega)\}\subset\mathcal A_n^\varepsilon\]
+        thus
+        \[P\left(\limsup_{n\to\infty}\mathcal A_n^\varepsilon\right)\geq
+        P\left(\limsup_{n\to\infty}\{\omega;X_n(\omega)=1\}\right)=1>0\]
+        It follows that \sidenote{The set on which the sequence
+        does not converge to 0 has probability 1 actually.}
+        $X_n\not\to 0$.
     \end{proof}
-
 \end{document}
