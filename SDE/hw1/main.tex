@@ -1,7 +1,5 @@
 \documentclass{homework}
 
-\usepackage{lipsum}
-
 \title{Homework 1}
 
 \begin{document}
@@ -40,7 +38,7 @@
 
         \item
         \begin{proof}
-            \lipsum[4-6]
+            TODO
         \end{proof}
     \end{subproblem}
 
@@ -91,6 +89,37 @@
         It follows that
         \[P\left(\omega;\frac{|X(\omega)-\mu|}{\sigma}\geq\lambda\right)
         \leq\frac{1}{\lambda^2}\]
+    \end{proof}
+
+    \section{Problem 4}
+    \begin{proof}
+        To prove the decreasing, consider any $\omega\in A_j$,
+        there exists some $k\geq j$ such that $\omega\in\mathcal A_k^\varepsilon$.
+        Since $i\leq j\leq k$, we have that $\omega\in\bigcup_{m\geq j}\mathcal A_m^\varepsilon$,
+        i.e., $\omega\in A_i$ too, which is equivalent to $A_j\subset A_i$. Hence
+        $A_n$ is decreasing.
+
+        For any $\omega\in\mathcal O$, there exists some $\varepsilon$ s.t.
+        for any $n>0$ there exists some $m\geq n$ s.t. $|X(\omega)-X|\geq\varepsilon$.
+        It follows that for a given $\varepsilon$, and any $n$ there always
+        exists $m\geq n$ s.t. $\omega\in\mathcal A_m^\varepsilon$, i.e.,
+        this holds if $m$ ($n$) is suffienciently large.
+        Alternatively this can be stated as
+        \[\mathcal O=\bigcap_{\varepsilon>0}\bigcup_{n=1}^\infty
+        \bigcap_{m\geq n}\mathcal A_m^\varepsilon
+        =\bigcap_{\varepsilon>0}\mathcal A_m^\varepsilon\text{ i.o.}\]
+
+        Since $X_n\xrightarrow{\mathrm{s.t.}}X$, we have $P(\mathcal O)=0$.
+        Then we obtain $P(\mathcal A_m^\varepsilon\text{ i.o.})\leq
+        P(\mathcal{O})=0$, i.e., $P(\mathcal A_m^\varepsilon\text{ i.o.})=0$.
+        
+        Also note that $\mathcal A_m^\varepsilon\text{ i.o.}=A_\infty$ since
+        $A_n$ is monotoned. Then $\mathcal A_n^\varepsilon
+        \subset A_n$ yields
+        \[\lim_{n\to\infty}P(\mathcal A_n^\varepsilon)
+        \leq\lim_{n\to\infty}P(A_n)=P(A_\infty)=0\]
+        Thus we obtain that $X_n\xrightarrow{\mathrm{s.t.}}X$ as
+        $n\to\infty$.
     \end{proof}
 
     \section{Problem 5}
