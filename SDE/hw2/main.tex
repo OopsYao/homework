@@ -1,0 +1,31 @@
+\documentclass{homework}
+
+\title{Homework 2}
+
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Corr}{Corr}
+
+\begin{document}
+    \maketitle    
+
+    \section{Problem 1}
+    Without loss of generality, assume that $t\geq s$.
+    Then by the law of distributivity,
+    \begin{align*}
+        \Cov(B_t,B_s)&=\Cov(B_t-B_s+B_s,B_s)\\
+                     &=\Cov(B_t-B_s,B_s)+\Cov(B_s,B_s)
+    \end{align*} 
+    Since Brownian motion has independent increments,
+    we have that
+    \[\Cov(B_t-B_s,B_s)=0\]
+    Therefore
+    \[\Cov(B_t,B_s)=\Var(B_s)=s\]
+    i.e.,
+    \[\Cov(B_t,B_s)=\min\{t,s\}\]
+    in general.
+
+    Hence
+    \[\Corr(B_t,B_s)=\frac{\Cov(B_t,B_s)}{\sqrt{\Var(B_t)\Var(B_s)}}
+    =\frac{\min\{t,s\}}{\sqrt{ts}}\]
+\end{document}
