@@ -28,4 +28,89 @@
     Hence
     \[\Corr(B_t,B_s)=\frac{\Cov(B_t,B_s)}{\sqrt{\Var(B_t)\Var(B_s)}}
     =\frac{\min\{t,s\}}{\sqrt{ts}}\]
+
+    \section{Problem 2}
+    Note that $E\left(B_t^2\right)=t$, so by definition of
+    covariance,
+    \begin{equation}
+        \label{eq:cov def}
+        E\left((B_t^2-t)(B_s^2-s)\right)=\Cov(B_t^2,B_s^2)
+    \end{equation}
+    Also note that
+    \begin{equation}
+        \label{eq:cov formula}
+        \Cov(B_t^2,B_s^2)=E(B_t^2B_s^2)-E(B_t^2)\cdot E(B_s^2)
+    \end{equation}
+
+    So the key to these problems is calculating $E(B_t^2B_s^2)$,
+    which can be obtained by law of total expectation. Therefore,
+    we can start from $E(B_t^2B_s^2|\mathcal F_s)$, and without
+    loss of generality, we assume that $s\leq t$.
+
+    We have that
+    \begin{align*}
+        E\left.\left(B_t^2B_s^2\right|\mathcal F_s\right)
+        &=B_s^2E\left.\left(B_t^2\right|\mathcal F_s\right)\\
+    \end{align*}
+    and
+    \begin{align*}
+        E\left.\left(B_t^2\right|\mathcal F_s\right)
+        &=E\left.\left((B_t-B_s+B_s)^2\right|\mathcal F_s\right)\\
+        &=E\left((B_t-B_s)^2|\mathcal F_s\right)
+            +2E\big(B_s(B_t-B_s)|\mathcal F_s\big)
+            +E\left.\left(B_s^2\right|\mathcal F_s\right)
+    \end{align*}
+    Since Brownian motion has independent increments, we have
+    that
+    \begin{align*}
+    E\left.\left((B_t-B_s)^2\right|\mathcal F_s\right)
+    &=E\left((B_t-B_s)^2\right)=t-s\\
+    E\left.\left(B_s(B_t-B_s)\right|\mathcal F_s\right)&=B_sE(B_t-B_s)=0\\
+    E\left.\left(B_s^2\right|\mathcal F_s\right)&=B_s^2
+    \end{align*}
+    Hence
+    \begin{align*}
+        E\left.\left(B_t^2B_s^2\right|\mathcal F_s\right)
+        &=B_s^2\cdot E\left.\left(B_t^2\right|\mathcal F_s\right)\\
+        &=B_s^2\left(t-s+B_s^2\right)
+    \end{align*} 
+
+    Therefore
+    \begin{align*}
+    E\left(B_t^2B_s^2\right)&=E\left(E\left.\left(B_t^2B_s^2\right|\mathcal F_s\right)\right)\\
+    &=E\left(B_s^2\left(t-s+B_s^2\right)\right)\\
+    &=(t-s)E\left(B_s^2\right)+E\left(B_s^4\right)
+    \end{align*}
+
+
+    As for $E\left(B_s^4\right)$, since that $\left(B_s/\sqrt{s}\right)^2
+    \sim\chi^2(1)$, we obtain,
+    \[\Var(B_s^2)=2s^2\]
+    thus
+    \begin{align*}
+        E\left(B_s^4\right)&=\Var\left(B_s^2\right)+\left(E\left(B_s^2\right)\right)^2=3s^2
+    \end{align*}
+    It follows that
+    \begin{align*}
+    E\left(B_t^2B_s^2\right)=s(t+2s)
+    \end{align*}
+    so in general by symmetry,
+    \begin{equation}
+        \label{eq:EBs2Bt2}
+        E\left(B_t^2B_s^2\right)=ts+2\min\{t,s\}
+    \end{equation}
+
+    \begin{subproblem}
+        \item\label{pb:2.1}
+        From \cref{eq:cov def,eq:cov formula} we know that
+        \[E\left((B_t^2-t)(B_s^2-s)\right)=ts+2\min\{t,s\}-ts=2\min\{t,s\}\]
+
+        \item
+        As in \cref{eq:EBs2Bt2}
+        \[E\left(B_t^2B_s^2\right)=ts+2\min\{t,s\}\]
+
+        \item
+        Same as \ref{pb:2.1} as shown by \cref{eq:cov def},
+        \[\Cov(B_t^2,B_s^2)=2\min\{t,s\}\]
+    \end{subproblem}
 \end{document}
