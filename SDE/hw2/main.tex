@@ -113,4 +113,29 @@
         Same as \ref{pb:2.1} as shown by \cref{eq:cov def},
         \[\Cov(B_t^2,B_s^2)=2\min\{t,s\}\]
     \end{subproblem}
+
+    \section{Problem 3}
+    \begin{proof}
+        Since $2X_i-1$ represents the movements of every step,
+        we have that
+        \[Y_n=\Delta x\cdot\left(\sum_{i=1}2X_i-1\right)
+        =\Delta x(2S_n-n)\]
+        Then by Laplace-De Moivre Theorem,
+        \[\frac{S_n-\frac{n}{2}}{\sqrt{\frac{n}{4}}}\to N(0,1)\]
+        i.e.,
+        \[\frac{Y_n}{\sqrt{n}\Delta x}\to N(0,1)\]
+        Since $D=(\Delta x)^2/\Delta t$ and $t=n\Delta t$,
+        we have that
+        \[\frac{Y_n}{\sqrt{n}\Delta x}=\frac{Y_n}{\sqrt{Dt}}\]
+        And $n\to\infty$ is equivalent $t\to\infty$, therefore
+        \[\frac{Y_t}{\sqrt{Dt}}\to N(0,1)\]
+        It follows that
+        \begin{align*}
+        \lim_{n\to\infty,t=n\Delta t}P(a\leq Y_t\leq b)
+        &=\frac{1}{\sqrt{2\pi}}
+        \int_{a/\sqrt{Dt}}^{b/\sqrt{Dt}}\e^{-\frac{\xi^2}{2}}\diff\xi\\
+        &=\frac{1}{\sqrt{2\pi Dt}}
+        \int_a^b\e^{-\frac{x^2}{2Dt}}\diff x
+        \end{align*}
+    \end{proof}
 \end{document}
