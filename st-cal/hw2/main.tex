@@ -1,0 +1,48 @@
+\documentclass[cn]{homework}
+
+\title{作业2}
+
+\DeclareMathOperator{\prob}{\mathbb P}
+
+\begin{document}
+    \maketitle
+
+    \section{题1}
+    \begin{subproblem}
+        \item
+        \begin{proof}
+            由于
+            \begin{align*}
+                \prob(A)+\prob(A^c)&=
+                \sum_{\omega\in A}\prob(\omega)+\sum_{\omega\in A^c}\prob(\omega)\\
+                &=\sum_{\omega\in\Omega}P(\omega)\\
+                &=1
+            \end{align*}
+            即证。
+        \end{proof}
+
+        \item
+        \begin{proof}
+            先证明$N=2$的情况，将$A_1\cup A_2$分解为不交并
+            \[A_1\cup A_2=((A_1\cup A_2)\backslash A_2)\cup A_2\]
+            则
+            \begin{align*}
+                \prob(A_1\cup A_2)&=\prob((A_1\cup A_2)\backslash A_2)
+                +\prob(A_2)
+            \end{align*}
+            又由于
+            \[(A_1\cup A_2)\backslash A_2\subset A_1\]
+            则
+            \[\prob((A_1\cup A_2)\backslash A_2)\leq\prob(A_1)\]
+            因此
+            \[\prob(A_1\cup A_2)\leq\prob(A_1)+\prob(A_2)\]
+            于是$N=2$的情况得证。
+
+            对于$N>2$的情况，由于
+            \[\bigcup_{i=1}^NA_i=\left(\bigcup_{i=1}^{N-1}A_i\right)\cup A_N\]
+            以及
+            \[\sum_{i=1}^N\prob(A_i)=\prob(A_N)+\sum_{i=1}^{N-1}\prob(A_i)\]
+            则由数学归纳法自然证得。
+        \end{proof}
+    \end{subproblem}
+\end{document}
