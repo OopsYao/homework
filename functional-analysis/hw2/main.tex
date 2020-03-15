@@ -1,0 +1,34 @@
+\documentclass[cn]{homework}
+
+\title{第三周作业}
+
+\begin{document}
+    \maketitle
+
+    \section{题1}
+    \begin{proof}
+        非负性与对称性是显然的。由绝对值不等式，
+        \[|x_i-y_i|+|y_i-z_i|\leq|x_i-y_i+y_i-z_i|=|x_i-z_i|\]
+        因此
+        \[\sum_{i=1}^n\lambda_i|x_i-y_i|
+        +\sum_{i=1}^n\lambda_i|y_i-z_i|
+        \leq\sum_{i=1}^n\lambda_i|x_i-z_i|\]
+        即
+        \[d(x,y)+d(y,z)\leq d(x,z)\]
+        三角不等式得证。
+
+        下证距离收敛和坐标收敛的等价性。
+        由于
+        \[\forall i=1,2,\ldots,n\quad |x_{ik}-x|\to 0\Rightarrow
+        \sum_{i=1}^n\lambda_i|x_{ik}-x_i|\to 0\]
+        故依坐标收敛蕴含依距离收敛。
+
+        反过来，由于
+        \[\lambda_i|x_{ik}-x_i|\leq\sum_{i=1}^n\lambda_i|x_{ik}-x_i|
+        =d(x_k,x)\]
+        故
+        \[d(x_k,x)\to 0\Rightarrow \lambda_i|x_{ik}-x_i|\to 0
+        \Rightarrow |x_{ik}-x_i|\to 0\]
+        即以距离收敛蕴含依坐标收敛，等价性得证。
+    \end{proof}    
+\end{document}
