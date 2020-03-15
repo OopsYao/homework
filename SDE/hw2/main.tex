@@ -138,4 +138,92 @@
         \int_a^b\e^{-\frac{x^2}{2Dt}}\diff x
         \end{align*}
     \end{proof}
+
+    \section{Problem 4}
+    \begin{subproblem}[\roman*)]
+        \item
+        Let's start from the high dimension directly.
+        Denote random variable
+        \[Z_i:=\begin{cases}
+            W_{t_1},&i=1\\
+            W_{t_i}-W_{t_{i-1}},&i>1
+        \end{cases}\]
+        By the independent increments of Brownian motion, we
+        obtain $Z_i,i=1,2,\ldots,N$ are mutually independent.
+        Then the joint distribution of $(Z_1,Z_2,\ldots,Z_N)$
+        is clear and simple -- we have the JPDF
+        \begin{equation*}
+            p(z_1,z_2,\ldots,z_N)=
+            \frac{\e^{-\frac{1}{2}\left(
+                \frac{z_1^2}{t_1}
+                +\frac{z_2^2}{t_2-t_1}
+                +\cdots+\frac{z_N^2}{t_N-t_{N-1}}
+            \right)}}{\sqrt{(2\pi)^Nt_1(t_2-t_1)\cdots(t_N-t_{N-1})}}
+        \end{equation*}
+
+        For the event $\{\omega;a_i\leq W_{t_i}(\omega)\leq b_i\}$,
+        it is equivalent to
+        \[\left\{\omega;a_i\leq \sum_{k=1}^iZ_k(\omega)\leq b_i\right\}\]
+        It follows that
+        \begin{equation}
+            \label{eq:p4 mult-integral}
+            \begin{aligned}
+            &P(\omega;a_i\leq W_{t_i}\leq b_i,i=1,2,\ldots,N)\\
+            =&P\left(\omega;a_i\leq \sum_{k=1}^iZ_k(\omega)\leq b_i,i=1,2,\ldots,N\right)\\
+            =&\int_{\left\{z\in\mathbb R^N;a_i\leq\sum_{k=1}^iz_i\leq b_i,i=1,2,\ldots,N\right\}}
+              p(z_1,z_2,\ldots,z_N)
+              \diff z_1\diff z_2\cdots\diff z_N
+            \end{aligned}
+        \end{equation}
+        Then by variable subtitution of the following,
+        \begin{align*}
+            z_1&=w_1,\\
+            z_i&=w_i-w_{i-1},i=2,3,\ldots,N\\
+        \end{align*}
+        we have the Jacobian determinant
+        \[\mathcal J=
+        \frac{\partial(z_1,z_2,\ldots,z_N)}{\partial(w_1,w_2,\ldots,w_N)}
+        =\det\begin{pmatrix}
+            1  &        &        &       \\
+            -1 & 1      &        &       \\
+               & \ddots & \ddots &       \\
+               &        & -1     & 1     \\
+        \end{pmatrix}=1\]
+        thus \cref{eq:p4 mult-integral} becomes
+        \begin{align*}
+            &P(\omega;a_i\leq W_{t_i}\leq b_i,i=1,2,\ldots,N)\\
+            =&\int_{\prod_{i=1}^N[a_i,b_i]}
+              p(w_1,w_2-w_1,\ldots,w_N-w_{N-1})
+              |\mathcal J|
+              \diff w_1\diff w_2\cdots\diff w_N\\
+            =&\int_{\prod_{i=1}^N[a_i,b_i]}
+               \frac{\e^{-\frac{1}{2}\left(
+                   \frac{w_1^2}{t_1} 
+                   +\frac{(w_2-w_1)^2}{t_2-t_1}
+                   +\cdots
+                   +\frac{(w_N-w_{N-1})^2}{t_N-t_{N-1}}
+               \right)}}{\sqrt{(2\pi)^Nt_1(t_2-t_1)\cdots(t_N-t_{N-1})}}
+              \diff w_1\diff w_2\cdots\diff w_N\\
+        \end{align*}
+
+        \item
+        As $N\to\infty$, there are infinitely many $W_{t_i}\in[a,b]$,
+        which should be rarely happening. So in conclusion,
+        \[\lim_{N\to\infty}P\left(
+            \omega;
+            a_i\leq W_{t_i}\leq b_i,
+            \forall i=1,2,\ldots,N
+        \right)=0\]
+        
+        \item
+        As \sidenote{Since the work of calculation increases rapidly
+        as $N$ increases, only a few $N$s is chosen.}
+        \cref{fig:integral}.
+        \begin{marginfigure}
+            \centering
+            \includegraphics[width=\columnwidth]{integral}
+            \caption{Approximation as $N\to\infty$}
+            \label{fig:integral}
+        \end{marginfigure}
+    \end{subproblem}
 \end{document}

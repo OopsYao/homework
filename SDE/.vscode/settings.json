@@ -23,5 +23,6 @@
                 "latexmk"
             ]
         }
-    ]
+    ],
+    "python.pythonPath": "py/bin/python"
 }
