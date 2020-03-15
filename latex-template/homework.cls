@@ -32,7 +32,10 @@
 }
 
 % Subproblem environment
-\newenvironment{subproblem}{\begin{enumerate}[leftmargin=0pt,label=(\roman*)]}{\end{enumerate}}
+\newenvironment{subproblem}%
+[1][(\roman*)]%
+{\begin{enumerate}[leftmargin=0pt,label=#1]}%
+{\end{enumerate}}
 
 % Some useful math macros
 \input{math-macros.tex}
