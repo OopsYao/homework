@@ -226,4 +226,92 @@
             \label{fig:integral}
         \end{marginfigure}
     \end{subproblem}
+
+    \section{Problem 5}
+    \subsection{$X_t$ Is Not a Martingale}
+    \begin{proof}
+        Just verify equation
+        \[E(X_{t+s}|\mathcal F_t)=X_t\]
+        does not hold for some $s\leq 0$.
+
+        Consider the moments generating function of $W_t$
+        \begin{equation}
+            \label{eq:mgf}
+            \begin{aligned}
+            E\left(\e^{aW_t}\right)&=\int_{-\infty}^\infty
+            \e^{ax}
+            \frac{\e^{-\frac{x^2}{2t}}}{\sqrt{2\pi t}}
+            \diff x\\
+            &=\int_{-\infty}^\infty
+              \e^{-\frac{(x-at)^2}{2t}+\frac{a^2t}{2}}\diff x\\
+            &=\e^{\frac{a^2t}{2}}\int_{-\infty}^\infty
+              \frac{\e^{-\frac{\xi^2}{2}}}{\sqrt{2\pi}}
+              \diff\xi\\
+            &=\e^{\frac{a^2t}{2}}
+            \end{aligned}
+        \end{equation}
+        Thus
+        \[\begin{aligned}
+            E(X_{t+s}|\mathcal F_t)&=E(\e^{W_{t+s}-W_t}\cdot\e^{W_t}|\mathcal F_t)\\
+            &=\e^{W_t}E(\e^{W_{t+s}-W_t}|\mathcal F_t)
+        \end{aligned}\]
+        Since Brownian motion has independent increments, we have that
+        \[E\left(\left.\e^{W_{t+s}-W_t}\right|\mathcal F_t\right)
+        =E\left(\e^{W_{t+s}-W_t}\right)
+        =\e^{\frac{s}{2}}\]
+        Hence we obtain,
+        \[E(X_{t+s}|\mathcal F_t)=\e^{\frac{s}{2}}X_t\neq X_t\]
+        for any $s>0$. So $\{X_t\}_{t\geq 0}$ is not a martingale.
+
+    \end{proof}
+
+    \subsection{$Y_t$ Is a Martingale}
+    \begin{proof}
+        Since $Y_t>0$, we have that $Y_t$ is integrable is equivalent
+        to the existence of $E(Y_t)$, which will be proved during
+        its calculation. And $W_t$ being adapted to $\mathcal F_t$ yields
+        $Y_t=\e^{aW_t-\frac{a^2t}{2}}$ adapted too.
+
+        So let's start from verifying the conditional expectation,
+        \[\begin{aligned}
+            E(Y_{t+s}|\mathcal F_t)
+            &=E\left(\left.\e^{a(W_{t+s}-W_t)+aW_t-\frac{a^2(t+s)}{2}}\right|\mathcal F_t\right)\\
+            &=\e^{aW_t-\frac{a^2(t+s)}{2}}E\left(\left.\e^{a(W_{t+s}-W_t)}\right|\mathcal F_t\right)
+        \end{aligned}\]
+
+        Similarly, by \cref{eq:mgf} we have that
+        \[E\left(\left.\e^{a(W_{t+s}-W_t)}\right|\mathcal F_t\right)
+        =E\left(\e^{a(W_{t+s}-W_t)}\right)
+        =\e^{\frac{a^2s}{2}}\]
+        It follows that
+        \[E(Y_{t+s}|\mathcal F_t)=\e^{aW_t-\frac{a^2t}{2}}=Y_t\]
+        Then $\{Y_t\}_{t\geq 0}$ is a martingale.
+    \end{proof}
+
+    \subsection{About $\Cov(X_s,X_t)$}
+    By covariance formula
+    \[\Cov(X,Y)=E(XY)-EX\cdot EY\]
+    we only need to concentrate on $E(X_tX_s)$.
+
+    Without loss of generality, we assume $t>s$.
+    Consider conditional expectation
+    \[\begin{aligned}
+        E(X_tX_s|\mathcal F_s)&=\e^{2W_s}E\left(\left.\e^{W_t-W_s}\right|\mathcal F_s\right)\\
+        &=\e^{2W_s}E\left(\e^{W_t-W_s}\right)\\
+        &=\e^{2W_s+\frac{t-s}{2}}
+    \end{aligned}\]
+    Then by total expectation formula, together with
+    \cref{eq:mgf}, we obtain,
+    \[\begin{aligned}
+        E(X_tX_s)&=E(E(X_tX_s|\mathcal F_s))\\
+                 &=E\left(\e^{2W_s+\frac{t-s}{2}}\right)\\
+                 &=\e^{\frac{t-s}{2}}\e^{\frac{2^2s}{2}}\\
+                 &=\e^{\frac{t+3s}{2}}
+    \end{aligned}\]
+    It follows that
+    \[\Cov(X_t,X_s)=\e^{\frac{t+3s}{2}}
+    -\e^{\frac{t}{2}}\cdot\e^{\frac{s}{2}}
+    =\e^{\frac{t+s}{2}}(\e^s-1)\]
+    i.e., in general
+    \[\Cov(X_t,X_s)=\e^{\frac{t+s}{2}}\left(\e^{\min\{t,s\}}-1\right)\]
 \end{document}
