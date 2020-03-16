@@ -31,6 +31,15 @@
     \colorbox{lbcolor}{\lstinline{#1}}
 }
 
+% Problem
+\newcounter{problem}
+\if@tweaktufte
+  \newcommand{\problem}{\stepcounter{problem}\section{题\theproblem}}
+\else
+  \newcommand{\problem}{\stepcounter{problem}\section{Problem \theproblem}}
+\fi
+\counterwithin{equation}{problem}
+
 % Subproblem environment
 \newenvironment{subproblem}%
 [1][(\roman*)]%
