@@ -5,7 +5,7 @@
 \begin{document}
     \maketitle
 
-    \section{题1}
+    \problem
     \begin{proof}
         非负性与对称性是显然的。由绝对值不等式，
         \[|x_i-y_i|+|y_i-z_i|\leq|x_i-y_i+y_i-z_i|=|x_i-z_i|\]
@@ -31,4 +31,26 @@
         \Rightarrow |x_{ik}-x_i|\to 0\]
         即以距离收敛蕴含依坐标收敛，等价性得证。
     \end{proof}    
+    
+    \problem
+    \begin{proof}
+        \newcommand{\infy}{\inf_{y\in A}}
+        \newcommand{\supy}{\sup_{y\in A}}
+        由三角不等式
+        \[d(x_n,y)\leq d(x_n,x)+d(x,y)\]
+        则由下确界定义知
+        \[\infy d(x_n,y)\leq d(x_n,x)+d(x,y)\]
+        注意到不等式右端$y$的任意性，则
+        \[\infy d(x_n,y)\leq d(x_n,x)+\infy d(x,y)\]
+        由对称性可得另一不等式
+        \[\infy d(x,y)\leq d(x,x_n)+\infy d(x_n,y)\]
+        故
+        \[\left|\infy d(x_n,y)-\infy d(x,y)\right|
+        \leq d(x_n,x)\]
+
+        而$d$是距离，则
+        \[x_n\to x\Rightarrow d(x_n,x)\to 0
+        \Rightarrow |f(x_n)-f(x)|\to 0\]
+        即$f$是连续的。
+    \end{proof}
 \end{document}
