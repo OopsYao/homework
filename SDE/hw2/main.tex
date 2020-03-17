@@ -346,4 +346,29 @@
             is a submartingale.
         \end{proof}
     \end{subproblem}
+
+    \problem
+    \begin{proof}
+        For any $s>0$ we have that
+        \newcommand{\conde}[1]{E\left(\left. #1 \right|\mathcal F_t\right)}
+        \[\begin{aligned}
+            \conde{\e^{\sigma W_{t+s}}}
+            &=\e^{\mu(t+s)+\sigma W_t}\conde{\e^{\sigma(W_{t+s}-W_t)}}\\
+            &=\e^{\mu(t+s)+\sigma W_t}E\left(\e^{\sigma(W_{t+s}-W_t)}\right)
+        \end{aligned}\]
+        as Brownian motion has independent increments.
+
+        By \cref{eq:mgf} we obtain the expectation as
+        \[\begin{aligned}
+            \conde{\e^{\sigma W_{t+s}}}
+            &=\e^{\mu(t+s)+\sigma W_t}\cdot\e^{\frac{\sigma^2s}{2}}\\
+            &=\e^{\left(\mu+\frac{\sigma^2}{2}\right)s}\cdot\e^{\sigma W_t+\mu t}\\
+            &\geq\e^{\sigma W_t+\mu t}
+        \end{aligned}\]
+        since $\mu>0$.
+
+        The moment generating function guarantees the integrability,
+        and $\e^{\sigma W_t+\mu t}$ is adapted to $\{\mathcal F_t\}$.
+        Therefore $X_t$ is a submartingale.
+    \end{proof}
 \end{document}
