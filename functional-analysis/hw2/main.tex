@@ -53,4 +53,23 @@
         \Rightarrow |f(x_n)-f(x)|\to 0\]
         即$f$是连续的。
     \end{proof}
+
+    \problem
+    \begin{proof}
+        设有距离空间$(X,d_X)$与$(Y,d_Y)$，$f:X\to Y$是其间的
+        等距映射。则由等距映射定义，
+        $\forall\varepsilon>0$，$\exists\delta=\varepsilon$，
+        使得$\forall x'\in X$满足$d_X(x',x)<\delta$有$d_Y(f(x'),f(x))
+        =d_X(x',x)<\delta=\varepsilon$。即$f$是连续映射。
+
+        又$\forall x_1,x_2\in X$若满足
+        \[f(x_1)=f(x_2)\]
+        则由距离公理
+        \[d_Y(f(x_1),f(x_2))=0\]
+        再由等距映射定义
+        \[d_X(x_1,x_2)=0\]
+        再由距离公里
+        \[x_1=x_2\]
+        因此，$f$是单射。
+    \end{proof}
 \end{document}
