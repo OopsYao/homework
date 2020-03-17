@@ -371,4 +371,53 @@
         and $\e^{\sigma W_t+\mu t}$ is adapted to $\{\mathcal F_t\}$.
         Therefore $X_t$ is a submartingale.
     \end{proof}
+
+    \problem
+    \begin{subproblem}
+        \item
+        \begin{proof}
+            Since
+            \[\begin{aligned}
+                X_t&=W_t-t(W_1-W_t+W_t)\\
+                   &=(1-t)W_t-t(W_1-W_t) 
+            \end{aligned}\]
+            we know that $X_t$ is the summation of two
+            independent normally distributed random variables,
+            as Brownian has independent increments. Also we know
+            the linearity of normal distribution, hence
+            \begin{equation}
+                \label{eq:normal dist}
+                \begin{aligned}
+                X_t\sim N\left(0,(1-t)^2t+t^2(1-t)\right)
+                \end{aligned}
+            \end{equation}
+            i.e.,
+            \[X_t\sim N\big(0,t(1-t)\big)\]
+            $X_t$ is normally distributed.
+        \end{proof}
+
+        Therefore, its pdf,
+        \[p(x)=\frac{\e^{-\frac{x^2}{t(1-t)}}}{\sqrt{2\pi t(1-t)}}\]
+
+        \item
+        From \cref{eq:normal dist} we know that
+        \begin{align*}
+            E(X_t)&=0,\\
+            \Var(X_t)&=t(1-t)
+        \end{align*}
+
+        \item
+        Since
+        \[\left(\frac{X_t}{\sqrt{t(1-t)}}\right)^2\sim\chi^2(1)\]
+        we have that
+        \begin{align*}
+            E\left(\frac{Y_t}{t(1-t)}\right)&=1,\\
+            \Var\left(\frac{Y_t}{t(1-t)}\right)&=2
+        \end{align*}
+        thus
+        \begin{align*}
+            E(Y_t)&=t(1-t),\\
+            \Var(Y_t)&=2t^2(1-t)^2
+        \end{align*}
+    \end{subproblem}
 \end{document}
