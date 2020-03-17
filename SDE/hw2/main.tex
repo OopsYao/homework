@@ -314,4 +314,36 @@
     =\e^{\frac{t+s}{2}}(\e^s-1)\]
     i.e., in general
     \[\Cov(X_t,X_s)=\e^{\frac{t+s}{2}}\left(\e^{\min\{t,s\}}-1\right)\]
+
+    \problem
+    \begin{subproblem}
+        \item
+        \begin{proof}
+            Since $\phi$ is a convex function, Jensen's inequality
+            also holds for conditional expectation,
+            \begin{equation}
+                \label{eq:Jensen}
+                E(\phi(X_{t+s})|\mathcal F_t)
+                \geq\phi(E(X_{t+s}|\mathcal F_t))
+            \end{equation}
+            So
+            \[E(\phi(X_{t+s}|\mathcal F_t))\geq\phi(X_t)\]
+            as $\{X_t\}_{t\geq 0}$ is a martingale w.r.t $\{\mathcal F_t\}$.
+
+            While the integrability of $\phi(X_t)$ implies the existence of
+            $E|\phi(X_t)|$, $\phi(X_t)$ is adapted as $X_t$ is adapted.
+            Therefore, $\{\phi(X_t)\}_{t\geq 0}$ is a submartingale.
+        \end{proof}
+
+        \item
+        \begin{proof}
+            Since $\phi$ is increasing and $\{X_t\}_{t\geq 0}$ is a
+            submartingale, we have that
+            \[\phi(E(X_{t+s}|\mathcal F_t))\geq\phi(X_t)\]
+            With \cref{eq:Jensen}, it yields
+            \[\phi(E(X_{t+s}|\mathcal F_t))\geq\phi(X_t)\]
+            Similarly, it follows that $\{\phi(X_t)\}_{t\geq 0}$
+            is a submartingale.
+        \end{proof}
+    \end{subproblem}
 \end{document}
