@@ -270,7 +270,12 @@
         Since $Y_t>0$, we have that $Y_t$ is integrable is equivalent
         to the existence of $E(Y_t)$, which will be proved during
         its calculation. And $W_t$ being adapted to $\mathcal F_t$ yields
-        $Y_t=\e^{aW_t-\frac{a^2t}{2}}$ adapted too.
+        $Y_t=\e^{aW_t-\frac{a^2t}{2}}$ adapted too,
+        as $f(x)=\e^{ax-\frac{s^2t}{2}}$ is continuous.
+        \sidenote{Since $f^{-1}(G)$ is open if $f$ is continuous and
+        $G$ is open, that being said, $f(W_t)$ in open set implies
+        $W_t$ in open set too, hence $W_t$ in $\mathcal F_s,s\leq t$.
+        It follows that $f(W_t)$ is adapted to filtration $(\mathcal F_t)$}
 
         So let's start from verifying the conditional expectation,
         \[\begin{aligned}
