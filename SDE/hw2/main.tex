@@ -44,40 +44,40 @@
 
     So the key to these problems is calculating $E(B_t^2B_s^2)$,
     which can be obtained by law of total expectation. Therefore,
-    we can start from $E(B_t^2B_s^2|\mathcal F_s)$, and without
+    we can start from $E(B_t^2B_s^2|B_s)$, and without
     loss of generality, we assume that $s\leq t$.
 
     We have that
     \begin{align*}
-        E\left.\left(B_t^2B_s^2\right|\mathcal F_s\right)
-        &=B_s^2E\left.\left(B_t^2\right|\mathcal F_s\right)\\
+        E\left.\left(B_t^2B_s^2\right|B_s\right)
+        &=B_s^2E\left.\left(B_t^2\right|B_s\right)\\
     \end{align*}
     and
     \begin{align*}
-        E\left.\left(B_t^2\right|\mathcal F_s\right)
-        &=E\left.\left((B_t-B_s+B_s)^2\right|\mathcal F_s\right)\\
-        &=E\left((B_t-B_s)^2|\mathcal F_s\right)
-            +2E\big(B_s(B_t-B_s)|\mathcal F_s\big)
-            +E\left.\left(B_s^2\right|\mathcal F_s\right)
+        E\left.\left(B_t^2\right|B_s\right)
+        &=E\left.\left((B_t-B_s+B_s)^2\right|B_s\right)\\
+        &=E\left((B_t-B_s)^2|B_s\right)
+            +2E\big(B_s(B_t-B_s)|B_s\big)
+            +E\left.\left(B_s^2\right|B_s\right)
     \end{align*}
     Since Brownian motion has independent increments, we have
     that
     \begin{align*}
-    E\left.\left((B_t-B_s)^2\right|\mathcal F_s\right)
+    E\left.\left((B_t-B_s)^2\right|B_s\right)
     &=E\left((B_t-B_s)^2\right)=t-s\\
-    E\left.\left(B_s(B_t-B_s)\right|\mathcal F_s\right)&=B_sE(B_t-B_s)=0\\
-    E\left.\left(B_s^2\right|\mathcal F_s\right)&=B_s^2
+    E\left.\left(B_s(B_t-B_s)\right|B_s\right)&=B_sE(B_t-B_s)=0\\
+    E\left.\left(B_s^2\right|B_s\right)&=B_s^2
     \end{align*}
     Hence
     \begin{align*}
-        E\left.\left(B_t^2B_s^2\right|\mathcal F_s\right)
-        &=B_s^2\cdot E\left.\left(B_t^2\right|\mathcal F_s\right)\\
+        E\left.\left(B_t^2B_s^2\right|B_s\right)
+        &=B_s^2\cdot E\left.\left(B_t^2\right|B_s\right)\\
         &=B_s^2\left(t-s+B_s^2\right)
     \end{align*} 
 
     Therefore
     \begin{align*}
-    E\left(B_t^2B_s^2\right)&=E\left(E\left.\left(B_t^2B_s^2\right|\mathcal F_s\right)\right)\\
+    E\left(B_t^2B_s^2\right)&=E\left(E\left.\left(B_t^2B_s^2\right|B_s\right)\right)\\
     &=E\left(B_s^2\left(t-s+B_s^2\right)\right)\\
     &=(t-s)E\left(B_s^2\right)+E\left(B_s^4\right)
     \end{align*}
@@ -301,14 +301,14 @@
     Without loss of generality, we assume $t>s$.
     Consider conditional expectation
     \[\begin{aligned}
-        E(X_tX_s|\mathcal F_s)&=\e^{2W_s}E\left(\left.\e^{W_t-W_s}\right|\mathcal F_s\right)\\
+        E(X_tX_s|W_s)&=\e^{2W_s}E\left(\left.\e^{W_t-W_s}\right|W_s\right)\\
         &=\e^{2W_s}E\left(\e^{W_t-W_s}\right)\\
         &=\e^{2W_s+\frac{t-s}{2}}
     \end{aligned}\]
     Then by total expectation formula, together with
     \cref{eq:mgf}, we obtain,
     \[\begin{aligned}
-        E(X_tX_s)&=E(E(X_tX_s|\mathcal F_s))\\
+        E(X_tX_s)&=E(E(X_tX_s|W_s))\\
                  &=E\left(\e^{2W_s+\frac{t-s}{2}}\right)\\
                  &=\e^{\frac{t-s}{2}}\e^{\frac{2^2s}{2}}\\
                  &=\e^{\frac{t+3s}{2}}
