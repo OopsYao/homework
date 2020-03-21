@@ -5,11 +5,14 @@
     \maketitle
 
     \problem
-    Denote $X_t:=W_t^2$, then by Doob's submartingale inequality
-    we have that
-    \[P\left(\max_{0\leq s\leq t}X_s\leq\lambda\right)
-    \leq\frac{1}{\lambda}E(X_t^+)=\frac{t}{\lambda}\]
-    as $X_t\geq 0$ implies $E(X_t^+)=E(X_t)=t$.
+    \begin{proof}
+        Denote $X_t:=W_t^2$, then by Doob's submartingale inequality
+        we have that
+        \[P\left(\max_{0\leq s\leq t}X_s\geq\lambda\right)
+        \leq\frac{1}{\lambda}E(X_t^+)=\frac{t}{\lambda}\]
+        as $X_t\geq 0$ implies $E(X_t^+)=E(X_t)=t$. Hence the
+        first inequality is proved.
+    \end{proof}
 
     \problem
     \begin{proof}
@@ -26,4 +29,25 @@
         for a given $\sigma$, hence $X_t\to 0$ in probability
         as $t\to +\infty$.
     \end{proof}
+
+    \problem
+    For any random variable $X$ and $p>0$, denote stochastic process
+    $Y_t=|X|^p,t\geq 0$,
+    then it is obvious that
+    \[\max_{0\leq s\leq t}Y_s=|X|^p\]
+    Doob's submartingale inequality tells us that
+    for any $\lambda>0$
+    \[P\left(\max_{0\leq s\leq t}Y_s\geq\lambda^p\right)
+    \leq\frac{1}{\lambda^p}E(Y_t^+)\]
+
+    Since $Y_t=|X|^p\geq 0$, we have that
+    \[E(Y_t^+)=E(Y_t)=E(|X|^p)\]
+    hence
+    \[P(|X|^p\geq\lambda^p)\leq\frac{1}{\lambda^p}E(|X|^p)\]
+    Also note that
+    \[\{\omega\in\Omega;|X(\omega)|^p\geq\lambda^p\}
+    =\{\omega\in\Omega;|X(\omega)|\geq\lambda\}\]
+    It follows that
+    \[P(|X|\geq\lambda)\leq\frac{1}{\lambda^p}E(|X|^p)\]
+    which is the statement of Markov inequality.
 \end{document}
