@@ -1,0 +1,117 @@
+\documentclass[cn]{homework}
+
+\title{作业4}
+
+\begin{document}
+    \maketitle
+
+    \problem
+    \begin{proof}
+        显然该模型对应的特征方程为
+        \[\lambda^2-\theta_1\lambda-\theta_2\lambda=0\]
+        则特征根$\lambda_{1,2}$满足
+        \[\lambda_1+\lambda_2=\theta_1,
+        \quad\lambda_1\lambda_2=-\theta_2\]
+        注意到若特征根为虚数，则$\lambda_1,\lambda_2$相互共轭，因此
+        \[(1-\lambda_1)(1-\lambda_2)=|1-\lambda_1|^2>0\]
+        此处无法取得等号的原因是由于MA过程的可逆性；
+        若特征根为两实数，则仍由可逆性有$1-\lambda_{1,2}>0$，
+        则$(1-\lambda_1)(1-\lambda_2)>0$成立。
+        因此
+        \[-\lambda_1\lambda_2+\lambda_1+\lambda_2<1\]
+        即
+        \[\theta_1+\theta_2<1\]
+        
+        同理有
+        \[(1-\lambda_1)(1-\lambda_2)=|1-\lambda_1|^2>0\]
+        亦得到
+        \[\theta_2-\theta_1<1\]
+
+        同时由$|\lambda_{1,2}|<1$知
+        \[|\theta_2|=|\lambda_1\lambda_2|<1\]
+    \end{proof}
+
+    \problem
+
+    \problem
+    \begin{subproblem}[(\alph*)]
+        \item\label{pb:acf}
+        \newcommand{\Cov}{\mathrm{Cov}}
+        \newcommand{\Var}{\mathrm{Var}}
+        由于有限项MA模型为平稳的，故
+        对于任意$k\in\mathbb N$，有
+        \[\begin{aligned}
+            \gamma_k&=\Cov(Y_t,Y_{t-k})\\
+                    &=\Cov(Z_t-\theta Z_{t-1},Z_{t-k}-\theta Z_{t-k-1})\\
+                    &=\begin{cases}
+                        \Var(Z_t-\theta Z_{t-1}),&k=0\\
+                        \Cov(-\theta Z_{t-1},Z_{t-1}),&k=1\\
+                        0,&k>1
+                    \end{cases}\\
+                    &=\begin{cases}
+                        (1+\theta^2)\sigma^2,&k=0\\
+                        -\theta\sigma^2,&k=1\\
+                        0,&k>1
+                    \end{cases}
+        \end{aligned}\]
+        因此
+        \[\begin{aligned}
+            \rho(k)&=\frac{\gamma_k}{\gamma_0}\\
+                   &=\begin{cases}
+                        1,&k=0\\
+                        -\frac{\theta}{1+\theta^2},&k=1\\
+                        0,&k>1
+                   \end{cases}
+        \end{aligned}\]
+
+        \item
+        令$\rho(1)=0.4$可解得
+        \[\theta_1=-0.5,\theta_2=-2\]
+
+        由于$\theta=\theta_1=-0.5$时，该MA模型具有可逆性，
+        故更偏好$\theta=-0.5$。
+
+        \item
+        \begin{proof}
+            由题意知$\sum Z_{t-n}$收敛，不妨设
+            \[Z^*_n=\sum_{k=1}^nZ_{t-k},n=1,2,\ldots\]
+            则
+            \begin{equation}
+                \label{eq:partial sum}
+                Y_t=Z_t+C\cdot\lim_{n\to\infty}Z^*_n
+            \end{equation}
+            由中心极限定理知
+            \[\lim_{n\to\infty}Z^*_n\]
+            方差不存在，因此$Y_t$方差亦不存在。
+            故不可能是宽平稳的。
+        \end{proof}
+
+        \item
+        \begin{proof}
+            将\cref{eq:partial sum}滞后一阶有
+            \[\begin{aligned}
+                Y_{t-1}&=Z_{t-1}+C\cdot\lim_{n\to\infty}(Z^*_n-Z_{t-1})\\
+                    &=Z_{t-1}-C\cdot Z_{t-1}+C\cdot\lim_{n\to\infty}Z^*_n
+            \end{aligned}\]
+            故
+            \[X_t=Z_t+(C-1)Z_{t-1}\]
+            即$X_t$是MA(1)模型，自然具有平稳性。
+        \end{proof}
+
+        \item
+        同题\ref{pb:acf}，可得
+        \[\rho_X(k)=\begin{cases}
+            1,&k=0\\
+            \frac{C-1}{1+(C-1)^2},&k=1\\
+            0,&k>1
+        \end{cases}\]
+    \end{subproblem}
+
+    \problem
+    (a)为ARMA(1,1)，且由表达式易知其为平稳且可逆的。
+    (b)为MA(1)，也易判断其为可逆的。
+    (c)为AR(2)，由于其特征根为一对共轭复数，不妨设为$\lambda,\bar\lambda$，
+    则
+    \[|\lambda|^2=|\bar\lambda|^2=\lambda\bar\lambda=0.75<1,\]
+    因此该模型亦为平稳的。
+\end{document}
