@@ -50,4 +50,81 @@
     It follows that
     \[P(|X|\geq\lambda)\leq\frac{1}{\lambda^p}E(|X|^p)\]
     which is the statement of Markov inequality.
+
+    \problem
+    \newcommand{\absdelta}{\left|X\left(\frac{i+1}{2^n}\right)-X\left(\frac{i}{2^n}\right)\right|}
+    \begin{subproblem}
+        \item
+        \begin{proof}
+            Since for any $\omega\in A_n$, there exists some
+            integer\sidenote{It seems like there are some mistakes in your
+            definition, and I guess
+            \begin{multline*}
+                A_n:=
+                \left\{\absdelta\right.\\
+                \left.>\frac{1}{2^{\gamma n}}
+                \text{ for some integer }0\leq i\leq 2^n\right\}
+            \end{multline*} is what you really mean to.}
+            $0\leq i\leq 2^n$, s.t.
+            \begin{equation}
+                \label{eq:absdelta condi}
+                \absdelta>\frac{1}{2^{\gamma n}}
+            \end{equation}
+            And denote
+            \[M_{ni}:=\left\{\absdelta>\frac{1}{2^{\gamma n}}\right\}\]
+            then
+            \[\omega\in\bigcup_{i=0}^{2^n}M_{ni}\]
+            and conversely for any $\omega$ satisfies the condition above,
+            $\omega$ satisfies \cref{eq:absdelta condi} too, thus,
+            \[A_n=\bigcup_{i=0}^{2^n}M_{ni}\]
+
+            Consider that
+            \[\begin{aligned}
+                E\left(\absdelta^\beta\right)&=\int_\Omega\absdelta^\beta\diff P\\
+                &\geq\int_{M_{ni}}\absdelta^\beta\diff P\\
+                &>\int_{M_{ni}}\left(\frac{1}{2^{\gamma n}}\right)^\beta\diff P\\
+                &=\frac{P(M_{ni})}{2^{\beta\gamma n}}
+            \end{aligned}\]
+            And since there exists constant $C,\alpha,\beta$ s.t.
+            \[E\left(\absdelta^\beta\right)
+            \leq C\left|\frac{i+1}{2^n}-\frac{i}{2^n}\right|^{1+\alpha}
+            =\frac{C}{2^{n(1+\alpha)}}\]
+            then we have that
+            \[\frac{P(M_{ni})}{2^{n\beta\gamma}}
+            <\frac{C}{2^{n(1+\alpha)}}\]
+            i.e.,
+            \[P(M_{ni})<C\cdot 2^{-n(1+\alpha-\beta\gamma)}\]
+            It follows that
+            \[\begin{aligned}
+                P(A_n)&\leq\sum_{i=1}^{2^n}P(M_{ni})\\
+                &<\sum_{i=1}^{2^n}C\cdot 2^{-n(1+\alpha-\beta\gamma)}\\
+                &=2^n\cdot 2^{-n(1+\alpha-\beta\gamma)}C\\
+                &=C\cdot 2^{-(\alpha-\beta\gamma)n}
+            \end{aligned}\]
+        \end{proof}
+
+        \item
+        \begin{proof}
+            Since $\gamma<\alpha/\beta$, then $\alpha-\beta\gamma>0$.
+            It follows that
+            \[\sum_{n=1}^\infty C\cdot 2^{-(\alpha-\beta\gamma)n}\]
+            is convergent. Hence,
+            \[\sum_{n=1}^\infty P(A_n)
+            \leq\sum_{n=1}^\infty C\cdot 2^{-(\alpha-\beta\gamma)n}
+            <\infty\]
+            then by Borel-Cantelli Lemma, we have that
+            \[P\left(\limsup_{n\to\infty}A_n\right)=0\]
+            which is equivalent to
+            \[P\left(\liminf_{n\to\infty}A_n^\mathrm c\right)=1\]
+            where $A_n^\mathrm c$ represents the complement of $A_n$.
+            Then by the definition,
+            \[\liminf_{n\to\infty}A_n^\mathrm c
+            =\bigcup_{N=1}^\infty\bigcap_{n=N}^\infty
+            \left\{\absdelta\leq\frac{1}{2^{\gamma n}}\right\}\]
+            That being said, for a.e. $\omega\in\Omega$, the following
+            holds for any $n$ sufficiently large
+            \[\absdelta\leq\frac{1}{2^{\gamma n}}\]
+        \end{proof}
+    \end{subproblem}
+
 \end{document}
