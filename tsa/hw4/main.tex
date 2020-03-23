@@ -32,12 +32,38 @@
     \end{proof}
 
     \problem
+    \newcommand{\Cov}{\mathrm{Cov}}
+    \newcommand{\Var}{\mathrm{Var}}
+    \begin{proof}
+        由于对于任意$t,s,E(W_sZ_t)=0$，而
+        \[\phi(B)X_t=\theta(B)Z_t\]
+        由于平稳性可变为
+        \[X_t=\phi^{-1}(B)\theta(B)Z_t\]
+        因此亦有
+        \[E(W_sX_t)=0\]
+        不妨设$\{X_t\}$的协方差函数为$\gamma_X(k),k=0,1,2,\ldots$，
+        于是
+        \begin{equation}\begin{aligned}
+            \label{eq:p2 acf}
+            \Cov(Y_t,Y_{t-k})&=\Cov(X_t+W_t,X_{t-k}+W_{t-k})\\
+            &=\Cov(X_t,X_{t-k})+\Cov(W_t,W_{t-k})\\
+            &=\gamma_X(k)+\begin{cases}
+                \sigma^2,&k=0\\
+                0,&k>0
+            \end{cases}
+        \end{aligned}\end{equation}
+        与$t$无关，又
+        \[\begin{aligned}
+            E(Y_t)&=E(X_t)+E(W_t)\\
+            &=E(\phi^{-1}\theta(B)Z_t)+E(W_t)\\
+            &=0
+        \end{aligned}\]
+        因此，$\{Y_t\}$是平稳的。其ACF如\cref{eq:p2 acf}。
+    \end{proof}
 
     \problem
     \begin{subproblem}[(\alph*)]
         \item\label{pb:acf}
-        \newcommand{\Cov}{\mathrm{Cov}}
-        \newcommand{\Var}{\mathrm{Var}}
         由于有限项MA模型为平稳的，故
         对于任意$k\in\mathbb N$，有
         \[\begin{aligned}
