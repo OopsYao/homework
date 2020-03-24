@@ -49,4 +49,66 @@
         \[f(x')=\alpha\]
         即$f$在$x'$处取得上确界。同理可证得下确界。
     \end{proof}
+
+    \problem
+    \problem
+
+    \problem
+    \begin{proof}
+        由距离的三角不等式，我们有
+        \begin{align*}
+            d(x_n,y_n)&\leq d(x_n,x_m)+d(x_m,y_n)\\
+            d(x_m,y_m)&\geq d(x_m,y_n)-d(y_m,y_n)
+        \end{align*}
+        因此
+        \[d(x_n,y_n)-d(x_m,y_m)\leq d(x_n,x_m)+d(y_m,y_n)\]
+        再由对称性可得
+        \[d(x_m,y_m)-d(x_n,y_n)\leq d(x_m,x_n)+d(y_n,y_m)\]
+        于是
+        \[|d(x_n,y_n)-d(x_m,y_m)|\leq d(x_n,x_m)+d(y_m,y_n)\]
+        
+        由于$\{x_n\}_{n=1}^\infty,\{x_n\}_{n=1}^\infty$是Cauchy列，
+        因此对于$\varepsilon/2>0$，存在$N$对于任意$m,n>N$，
+        \begin{align*}
+            d(x_n,x_m)&<\frac{\varepsilon}{2}\\
+            d(y_n,y_m)&<\frac{\varepsilon}{2}
+        \end{align*}
+        于是
+        \[|d(x_n,y_n)-d(x_m,y_m)|<\varepsilon\]
+        因此$\{d(x_n,y_n)\}_{n=1}^\infty$是Cauchy列。
+    \end{proof}
+
+    \problem
+    \begin{proof}
+        由于其本身也是子列，因此必要性是显然的，下证充分性。
+        不妨设$\{x_n\}_{n=1}^\infty$为Cauchy列，且
+        存在子列$\{x_{n_k}\}_{k=1}^\infty$收敛于$x\in X$。
+        则对于$\varepsilon>0$，存在$N_1$，使得
+        对于任意$k>N_1$满足
+        \[d(x_{n_k},x)<\frac{\varepsilon}{2}\]
+        又由Cauchy列，对于此$\varepsilon$，存在
+        $N_2$使得对于任意$n_k\geq k>N_2$，有
+        \[d(x_k,x_{n_k})<\frac{\varepsilon}{2}\]
+        因此存在$N=\max\{N_1,N_2\}$，使得对于任意$k>N$，有
+        \[d(x_k,x)\leq d(x_k,x_{n_k})+d(x_{n_k},x)<\varepsilon\]
+        故$\{x_n\}_{n=1}^\infty$收敛。
+
+        因此，距离空间中Cauchy列收敛的充要条件是存在收敛子列。
+    \end{proof}
+
+    \problem
+    \begin{proof}
+        我们证明$d_1$下的Cauchy列一定是$d_2$下的Cauchy列。
+        不妨设$\{x_n\}_{n=1}^\infty$是$d_1$下的Cauchy列，
+        则对于任意$\varepsilon>0$，存在$N$使得对于任意$m,n>N$，
+        有
+        \[d_1(x_n,x_m)<\frac{1}{b}\cdot\varepsilon\]
+        因此
+        \[d_2(x_n,x_m)\leq b\cdot d_1(x_n,x_m)<\varepsilon\]
+        即$\{x_n\}_{n=1}^\infty$是$d_2$下的Cauchy列。
+
+        另一方面由于
+        \[d_1\leq\frac{1}{a}\cdot d_2\]
+        因此也有$d_2$下的Cauchy列也是$d_1$下的。
+    \end{proof}
 \end{document}
