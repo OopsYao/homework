@@ -19,11 +19,11 @@
 % Lstlist setting
 \RequirePackage{listings}
 \RequirePackage{xcolor}
-\definecolor{lbcolor}{rgb}{0.95,0.95,0.95} 
+\definecolor{lbcolor}{rgb}{0.98,0.98,0.98} 
 \lstset{
     basicstyle=\footnotesize\ttfamily,
     backgroundcolor=\color{lbcolor},
-    xleftmargin=.1\textwidth, xrightmargin=.1\textwidth,
+    % xleftmargin=.1\textwidth, xrightmargin=.1\textwidth,
     autogobble
 }
 % `code' macro

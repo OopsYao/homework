@@ -30,7 +30,7 @@
         \[P\left(\max_{0\leq s\leq t}|W_t|\geq\lambda\right)
         \leq\frac{1}{\lambda}E(|W_t|^+)=\frac{\sqrt{2t/\pi}}{\lambda}\]
         which is the statement of the second inequality
-        \sidenote{It seems you typed $\frac{\sqrt{2t/\pi}}{\lambda}$
+        \sidenote{It seems like that you typed $\frac{\sqrt{2t/\pi}}{\lambda}$
         as $\frac{\sqrt{2t/\lambda}}{\lambda}$ by mistake.}.
     \end{proof}
 
@@ -147,4 +147,28 @@
         \end{proof}
     \end{subproblem}
 
+    \problem
+    As we can see (\cref{fig:simulation}), the bigger $\sigma$ means more
+    powerful zigzag, and $\mu$ determines the main trend,
+    while larger $T$ shows something interesting, that though
+    a path with higher $\sigma$ goes below one with lower
+    during a short time $\sigma$ ($T=5$),
+    it overtakes another in the long time ($T=10$).
+
+    Basically $\mu$ is the main stream of motion while
+    $\sigma$ is the magnitude of the uncertainity.
+
+    \begin{figure*}
+        \centering
+        \includegraphics[width=0.47\textwidth]{T=5}
+        \includegraphics[width=0.47\textwidth]{T=10}
+        \caption{Simulation of GBM}
+        \label{fig:simulation}
+    \end{figure*}
+
+    \appendix
+    \section{Python Code for Simulation}
+    \begin{fullwidth}
+    \lstinputlisting[language=Python]{simulator.py}
+    \end{fullwidth}
 \end{document}
