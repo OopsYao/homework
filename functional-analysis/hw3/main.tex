@@ -51,6 +51,23 @@
     \end{proof}
 
     \problem
+    \begin{proof}
+        采用反证法，倘若$f$不是一致连续的，则存在$\varepsilon>0$，
+        对于任意$n$，总有$x_n,y_n\in M$满足$d(x_n,y_n)<1/n$，
+        但
+        \[|f(x_n)-f(y_n)\geq\varepsilon\]
+        又由$M$是自列紧的，故$\{x_n\}_{n=1}^\infty$具有收敛子列
+        $\{x_{n_k}\}_{k=1}^\infty$，不妨设
+        \[\lim_{k\to\infty}x_{n_k}=x\in M\]
+        而$x_n,y_n$的关系使得
+        \[\lim_{k\to\infty}y_{n_k}=x\]
+        又由$f$的连续性知
+        \[|f(x_{n_k})-f(y_{n_k})|\to|f(x)-f(x)|=0
+        \quad(k\to\infty)\]
+        产生矛盾。
+        因此$f$一定是一致连续的。
+    \end{proof}
+
     \problem
 
     \problem
