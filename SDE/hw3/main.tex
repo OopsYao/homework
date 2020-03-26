@@ -12,6 +12,26 @@
         \leq\frac{1}{\lambda}E(X_t^+)=\frac{t}{\lambda}\]
         as $X_t\geq 0$ implies $E(X_t^+)=E(X_t)=t$. Hence the
         first inequality is proved.
+
+        Since
+        \[\begin{aligned}
+            E(|W_t|)&=\int_{\Omega}W_t\diff P\\
+            &=\int_{-\infty}^\infty x\cdot
+              \frac{\e^{-\frac{x^2}{2t}}}{\sqrt{2\pi t}}
+              \diff x\\
+            &=\sqrt{\frac{2}{\pi t}}\int_0^\infty x\e^{-\frac{x^2}{2t}}\diff x\\
+            &=\sqrt{\frac{2}{\pi t}}\int_0^\infty \e^{-\frac{\xi}{t}}\diff\xi\\
+            &=\sqrt{\frac{2t}{\pi}}
+        \end{aligned}\]
+        where we use $\xi=x^2/2$ as a substitution,
+        then we know that
+        \[E(|W_t|^+)=E(|W_t|)=\sqrt{\frac{2t}{\pi}}\]
+        hence by Doob's inequality we obtain
+        \[P\left(\max_{0\leq s\leq t}|W_t|\geq\lambda\right)
+        \leq\frac{1}{\lambda}E(|W_t|^+)=\frac{\sqrt{2t/\pi}}{\lambda}\]
+        which is the statement of the second inequality
+        \sidenote{It seems you typed $\frac{\sqrt{2t/\pi}}{\lambda}$
+        as $\frac{\sqrt{2t/\lambda}}{\lambda}$ by mistake.}.
     \end{proof}
 
     \problem
