@@ -69,6 +69,39 @@
     \end{proof}
 
     \problem
+    \begin{proof}
+        由Arzelà–Ascoli定理，我们只需证明$S$中的函数是
+        一致有界且等度连续的。
+
+        由于$M$为有界集，故存在$\gamma'>0$与某一函数$f_0\in C[a,b]$
+        使得
+        \[M\subset B(f_0,\gamma')\]
+        即
+        \[d(f,f_0)<\gamma'\quad\forall f\in M\]
+        因此存在$\gamma=\gamma'+d(f_0,0)$使得\sidenote{
+        显然$0\in C[a,b]$}
+        \[d(f,0)\leq d(f,f_0)+d(f_0,0)<\gamma'+d(f_0,0)=\gamma
+        ,\forall f\in M\]
+        即
+        \[\max_{[a.b]}|f|<\gamma\quad\forall f\in M\]
+        
+        于是对于任意$\varepsilon>0$，
+        \[\left|\int_a^xf(t)\diff t\right|
+        \leq\int_a^x|f(t)|\diff t
+        \leq\gamma(b-a)
+        \quad\forall x\in[a,b]\]
+        即$S$中的函数是一致有界的。
+
+        而存在$\delta=\varepsilon/\gamma$，使得
+        任意$\int_a^xf(t)\diff t\in S$与
+        任意$t_1,t_2$满足$|t_1-t_2|<\delta$，有
+        \[\left|\int_a^{t_1}f(t)\diff t
+        -\int_a^{t_2}f(t)\diff t\right|
+        =\left|\int_{t_2}^{t_1}f(t)\diff t\right|
+        <\gamma|t_1-t_2|=\varepsilon\]
+        因此$S$中的函数是等度连续的。故
+        $S$是列紧的。
+    \end{proof}
 
     \problem
     \begin{proof}
