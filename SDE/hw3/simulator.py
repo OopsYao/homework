@@ -1,6 +1,5 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import math
 
 T = 10
 dt = 0.001
@@ -25,5 +24,5 @@ for mu, sigma in [(1, 0.4), (1, 0.8), (0.5, 0.4), (-0.3, 0.4)]:
 plt.legend()
 plt.xlabel('t')
 plt.ylabel('X')
-plt.title(f'$T = {T}$')
+plt.title(f'$T={T}$')
 plt.show()

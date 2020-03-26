@@ -140,9 +140,16 @@
             Then by the definition,
             \[\liminf_{n\to\infty}A_n^\mathrm c
             =\bigcup_{N=1}^\infty\bigcap_{n=N}^\infty
-            \left\{\absdelta\leq\frac{1}{2^{\gamma n}}\right\}\]
-            That being said, for a.e. $\omega\in\Omega$, the following
-            holds for any $n$ sufficiently large
+            \left\{\absdelta\leq\frac{1}{2^{\gamma n}}
+            ,\forall i\in[0,2^n]\right\}\]
+            that being said, for a.e. $\omega\in\Omega$,
+            there exists at least one integer $N\geq 1$ s.t.,
+            the following holds for any\sidenote{
+                So that is the issue -- I just proved
+                that when $n$ is sufficiently large,
+                not for any positive interger.
+            } $n\geq N$ and any integer
+            $i\in [0,2^n]$
             \[\absdelta\leq\frac{1}{2^{\gamma n}}\]
         \end{proof}
     \end{subproblem}
@@ -152,7 +159,7 @@
     powerful zigzag, and $\mu$ determines the main trend,
     while larger $T$ shows something interesting, that though
     a path with higher $\sigma$ goes below one with lower
-    during a short time $\sigma$ ($T=5$),
+    $\sigma$ during a short time ($T=5$),
     it overtakes another in the long time ($T=10$).
 
     Basically $\mu$ is the main stream of motion while
