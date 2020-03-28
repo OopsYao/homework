@@ -1,0 +1,23 @@
+\documentclass[cn]{homework}
+
+\title{第五周作业}
+
+\begin{document}
+    \maketitle
+
+    \problem
+    \begin{proof}
+        对于点列$\{x_n=n\}_{n=1}^\infty$来说，由于
+        存在$N\geq 2/\varepsilon$使得
+        \[d(x_n,x_m)=\left|\frac{1}{n}-\frac{1}{m}\right|
+        \leq\frac{2}{\min\{m,n\}}
+        \leq\frac{2}{N}
+        \leq\varepsilon\]
+        因此$\{x_n\}_{n=1}^\infty$为Cauchy列，
+        而对于任意$k\in X$，总有$\varepsilon_k=1/k$，使得
+        \[d(x_n,k)=\left|\frac{1}{n}-\frac{1}{k}\right|
+        \to\left|\frac{1}{k}\right|\geq\varepsilon_k
+        \quad(n\to\infty)\]
+        即序列不会收敛于$X$中的任意元素，因此$X$不是完备的。
+    \end{proof}
+\end{document}
