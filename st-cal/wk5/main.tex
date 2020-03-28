@@ -1,0 +1,21 @@
+\documentclass[cn]{homework}
+
+\title{第五周作业}
+
+\begin{document}
+    \maketitle
+
+    \problem
+    \begin{proof}
+        由条件期望定义有无偏性
+        \[E(X\cdot E(Y|G))=E(E(X\cdot E(Y|G)|G))\]
+        而由提取已知量的性质，注意到$E(Y|G)$是$G$可测的，
+        \[E(X\cdot E(Y|G)|G)=E(Y|G)\cdot E(X|G)\]
+        因此
+        \[E(X\cdot E(Y|G))=E(E(Y|G)\cdot E(X|G))\]
+        同理由对称性可得
+        \[E(Y\cdot E(X|G))=E(E(X|G)\cdot E(Y|G))\]
+        故
+        \[E(X\cdot E(Y|G))=E(Y\cdot E(X|G))\]
+    \end{proof}
+\end{document}
