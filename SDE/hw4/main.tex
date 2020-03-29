@@ -43,4 +43,54 @@
         &=\frac{t^3}{3}
     \end{aligned}\]
 
+    \problem
+    % TODO Problem 2
+
+    \problem
+    By Fubini theorem, calculating $E(Y_t)$ falls to
+    calculate $\int_0^tE(\e^{W_s})\diff s$ as
+    \[\begin{aligned}
+    E(Y_t)&=\int_\Omega\left(\int_0^t\e^{W_s}\diff s\right)\diff P\\
+    &=\int_0^t\left(\int_\Omega\e^{W_s}\diff P\right)\diff s\\
+    &=\int_0^tE(\e^{W_s})\diff s \\
+    \end{aligned}\]
+    And to the convenience of following calculation, consider moment
+    generating function of $W_s$,
+    \begin{equation}
+        \label{eq:mgf}
+        \begin{aligned}
+        E(\e^{uW_s})&=\int_{-\infty}^\infty\e^{ux}\cdot
+        \frac{\e^{-\frac{x^2}{2s}}}{\sqrt{2\pi s}}\diff x\\
+        &=\int_{-\infty}^\infty\e^{\frac{u^2s}{2}}
+        \cdot\frac{\e^{-\frac{(x-us)^2}{2s}}}{\sqrt{2\pi s}}\diff x\\
+        &=\int_{-\infty}^\infty\e^{\frac{u^2s}{2}}
+        \cdot\frac{\e^{-\frac{\xi^2}{2s}}}{\sqrt{2\pi s}}\diff\xi\\
+        &=\e^{\frac{u^2s}{2}}
+        \end{aligned}
+    \end{equation}
+    where we used substitution of $\xi=x-us$.
+
+    Therefore,
+    \[\begin{aligned}
+        E(\e^{W_s})&=\e^{\frac{s}{2}}\\
+        E(\e^{2W_s})&=\e^{2s}\\
+    \end{aligned}\]
+    Thus,
+    \[\begin{aligned}
+        E(Y_t)&=\int_0^tE(\e^{W_s})\diff s\\
+        &=\int_0^t\e^{\frac{s}{2}}\diff s\\
+        &=2(\e^{\frac{t}{2}}-1)
+    \end{aligned}\]
+    and similarly,
+    \[\begin{aligned}
+        E(Y_t^2)&=\int_0^tE(\e^{2W_s})\diff s\\
+        &=\int_0^t\e^{2s}\diff s\\
+        &=\frac{\e^{2t}-1}{2}
+    \end{aligned}\]
+    hence the variance,
+    \[\begin{aligned}
+        \var(Y_t)&=E(Y_t^2)-(E(Y_t))^2\\
+        &=\frac{\e^{2t}-1}{2}-4(\e^{\frac{t}{2}}-1)^2\\
+        &=\frac{\e^{2t}}{2}-4\e^t+8\e^{\frac{t}{2}}-\frac{9}{2}
+    \end{aligned}\]
 \end{document}
