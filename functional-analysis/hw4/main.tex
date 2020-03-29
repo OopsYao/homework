@@ -20,4 +20,102 @@
         \quad(n\to\infty)\]
         即序列不会收敛于$X$中的任意元素，因此$X$不是完备的。
     \end{proof}
+
+    \problem
+    \begin{subproblem}
+        \item 
+        \begin{proof}
+            \newcommand{\yz}{|y(t)-z(t)|}
+            \newcommand{\yzp}{|y'(t)-z'(t)|}
+            \newcommand{\xz}{|x(t)-z(t)|}
+            \newcommand{\xzp}{|x'(t)-z'(t)|}
+            \newcommand{\xy}{|x(t)-y(t)|}
+            \newcommand{\xyp}{|x'(t)-y'(t)|}
+            由绝对值的三角不等式，对于任意$x,y,z\in D$，
+            $t\in[0,1]$，
+            \begin{align*}
+                \xz &\leq\xy+\yz\\
+                \xzp &\leq\xyp+\yzp\\
+            \end{align*}
+            因此，
+            \begin{align*}
+                \sup_{0\leq t\leq 1}\xz
+                &\leq\sup_{0\leq t\leq 1}\xy
+                +\sup_{0\leq t\leq 1}\xz\\
+                \sup_{0\leq t\leq 1}\xzp
+                &\leq\sup_{0\leq t\leq 1}\xyp
+                +\sup_{0\leq t\leq 1}\xzp\\
+            \end{align*}
+            故
+            \[d(x,z)\leq d(x,y)+d(y,z)\]
+            三角不等式得证，而对称性与非负性是显然的，对于不可区分同一性，
+            倘若
+            \[d(x,y)=0\]
+            则
+            \[\sup_{0\leq t\leq 1}\xy=0\]
+            因此对于任意$t\in[0,1]$，有
+            \[x(t)=y(t)\]
+            即$x=y$。
+            综上，$d$为距离，$D$为距离空间。
+        \end{proof}
+
+        \item
+        \newcommand{\xnx}{|x_n(t)-x(t)|}
+        \newcommand{\xnxp}{|x_n'(t)-x'(t)|}
+        不妨设$x_n\to x(n\to\infty)$，按距离收敛意味着
+        \[\sup_{0\leq t\leq 1}\xnx+\sup_{0\leq t\leq 1}\xnxp\to 0\]
+        由两者非负性，等价于
+        \begin{align*}
+            \sup_{0\leq t\leq 1}\xnx&\to 0\\
+            \sup_{0\leq t\leq 1}\xnxp&\to 0\\
+        \end{align*}
+        亦等价于，对于任意$t\in[0,1]$，
+        \begin{align*}
+            \xnx&\to 0\\
+            \xnxp&\to 0\\
+        \end{align*}
+        即$x_n(t),x_n'(t)$（在函数列的层面上）一致收敛于
+        $x(t),x'(t)$。
+
+        \item
+        \begin{proof}
+            \newcommand{\xmn}{|x_m(t)-x_n(t)|}
+            \newcommand{\xmnp}{|x'_m(t)-x_n'(t)|}
+            不妨设$\{x_n\}_{n=1}^\infty$为$D$中的Cauchy列，
+            则对于任意$\varepsilon>0$，存在$N$，对于任意$m,n>N$有，
+            \[d(x_m,x_n)<\varepsilon\]
+            故
+            \begin{align*}
+                \sup_{0\leq t\leq 1}\xmn&<\varepsilon\\
+                \sup_{0\leq t\leq 1}\xmnp&<\varepsilon\\
+            \end{align*}
+            注意到$D\subset C[0,1]$，
+            因此$\{x_n\}_{n=1}^\infty$与$\{x'_n\}_{n=1}^\infty$
+            为$C[0,1]$中的Cauchy列，
+            利用$C[0,1]$的完备性知，存在$x,y\in C[0,1]$有
+            \begin{align*}
+                \sup_{0\leq t\leq 1}\xnx&\to 0\\
+                \sup_{0\leq t\leq 1}|x'_n(t)-y(t)|&\to 0
+            \end{align*}
+            因此$x_n(t)$与$x'_n(t)$分别一致收敛于$x(t)$与$y(t)$。
+
+            下面只要证明$x\in D$，则有$d(x_n,x)\to 0$，完备性可得证。
+            由于
+            \[\lim_{n\to\infty}\int_0^tx'_n(\xi)\diff\xi
+            =\lim_{n\to\infty}x_n(t)-x_n(0)=x(t)-x(0)\]
+            而另一方面由一致连续性
+            \[\lim_{n\to\infty}\int_0^tx'_n(\xi)\diff\xi
+            =\int_0^t\lim_{n\to\infty}x'_n(\xi)\diff\xi
+            =\int_0^ty(\xi)\diff\xi\]
+            因此
+            \[x(t)=x(0)+\int_0^ty(\xi)\diff\xi\]
+            故由含参变量积分的可微性知
+            \[x'(t)=y(t)\in C[0,1]\]
+            因此$x\in D$，而
+            \[d(x_n,x)=\sup_{0\leq t\leq 1}\xnx
+            +\sup_{0\leq t\leq 1}|x_n'(t)-x(t)|
+            \to 0\]
+            故$D$是完备的。
+        \end{proof}
+    \end{subproblem}
 \end{document}
