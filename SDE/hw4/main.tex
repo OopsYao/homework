@@ -1,0 +1,46 @@
+\documentclass{homework}
+
+\title{Homework 4}
+
+\DeclareMathOperator{\var}{Var}
+
+\begin{document}
+    \maketitle
+
+    \problem
+    Since
+    \[\begin{aligned}
+        \var(X_t)&=E(X_t^2)-(E(X_t))^2\\
+        &=E\left\{\left(\int_0^tW_s\diff s\right)
+        \left(\int_0^tW_r\diff r\right)\right\}\\
+        &=E\left(\int_0^t\int_0^tW_sW_r\diff s\diff r\right)\\
+        &=\int_\Omega\left(\iint_{[0,t]^2}W_sW_r\diff s\diff r\right)\diff P
+    \end{aligned}\]
+    then we apply Fubini theorem again,
+    \[\var(X_t)=\iint_{[0,t]^2}
+    \left(\int_\Omega W_sW_r\diff P\right)\diff s\diff r\]
+    Without loss of generality, assume that $s<r$, then we obtain
+    by inpendent increments of Brownian motion,
+    \[\begin{aligned}
+        \int_\Omega W_sW_r\diff P&=E(W_sW_r)\\
+        &=E(W_s(W_r-W_s+W_s))\\
+        &=E(W_s(W_r-W_s))+E(W_s^2)\\
+        &=s
+    \end{aligned}\]
+    thus in general,
+    \[\int_\Omega W_sW_r\diff P=\min\{s,r\}\]
+    It follows that
+    \[\begin{aligned}
+        \var(X_t)&=\iint_{[0,t]^2}\min\{s,r\}\diff s\diff r\\
+        &=\left(\iint_{\{(s,r)\in[0,t]^2;s\leq r\}}
+                +\iint_{\{(s,r)\in[0,t]^2;s\leq r\}}\right)
+        \min\{s,r\}\diff s\diff r\\
+    \end{aligned}\]
+    and by symmetry, we obtain the variance as
+    \[\begin{aligned}
+        \var(X_t)&=2\iint_{\{(s,r)\in[0,t]^2;s\leq r\}}s\diff s\diff r\\
+        &=\int_0^t\diff r\int_0^r2s\diff s\\
+        &=\frac{t^3}{3}
+    \end{aligned}\]
+
+\end{document}
