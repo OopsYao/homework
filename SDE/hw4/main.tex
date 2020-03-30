@@ -3,6 +3,7 @@
 \title{Homework 4}
 
 \DeclareMathOperator{\var}{Var}
+\DeclareMathOperator{\cov}{Cov}
 
 \begin{document}
     \maketitle
@@ -93,4 +94,62 @@
         &=\frac{\e^{2t}-1}{2}-4(\e^{\frac{t}{2}}-1)^2\\
         &=\frac{\e^{2t}}{2}-4\e^t+8\e^{\frac{t}{2}}-\frac{9}{2}
     \end{aligned}\]
+
+    \problem
+
+    \problem
+    \begin{subproblem}
+        \item
+        Without loss of generality, assume that $s<t$.
+        Since $EX_t=0$, then we have that
+        \[\begin{aligned}
+            \cov(X_t,X_s)&=E(X_tX_s)\\
+            &=E((W_t-tW_1)(W_s-sW_1))\\
+        \end{aligned}\]
+        Let $\mathcal F_\cdot=(\mathcal F_t)_{t>0}$ be
+        the natural filtration of Brownian motion
+        $W_t$. Consider that
+        \begin{multline}
+            \label{eq:p5 condi exp}
+            E((W_t-tW_1)(W_s-sW_1)|\mathcal F_s)
+            =E(W_s(W_t-tW_1)|\mathcal F_s)\\
+            -s\cdot E(W_1(W_t-tW_1)|\mathcal F_s)
+        \end{multline}
+        And
+        \begin{equation}
+            \label{eq:p5 condi exp part}
+            \begin{aligned}
+                &E(W_1(W_t-tW_1)|\mathcal F_s)\\
+                =&E((W_1-W_s+W_s)(W_t-tW_1)|\mathcal F_s)\\
+                =&E(W_1-W_s)\cdot E(W_t-tW_1|\mathcal F_s)
+                +E(W_s(W_t-tW_1)|\mathcal F_s)\\
+                =&W_s\cdot E(W_t-tW_1|\mathcal F_s)\\
+            \end{aligned}
+        \end{equation}
+        as inpendent increments of $W_t$ implying that
+        \[E((W_1-W_s)(W_t-tW_1)|\mathcal F_s)
+        =E(W_1-W_s)\cdot E(W_t-tW_1|\mathcal F_s)=0\]
+        Hence \cref{eq:p5 condi exp} becomes
+        \[E((W_t-tW_1)(W_s-sW_1)|\mathcal F_s)
+        =(1-s)W_s\cdot E(W_t-tW_1|\mathcal F_s)\]
+        And since
+        $W_t$ is a martingale with respect to its natural filtration,
+        we have that
+        \[E(W_t-tW_1|\mathcal F_s)=W_s-tW_s=(1-t)W_s\]
+        thus \cref{eq:p5 condi exp} becomes
+        \[E((W_t-tW_1)(W_s-sW_1)|\mathcal F_s)=(1-t)(1-s)W_s^2\]
+        
+        Applying the tower rule we have that
+        \[\begin{aligned}
+            E((W_t-tW_1)(W_s-sW_1))&=E((W_t-tW_1)(W_s-sW_1)|\mathcal F_s)\\
+            &=(1-t)(1-s)E(W_s^2)\\
+            &=s(1-t)(1-s)
+        \end{aligned}\]
+        so in general,
+        \[\cov(X_t,X_s)=(1-t)(1-s)\min\{t,s\}\]
+
+        \item
+        Since
+        \[\var(Y_t)=\var(X_t^2)=\var(W_t^2)\]        
+    \end{subproblem}
 \end{document}
