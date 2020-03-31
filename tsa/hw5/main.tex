@@ -1,0 +1,24 @@
+\documentclass[cn]{homework}
+
+\title{作业5}
+
+\DeclareMathOperator{\var}{Var}
+\DeclareMathOperator{\E}{E}
+\begin{document}
+    \maketitle
+
+    \problem
+    \begin{proof}
+        由于
+        \[\begin{aligned}
+            \mathrm{MSE}&=\E(Y-g(X))^2\\
+            &=(\E(Y-g(X)))^2+\var(Y-g(X))\\
+            &\geq (\E(Y-g(X)))^2\\
+            &\geq 0
+        \end{aligned}\]
+
+        而$g(X)=\E(Y|X)$使得
+        \[E(Y-g(X))=EY-E(E(Y|X))=0\]
+        即可以取得下界，因此$\E(Y|X)$使得MSE最小。
+    \end{proof}
+\end{document}
