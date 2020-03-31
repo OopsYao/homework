@@ -9,17 +9,36 @@
 
     \problem
     \begin{proof}
-        由于
+        为记号的简便性，我们记
+        \[\E(Y|X)=Y'\]
+        考虑
         \[\begin{aligned}
-            \mathrm{MSE}&=\E(Y-g(X))^2\\
-            &=(\E(Y-g(X)))^2+\var(Y-g(X))\\
-            &\geq (\E(Y-g(X)))^2\\
-            &\geq 0
+            \mathrm{MSE}
+            &=\E(Y-g(X))^2\\
+            &=\E(Y-Y'+Y'-g(X))^2\\
+            &=\E(Y-Y')^2-2\E((Y-Y')(Y'-g(X)))+\E(Y'-g(X))^2\\
         \end{aligned}\]
-
-        而$g(X)=\E(Y|X)$使得
-        \[E(Y-g(X))=EY-E(E(Y|X))=0\]
-        即可以取得下界，因此$\E(Y|X)$使得MSE最小。
+        而中间项
+        \[\begin{aligned}
+            \E((Y-Y')(Y'-g(X)))&=\E(Y(Y'-g(X)))-\E(Y'(Y'-g(X)))
+        \end{aligned}\]
+        注意到$Y'-g(X)$是$\sigma(X)$可测的，于是
+        \[\begin{aligned}
+            \E(Y'(Y'-g(X)))&=\E((Y'-g(X))\E(Y|X))\\
+            &=\E\Big(\E\big(Y(Y'-g(X))|X\big)\Big)\\
+            &=\E(Y(Y'-g(X)))
+        \end{aligned}\]
+        因此中间项
+        \[\E((Y-Y')(Y'-g(X)))=0\]
+        故
+        \[\begin{aligned}
+           \mathrm{MSE}&=\E(Y-Y')^2+\E(Y'-g(X))^2\\
+           &=\E(Y-\E(Y|X))^2+\E(g(X)-\E(Y|X))^2
+        \end{aligned}\]
+        显然，仅在
+        \[g(X)=\E(Y|X)\quad\mathrm{a.e.}\]
+        时能取得最小值
+        \[\E(Y-\E(Y|X))^2\]
     \end{proof}
 
     \problem
