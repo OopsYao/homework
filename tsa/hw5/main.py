@@ -39,7 +39,7 @@ sm.graphics.tsa.plot_acf(np.diff(X, n=d))
 sm.graphics.tsa.plot_pacf(np.diff(X, n=d))
 
 # Fit with ARIMA(p, d, q)
-model = ARIMA_model.ARIMA(X, (1, d, 4))
+model = ARIMA_model.ARIMA(X, (1, d, 3))
 result = model.fit()
 print(result.summary())
 

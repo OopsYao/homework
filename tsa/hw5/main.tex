@@ -119,33 +119,55 @@
         \item
         首先对数据进行差分运算，并进行平稳性的判断，可以看到
         （\cref{fig:acf}），
-        经过1阶差分后，数据可以判定是平稳的。
+        经过1阶差分后，数据可以判定是平稳的，2阶差分并没出现更
+        明显的平稳性，于是判定$d=1$。
+
         \begin{figure}[h]
             \centering
-            \includegraphics[width=0.32\textwidth]{acf-d0}
-            \includegraphics[width=0.32\textwidth]{acf-d1}
-            \includegraphics[width=0.32\textwidth]{acf-d2}
+            \includegraphics[width=0.32\linewidth]{acf-d0}
+            \includegraphics[width=0.32\linewidth]{acf-d1}
+            \includegraphics[width=0.32\linewidth]{acf-d2}
             \caption{不同阶数差分下的ACF}
             \label{fig:acf}
         \end{figure}
 
-        从ACF上能够看出，1阶差分后的序列差不多具有3阶截尾性，
-        这是MA模型的典型特征，同时绘制PACF如\cref{fig:pacf}。
-        具有1阶截尾性这是AR(1)的特征，于是我们可以考虑模型
-        ARIMA(1,1,3)。
         \begin{marginfigure}
             \includegraphics[width=0.9\textwidth]{pacf}
             \caption{PACF}
             \label{fig:pacf}
         \end{marginfigure}
 
+        从ACF上能够看出，1阶差分后的序列差不多具有3阶截尾性，
+        这是MA模型的典型特征，同时绘制PACF如\cref{fig:pacf}。
+        具有1阶截尾性这是AR(1)的特征，于是我们可以考虑模型
+        ARIMA(1,1,3)或者ARIMA(1,1,4)。
+
+        经过拟合发现，ARIMA(1,1,3)的AIC与BIC稍大于ARIMA(1,1,4)，
+        但是差距并不是很明显（\cref{tab:AIC BIC}），
+        以简单起见的原则，我们选用ARIMA(1,1,3)。
+
+        \begin{margintable}
+            \centering
+            \begin{tabular}{ccc}
+                \toprule
+                模型 & AIC & BIC\\
+                \midrule
+                ARIMA(1,1,3) & -770.619& -750.508\\ 
+                ARIMA(1,1,4) & -774.499 & -751.036\\
+                \bottomrule
+            \end{tabular}
+            \caption{AIC与BIC}
+            \label{tab:AIC BIC}
+        \end{margintable}
+
         通过对模型进行估计，我们可以得到估计的模型方程为
         \[\Delta X_t+0.005\Delta X_{t-1}=0.0018+\epsilon_t-0.6356\epsilon_{t-1}
         -0.5663\epsilon_{t-2}-0.4986\epsilon_{t-3}\]
-        而$\mathrm{AIC}=-770.619,\mathrm{BIC}=-750.508$。
+
         同时对残差进行白噪声检验，可以得到$m=6,12$时的Q统计量
         （\cref{tab:residual test}），其$p$值是显著大于0.05的，
         因此可以认为通过了检验，残差项是白噪声。
+
         \begin{margintable}
             \centering
             \begin{tabular}{ccc}
@@ -159,6 +181,7 @@
             \caption{ARMIA(1,1,3)残差检验}
             \label{tab:residual test}
         \end{margintable}
+
         \begin{marginfigure}
             \includegraphics[width=0.9\textwidth]{real-prediction}
             \caption{真实值与预测值}
@@ -167,8 +190,30 @@
         
         \item
         如图
+        \begin{table}[h]
+            \centering
+            \begin{tabular}{cccc}
+                \toprule
+                季度 & 实际值 & 预测值 & 误差\\
+                \midrule
+                2011Q1 & 2.19722 & 2.25107 & -0.05385\\
+                2011Q2 & 2.20055 & 2.16733 & 0.03322\\
+                2011Q3 & 2.19722 & 2.20148 & -0.00426\\
+                2011Q4 & 2.15987 & 2.18824 & -0.02838\\
+                2012Q1 & 2.11263 & 2.15776 & -0.04513\\
+                2012Q2 & 2.10047 & 2.06754 & 0.03293\\
+                2012Q3 & 2.08318 & 2.08346 & -0.00027\\
+                2012Q4 & 2.05796 & 2.08093 & -0.02296\\
+                \bottomrule
+            \end{tabular}
+        \end{table}
+        \begin{figure}
+            \centering
+            \includegraphics[width=0.8\linewidth]{tail-prediction}
+        \end{figure}
     \end{subproblem}
 
+    \newpage
     \appendix
     \section{Python代码}
     \lstinputlisting[language=Python]{main.py}
