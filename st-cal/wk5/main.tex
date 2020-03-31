@@ -3,6 +3,7 @@
 \title{第五周作业}
 
 \DeclareMathOperator{\E}{E}
+\DeclareMathOperator{\var}{var}
 \newcommand{\Econd}[2]{\mathrm E\left[\left.#1\right|#2\right]}
 
 \begin{document}
@@ -25,7 +26,34 @@
     \problem
     \begin{subproblem}
         \item
-        % TODO 2.(1)
+        \begin{proof}
+            为简便起见，记
+            \[Z=\E(X|G)\]
+            由于
+            \[\var(X)=\E X^2-(\E X)^2\]
+            而条件期望具有无偏性，故只需证明
+            \[\E X^2\geq \E Z^2\]
+            考虑
+            \[\begin{aligned}
+                \E X^2&=\E(X-Z+Z)^2\\
+                &=\E(X-Z)^2+2\E(Z(X-Z))+\E Z^2\\
+            \end{aligned}\]
+            而中间项
+            \[\E(Z(X-Z))=E(ZX)-EZ^2\]
+            这里注意到$Z=\E(X|G)$是$G$-可测的，于是
+            \[EZ^2=\E(Z\cdot\E(X|G))=\E(\E(ZX|G))=\E(ZX)\]
+            因此中间项
+            \[\E(Z(X-Z))=0\]
+            故
+            \[\begin{aligned}
+                \E X^2&=\E(X-Z)^2+\E Z^2\geq \E Z^2\\
+            \end{aligned}\]
+            显然等号仅在
+            \[\E (X-Z)^2=0\]
+            即
+            \[X=Z=\E(X|G)\quad\text{a.e.}\]
+            时取得。
+        \end{proof}
 
         \item
         \begin{proof}
