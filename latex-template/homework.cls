@@ -24,7 +24,9 @@
     basicstyle=\footnotesize\ttfamily,
     backgroundcolor=\color{lbcolor},
     % xleftmargin=.1\textwidth, xrightmargin=.1\textwidth,
-    autogobble
+    autogobble,
+    breaklines=true,
+    postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space}
 }
 % `code' macro
 \newcommand\code[1]{%

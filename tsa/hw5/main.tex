@@ -94,4 +94,63 @@
         即方差将趋于
         \[\left(1+\frac{(\phi-\theta)^2}{1-\phi^2}\right)\sigma_Z^2\]
     \end{subproblem}
+
+    \problem
+    \begin{subproblem}[(\alph*)]
+        \item
+        首先对数据进行差分运算，并进行平稳性的判断，可以看到
+        （\cref{fig:acf}），
+        经过1阶差分后，数据可以判定是平稳的。
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=0.32\textwidth]{acf-d0}
+            \includegraphics[width=0.32\textwidth]{acf-d1}
+            \includegraphics[width=0.32\textwidth]{acf-d2}
+            \caption{不同阶数差分下的ACF}
+            \label{fig:acf}
+        \end{figure}
+
+        从ACF上能够看出，1阶差分后的序列差不多具有3阶截尾性，
+        这是MA模型的典型特征，同时绘制PACF如\cref{fig:pacf}。
+        具有1阶截尾性这是AR(1)的特征，于是我们可以考虑模型
+        ARIMA(1,1,3)。
+        \begin{marginfigure}
+            \includegraphics[width=0.9\textwidth]{pacf}
+            \caption{PACF}
+            \label{fig:pacf}
+        \end{marginfigure}
+
+        通过对模型进行估计，我们可以得到估计的模型方程为
+        \[\Delta X_t+0.005\Delta X_{t-1}=0.0018+\epsilon_t-0.6356\epsilon_{t-1}
+        -0.5663\epsilon_{t-2}-0.4986\epsilon_{t-3}\]
+        而$\mathrm{AIC}=-770.619,\mathrm{BIC}=-750.508$。
+        同时对残差进行白噪声检验，可以得到$m=6,12$时的Q统计量
+        （\cref{tab:residual test}），其$p$值是显著大于0.05的，
+        因此可以认为通过了检验，残差项是白噪声。
+        \begin{margintable}
+            \centering
+            \begin{tabular}{ccc}
+                \toprule
+                $m$ & $Q$ & $p$ \\
+                \midrule
+                6 & 4.3963 & 0.6232\\
+                12 & 21.5272 & 0.0631\\
+                \bottomrule
+            \end{tabular}
+            \caption{ARMIA(1,1,3)残差检验}
+            \label{tab:residual test}
+        \end{margintable}
+        \begin{marginfigure}
+            \includegraphics[width=0.9\textwidth]{real-prediction}
+            \caption{真实值与预测值}
+            \label{fig:residual}
+        \end{marginfigure}
+        
+        \item
+        如图
+    \end{subproblem}
+
+    \appendix
+    \section{Python代码}
+    \lstinputlisting[language=Python]{main.py}
 \end{document}
