@@ -13,6 +13,8 @@
   \input{tweak-tufte.tex}
   \RequirePackage{cleveref}
   \crefformat{equation}{式~(#2#1#3)}
+  \crefformat{table}{表~#2#1#3}
+  \crefformat{figure}{图~#2#1#3}
 \fi
 
 
