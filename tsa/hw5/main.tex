@@ -21,4 +21,77 @@
         \[E(Y-g(X))=EY-E(E(Y|X))=0\]
         即可以取得下界，因此$\E(Y|X)$使得MSE最小。
     \end{proof}
+
+    \problem
+    \begin{subproblem}[(\alph*)]
+        \item
+        题中ARMA模型可以写为
+        \[(1-\phi B)Y_t=(1-\theta B)Z_t\]
+        考虑其传递模式有
+        \[\begin{aligned}
+            \frac{1-\theta B}{1-\phi B}
+            &=(1-\theta B)\sum_{i=0}^\infty(\phi B)^i\\
+            &=1+(\phi-\theta)\sum_{i=1}^\infty\phi^{i-1}B^i\\
+        \end{aligned}\]
+        因此有Green函数
+        \begin{equation}
+            \label{eq:p2 Green}
+            G_i=\begin{cases}
+            1,&i=0\\
+            (\phi-\theta)\phi^{i-1},&i>0
+            \end{cases}\quad i=0,1,2,\ldots
+        \end{equation}
+
+        考虑到$\hat Y_m(s)$是$Z_m,Z_{m-1},\ldots$的线性函数，
+        不妨设
+        \[\hat Y_m(s)=\sum_{i=0}^\infty W_iZ_{m-i}\]
+        而真实值
+        \[Y_{m+s}=\sum_{i=0}^\infty G_iZ_{m+s-i}\]
+        则误差
+        \[\begin{aligned}
+           e_m(s)&=Y_{m+s}-\hat Y_m(s)\\ 
+           &=\sum_{i=0}^{s-1}G_iZ_{m+s-i}
+             +\sum_{i=s}^\infty G_iZ_{m+s-i}
+             -\sum_{i=0}^\infty W_iZ_{m-i}\\
+           &=\sum_{i=0}^{s-1}G_iZ_{m+s-i}
+             +\sum_{i=0}^\infty (G_{s+i}-W_i)Z_{m-i}
+        \end{aligned}\]
+        其方差为
+        \[\begin{aligned}
+            \var(e_m(s))&=\var\left(\sum_{i=0}^{s-1}G_iZ_{m+s-i}\right)
+            +\var\left(\sum_{i=0}^\infty (G_{s+i}-W_i)Z_{m-i}\right)\\
+            &=\sigma_Z^2\sum_{i=0}^{s-1}G_i^2
+              +\var\left(\sum_{i=0}^\infty (G_{s+i}-W_i)Z_{m-i}\right)\\
+        \end{aligned}\]
+        其中$\sigma_Z^2$为白噪声的方差。
+        显然，当
+        \[W_i=G_{s+i},i=0,1,2,\ldots\]
+        时可满足最小方差原则，
+        此时方差为
+        \begin{equation}
+            \label{eq:p2 variance}
+            \var(e_m(s))=\sigma_Z^2\sum_{i=0}^{s-1}G_i^2
+        \end{equation}
+        于是
+        \[\hat Y_m(s)=\sum_{i=0}^\infty G_{s+i}Z_{m-i}\]
+        其中$G_{s+i}$由\cref{eq:p2 Green}决定。
+
+        \item
+        由于模型平稳，因此有$|\phi|<1$，故对于任意$i\in\mathbb N$
+        \[G_{s+i}\to 0\quad(s\to\infty)\]
+        于是
+        \[\hat Y_m(s)\to 0\quad(s\to\infty)\]
+        即预测将趋于0。
+
+        \item
+        由\cref{eq:p2 variance}知
+        \[\begin{aligned}
+            \var(e_m(s))
+            &=\left(1+(\phi-\theta)^2\sum_{i=1}^{s-1}\phi^{2i-2}\right)\sigma_Z^2\\
+            &\to\left(1+\frac{(\phi-\theta)^2}{1-\phi^2}\right)\sigma_Z^2
+             \quad(s\to\infty)
+        \end{aligned}\]
+        即方差将趋于
+        \[\left(1+\frac{(\phi-\theta)^2}{1-\phi^2}\right)\sigma_Z^2\]
+    \end{subproblem}
 \end{document}
