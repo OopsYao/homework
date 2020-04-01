@@ -211,4 +211,51 @@
             &\to E(X^2)-(E(X))^2=\cov(X,X)\quad(n\to\infty)
         \end{aligned}\]
     \end{subproblem}
+
+    \problem
+    \begin{subproblem}
+        \item
+        \begin{proof}
+            For any $\sigma>0$, let
+            $A_\sigma=\{\omega\in\Omega;|X_n(\omega)-X(\omega)|\geq\sigma\}$,
+            then
+            \[\begin{aligned}
+                E(|X_n-X|^2)&=\int_\Omega|X_n-X|^2\diff P\\
+                &\geq\int_{A_\sigma}|X_n-X|^2\diff P\\
+                &\geq \sigma^2\int_{A_\sigma}\diff P\\
+                &=\sigma^2P(A_\sigma)
+            \end{aligned}\]
+            It follows that
+            \[\lim_{n\to\infty}P(A_\sigma)
+            =\frac{1}{\sigma^2}\lim_{n\to\infty}E(|X_n-X|^2)
+            =0\]
+            as m.s. $X_n\to X$. Therefore, $X_n\to X$ in probability.
+        \end{proof}
+
+        \item
+        Consider R.V. $X_n$ s.t. $P(X_n=0)=1-1/n^2$ and $P(X_n=n)=1/n^2$.
+        And it is evident that
+        \[\begin{aligned}
+            E(|X_n-X|)&=\frac{1}{n}\to 0\\
+            E(|X_n-X|^2)&=1\not\to 0
+        \end{aligned}\quad(n\to\infty)\]
+        where $X=0$ a.e.
+
+        \item
+        \begin{proof}
+            For any $p>0$, the notation $A_\sigma$ is the same
+            as the one in problem (i), and similarly,
+            \[\begin{aligned}
+                E(|X_n-X|^p)&=\int_\Omega|X_n-X|^p\diff P\\
+                &\geq\int_{A_\sigma}|X_n-X|^p\diff P\\
+                &\geq \sigma^p\int_{A_\sigma}\diff P\\
+                &=\sigma^pP(A_\sigma)
+            \end{aligned}\]
+            Then $X_n\to X$ in $p$-th norm implies convergence in
+            probability in the same manner as
+            \[\lim_{n\to\infty}P(A_\sigma)
+            =\frac{1}{\sigma^p}\lim_{n\to\infty}E(|X_n-X|^p)
+            =0\]
+        \end{proof}
+    \end{subproblem}
 \end{document}
