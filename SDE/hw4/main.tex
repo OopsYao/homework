@@ -104,52 +104,61 @@
         Since $EX_t=0$, then we have that
         \[\begin{aligned}
             \cov(X_t,X_s)&=E(X_tX_s)\\
-            &=E((W_t-tW_1)(W_s-sW_1))\\
         \end{aligned}\]
         Let $\mathcal F_\cdot=(\mathcal F_t)_{t>0}$ be
         the natural filtration of Brownian motion
         $W_t$. Consider that
-        \begin{multline}
-            \label{eq:p5 condi exp}
-            E((W_t-tW_1)(W_s-sW_1)|\mathcal F_s)
-            =E(W_s(W_t-tW_1)|\mathcal F_s)\\
-            -s\cdot E(W_1(W_t-tW_1)|\mathcal F_s)
-        \end{multline}
-        And
         \begin{equation}
-            \label{eq:p5 condi exp part}
-            \begin{aligned}
-                &E(W_1(W_t-tW_1)|\mathcal F_s)\\
-                =&E((W_1-W_s+W_s)(W_t-tW_1)|\mathcal F_s)\\
-                =&E(W_1-W_s)\cdot E(W_t-tW_1|\mathcal F_s)
-                +E(W_s(W_t-tW_1)|\mathcal F_s)\\
-                =&W_s\cdot E(W_t-tW_1|\mathcal F_s)\\
-            \end{aligned}
+            \label{eq:p5 condi exp}
+            E(X_t(W_s-sW_1)|\mathcal F_s)
+            =E(W_sX_t|\mathcal F_s)
+            -s\cdot E(W_1X_t|\mathcal F_s)
         \end{equation}
-        as inpendent increments of $W_t$ implying that
-        \[E((W_1-W_s)(W_t-tW_1)|\mathcal F_s)
-        =E(W_1-W_s)\cdot E(W_t-tW_1|\mathcal F_s)=0\]
-        Hence \cref{eq:p5 condi exp} becomes
-        \[E((W_t-tW_1)(W_s-sW_1)|\mathcal F_s)
-        =(1-s)W_s\cdot E(W_t-tW_1|\mathcal F_s)\]
-        And since
-        $W_t$ is a martingale with respect to its natural filtration,
-        we have that
-        \[E(W_t-tW_1|\mathcal F_s)=W_s-tW_s=(1-t)W_s\]
-        thus \cref{eq:p5 condi exp} becomes
-        \[E((W_t-tW_1)(W_s-sW_1)|\mathcal F_s)=(1-t)(1-s)W_s^2\]
-        
-        Applying the tower rule we have that
+        The first term
+        \[E(W_sX_t|\mathcal F_s)=W_s\cdot E(X_t|\mathcal F_s)
+        =W_s\cdot E(W_t-tW_1|\mathcal F_s)=(1-t)W_s^2\]
+        And the last term
+        \begin{equation*}
+            \begin{aligned}
+                E(W_1X_t|\mathcal F_s)
+                =E(W_1(W_t-tW_1)|\mathcal F_s)
+                =E(W_1W_t|\mathcal F_s)-tE(W_1^2|\mathcal F_s)
+            \end{aligned}
+        \end{equation*}
+        Since inpendent increments of $W_t$ implying that
+        \[E(W_1W_t)=E(W_t(W_1-W_t+W_t))=E(W_t)\cdot E(W_1-W_t)+E(W_t^2)=t\]
+        then the expectation of last term of \cref{eq:p5 condi exp}
+        is obtained as
+        \[E(E(W_1X_t|\mathcal F_s))=E(W_1W_t)-tE(W_1^2)=t-t=0\]
+        Therefore by tower rule,
         \[\begin{aligned}
-            E((W_t-tW_1)(W_s-sW_1))&=E((W_t-tW_1)(W_s-sW_1)|\mathcal F_s)\\
-            &=(1-t)(1-s)E(W_s^2)\\
-            &=s(1-t)(1-s)
+            E(X_tX_s)&=E(E(W_sX_t|\mathcal F_s))-s\cdot E(E(W_1X_t|\mathcal F_s))\\
+            &=(1-t)E(W_s^2)\\
+            &=s(1-t)
         \end{aligned}\]
         so in general,
-        \[\cov(X_t,X_s)=(1-t)(1-s)\min\{t,s\}\]
+        \begin{equation}
+            \label{eq:p5 cov}
+            \cov(X_t,X_s)=\min\{t,s\}-st
+        \end{equation}
 
         \item
-        Since
-        \[\var(Y_t)=\var(X_t^2)=\var(W_t^2)\]        
+        Since \cref{eq:p5 cov} yields that
+        \[\var(X_t)=\cov(X_t,X_t)=t(1-t)\]
+        and by linearity of normal distribution, we have that
+        \[X_t\sim \mathcal N(0,t(1-t))\]
+        thus
+        \[\left(\frac{X_t}{\sqrt{t(1-t)}}\right)^2
+        =\frac{X_t^2}{t(1-t)}\sim\chi^2(1)\]
+        hence
+        \[\begin{aligned}
+            E\left(\frac{X_t^2}{t(1-t)}\right)&=1\\
+            \var\left(\frac{X_t^2}{t(1-t)}\right)&=2\\
+        \end{aligned}\]
+        i.e.,
+        \[\begin{aligned}
+            E(Y_t)&=E(X_t^2)=t(1-t)\\
+            \var(Y_t)&=\var(X_t^2)=2t^2(1-t)^2
+        \end{aligned}\]
     \end{subproblem}
 \end{document}
