@@ -181,10 +181,13 @@
             \sqrt{E(|X|^2)}&\leq\sqrt{E(|X-X_n|^2)}+\sqrt{E(|X_n|^2)}\\
         \end{aligned}\]
         i.e.,
-        \[\left|\sqrt{E(|X_n|^2)-E(|X|^2)}\right|
+        \[\left|\sqrt{E(|X_n|^2)}-\sqrt{E(|X|^2)}\right|
         \leq\sqrt{E(|X_n-X|^2)}\]
         so m.s. $X_n\to X$ implies
+        \[\sqrt{E(|X_n|^2)}\to\sqrt{E(|X|^2)}\]
+        as well as
         \[E(|X_n|^2)\to E(|X|^2)\]
+        because of the continuity of $f(x)=x^2$.
 
         Finally since
         \[\begin{aligned}
@@ -256,6 +259,60 @@
             \[\lim_{n\to\infty}P(A_\sigma)
             =\frac{1}{\sigma^p}\lim_{n\to\infty}E(|X_n-X|^p)
             =0\]
+        \end{proof}
+
+        \item
+        \begin{proof}
+            Since
+            \[\begin{aligned}
+                E(|X_t-1|^2)&=E(X_t^2)-2E(X_t)+1\\
+                &=\e^{-t}\cdot E(\e^{2W_t})
+                  -2\e^{-\frac t2}\cdot E(\e^{W_t})+1
+            \end{aligned}\]
+            and by the mgf \cref{eq:mgf} we know that
+            \[\begin{aligned}
+                E(\e^{2W_t})&=\e^{2t}\\
+                E(\e^{W_t})&=\e^{\frac t2}\\
+            \end{aligned}\]
+            then we have that
+            \[\begin{aligned}
+                E(|X_t-1|^2)&=\e^{-t}\cdot\e^{2t}
+                -2\e^{-\frac t2}\cdot\e^{\frac t2}+1\\
+                &=\e^t-1\not\to 0\quad(t\to\infty)
+            \end{aligned}\]
+            i.e., $X_t\not\to 1$ m.s.
+        \end{proof}
+
+        \item
+        % TODO (v) Find 2 counter example between a.c. and m.s.
+
+        \item
+        \begin{proof}
+            For any $\sigma>0$, the only non-zero-measure part
+            of $X_n$ is $X_n=n$, thus
+            \[\begin{aligned}
+                P(|X_n|\geq\sigma)=P(X_n=n)=\frac{1}{n}\to 0
+                \quad(n\to\infty)
+            \end{aligned}\]
+            therefore $X_n\to 0$ in probability.
+
+            And apparently,
+            \[E(|X_n|^2)=n^2\cdot\frac{1}{n}=n\not\to 0\]
+            i.e., $X_n\not\to 0$ m.s.
+        \end{proof}
+
+        \item
+        % TODO (vii) Prove Xn -> 0 a.c. above
+
+        \item
+        % TODO (viii) Prove convergence in probability => in distribution
+
+        \item
+        \begin{proof}
+            Since for any $\sigma>0$,
+            \[P(|X_n-X|\geq\sigma)=P(2|X|\geq\sigma)\]
+            which is a non-zero constant, it is evident that
+            $X_n\not\to X$ in probability.
         \end{proof}
     \end{subproblem}
 \end{document}
