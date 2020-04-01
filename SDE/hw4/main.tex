@@ -315,4 +315,54 @@
             $X_n\not\to X$ in probability.
         \end{proof}
     \end{subproblem}
+
+    \problem
+    \begin{proof}
+        Denote that
+        \[X_n:=\sum_{i=0}^{n-1}(W_{t_{i+1}}-W_{t_i})^2\]
+        then by inpendent increments of  Brownian motion, we have that
+        \[\var(X_n)=\sum_{i=0}^{n-1}\var((W_{t_{i+1}}-W_{t_i})^2)\]
+        And we know that
+        \[W_{t_{i+1}}-W_{t_i}\sim\mathcal N(0,\Delta t_i)\]
+        thus
+        \[\left(\frac{W_{t_{i+1}}-W_{t_i}}{\sqrt{\Delta t_i}}\right)^2
+        \sim\chi^2(1)\]
+        therefore,
+        \[\begin{aligned}
+            \var((W_{t_{i+1}}-W_{t_i})^2)&=2(\Delta t_i)^2\\
+            E((W_{t_{i+1}}-W_{t_i})^2)&=\Delta t_i
+        \end{aligned}\]
+        and since partition is equidistant, i.e., 
+        $\Delta t_i=(b-a)/n$, then we have
+        \begin{equation}
+            \label{eq:p8 variance}
+            \var(X_t)=2\sum_{i=0}^{n-1}(\Delta t_i)^2
+            =2n\cdot\left(\frac{b-a}{n}\right)^2
+            =\frac{2(b-a)^2}{n}
+        \end{equation}
+        and
+        \[E(X_t)=\sum_{i=0}^{n-1}\Delta t_i=b-a\]
+        Therefore,
+        \begin{equation}
+            \label{eq:p8 m.s.}
+            \begin{aligned}
+            E(|X_t-(b-a)|^2)&=\var(X_t-(b-a))+(E(X_t-(b-a)))^2\\
+            &=\var(X_t)+(E(X_t)-(b-a))^2\\
+            &=\frac{2(b-a)^2}{n}\to 0\quad(n\to\infty)
+            \end{aligned}
+        \end{equation}
+        i.e., in mean square
+        \[\lim_{n\to\infty}\sum_{i=0}^{n-1}(W_{t_{i+1}}-W_{t_i})^2=b-a\]
+    \end{proof}
+
+    And if the partition is not equidistant, then denote
+    \[\Delta t=\sup_{i}\Delta t_i\]
+    then \cref{eq:p8 variance} is stated as
+    \[\var(X_t)=2\sum_{i=0}^{n-1}(\Delta t_i)^2
+    \leq 2\sum_{i=0}^{n-1}\Delta t_i\cdot\Delta t
+    =2(b-a)\Delta t\]
+    and similarly, like \cref{eq:p8 m.s.},
+    \[E(|X_t-(b-a)|^2)=\var(X_t)\leq 2(b-a)\Delta t\]
+    So for any partition, if $\Delta t=\sup_i\Delta t_i\to 0$,
+    then $X_t\to b-a$ m.s. as well.
 \end{document}
