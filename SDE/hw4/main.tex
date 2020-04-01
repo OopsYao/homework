@@ -161,4 +161,54 @@
             \var(Y_t)&=\var(X_t^2)=2t^2(1-t)^2
         \end{aligned}\]
     \end{subproblem}
+    
+    \problem
+    \begin{subproblem}
+        \item
+        By Jensen's inequality, we have that
+        \[E(|X_n-X|^2)\geq (E(|X_n-X|))^2\geq |E(X_n-X)|^2\]
+        It follows that 
+        \[\lim_{n\to\infty}E(|X_n-X|^2)=0\]
+        yields
+        \[\begin{aligned}
+            \lim_{n\to\infty}E(X_n-X)&=0\\
+        \end{aligned}\]
+        i.e.,
+        \[\lim_{n\to\infty}E(X_n)=E(X)\]
+        And by Minkowski inequality,
+        \[\begin{aligned}
+            \sqrt{E(|X_n|^2)}&\leq\sqrt{E(|X_n-X|^2)}+\sqrt{E(|X|^2)}\\
+            \sqrt{E(|X|^2)}&\leq\sqrt{E(|X-X_n|^2)}+\sqrt{E(|X_n|^2)}\\
+        \end{aligned}\]
+        i.e.,
+        \[\left|\sqrt{E(|X_n|^2)-E(|X|^2)}\right|
+        \leq\sqrt{E(|X_n-X|^2)}\]
+        so m.s. $X_n\to X$ implies
+        \[E(|X_n|^2)\to E(|X|^2)\]
+
+        Finally since
+        \[\begin{aligned}
+            \var(X_n)&=E(X_n^2)-(E(X_n))^2\\
+            \var(X)&=E(X^2)-(E(X))^2
+        \end{aligned}\]
+        we have that
+        \[\var(X_n)\to\var(X)\quad(n\to\infty)\]
+
+        \item
+        Note
+        \[E(|X_n-X|^2)=E(X_n^2)-2E(X_nX)+E(X^2)\]
+        implies that
+        \[\lim_{n\to\infty}E(X_nX)
+        =\frac{1}{2}\lim_{n\to\infty}\left(E(X_n^2)+E(X^2)+E(|X_n-X|^2)\right)
+        =E(X^2)=0\]
+        as
+        \[\lim_{n\to\infty}E(X_n^2)=E(X^2)
+        \text{ and }
+        \lim_{n\to\infty}E(|X_n^2-X^2|)=0\]
+        therefore
+        \[\begin{aligned}
+            \cov(X_n,X)&=E(X_nX)-E(X_n)\cdot E(X)\\
+            &\to E(X^2)-(E(X))^2=\cov(X,X)\quad(n\to\infty)
+        \end{aligned}\]
+    \end{subproblem}
 \end{document}
