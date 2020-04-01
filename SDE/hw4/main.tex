@@ -21,7 +21,7 @@
     \[\var(X_t)=\iint_{[0,t]^2}
     \left(\int_\Omega W_sW_r\diff P\right)\diff s\diff r\]
     Without loss of generality, assume that $s<r$, then we obtain
-    by inpendent increments of Brownian motion,
+    by independent increments of Brownian motion,
     \[\begin{aligned}
         \int_\Omega W_sW_r\diff P&=E(W_sW_r)\\
         &=E(W_s(W_r-W_s+W_s))\\
@@ -125,7 +125,7 @@
                 =E(W_1W_t|\mathcal F_s)-tE(W_1^2|\mathcal F_s)
             \end{aligned}
         \end{equation*}
-        Since inpendent increments of $W_t$ implying that
+        Since independent increments of $W_t$ implying that
         \[E(W_1W_t)=E(W_t(W_1-W_t+W_t))=E(W_t)\cdot E(W_1-W_t)+E(W_t^2)=t\]
         then the expectation of last term of \cref{eq:p5 condi exp}
         is obtained as
@@ -320,7 +320,7 @@
     \begin{proof}
         Denote that
         \[X_n:=\sum_{i=0}^{n-1}(W_{t_{i+1}}-W_{t_i})^2\]
-        then by inpendent increments of  Brownian motion, we have that
+        then by independent increments of  Brownian motion, we have that
         \[\var(X_n)=\sum_{i=0}^{n-1}\var((W_{t_{i+1}}-W_{t_i})^2)\]
         And we know that
         \[W_{t_{i+1}}-W_{t_i}\sim\mathcal N(0,\Delta t_i)\]
@@ -363,6 +363,30 @@
     =2(b-a)\Delta t\]
     and similarly, like \cref{eq:p8 m.s.},
     \[E(|X_t-(b-a)|^2)=\var(X_t)\leq 2(b-a)\Delta t\]
-    So for any partition, if $\Delta t=\sup_i\Delta t_i\to 0$,
+    So for any partition whether equidistant or not,
+    if $\Delta t=\sup_i\Delta t_i\to 0$,
     then $X_t\to b-a$ m.s. as well.
+
+    \problem
+    \begin{proof}
+        Denote $\Delta t_k=t_{k+1}-t_k$, and
+        \[X_n=\sum_{k=0}^{n-1}(W_{t_{k+1}}-W_{t_k})(t_{k+1}-t_k)\]
+        then by independent increments,
+        \[\var(X_n)
+        =\sum_{k=0}^{n-1}(\Delta t_k)^2\var(W_{t_{k+1}}-W_{t_k})
+        =\sum_{k=0}^{n-1}(\Delta t_k)^2\cdot\Delta t_k
+        =\sum_{k=0}^{n-1}(\Delta t_k)^3\]
+        and 
+        \[E(X_n)=\sum_{k=0}^{n-1}\Delta t\cdot E(W_{t_{k+1}}-W_{t_k})
+        =0\]
+        Hence in the same manner
+        \[E(|X_n|^2)=\var(X_n)+(E(X_n))^2=\sum_{k=0}^{n-1}(\Delta t_k)^3
+        \leq\sum_{k=0}^{n-1}(\Delta t)^2\Delta t_k
+        =(\Delta t)^2 T\]
+        where $\Delta t=\sup_{k}\Delta t_k$.
+        It follows that
+        for any partition whether equidistant or not,
+        if $\Delta t=\sup_i\Delta t_i\to 0$,
+        then $X_t\to 0$ m.s.
+    \end{proof}
 \end{document}
