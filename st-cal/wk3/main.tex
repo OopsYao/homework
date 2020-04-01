@@ -7,7 +7,7 @@
 \begin{document}
     \maketitle
 
-    \section{题1}
+    \problem
     \begin{subproblem}
         \item
         \begin{proof}
@@ -44,5 +44,47 @@
             \[\sum_{i=1}^N\prob(A_i)=\prob(A_N)+\sum_{i=1}^{N-1}\prob(A_i)\]
             则由数学归纳法自然证得。
         \end{proof}
+    \end{subproblem}
+
+    \problem
+    \begin{subproblem}
+        \item
+        $S_3$分布如下
+        \[\begin{aligned}
+            &\prob(S_3=32)
+            =\prob\left(S_3=\frac{1}{2}\right)
+            =\frac{1}{8}\\
+            &\prob(S_3=8)
+            =\prob(S_3=2)
+            =\frac{3}{8}\\
+        \end{aligned}\]
+
+        \item
+        \newcommand{\E}{\tilde{\mathbb E}}
+        期望如下，
+        \[\begin{aligned}
+            \E S_1&=\frac{8+2}{2}=5\\
+            \E S_2&=\frac{16+4\cdot 2+1}{2^2}=\frac{25}{4}\\
+            \E S_3&=\frac{32+8\cdot 3+2\cdot 3+\frac{1}{2}}{2^3}
+            =\frac{125}{16}
+        \end{aligned}\]
+
+        \item
+        \newcommand{\preal}{\mathbb P}
+        $S_3$分布如下
+        \[\begin{aligned}
+            \preal(S_3=32)&=p^3=\frac{8}{27}\\
+            \preal(S_3=8)&=3p^2q=\frac{4}{9}\\
+            \preal(S_3=2)&=3pq^2=\frac{2}{9}\\
+            \preal\left(S_3=\frac{1}{2}\right)&=q^3=\frac{1}{27}\\
+        \end{aligned}\]
+        实际期望
+        \renewcommand{\E}{\mathbb E}
+        \[\begin{aligned}
+            \E S_1&=8p+2q=6\\
+            \E S_2&=16p^2+4\cdot 2pq+q^2=9\\
+            \E S_3&=32p^3+8\cdot 3p^2q+2\cdot 3pq^2+\frac{1}{2}q^3
+            =\frac{27}{2}
+        \end{aligned}\]
     \end{subproblem}
 \end{document}
