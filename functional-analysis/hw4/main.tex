@@ -118,4 +118,30 @@
             故$D$是完备的。
         \end{proof}
     \end{subproblem}
+
+    \problem
+    \begin{proof}
+        考虑$C[0,1]$，度量与题中定义相同（显然该度量在新的空间中
+        也是度量），故新的度量空间（记为$M$）包含原来的（记为$P$）。
+        考虑
+        \[p_n(x)=\sum_{k=0}^n\frac{x^k}{k!}\]
+        则对于任意$m>n$，注意到$x\in[0,1]$，
+        \[d(p_m,p_n)=\int_0^1\left|\sum_{k=n+1}^m\frac{x^k}{k!}\right|\diff x
+        =\sum_{k=n+1}^m\frac{1}{(k+1)!}\]
+        考虑到
+        \[\sum_{k=0}\frac{1}{k!}=\e<\infty\]
+        因此
+        \[\sum_{k=n+1}^m\frac{1}{(k+1)!}\to 0\quad(n\to\infty,m>n)\]
+        于是$\{p_n\}$是$P$中的Cauchy列。
+
+        而对于$\e^x\in M$，由于闭区间上（一致）连续性，
+        \[\begin{aligned}
+            \lim_{n\to\infty}d(p_n,\e^x)
+            &=\lim_{n\to\infty}\int_0^1\left|\e^x-\sum_{k=0}^n\frac{x^k}{k!}\right|\diff x\\
+            &=\int_0^1\left|\e^x-\lim_{n\to\infty}\sum_{k=0}^n\frac{x^k}{k!}\right|\diff x\\
+            &=0
+        \end{aligned}\]
+        由度量空间极限的唯一性，$\e^x\in M$是该Cauchy列的唯一极限，
+        而$\e^x\not\in P$，故$P$不是完备的。
+    \end{proof}
 \end{document}
