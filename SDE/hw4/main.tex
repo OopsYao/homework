@@ -389,4 +389,45 @@
         if $\Delta t=\sup_i\Delta t_i\to 0$,
         then $X_t\to 0$ m.s.
     \end{proof}
+
+    \problem
+    % TODO Calculate Var(X^2) straightforward
+
+    \problem
+    \begin{proof}
+        Let's show the case when m.s. $X_n\to 0,Y_n\to 0$ at first.
+        Since
+        \[E(|X_n+Y_n|^2)=E(|X_n|^2)+E(|Y_n|^2)+2E(X_nY_n)\]
+        we need to show that $E(X_nY_n)\to 0$ m.s.
+        And in the light of Cauchy-Schwarz inequality, note that
+        for any $\lambda\in\mathbb R$,
+        \[E(|X_n+\lambda Y_n|^2)\geq 0\]
+        i.e.,
+        \[\lambda^2E(Y_n^2)+2\lambda E(X_nY_n)+E(X_n^2)\geq 0\]
+        It follows that
+        \[\Delta=(2E(X_nY_n))^2-4E(X_n^2)\cdot E(Y_n^2)\leq 0\]
+        in term of the quadratic of $\lambda$. Hence
+        \[|E(X_nY_n)|\leq\sqrt{E(X_n^2)\cdot E(Y_n^2)}\to 0\]
+        as m.s. $X_n,Y_n\to 0$.
+
+        Therefore,
+        \[E(|X_n+Y_n|^2)=E(|X_n|^2)+E(|Y_n|^2)+2E(X_nY_n)\to 0\]
+        i.e., m.s. $X_n+Y_n\to 0$.
+
+        Now consider any $X_n\to X$ m.s. and $Y_n\to Y$ m.s.,
+        denote $\tilde X_n=X_n-X$ and $\tilde Y_n=Y_n-Y$.
+        And it is easy to verify that
+        \[E(|\tilde X_n|^2)=E(|X_n-X|^2)\to 0
+        \text{ and }
+        E(|\tilde Y_n|^2)=E(|Y_n-Y|^2)\to 0 \]
+        i.e., m.s. $\tilde X_n,\tilde Y_n\to 0$
+        Then apply the result we obtained above, we have that
+        \[E(|\tilde X_n+\tilde Y_n|^2)\to 0\]
+        i.e.,
+        \[E(|X_n+Y_n-(X+Y)|^2)\to 0\]
+        that being said,
+        \[\text{m.s.}\lim_{n\to\infty}(X_n+Y_n)
+        =\text{m.s.}\lim_{n\to\infty}X_n
+        +\text{m.s.}\lim_{n\to\infty}Y_n\]
+    \end{proof}
 \end{document}
