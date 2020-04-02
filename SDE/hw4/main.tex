@@ -363,7 +363,37 @@
         % TODO (vii) Prove Xn -> 0 a.c. above
 
         \item
-        % TODO (viii) Prove convergence in probability => in distribution
+        \begin{proof}
+            For any $\epsilon>0$ and $x\in\mathbb R,\omega\in\Omega$,
+            if
+            \[X(\omega)>x+\epsilon\text{ and }
+            |X_n(\omega)-X(\omega)|<\epsilon\]
+            then
+            \[X_n(\omega)>X(\omega)-\epsilon>x\]
+            thus
+            \[\{\omega;X(\omega)>x+\epsilon\}\cap
+            \{\omega;|X_n(\omega)-X(\omega)|<\epsilon\}
+            \subset \{\omega;X_n(\omega)>x\}\]
+            i.e.,
+            \[\{\omega;X_n(\omega)\leq x\}
+            \subset\{\omega;X(\omega)\leq x+\epsilon\}
+            \cup\{\omega;|X_n(\omega)-X(\omega)|\geq\epsilon\}\]
+            hence
+            \[P(X_n\leq x)\leq P(X_n\leq x+\epsilon)+P(|X_n-X|\geq\epsilon)\]
+            and if we change the position of $X_n$ and $X$, and substitute
+            $x-\epsilon$ for $x$ due to the arbitrary of $x$, then we obatin,
+            \[P(X\leq x-\epsilon)\leq P(X_n\leq x)+P(|X_n-X|\geq\epsilon)\]
+            It follows that
+            \[F(x-\epsilon)-P(|X_n-X|\geq\epsilon)
+            \leq F_n(x)\leq
+            F(x+\epsilon)+P(|X_n-X|\geq\epsilon)\]
+            Then by sending $n\to\infty$, since $X_n\to X$ in probability,
+            we have that
+            \[F(x-\epsilon)\leq\lim_{n\to\infty}F_n(x)\leq F(x+\epsilon)\]
+            again send $\epsilon\to 0^+$, we obtain
+            \[\lim_{n\to\infty}F_n(x)=F(x)\]
+            thanks to the continuity of $F(x)$. So $X_n\to X$ in distribution.
+        \end{proof}
 
         \item
         \begin{proof}
