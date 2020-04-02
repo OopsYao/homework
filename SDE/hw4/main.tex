@@ -96,6 +96,64 @@
     \end{aligned}\]
 
     \problem
+    Denote
+    \[X_t=\int_0^tW_\xi\diff\xi\]
+    then
+    \[X_t\sim\mathcal N\left(0,\frac{t^3}{3}\right)\]
+    By the integration by parts formula\sidenote{In my opinion,
+    only knowing the distribution of
+    $X_t$ is not sufficient to calculate $\cov(X_t,X_s)$. So
+    I turn to the definition of $X_t$, and did some deduction
+    formally -- not so rigorously,
+    e.g. the notation $\diff W_\xi$ is not well
+    defined, and I just considered it as an increment like the
+    discrete version in the Riemann sum.},
+    \[\begin{aligned}
+        X_t&=\left.\xi W_\xi\right|^t_0-\int_0^t\xi\diff W_\xi\\
+        &=tW_t-\int_0^t\xi\diff W_\xi\\
+        &=t\int_0^t\diff W_\xi-\int_0^t\xi\diff W_\xi\\
+        &=\int_0^t(t-\xi)\diff W_\xi
+    \end{aligned}\]
+    That being said, $X_t$ is a sumation of independent increments
+    $\diff W_\xi$ with $\xi\in[0,t]$. So we can see that $X_t$
+    also has independent increments as
+    $X_{t+s}-X_t=\int_t^{t+s}W_\xi\diff\xi$
+    is only the
+    sumation of $\diff W_\xi$ between $[t,t+s]$.
+
+    Without loss of generality, assume $s<t$,
+    therefore,
+    \[\var(X_t)=\var(X_t-X_s)+\var(X_s)\]
+    which yields
+    \[\var(X_t-X_s)=\var(X_t)-\var(X_s)=\frac{t^3-s^3}{3}\]
+    Since we know that $X_t,X_s$ are normally distributioned,
+    with zero expectation, then
+    \[X_t-X_s\sim\mathcal N\left(0,\frac{t^3-s^3}{3}\right)\]
+    So in the light of the mgf stated in \cref{eq:mgf}, we have that
+    \[E(\e^{X_t-X_s})=\e^{\frac{1}{2}\cdot\frac{t^3-s^3}{3}}
+    =\e^{\frac{t^3-s^3}{6}}\]
+    and
+    \[E(\e^{kX_s})=\e^{\frac{k^2}{2}\cdot\frac{s^3}{3}}
+    =\e^{\frac{k^2s^3}{6}}\]
+    thus
+    \[E(Y_t)=E(\e^{X_t})=\e^{\frac{t^3}{6}}\]
+    And with independent increments,
+    \[E(Y_tY_s)=E(\e^{X_t-X_s+2X_s})
+    =E(\e^{X_t-X_s})\cdot E(\e^{2X_s})
+    =\e^{\frac{t^3+3s^3}{6}}\]
+    So
+    \[\begin{aligned}
+        \cov(Y_t,Y_s)&=E(Y_tY_s)-E(Y_t)\cdot E(Y_s)\\
+        &=\e^{\frac{t^3+3s^3}{6}}-\e^{\frac{t^3}{6}}\cdot\e^\frac{s^3}{6}\\
+        % &=\e^{\frac{t^3}{6}}\left(\e^{-\frac{s^3}{2}}-\e^{\frac{s^3}{6}}\right)
+        &=\e^{\frac{t^3+s^3}{6}}\left(\e^{\frac{s^3}{3}}-1\right)
+    \end{aligned}\]
+    and in general,
+    \[\cov(Y_t,Y_s)=\e^{\frac{t^3+s^3}{6}}
+    \left(\e^{\frac{\min\{t,s\}^3}{3}}-1\right)\]
+    then
+    \[\var(Y_t)=\cov(Y_t,Y_t)
+    =\e^{\frac{t^3}{3}}\left(\e^{\frac{t^3}{3}}-1\right)\]
 
     \problem
     \begin{subproblem}
