@@ -391,7 +391,41 @@
     \end{proof}
 
     \problem
-    % TODO Calculate Var(X^2) straightforward
+    \newcommand{\epower}{\e^{-\frac{x^2}{2\sigma^2}}}
+    \newcommand{\const}{\sqrt{2\pi\sigma^2}}
+    \begin{proof}
+        Since
+        \[\var(X^2)=E(X^4)-(E(X^2))^2\]
+        of which $E(X^2)=\sigma^2$ is known to us,
+        then consider
+        \[\begin{aligned}
+            E(X^4)&=\int_{\Omega}X^4\diff P\\
+            &=\int_{-\infty}^\infty x^4\cdot
+            \frac{\epower}{\const}\diff x\\
+            &=\frac{2}{\const}\int_0^\infty x^4\epower\diff x
+        \end{aligned}\]
+        Note that we used the symmetry in the last equation above.
+
+        And we know that
+        \[\diff \epower=-\frac{x}{\sigma^2}\epower\diff x\]
+        thus the integral above becomes
+        \[\begin{aligned}
+            E(X^4)&=-\frac{2\sigma^2}{\const}\int_0^\infty x^3\diff\epower\\
+            &=-\frac{2\sigma^2}{\const}\left(\left.x^3\epower\right|^\infty_0
+            -\int_0^\infty\epower\diff x^3\right)
+        \end{aligned}\]
+        and the first term in the brace is self-cancelled as
+        \[x^3\epower=0\]
+        hence
+        \[\begin{aligned}
+            E(X^4)&=\frac{2\sigma^2}{\const}\int_0^\infty 3x^2\epower\diff x\\
+            &=3\sigma^2\int_{-\infty}^\infty x^2\cdot\frac{\epower}{\const}\diff x
+        \end{aligned}\]
+        of which the integral is $E(X^2)$ exactly, therefore
+        \[E(X^4)=3\sigma^2\cdot \sigma^2=3\sigma^4\]
+        Then
+        \[\var(X^2)=E(X^4)-(E(X^2))^2=3\sigma^4-(\sigma^2)^2=2\sigma^4\]
+    \end{proof}
 
     \problem
     \begin{proof}
