@@ -43,7 +43,7 @@
     \end{proof}
 
     \section{题3}
-    \begin{subproblem}
+    \begin{subproblem}[(\arabic*)]
         \item
         \begin{proof}
         由于
@@ -69,5 +69,34 @@
             &=\int_0^a\bar\lambda\e^{-\bar\lambda x}\diff x\\
             &=1-\e^{-\bar\lambda a}\quad\forall a\geq 0
         \end{align*}
+    \end{subproblem}
+
+    \section{题4}
+    \begin{subproblem}[(\arabic*)]
+        \item
+        \begin{proof}
+            非负性是显然的，则由于
+            \[\begin{aligned}
+                \mathrm EZ&=\int_\Omega Z\diff P\\
+                &=\int_{-\infty}^\infty\frac{h(g(x))g'(x)}{f(x)}f(x)\diff x\\
+                &=\int_{-\infty}^\infty h(g(x))g'(x)\diff x
+            \end{aligned}\]
+            利用替换$y=g(x)$，且注意到$g$的单调性，则上式变为
+            \[\mathrm EZ=\int_{-\infty}^\infty h(y)\diff y=1\]
+        \end{proof}
+
+        \item
+        \begin{proof}
+            考虑
+            \[\begin{aligned}
+                \tilde P(Y\leq y)&=\int_{Y\leq y}Z\diff P\\
+                &=\int_{-\infty}^{g^{-1}(y)}
+                \frac{h(g(x))g'(x)}{f(x)}f(x)\diff x\\
+                &=\int^{g^{-1}(y)}_{-\infty}h(g(x))g'(x)\diff x\\
+            \end{aligned}\]
+            利用代换$\xi=g(x)$，则
+            \[\tilde P(Y\leq y)=\int_{-\infty}^yh(\xi)\diff\xi\]
+            即$Y$在$\tilde P$下具有密度函数$h(y)$。
+        \end{proof}
     \end{subproblem}
 \end{document}
