@@ -430,4 +430,23 @@
         =\text{m.s.}\lim_{n\to\infty}X_n
         +\text{m.s.}\lim_{n\to\infty}Y_n\]
     \end{proof}
+
+    \problem
+    \begin{subproblem}
+        \item
+        % TODO Prove squeeze theorem
+
+        \item
+        \begin{proof}
+            Since
+            \[(\sin W_t)^2\leq 1\]
+            then it is obvious to see that
+            \[\left(\frac{W_t\sin W_t}{t}\right)^2\leq\frac{W_t^2}{t^2}\]
+            hence
+            \[E\left(\left|\frac{W_t\sin W_t}{t}\right|^2\right)
+            \leq\frac{E(W_t^2)}{t^2}=\frac{1}{t}\to 0\]
+            as $t\to\infty$, i.e.,
+            \[\text{m.s.}\lim_{t\to\infty}\frac{W_t\sin W_t}{t}=0\]
+        \end{proof}
+    \end{subproblem}
 \end{document}
