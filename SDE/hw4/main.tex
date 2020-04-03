@@ -342,7 +342,46 @@
         \end{proof}
 
         \item
-        % TODO (v) Find 2 counter example between a.c. and m.s.
+        Consider $X_n$ s.t.
+        \[P(X_n=n)=\frac{1}{n^2}\text{ and }P(X_n=0)=1-\frac{1}{n^2}\]
+        then for any $\varepsilon>0$,
+        \[P(\omega;|X_n(\omega)|\geq\varepsilon)=P(\omega;X_n(\omega)=n)
+        =\frac{1}{n^2}\]
+        hence
+        \[\sum_{n=1}^\infty P(\omega;|X_n(\omega)|\geq\varepsilon)<\infty\]
+        and by Borel-Cantelli lemma, we have that
+        \[P\left(\limsup_{n\to\infty}\{\omega;|X_n(\omega)|\geq\varepsilon\}\right)
+        =0\]
+        i.e.,
+        \[P\left(\bigcap_{N=1}^\infty\bigcup_{n=N}^\infty
+        \{\omega;|X_n(\omega)\geq\varepsilon\}\right)=0\]
+        that being said, the set consisting of $\omega$ s.t.
+        for any integer $N$,
+        there exists some $n$ making $|X_n(w)|\geq\varepsilon$,
+        has zero measure, i.e., $X_n\to 0$ a.c.
+        And it is easy to see that
+        \[E(|X_n|^2)=n^2\cdot\frac{1}{n^2}=1\not\to 0\]
+        i.e., $X_n\not\to 0$ m.s. This serves as a counter example
+        for convergence a.c. not implying m.s.
+
+        Consider\sidenote{In fact it is the example in the last
+        problem of HW1} mutually independent $X_n$ s.t.
+        \[P(X_n=0)=1-\frac{1}{n}\text{ and }
+        P(X_n=1)=\frac{1}{n}\]
+        We can see that
+        \[E(X_n^2)=\frac{1}{n}\to 0\]
+        i.e., $X_n\to 0$ m.s.
+        And denote $A_n=\{\omega\in\Omega;|X_n|geq 1\}$,
+        then
+        \[P(A_n)=P(X_n=1)=\frac{1}{n}\]
+        thus
+        \[\sum_{n=1}^\infty P(A_n)=\infty\]
+        By Borel-Cantelli lemma (the second form),
+        \[P\left(\limsup_{n\to\infty}A_n\right)=1\]
+        that being said\sidenote{The set on which the
+        sequence does not converge to 0 has probability 1 actually},
+        a.c. $X_n\not\to 0$. And this serves as a counter example
+        for m.s. not implying a.c.
 
         \item
         \begin{proof}
@@ -360,7 +399,28 @@
         \end{proof}
 
         \item
-        % TODO (vii) Prove Xn -> 0 a.c. above
+        {
+            \it
+            It seems that there may be something wrong or I missed something,
+            since I can
+            prove that $X_n\not\to 0$ a.c under a specific condition
+            (i.e., the independence of $X_n$).
+
+            For any $\varepsilon>0$, denote
+            \[A_n=\{\omega\in\Omega;|X_n(\omega)|\geq\varepsilon\}\]
+            and we can see that
+            \[P(A_n)=P(X_n=n)=\frac{1}{n}\]
+            thus
+            \[\sum_{n=1}^\infty P(A_n)=\infty\]
+            So if $X_n$ is mutually independent, then events $A_n$
+            is independent mutually as well. By Borel-Cantelli lemma
+            (the second form\sidenote{By the way, I remember the condition
+            to the second form is disjoint $A_n$ as you mentioned in class,
+            but I searched on the Internet, they said it is the independence.}), 
+            \[P\left(\limsup_{n\to\infty}A_n\right)=1\]
+            that being said, a.c. $X_n\not\to 0$.
+        }
+
 
         \item
         \begin{proof}
