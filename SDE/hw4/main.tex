@@ -45,7 +45,37 @@
     \end{aligned}\]
 
     \problem
-    % TODO Problem 2
+    No matter what the partition is\sidenote{I have no idea about
+    the convergence in mean square, since the limit itself is not
+    friendly to me, and I just thinked about the
+    limit distribution, under a not so specific partition.}
+    , we can always write
+    \[\begin{aligned}
+        W_{t^*_1}&=W_{t^*_1},\\
+        W_{t^*_2}&=W_{t^*_2}-W_{t^*_1}+W_{t^*_1}\\
+        &\cdots\\
+        W_{t^*_N}&=W_{t^*_N}-W_{t^*_{N-1}}+\cdots+W_{t^*_1}
+    \end{aligned}\]
+    hence
+    \[\sum_{i=1}^NW_{t^*_i}\Delta t=\sum_{i=1}^NiZ_{n-i}\]
+    where
+    \[Z_i=\begin{cases}
+        W_{t^*_1},&i=1\\
+        W_{t^*_i}-W_{t^*_{i-1}},&i>1\\
+    \end{cases}\]
+    thus $Z_i$ is mutually independent.
+    That being said
+    \[\lim_{N\to\infty}\sum_{i=1}^N W_{t_i^*}\Delta t\]
+    is normally distributed, so all we care is the expectation
+    and variance. While the expectation is 0 apparently,
+    \[\var\left(\sum_{i=1}^N W_{t_i^*}\Delta t\right)
+    =\Delta t^2\sum_{i=1}^Ni^2\var(Z_{n-i})
+    =\Delta t^2\sum_{i=1}^Ni^2\Delta t_i\]
+    where $\Delta t_i=t^*_i-t^*_i$.
+    Since $x^2$ is Riemann-integrable, then for any point $t_i^*$
+    we choose, the limit is the same, the same as what we obtained
+    in class, i.e., $t^3/3$, where we chosed the end points under
+    equidistant partition.
 
     \problem
     By Fubini theorem, calculating $E(Y_t)$ falls to
