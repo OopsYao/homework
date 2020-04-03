@@ -556,7 +556,34 @@
     \problem
     \begin{subproblem}
         \item
-        % TODO Prove squeeze theorem
+        \begin{proof}
+            Denote $\tilde X_n=X_n-L,\tilde Y_n=Y_n-L$
+            and $\tilde Z_n=Z_n-L$. Then we have that for a.c.
+            $\omega\in\Omega$,
+            \[\tilde X_n\leq\tilde Y_n\leq\tilde Z_n\]
+            thus
+            \[\tilde Y_n\leq\tilde Z_n\text{ and }
+            -\tilde Y_n\leq-\tilde X_n\]
+            hence
+            \[|\tilde Y_n|\leq\max\{\tilde Z_n,-\tilde X_n\}\]
+
+            And note that for maximum we have the equivalent form,
+            \[\max\{\tilde Z_n,-\tilde X_n\}
+            =\frac{\tilde Z_n-\tilde X_n+|\tilde Z_n+\tilde X_n|}{2}
+            \leq\frac{|\tilde Z_n-\tilde X_n|+|\tilde Z_n+\tilde X_n|}{2}\]
+            hence a.c. in $\Omega$,
+            \[\tilde Y^2_n\leq
+            \max\{\tilde Z_n,-\tilde X_n\}^2
+            \leq\frac{\tilde Z_n^2+\tilde X_n^2+2|\tilde Z_n^2-\tilde X_n^2|}{4}
+            \leq\frac{3(\tilde Z_n^2+\tilde X_n^2)}{4}\]
+            It follows that
+            \[E(\tilde Y_n^2)
+            \leq E(\max\{\tilde Z_n,-\tilde X_n\}^2)
+            \leq\frac{3}{4}E(\tilde Z_n^2+\tilde X_n^2)
+            \to 0\quad(n\to\infty)\]
+            as m.s. $\tilde X_n,\tilde Z_n\to 0$. Therefore,
+            m.s. $\tilde Y_n\to 0$, i.e., $Y_n\to L$.
+        \end{proof}
 
         \item
         \begin{proof}
