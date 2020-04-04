@@ -1,0 +1,28 @@
+\documentclass[cn]{homework}
+
+\title{第四周作业}
+
+\newcommand{\E}{\mathbb E}
+\newcommand{\var}{\mathrm{Var}}
+
+\begin{document}
+    \maketitle
+
+    \section{习题2.3}
+    \begin{proof}
+        先证明$V,W$是标准正态随机变量，
+        由于正态随机变量的线性组合仍为正态的，考虑期望
+        \[\E V=\cos\theta\cdot\E X+\sin\theta\cdot\E Y=0\]
+        以及方差
+        \[\var(V)=\cos^2\theta\cdot\var(X)+\sin^2\theta\cdot\var(Y)=1\]
+        故$V\sim\mathcal N(0,1)$，同理可得$W$。
+
+        下证独立性，考虑矩母函数
+        \[\E\e^{xV+yW}=\E\e^{(x\cos\theta-y\sin\theta)X
+                          +(x\sin\theta+y\cos\theta)Y}\]
+        由于$X,Y$的独立性，
+        \[\E\e^{xV+yW}=\E\e^{(x\cos\theta-y\sin\theta)X}
+                          \cdot\E\e^{(x\sin\theta+y\cos\theta)Y}\]
+    \end{proof}
+
+\end{document}
