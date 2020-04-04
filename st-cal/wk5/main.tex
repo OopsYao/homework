@@ -68,14 +68,32 @@
 
             考虑事件$B=\{\omega\in\Omega;X(\omega)<Y(\omega)\}$，
             和事件
-            \[B'=\bigcup_{q\in\mathbb Q}\{\omega\in\Omega;X(\omega)<q<Y(\omega)\}\]
+            \[B'=\bigcup_{q\in\mathbb Q}\{\omega\in\Omega;X(\omega)\leq q<Y(\omega)\}\]
             对于任意$\omega\in B'$，显然$\omega\in B$，反过来，对于任意$\omega\in B$，
             由有理数在实数中的稠密性，总有$q\in\mathbb Q$，使得
-            \[X(\omega)<q<Y(\omega)\]
+            \[X(\omega)\leq q<Y(\omega)\]
             因此$\omega\in B'$，即$B=B'$。
-            而注意到$\{\omega\in\Omega;X(\omega)<q\}\in\sigma(X)$
-            
-            % TODO Something goes wrong ...
+
+            又注意到
+            \[\int_{X\leq q}(X-Y)\diff P=0\]
+            故
+            \[\int_{X\leq q<Y}(X-Y)\diff P+\int_{X,Y\leq q}(X-Y)\diff P=0\]
+            而
+            \[\int_{X\leq q<Y}(X-Y)\diff P\leq 0\]
+            因此
+            \[\int_{X,Y\leq q}(X-Y)\diff P\geq 0\]
+            交换$X,Y$有
+            \[\int_{X,Y\leq q}(Y-X)\diff P\geq 0\]
+            即
+            \[\int_{X,Y\leq q}(X-Y)\diff P=0\]
+            于是
+            \[\int_{X\leq q<Y}(X-Y)\diff P=0\]
+            因此$P(X\leq q<Y)=0$。
+            则由概率的次可加性
+            \[P(B)=P(B')\leq 0\]
+            同理可得
+            \[P(X>Y)=0\]
+            故$X=Y$ a.s.
         \end{proof}
     \end{subproblem}
 
