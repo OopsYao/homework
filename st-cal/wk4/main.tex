@@ -34,4 +34,90 @@
         故$V,W$独立。
     \end{proof}
 
+    \section{习题2.4}
+    \begin{subproblem}
+        \item
+        由于
+        \[\e^{uX+vY}=\e^{(u+vZ)X}\]
+        故考虑条件期望，
+        \[\E(\e^{(u+vZ)X)}|Z)=\e^{\frac{(u+vZ)^2}{2}}\]
+        因此
+        \[\begin{aligned}
+           \E\e^{uX+vY}&=\E(\E(\e^{(u+vZ)X}|Z))\\
+           &=\E\e^{\frac{(u+vZ)^2}{2}}\\
+           &=\e^{\frac{1}{2}(u^2+v^2)}\cdot\frac{\e^{uv}+\e^{-uv}}{2}
+        \end{aligned}\]
+
+        \item
+        取$u=0$即得
+        \[\E\e^{vY}=\e^{\frac{1}{2}v^2}\]
+        因此$Y\sim\mathcal N(0,1)$。
+
+        \item
+        由于
+        \[\E\e^{uX}\cdot\E\e^{vY}=\e^{\frac{1}{2}(u^2+v^2)}\]
+        故
+        \[\E\e^{uX+vY}=\E\e^{uX}\cdot\E\e^{vY}\]
+        并不总是成立，因此$X,Y$不独立。
+    \end{subproblem}
+
+    \section{习题2.5}
+    \begin{proof}
+        由于$X$的密度函数为
+        \newcommand{\pdf}{\frac{2|x|+y}{\sqrt{2\pi}}\e^{-\frac{(2|x|+y)^2}{2}}}
+        \newcommand{\npdf}{\frac{2x+y}{\sqrt{2\pi}}\e^{-\frac{(2x+y)^2}{2}}}
+        \newcommand{\xipdf}{\frac{\xi}{\sqrt{2\pi}}\e^{-\frac{\xi^2}{2}}}
+        \[\begin{aligned}
+            f_X(x)&=\int_{-\infty}^\infty f_{X,Y}(x,y)\diff y\\
+            &=\int_{-|x|}^\infty\pdf\diff x
+        \end{aligned}\]
+        考虑积分变量替换
+        \[\xi=2|x|+y\]
+        则
+        \[\begin{aligned}
+            f_X(x)&=\int_{|x|}^\infty\xipdf\diff\xi\\
+            &=\frac{\e^{-\frac{x^2}{2}}}{\sqrt{2\pi}}
+        \end{aligned}\]
+        因此$X\sim\mathcal N(0,1)$。
+        对于$Y$来说，
+        当$y>0$时，同样考虑变量替换$\xi=2x+y$，
+        \[\begin{aligned}
+            f_Y(y)&=\int_{-\infty}^\infty f_{X,Y}(x,y)\diff x\\
+            &=\int_{-\infty}^\infty\pdf\diff x\\
+            &=2\int_0^\infty\npdf\diff x\\
+            &=\int_y^\infty\xipdf\diff\xi\\
+            &=\frac{\e^{-\frac{y^2}{2}}}{\sqrt{2\pi}}
+        \end{aligned}\]
+        当$y\leq 0$时，
+        \[f_Y(y)=\left(\int_{-\infty}^y+\int_{-y}^\infty\right)
+        f_{X,Y}(x,y)\diff x\]
+        注意到
+        \[\int_{-\infty}^yf_{X,Y}(x,y)\diff x
+        =\int_{-y}^\infty f_{X,Y}(-x,y)\diff x
+        =\int_{-y}^\infty f_{X,Y}(x,y)\diff x\]
+        因此考虑变量替换$\xi=2x+y$
+        \[\begin{aligned}
+            f_Y(y)&=2\int_{-y}^\infty f_{X,Y}(x,y)\diff x\\
+            &=\int_{-y}^\infty\xipdf\diff\xi\\
+            &=\frac{\e^{-\frac{y^2}{2}}}{\sqrt{2\pi}}
+        \end{aligned}\]
+        故$Y\sim\mathcal N(0,1)$。
+
+        显然，
+        \[f_{X,Y}(x,y)\neq f_X(x)\cdot f_Y(y)\]
+        故$X,Y$不独立。
+        而
+        \[\begin{aligned}
+           \cov(X,Y)&=\E(XY)\\ 
+           &=\iint_{y\geq |x|}f_{X,Y}(x,y)\diff x\diff y\\
+           &=\int_{-\infty}^\infty\diff x
+           \int_{-|x|}^\infty xyf_{X,Y}(x,y)\diff y
+        \end{aligned}\]
+        应当注意到
+        \[g(x)=\int_{-|x|}^\infty xyf_{X,Y}(x,y)\diff y\]
+        为奇函数，故
+        \[\cov(X,Y)=0\]
+        于是$X,Y$不相关。
+    \end{proof}
+
 \end{document}
