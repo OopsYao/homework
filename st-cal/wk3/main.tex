@@ -7,88 +7,69 @@
 \begin{document}
     \maketitle
 
-    \problem
+    \section{习题2.1}
+    \begin{proof}
+        考虑到$\Omega$非空，则存在$\omega_0\in\Omega$，
+        设$c=X(\omega_0)$。考虑$\mathbb R$中的Borel集
+        \[\{c\}=[c-1,c]\cap[c,c+1]\]
+        则由于$X$为$\mathcal F_0$可测的，因此
+        \[X^{-1}(\{c\})\in\mathcal F_0\]
+        注意到有$\omega_0\in X^{-1}(\{c\})$，因此
+        \[X^{-1}=\Omega\]
+        即对于任意$\omega\in\Omega$，
+        \[X(\omega)=c\]
+        故$X$非随机。
+    \end{proof}
+
+    \section{习题2.2}
     \begin{subproblem}
         \item
+        \[\sigma(X)=\left\{\varnothing,\Omega_2,\{HT,TH\},\{HH,TT\}\right\}\]
+
+        \item
+        \[\sigma(S_1)=\left\{\varnothing,\Omega_2,\{HH,HT\},\{TH,TT\}\right\}\]
+
+        \item
+        \renewcommand{\prob}{\tilde{\mathbb P}}
+        \begin{proof}
+            只需证明对于任意$A\in\sigma(X),B\in\sigma(S_1)$，
+            有
+            \[\prob(A\cap B)=\prob(A)\cdot \prob(B)\]
+            即可。对于$A,B$其一为$\varnothing,\Omega_2$时显然成立。
+            故只需验证其他情况，
+            \[\begin{aligned}
+                \prob(\{HT,TH\}\cap\{HH,HT\})&=\prob(\{HT\})\\
+                &=\frac{1}{4}\\
+                &=\prob(\{HT,TH\})\cdot\prob(\{HH,HT\})\\
+                \prob(\{HT,TH\}\cap\{TH,TT\})
+                &=\prob(\{TH\})\\
+                &=\frac{1}{4}\\
+                &=\prob(\{HT,TH\})\cdot\prob(\{TH,TT\})\\
+                \prob(\{HH,TT\}\cap\{HH,HT\})
+                &=\prob(\{HH\})\\
+                &=\frac{1}{4}\\
+                &=\prob(\{HH,TT\})\cdot\prob(\{HH,HT\})\\
+                \prob(\{HH,TT\}\cap\{TH,TT\})
+                &=\prob(\{TT\})\\
+                &=\frac{1}{4}\\
+                &=\prob(\{HH,TT\})\cdot\prob(\{TH,TT\})
+            \end{aligned}\]
+            故$\sigma(X),\sigma(S_1)$是独立的。
+        \end{proof}        
+
+        \item
+        \renewcommand{\prob}{\mathbb P}
         \begin{proof}
             由于
-            \begin{align*}
-                \prob(A)+\prob(A^c)&=
-                \sum_{\omega\in A}\prob(\omega)+\sum_{\omega\in A^c}\prob(\omega)\\
-                &=\sum_{\omega\in\Omega}P(\omega)\\
-                &=1
-            \end{align*}
-            即证。
+            \[\prob(\{HT,TH\}\cap\{HH,HT\})=\prob(\{HT\})=\frac{2}{9}\]
+            而
+            \[\prob(\{HT,TH\})\cdot\prob(\{HH,HT\})
+            =\frac{4}{9}\cdot\frac{6}{9}
+            \neq\frac{2}{9}\]
+            因此$\sigma(X)$与$\sigma(S_1)$不是独立的。
         \end{proof}
 
         \item
-        \begin{proof}
-            先证明$N=2$的情况，将$A_1\cup A_2$分解为不交并
-            \[A_1\cup A_2=((A_1\cup A_2)\backslash A_2)\cup A_2\]
-            则
-            \begin{align*}
-                \prob(A_1\cup A_2)&=\prob((A_1\cup A_2)\backslash A_2)
-                +\prob(A_2)
-            \end{align*}
-            又由于
-            \[(A_1\cup A_2)\backslash A_2\subset A_1\]
-            则
-            \[\prob((A_1\cup A_2)\backslash A_2)\leq\prob(A_1)\]
-            因此
-            \[\prob(A_1\cup A_2)\leq\prob(A_1)+\prob(A_2)\]
-            于是$N=2$的情况得证。
-
-            对于$N>2$的情况，由于
-            \[\bigcup_{i=1}^NA_i=\left(\bigcup_{i=1}^{N-1}A_i\right)\cup A_N\]
-            以及
-            \[\sum_{i=1}^N\prob(A_i)=\prob(A_N)+\sum_{i=1}^{N-1}\prob(A_i)\]
-            则由数学归纳法自然证得。
-        \end{proof}
-    \end{subproblem}
-
-    \problem
-    \begin{subproblem}
-        \item
-        $S_3$分布如下
-        \[\begin{aligned}
-            &\prob(S_3=32)
-            =\prob\left(S_3=\frac{1}{2}\right)
-            =\frac{1}{8}\\
-            &\prob(S_3=8)
-            =\prob(S_3=2)
-            =\frac{3}{8}\\
-        \end{aligned}\]
-
-        \item
-        \newcommand{\E}{\tilde{\mathbb E}}
-        期望如下，
-        \[\begin{aligned}
-            \E S_1&=\frac{8+2}{2}=5\\
-            \E S_2&=\frac{16+4\cdot 2+1}{2^2}=\frac{25}{4}\\
-            \E S_3&=\frac{32+8\cdot 3+2\cdot 3+\frac{1}{2}}{2^3}
-            =\frac{125}{16}
-        \end{aligned}\]
-
-        因此平均增长率为$(\E S_3-\E S_1)/\E S_1\cdot 100\%=56.25\%$。
-
-        \item
-        \newcommand{\preal}{\mathbb P}
-        $S_3$分布如下
-        \[\begin{aligned}
-            \preal(S_3=32)&=p^3=\frac{8}{27}\\
-            \preal(S_3=8)&=3p^2q=\frac{4}{9}\\
-            \preal(S_3=2)&=3pq^2=\frac{2}{9}\\
-            \preal\left(S_3=\frac{1}{2}\right)&=q^3=\frac{1}{27}\\
-        \end{aligned}\]
-        实际期望
-        \renewcommand{\E}{\mathbb E}
-        \[\begin{aligned}
-            \E S_1&=8p+2q=6\\
-            \E S_2&=16p^2+4\cdot 2pq+q^2=9\\
-            \E S_3&=32p^3+8\cdot 3p^2q+2\cdot 3pq^2+\frac{1}{2}q^3
-            =\frac{27}{2}
-        \end{aligned}\]
-
-        因此平均增长率为$(\E S_3-\E S_1)/\E S_1\cdot 100\%=125\%$。
-    \end{subproblem}
+        由于$X$与$S_1$之间不独立，因此$X$的信息将有助于我们确定$S_1$。
+    \end{subproblem} 
 \end{document}
