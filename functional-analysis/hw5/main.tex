@@ -1,0 +1,27 @@
+\documentclass[cn]{homework}
+
+\title{第六周作业}
+
+\begin{document}
+    \maketitle
+
+    \problem
+    由于$\mathbb R$是完备的，且上面定义的度量兼容$d$，
+    故$(X,d)$的完备空间是$(\mathbb R,d)$。
+
+    \problem
+    其完备空间为
+    $L^1[0,1]:=\left\{f\text{可测};\int_{[0,1]}|f(\xi)|\diff\xi<\infty\right\}$
+    ，即$[0,1]$上勒贝格可积的可测函数构成的集合。
+    \problem
+    \begin{proof}
+        反证法，不妨设$T$有两相异不动点$x_1\neq x_2$，满足
+        \[\begin{aligned}
+            Tx_1&=x_1\\
+            Tx_2&=x_2
+        \end{aligned}\]
+        而由$T$的另一性质，
+        \[d(x_1,x_2)=d(Tx_1,Tx_2)<d(x_1,x_2)\]
+        产生矛盾，故不动点唯一（已知存在不动点）。
+    \end{proof}
+\end{document}
