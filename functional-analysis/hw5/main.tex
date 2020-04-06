@@ -24,4 +24,62 @@
         \[d(x_1,x_2)=d(Tx_1,Tx_2)<d(x_1,x_2)\]
         产生矛盾，故不动点唯一（已知存在不动点）。
     \end{proof}
+
+    \problem
+    \begin{proof}
+        我们采用数学归纳法证明，首先对于$n=1$的情形自然成立，
+        倘若$n\leq m$时成立，考虑
+        \[d(T^{m+1}x,T^{m+1}y)=d(T(T^m y),T(T^m y))\]
+        则由于$T,T^m$为压缩映射，存在$k_1,k_m\in[0,1)$使得，
+        \[\begin{aligned}
+            d(T(T^m x),T(T^m y))&\leq k_1d(T^mx,T^my)\\
+            d(T^mx,T^my)&\leq k_md(x,y)
+        \end{aligned}\]
+        于是存在$k_{m+1}=k_1k_m\in[0,1)$使得
+        \[d(T^{m+1}x,T^{m+1}y)\leq k_{m+1}d(x,y)\]
+        故$n=m+1$时成立，于是由数学归纳法，对于任意$n\in\mathbb N^+$，
+        $T^n$为压缩映射。
+    \end{proof}
+
+    对于其逆命题，设度量空间为区间$[0,1]$，度量为实数上的度量，
+    考虑映射如下定义的映射$T$，
+    \[T(x)=\begin{cases}
+       0,&x\in[0,\frac{1}{2}]\\ 
+       \frac{1}{2},&x\in(\frac{1}{2},1]
+    \end{cases}\]
+    则由于
+    \[T^2(x)=0,\forall x\in[0,1]\]
+    于是
+    \[d(T^2x,T^2y)=0,\forall x\in[0,1]\]
+    $T^2$显然满足压缩映射的定义。
+    而对于$T$来说\sidenote{事实上，由$T$的不连续性可直接得出
+    其不为压缩映射的结论。}，考虑两点$1/2,1/2+\varepsilon(\varepsilon>0)$
+    \[d\left(T\left(\frac{1}{2}\right),T\left(\frac{1}{2}+\varepsilon\right)\right)
+    =d\left(0,\frac{1}{2}\right)
+    =\frac{1}{2}\]
+    于是任意$0<\varepsilon<\frac{1}{2}$，均能说明$T$不为压缩映射。
+    因此逆命题不一定成立。
+
+    \problem
+    \begin{proof}
+        考虑完备空间$C[0,1]$与其上的映射
+        \[T:x(t)\mapsto\frac{1}{2}\sin x(t)-a(t)\]
+        对于任意$x,y\in C[0,1]$，有
+        \[\begin{aligned}
+            \left|\frac{\sin x}{2}-\frac{\sin y}{2}\right|
+            =\left|\sin\frac{x-y}{2}\cos\frac{x+y}{2}\right|
+            \leq\frac{|x-y|}{2}
+        \end{aligned}\]
+        于是
+        \[\begin{aligned}
+        d(Tx,Ty)&=\max_{t\in[0,1]}\left|\frac{\sin x(t)}{2}-\frac{\sin y(t)}{2}\right|\\
+        &\leq\frac{1}{2}\max_{t\in[0,1]}|x(t)-y(t)|\\
+        &=\frac{1}{2}d(x,y)
+        \end{aligned}\]
+        即$T$为完备空间$C[0,1]$上的一个压缩映射，故由压缩映射原理，
+        存在$x(t)\in C[0,1]$，即$[0,1]$上的连续函数，是$T$的不动点，使得
+        \[x=Tx\]
+        即
+        \[x(t)=\frac{1}{2}\sin x(t)-a(t)\]
+    \end{proof}
 \end{document}
