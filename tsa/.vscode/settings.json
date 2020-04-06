@@ -24,5 +24,7 @@
             ]
         }
     ],
-    "python.pythonPath": "envs/bin/python3.8",
+    "python.pythonPath": "py/bin/python3.7",
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true,
 }
