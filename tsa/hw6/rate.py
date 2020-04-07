@@ -15,20 +15,44 @@ plt.plot(rates)
 sm.graphics.tsa.plot_acf(rates)
 
 # ARCH effect
-ar_res = AutoReg(rates, lags=[1]).fit()
+ar_res = ar_select_order(rates, 5).model.fit()
 # Test of no serial correlation and homoskedasticity
 print(ar_res.diagnostic_summary())
+print(ar_res.summary())
+plt.figure()
+plt.plot(ar_res.resid)
 
-a = ar_res.resid
-a_res = ar_select_order(a, 5).model.fit()
-print(a_res.diagnostic_summary())
+# a = ar_res.resid
+# a_res = ar_select_order(a, 5).model.fit()
+# print(a_res.diagnostic_summary())
 
 # Fit with GARCH(p, q)
-ar = ARX(rates, lags=[1])  # Mean model
-ar.volatility = GARCH(p=4, q=1)  # Volatility model
-
+ar = ARX(rates, lags=[1, 2])  # Mean model
+ar.volatility = GARCH(p=1, q=1)  # Volatility model
 res = ar.fit()
 res.plot()
-# plt.plot(res.resid)
 print(res.summary())
+
+# Forecast
+drop = len(data) - len(rates)
+start = 3254 - 2 - drop
+end = 3262 - 2 - drop
+
+var = res.forecast(start=start, horizon=5,
+                   method='simulation').variance[start:1+end]
+var.plot()
+entry = [
+    '2012:06:20',
+    '2012:06:21',
+    '2012:06:22',
+    '2012:06:25',
+    '2012:06:26',
+    '2012:06:27',
+    '2012:06:28',
+    '2012:06:29',
+    '2012:07:02',
+]
+for v, e in zip(var['h.1'], entry):
+    print(f'{e} & {round(v,4)} \\\\')
+
 plt.show()
