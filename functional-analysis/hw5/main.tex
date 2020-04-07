@@ -82,4 +82,41 @@
         即
         \[x(t)=\frac{1}{2}\sin x(t)-a(t)\]
     \end{proof}
+
+    \problem
+
+    \problem
+    \begin{proof}
+        记$C[0,1]$的度量为$d$，并在该空间上定义新的度量
+        \[d'(x,y)=\max_{t\in[0,1]}\left|\e^{-t}\big(x(t)-y(t)\big)\right|\]
+        显然$d'$是满足对称性、非负性（不可区分同一性），而
+        由绝对值不等式
+        \[|\e^{-t}\big(x(t)-z(t))|\leq
+        |\e^{-t}\big(x(t)-y(t)\big)|+|\e^{-t}\big(y(t)-z(t)\big)|\]
+        可知$d'$是满足三角不等式的，即$d'$是一个度量。
+
+        同时又由于$t\in[0,1]$，有
+        \[d'(x,y)\leq d(x,y)\]
+        于是原来$d$下的Cauchy列也是$d'$下的Cauchy列\sidenote{该性质我们
+        也在第四周作业的最后一题中证明过了。}，而原度量$d$下空间是
+        完备的，因此新的度量$d'$下空间亦是完备的。
+
+        故考虑这个新的度量空间（记为$(X,d')$）上的映射
+        \[T:x(t)\mapsto y(t)+\lambda\int_0^1\e^{t-s}x(s)\diff s\]
+        于是对于任意$x_1,x_2\in X$，
+        \[\begin{aligned}
+            d'(x_1,x_2)&=|\lambda|\max_{t\in[0,1]}
+            \left|\e^{-t}\int_0^1\e^{t-s}(x_1(s)-x_2(s))\diff s\right|\\
+            &=|\lambda|\cdot
+            \left|\int_0^1\e^{-s}\big(x_1(s)-x_2(s)\big)\diff s\right|\\
+            &\leq|\lambda|\cdot
+            \int_0^1\left|\e^{-s}\big(x_1(s)-x_2(s)\big)\right|\diff s\\
+            &\leq|\lambda|\cdot\int_0^1d'(x_1,x_2)\diff s\\
+            &=|\lambda|\cdot d'(x_1,x_2)
+        \end{aligned}\]
+        由于$|\lambda|<1$，因此$T$是一个压缩映射，故由压缩映射原理知，
+        存在唯一$x\in X$使得其为不动点，即存在唯一解$x\in C[0,1]$，满足
+        积分方程
+        \[x(t)-\lambda\int_0^1\e^{t-s}x(s)\diff s=y(t)\]
+    \end{proof}
 \end{document}
