@@ -84,6 +84,42 @@
     \end{proof}
 
     \problem
+    \begin{proof}
+        考虑实数坐标空间$\mathbb R^n$，其上有度量为欧式距离
+        \[d(x,y)=\sqrt{\sum_{i=1}^n(x_i-y_i)^2}\]
+        由实数完备性知$\mathbb R^n$是完备的。
+        为记号的简便性，记度量诱导的范数
+        \[||x||:=d(x,0)\]
+        于是由度量的三角不等式导出范数的三角不等式
+        \[||x+y||=d(x+y,0)=d(x,-y)\leq d(x,0)+d(0,-y)=||x||+||y||\]
+
+        现考虑$\mathbb R^n$上的映射
+        \[T:x\mapsto b-(A-E)x\]
+        并记$B=A-E=(\beta_1,\beta_2,\cdots,\beta_n)$，这里$\beta_i\in\mathbb R^n$
+        为$n\times 1$的列向量。
+        于是对于任意$y,z\in\mathbb R^n$，记$x=y-z=(x_1,x_2,\ldots,x_n)^\mathrm T$，
+        由三角不等式
+        \[d(Ty,Tz)=||Bx||=\left|\left|\sum_{i=1}^nx_i\beta_i\right|\right|
+        \leq\sum_{i=1}^n|x_i|\cdot||\beta_i||\]
+        又由Cauchy不等式
+        \[\sum_{i=1}^n|x_i|\cdot||\beta_i||
+        \leq\sqrt{\left(\sum_{i=1}^nx_i^2\right)\left(\sum_{i=1}^n||\beta_i||^2\right)}\]
+        于是若记
+        \[||B||_F:=\sqrt{\sum_{i=1}^n||\beta_i||^2}\]
+        则我们有
+        \[d(Ty,Tz)\leq ||B||_F\cdot d(y,z)\]
+
+        又由于
+        \[\sum_{i=1}^n||\beta_i||^2=\sum_{i,j}b_{ij}^2
+        =\sum_{i,j}(a_{ij}-\delta_{ij})^2<1\]
+        于是
+        \[||B||_F<1\]
+        因此$T$为一个压缩映射，而$\mathbb R^n$为完备的，因此存在
+        唯一不动点$x\in\mathbb R^n$使得
+        \[x=Tx\]
+        即
+        \[Ax=b\]
+    \end{proof}
 
     \problem
     \begin{proof}
