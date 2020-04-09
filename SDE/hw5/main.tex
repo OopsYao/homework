@@ -7,7 +7,39 @@
     \maketitle
 
     \problem
-    % TODO P1: show 0 quadratic variation of deterministic function
+    \begin{proof}
+        Consider any interval $[a,b]$, then by definition the
+        quadratic variation of $f$ is
+        \[\lim_{N\to\infty}\sum_{i=0}^{N-1} (f(x_{i+1})-f(x_i))^2\]
+        where $a=x_0<x_1<\cdots<x_N=b$ is a partition of $[a,b]$.
+        Since $f$ is differentiable on $\mathbb R$, then be mean
+        value theorem, we have that
+        \[f(x_{i+1})-f(x_i)=f'(\xi_i)(x_{i+1}-x_i)\]
+        where $x_i\leq \xi_i\leq x_{i+1}$.
+        If we denote $\tau=\max_{0\leq i\leq N}(x_{i+1}-x_i)$,
+        then we have that
+        \[\begin{aligned}
+            \sum_{i=0}^{N-1}(f(x_{i+1})-f(x_i))^2
+            &=\sum_{i=0}^{N-1}(f'(\xi_i))^2(x_{i+1}-x_i)^2\\
+            &\leq\tau\sum_{i=0}^{N-1}(f'(\xi_i))^2(x_{i+1}-x_i)
+        \end{aligned}\]
+
+        Also we know that $f'^2$ is integrable on $\mathbb R$
+        thus the subinterval $[a,b]$, namely
+        \[\int_a^b|f'(\xi)|^2\diff\xi<\infty\]
+        hence for the partition above, by definition of Riemann
+        integral the following limit exists
+        \[\lim_{N\to\infty}\sum_{i=0}^N(f'(\xi))^2(x_{i+1}-x_i)
+        <\infty\]
+        It follows that
+        \[\lim_{N\to\infty}\tau\sum_{i=0}^N(f'(\xi))^2(x_{i+1}-x_i)
+        =0\]
+        as $N\to\infty$ means $\tau\to 0^+$. Therefore
+        \[\sum_{i=0}^N(f(x_{i+1})-f(x_i))^2\to 0\]
+        as $N\to\infty$, i.e., the quadratic variation on $[a,b]$
+        is 0, and by the arbitrariness of $a,b$, this entity holds
+        on $\mathbb R$.
+    \end{proof}
 
     \problem
     \begin{proof}
@@ -99,7 +131,62 @@
     \frac{W_T^2}{2}+\left(\lambda-\frac{1}{2}\right)T\]
 
     \problem
-    % TODO ti*(Wti - Wt(i+1))^2
+    By definition,
+    \[\int_0^Ts\diff(W_s^2)
+    =\lim_{N\to\infty}I_N
+    =\lim_{N\to\infty}\sum_{i=0}^{N-1}t_i^*(W_{t_{i+1}}^2-W_{t_i}^2)\]
+    where\sidenote{Again $t^*_i$ should be in $[t_i,t_{i+1}]$ exactly,
+    i.e., it can achieve both ends.
+    but it doesn't matter in my opinion, and strict inequality makes
+    the following analysis more clear.}
+    $0=t_0<t_0^*<t_1<t_1^*<\cdots<t_{N-1}<t_{N-1}^*<t_N=T$.
+    Note that the discrete term
+    \[\begin{aligned}
+        t_0^*(W_{t_1}^2-W_{t_0}^2)&=t_0^*W_{t_1}^2-t_0^*W_{t_0}^2\\
+        t_1^*(W_{t_2}^2-W_{t_1}^2)&=t_1^*W_{t_2}^2-t_1^*W_{t_1}^2\\
+        t_2^*(W_{t_3}^2-W_{t_2}^2)&=t_2^*W_{t_3}^2-t_2^*W_{t_2}^2\\
+        &\cdots\\
+        t_{N-1}^*(W_{t_N}^2-W_{t_{N-1}}^2)&=t_{N-1}^*W_{t_N}^2-t_{N-1}^*W_{t_{N-1}}^2\\
+    \end{aligned}\]
+    hence
+    \[\begin{aligned}
+        I_N
+        &=t_{N-1}^*W_{t_N}^2-t_0^*W_{t_0}^2
+          +\sum_{i=0}^{N-2}(t_i^*-t_{i+1}^*)W_{t_{i+1}}^2\\
+        &=t^*_{N-1}W_T^2
+          +\sum_{i=0}^{N-2}(t_i^*-t_{i+1}^*)W_{t_{i+1}}^2\\
+    \end{aligned}\]
+    where the last term is stochastical process integral
+    over time, which we will see next.
+
+    For any $\omega\in\Omega$, by definition\sidenote{The reason
+    why the last term looks so weird is that there is no $t^*_N$
+    and we omitted the first term which is 0.}
+    \[\int_0^TW_t^2\diff t
+    =\lim_{N\to\infty}\left(\sum_{i=0}^{N-2}W_{t_{i+1}}^2(t^*_{t+1}-t^*_i)
+    +W_T^2(T-t_{N-1}^*)\right)\]
+    where we chosed a partition
+    $0<t_0^*<t_1^*<t_2^*<\cdots<t_{N-1}^*<T$ and
+    sample point $t_i\in(t_{i-1}^*,t_i^*)$
+    (the first and last sample point is $0$ and $T$
+    accordingly).
+    It following that
+    \[\lim_{N\to\infty}(TW_T^2-I_N)
+    =\int_0^TW_t^2\diff t\]
+    pointwisely.
+    Therefore
+    \[\lim_{N\to\infty}I_N
+    =TW_T^2-\int_0^TW_t^2\diff t\]
+    pointwisely. In other word\sidenote{So I just convert 
+    a stochastic integral to another random variable which
+    may be complex as well.
+    And this seems to be a trival result of integral by parts.
+    But I still can't find a traditional
+    way to calculate this integral in the m.s. sense as
+    you showed in class.},
+    \[\int_0^Ts\diff(W_s^2)=TW_T^2-\int_0^TW_s^2\diff s\]
+
+
 
     \problem
     See \cref{fig:numerical solution}.
