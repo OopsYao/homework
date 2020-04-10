@@ -1,0 +1,63 @@
+\documentclass[cn]{homework}
+
+\title{第七周作业}
+
+\begin{document}
+    \maketitle
+
+    \problem
+    \begin{proof}
+        由于$d$为度量，故非负性显然，而
+        \[||x||=d(x,0)=0\Leftrightarrow x=0\]
+        因此正定性也满足。
+        同时由于$d$的相似性有
+        \[||\alpha x||=d(\alpha x,0)=|\alpha|d(x)
+        =|\alpha|\cdot||x||\]
+        正齐次得证。
+        而由$d$的平移不变性
+        \[||x+y||=d(x+y,0)=d(x,-y)
+        \leq d(x,0)+d(0,-y)=||x||+||y||\]
+        从而三角不等式得证。
+        因此$(X,||\cdot||)$为赋范线性空间。
+    \end{proof}
+
+    \problem
+    \begin{subproblem}
+        \item
+        \begin{proof}
+            非负性是显然的，由于对于任意$\alpha\in\mathbb R$，
+            \[||\alpha x||_1=
+            \left(\int_a^b(|\alpha x(t)|^2+|\alpha x'(t)|^2)\diff t\right)^{1/2}
+            =|\alpha|\cdot||x||_1\]
+            故正齐次得证。
+
+            同时，显然$||0||_1=0$，而倘若$||x||_1=0$，
+            则$x(t)$在$[a,b]$上几乎处处为0，进一步由$x(t)$的连续性，
+            $x(t)=0$，因此正定性得证。
+
+            为记号的简便性，我们记
+            \[||x||_2=\sqrt{\int_a^b|x(t)|^2\diff t}\]
+            于是
+            \[||x||_1=\sqrt{||x||_2^2+||x'||_2^2}\]
+            因此
+            \begin{multline*}
+            (||x||_1+||y||_1)^2=
+            ||x||_2^2+||y||_2^2
+            +||x'||_2^2+||y'||_2^2\\
+            +2\sqrt{(||x||_2^2+||x'||_2^2)(||y||_2^2+||y'||_2^2)}
+            \end{multline*}
+            而由Cauchy不等式，
+            \[(||x||_2^2+||x'||_2^2)(||y||_2^2+||y'||_2^2)
+            \geq(||x||_2\cdot||y||_2+||x'||_2\cdot||y'||_2)^2\]
+            因此
+            \[(||x||_1+||y||_1)^2
+            \geq(||x||_2+||y||_2)^2+(||x'||_2+||y'||_2)^2\]
+            进一步由Minkovski不等式
+            \[(||x||_1+||y||_1)^2\geq ||x+y||_2^2+||x'+y'||_2^2
+            =||x+y||_1^2\]
+            即
+            \[||x+y||_1\leq||x||_1+||y||_1\]
+            故三角不等式得证，因此$||\cdot||_1$为范数。
+        \end{proof}
+    \end{subproblem}
+\end{document}
