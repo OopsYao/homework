@@ -68,7 +68,8 @@
             1,&x\in[\frac{a+b}{2}+\frac{b-a}{3n},b]
         \end{cases}
         \quad n=1,2,3,\ldots\]
-        这里$\xi_n(t)$为次数不超过$K$的多项式函数，且满足
+        这里$\xi_n(t)$为次数不超过$K$的多项式函数\sidenote{事实上只要取连接两点，且保证
+        整体连续可微的一致有界的函数列即可，直觉上讲这样的函数列有很多。}，且满足
         \[\begin{aligned}
             \xi_n\left(\frac{a+b}{2}\right)=0,
             \xi_n\left(\frac{a+b}{2}+\frac{b-a}{3n}\right)=1\\
@@ -96,15 +97,15 @@
             \frac{1}{2},&x=\frac{a+b}{2}\\
             1,&x\in(\frac{a+b}{2},b]
         \end{cases}\]
-        则
+        则由Minkovski不等式
         \[\begin{aligned}
-        \int_a^b|x(t)-y(t)|^2\diff t
-        &\leq\int_a^b|x(t)-x_n(t)|^2\diff t
-        +\int_a^b|x_n(t)-y(t)|^2\diff t\\
-        &\leq ||x-x_n||_1^2
-            +\int_{\frac{a+b}{2}}^{\frac{a+b}{2}+\frac{b-a}{3n}}
-                \left|\xi_n(t)-\frac{1}{2}\right|^2\diff t\\
-        &\leq ||x-x_n||^2_1+M_2\cdot\frac{b-a}{3n}
+        \sqrt{\int_a^b|x(t)-y(t)|^2\diff t}
+        &\leq\sqrt{\int_a^b|x(t)-x_n(t)|^2\diff t}
+        +\sqrt{\int_a^b|x_n(t)-y(t)|^2\diff t}\\
+        &\leq ||x-x_n||_1
+            +\sqrt{\int_{\frac{a+b}{2}}^{\frac{a+b}{2}+\frac{b-a}{3n}}
+                \left|\xi_n(t)-\frac{1}{2}\right|^2\diff t}\\
+        &\leq ||x-x_n||_1+\sqrt{M_2\cdot\frac{b-a}{3n}}
         \end{aligned}\]
         这里$M_2$同样地由于$x_n$的一致有界而存在。
         两端取$n\to\infty$可得
@@ -168,13 +169,14 @@
             \frac{1}{2},&t=\frac{1}{2}\\
             1,&t\in(\frac{1}{2},1]
         \end{cases}\]
-        则
+        则由Minkovski不等式
         \[\begin{aligned}
-            \int_0^1|x(t)-y(t)|^2\diff t
-            &\leq\int_0^1|x(t)-x_n(t)|^2+|x_n(t)-y(t)|^2\diff t\\
-            &\leq ||x-x_n||^2+\int_{\frac{1}{2}}^{\frac{1}{2}+\frac{1}{3n}}
-             |x_n(t)-y(t)|\diff t\\
-            &\leq ||x-x_n||^2+\frac{1}{3n}
+            \sqrt{\int_0^1|x(t)-y(t)|^2\diff t}
+            &\leq\sqrt{\int_0^1|x(t)-x_n(t)|^2\diff t}
+            +\sqrt{\int_0^1|x_n(t)-y(t)|^2\diff t}\\
+            &\leq ||x-x_n||+\sqrt{\int_{\frac{1}{2}}^{\frac{1}{2}+\frac{1}{3n}}
+             |x_n(t)-y(t)|\diff t}\\
+            &\leq ||x-x_n||+\sqrt{\frac{1}{3n}}
         \end{aligned}\]
         取$n\to\infty$可得
         \[\int_0^1|x(t)-y(t)|^2\diff t=0\]
