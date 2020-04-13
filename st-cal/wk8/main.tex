@@ -1,0 +1,56 @@
+\documentclass[cn]{homework}
+
+\title{第八周作业}
+
+\newcommand{\E}{\mathrm E}
+
+\begin{document}
+    \maketitle
+    
+    \section{习题3.2}
+    \newcommand{\filt}{\mathcal F(s)}
+    \begin{proof}
+        考虑$0\leq s\leq t$，
+        由于
+        \[W^2(t)=(W(t)-W(s))^2+2W(t)W(s)-W^2(s)\]
+        于是
+        \[\E(W^2(t)|\filt)=
+        \E(W(t)-W(s))^2+2W(s)\cdot\E(W(t)|\filt)-W^2(s)\]
+        考虑到布朗运动为鞅，即
+        \[\E(W(t)|\filt)=W(s)\]
+        于是
+        \[\E(W^2(t)|\filt)=t-s+2W^2(s)-W^2(s)=W^2(s)+t-s\]
+        因此
+        \[\E(W^2(t)-t|\filt)=W^2(s)-s\]
+        即$W^2(t)-t$为鞅。
+    \end{proof}
+
+    \section{习题3.4}
+    \begin{subproblem}
+        \newcommand{\gap}{|W(t_{j+1})-W(t_j)|}
+        \newcommand{\sumhead}{\sum_{j=1}^{n-1}}
+        \newcommand{\limhead}{\lim_{\tau\to0^+}}
+        \item
+        \begin{proof}
+            反证法。记$\tau=\max_j|t_{j+1}-t_j|$，
+            倘若存在非零测的路径集合，其中路径
+            一阶变差有限，即
+            \[\limhead\sumhead\gap<\infty\]
+            则由于
+            \[\sumhead\gap^2\leq\tau\sumhead\gap\]
+            因此二阶变差
+            \[\limhead\sumhead\gap^2=0\]
+            这与布朗运动几乎所有路径二阶变差为$T$相矛盾，
+            因此几乎所有路径一阶变差趋于$\infty$。
+        \end{proof}
+
+        \item
+        \begin{proof}
+            记号同上，同样地有
+            \[\sumhead\gap^3\leq\tau\sumhead\gap^2\]
+            而
+            \[\limhead\sumhead\gap^2=T\quad\text{a.c.}\]
+            于是两端取$\tau\to0^+$即得几乎所有路径三阶变差为0。
+        \end{proof}
+    \end{subproblem}
+\end{document}
