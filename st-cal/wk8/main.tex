@@ -2,7 +2,7 @@
 
 \title{第八周作业}
 
-\newcommand{\E}{\mathrm E}
+\newcommand{\E}{\mathbb E}
 
 \begin{document}
     \maketitle
@@ -24,6 +24,15 @@
         \[\E(W^2(t)-t|\filt)=W^2(s)-s\]
         即$W^2(t)-t$为鞅。
     \end{proof}
+
+    \section{习题3.3}
+    由于
+    \[\varphi^{(3)}(u)=\e^{\frac{\sigma^2u^2}{2}}(3\sigma^4u+\sigma^4u^2)\]
+    故
+    \[\varphi^{(4)}(u)=\sigma^2u\e^{\frac{\sigma^2u^2}{2}}(3\sigma^4u+\sigma^4u^2)
+    +\e^{\frac{\sigma^2u^2}{2}}(3\sigma^4+2\sigma^4u)\]
+    因此
+    \[\E[(X-\mu)^4]=\varphi^{(4)}(0)=3\sigma^4\]
 
     \section{习题3.4}
     \begin{subproblem}
@@ -53,4 +62,52 @@
             于是两端取$\tau\to0^+$即得几乎所有路径三阶变差为0。
         \end{proof}
     \end{subproblem}
+
+    \section{习题3.5}
+    \begin{proof}
+        为简便起见，我们记
+        \[\begin{aligned}
+            d_+=d_+(T,S(0))\\
+            d_-=d_-(T,S(0))\\
+        \end{aligned}\]
+        则有
+        \[d_-+\sigma\sqrt T=d_+\]
+        由于事件$S(T)>K$等价于
+        \[\frac{W(T)}{\sqrt{T}}>
+        \frac{1}{\sigma\sqrt{T}}
+        \left(\log\frac{K}{S(0)}-\left(r-\frac{\sigma^2}2\right)T\right)=-d_-\]
+        注意到$W(T)/\sqrt{T}\sim\mathcal N(0,1)$，
+        于是
+        \[\begin{aligned}
+            \E(\e^{rT}(S(T)-K)^+)
+            &=\int_{S(T)>K}\e^{-rT}(S(T)-K)\diff P\\
+            &=\int_{-d_-}^\infty
+              (S(0)\e^{-\frac{\sigma^2}{2}T+\sigma\sqrt{T}x}
+              -Ke^{-rT})\frac{\e^{-\frac{x^2}{2}}}{\sqrt{2\pi}}\diff x\\
+            &=\int_{-d_-}^\infty
+              (S(0)\e^{-\frac{\sigma^2}{2}T+\sigma\sqrt{T}x}
+              -Ke^{-rT})\frac{\e^{-\frac{x^2}{2}}}{\sqrt{2\pi}}\diff x\\
+            &=\begin{aligned}[t]
+                \int_{-d_-}^\infty S(0)\e^{-\frac{\sigma^2}{2}T+\sigma\sqrt{T}x}
+                \cdot\frac{\e^{-\frac{x^2}{2}}}{\sqrt{2\pi}}\diff x\\
+                -K\e^{-rT}\int_{-d_-}^\infty
+                \frac{\e^{-\frac{x^2}{2}}}{\sqrt{2\pi}}\diff x
+            \end{aligned}
+        \end{aligned}\]
+        而前一项
+        \[\begin{aligned}
+            \int_{-d_-}^\infty S(0)
+            \e^{-\frac{\sigma^2}{2}T+\sigma\sqrt{T}x}
+            \cdot\frac{e^{-\frac{x^2}{2}}}{\sqrt{2\pi}}\diff x
+            &=S(0)\int_{-d_-}^\infty
+             \frac{\e^{-\frac{(x-\sigma\sqrt{T})^2}{2}}}{\sqrt{2\pi}}\diff x\\
+            &=S(0)\int_{-d_--\sigma\sqrt{T}}^\infty\frac{\e^{-\frac{\xi^2}{2}}}{\sqrt{2\pi}}
+             \diff\xi\\
+            &=S(0)\int_{-d_+}^\infty\frac{\e^{-\frac{\xi^2}{2}}}{\sqrt{2\pi}}
+             \diff\xi\\
+            &=S(0)N(d_+)
+        \end{aligned}\]
+        于是
+        \[\E(\e^{-rT}(S(T)-K)^+)=S(0)N(d_+)-K\e^{-rT}N(d_-)\]
+    \end{proof}
 \end{document}
