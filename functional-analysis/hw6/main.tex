@@ -68,19 +68,35 @@
             1,&x\in[\frac{a+b}{2}+\frac{b-a}{3n},b]
         \end{cases}
         \quad n=1,2,3,\ldots\]
-        这里$\xi_n(t)$为次数不超过$K$的多项式函数\sidenote{事实上只要取连接两点，且保证
-        整体连续可微的一致有界的函数列即可，直觉上讲这样的函数列有很多。}，且满足
-        \[\begin{aligned}
+        这里$\xi_n(t)$使得$x_n(t)$满足连续可微条件即\cref{eq:smooth condition}，
+        且$\xi_n(t),\xi'_n(t)$一致有界。我们可以按如下方式构造$\xi_n$，
+        \begin{equation}\begin{aligned}
+            \label{eq:smooth condition}
             \xi_n\left(\frac{a+b}{2}\right)=0,
             \xi_n\left(\frac{a+b}{2}+\frac{b-a}{3n}\right)=1\\
             \xi_n'\left(\frac{a+b}{2}\right)=0,
             \xi_n'\left(\frac{a+b}{2}+\frac{b-a}{3n}\right)=0\\
             \xi_n''\left(\frac{a+b}{2}\right)=0,
             \xi_n''\left(\frac{a+b}{2}+\frac{b-a}{3n}\right)=0\\
+        \end{aligned}\end{equation}
+        不失一般性的，我们
+        将$xi_n$所占据的区间$(\frac{a+b}{2},\frac{a+b}{2}+\frac{b-a}{3})$
+        换为$(0,1)$，记逐渐减小的定义域序列为$T_n$，
+        则$T_1=(0,1)$。于是存在一个次数足够高的多项式函数$\xi_1(t)$
+        满足\cref{eq:smooth condition}，即$n=1$的情况，
+        \textbf{且在$T_1$上单调}\sidenote{不难验证，
+        \[\xi_1(t)=6t^5-15t^4+10t^3,t\in[0,1]\]
+        符合条件。}。考虑更小区间的情况
+        （即$n$增大时），对$\xi_1(t)$进行横向压缩得到$\xi_n(t)$，即
+        \[\xi_n=\xi_1\left(\frac t{|T_n|}\right)\]
+        这里$|T_n|$为$T_n$的长度，容易验证，由于
+        \[\begin{aligned}
+            \xi_n'(t)&=\frac{\xi_1'(t)}{|T_n|}\\
+            \xi_n''(t)&=\frac{\xi_1''(t)}{|T_n|^2}
         \end{aligned}\]
-        因此$x_n(t)\in C^1[a,b]$，且一致有界\sidenote{可以让$K$取足够大的
-        值来使得$\xi_n$在$(\frac{a+b}{2},\frac{a+b}{2}+\frac{b-a}{3n})$
-        上单增，因此$|\xi_n|\leq 1$，一致有界，进一步$\xi_n'$一致有界。}
+        因此$\xi_n(t)$也满足条件\cref{eq:smooth condition}。
+        且函数列$\{\xi_n(t)\},\{\xi'_n(t)\}$是一致有界的。
+        因此$x_n(t)\in C^1[a,b]$，且$\{x_n(t)\},\{x_n'(t)\}$一致有界。
 
         于是对于任意$m>n$，
         \[\begin{aligned}
@@ -141,7 +157,7 @@
         则
         \[||x_k-x||=\max_i\sqrt{(a_{ki}-a_i)^2+(b_{ki}-b_i)^2}
         \to 0\quad(k\to\infty)\]
-        因此$\mathbb C^n$是完备的。
+        因此$\mathbb C^n$是完备的，为Banach空间。
     \end{proof}
 
     \problem
