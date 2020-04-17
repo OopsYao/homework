@@ -1,0 +1,71 @@
+\documentclass[cn]{homework}
+
+\title{第八周作业}
+
+\begin{document}
+    \maketitle
+
+    \problem
+
+    \problem
+    \begin{proof}
+        显然$||\cdot||$不满足正齐次性，因此不是范数。
+        而$d(x,y)=||x-y||$显然满足非负性、对称性，且
+        $d(x,y)=0$等价于$x,y$在$[0,1]$上几乎处处相等，
+        于是在$L^p$中可以认为是相同的，即$x=y$。
+
+        对于任意$x,y,z\in L^p[0,1]$，
+        当$x(t)=y(t),y(t)=z(t)$不同时成立时，
+        \[|x-y|+|y-z|>0\]
+        于是
+        \[0\leq\frac{|x-y|}{|x-y|+|y-z|},\frac{|y-z|}{|x-y|+|y-z|}\leq 1\]
+        注意到
+        \[\alpha\leq\alpha^p,\forall\alpha\in[0,1]\]
+        因此
+        \begin{multline*}
+            1=
+            \frac{|x-y|}{|x-y|+|y-z|}+\frac{|y-z|}{|x-y|+|y-z|}\\
+            \leq
+            \frac{|x-y|^p}{(|x-y|+|y-z|)^p}+\frac{|y-z|^p}{(|x-y|+|y-z|)^p}
+        \end{multline*}
+        即
+        \[(|x-y|+|y-z|)^p\leq |x-y|^p+|y-z|^p\]
+        而当$x(t)=y(t)=z(t)$时上式显然成立，于是对于任意$t\in[0,1]$
+        上式都会成立，故由绝对值三角不等式
+        \[|x-z|^p\leq(|x-y|+|y-z|)^p\leq|x-y|^p+|y-z|^p\]
+        两端同时积分即得
+        \[d(x,z)\leq d(x,y)+d(y,z)\]
+        因此$d$为距离。
+    \end{proof}
+
+    \problem
+    \begin{proof}
+        容易验证$l^\infty$是一个线性空间。
+        若$||x||=0$，则由于上确界为上界，有
+        \[|\xi_n|\leq 0,\forall n=1,2,\ldots\]
+        因此$x=0$，反之$||\{0\}||=0$，因此正定性得证。
+
+        对于任意$\alpha\in\mathbb R^*$，由于
+        $||x||$为$\{|\xi_n|\}$的上界，
+        \[|\alpha\xi_n|\leq|\alpha|\cdot||x||\]
+        因此$|\alpha|\cdot||x||$为$\{|\alpha\xi_n|\}$的上界。
+        对于$\varepsilon>0$，由于$||x||$为上确界，则存在$\xi_k$
+        使得
+        \[|\xi_k|>||x||-\frac\varepsilon{|\alpha|}\]
+        于是存在$\alpha\xi_k$使得
+        \[|\alpha\xi_k|>|\alpha|\cdot||x||-\varepsilon\]
+        因此$|\alpha|\cdot||x||$为上确界，即
+        \[||\alpha x||=|\alpha|\cdot||x||\]
+        而当$\alpha=0$时上式显然成立，因此
+        正齐次性满足。
+        
+        对于$x=\{\xi_n\},y=\{\eta_n\}$，由于
+        $||x||,||y||$分别为$\{|\xi_n\},\{\eta_n\}$的上确界，于是
+        \[|\xi_n+\eta_n|\leq|\xi_n|+|\eta_n|\leq||x||+||y||\]
+        即$||x||+||y||$为$\{|\xi_n+\eta_n|\}$的上界，
+        而$||x+y||$为其上确界，因此
+        \[||x+y||\leq||x||+||y||\]
+        三角不等式得证。
+        因此$l^\infty$是一个赋范空间。
+    \end{proof}
+\end{document}
