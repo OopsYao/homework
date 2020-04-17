@@ -6,7 +6,26 @@
     \maketitle
 
     \problem
-    % TODO deduction of limit dist of t-statistic
+    由于
+    \[t=\frac{\sum_{t=1}^Ty_{t-1}\varepsilon_t}
+    {\hat\sigma\sqrt{\sum_{t=1}^Ty_{t-1}^2}}
+    =\frac{T^{-1}\sum_{t=1}^Ty_{t-1}\varepsilon_t}
+    {\hat\sigma\sqrt{T^{-2}\sum_{t=1}^Ty_{t-1}^2}}\]
+    考虑到
+    \[\begin{aligned}
+        T^{-1}\sum_{i=1}^Ty_{t-1}\varepsilon_t
+        &\Rightarrow\frac{1}{2}\sigma^2 [W^2(1)-1]\\
+        T^{-2}\sum_{t=1}^Ty_{t-1}^2
+        &\Rightarrow\sigma^2\int_0^1W^2(r)\diff r
+    \end{aligned}\]
+    同时由于$\hat\sigma^2$为$\sigma^2$的最小二乘估计，
+    具有$\sqrt{T}$的收敛速度，于是具有一致性，
+    进一步$\hat\sigma$弱收敛于$\sigma$，即
+    \[\hat\sigma\Rightarrow\sigma\]
+    因此
+    \[t\Rightarrow\frac{W^2(1)-1}{2\sqrt{\int_0^1W^2(t)\diff r}}\]
+
+    
 
     \problem
     不妨设$Y_0=0$，
@@ -21,6 +40,7 @@
         \label{fig:simulation}
     \end{figure}
 
+    \newpage
     \appendix
     \section{随机游走代码(Python)}
     \lstinputlisting[language=Python]{simulation.py}
