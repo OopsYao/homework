@@ -94,4 +94,34 @@
             \[\diff(W_t^3)=3W_t^2\diff W_t+3W_t\diff t\]
             \end{proof}
     \end{subproblem}
+
+    \problem
+    Motivated by the symmetry, we denote
+    \newcommand{\sumhead}{\sum_{i=0}^{n-1}}
+    \newcommand{\limhead}{\lim_{n\to\infty}}
+    \newcommand{\wi}{W_{t_i}}
+    \newcommand{\wii}{W_{t_{i+1}}}
+    \newcommand{\deltaw}{\wii-\wi}
+    \[\begin{aligned}
+        I_n:=\sumhead\left(\lambda\wi+(1-\lambda)\wii\right)(\deltaw)\\
+        J_n:=\sumhead\left((1-\lambda)\wi+\lambda\wii\right)(\deltaw)
+    \end{aligned}\]
+    then it is easy to find that
+    \[\begin{aligned}
+        I_n+J_n&=\sumhead(\wi+\wii)(\deltaw)\\
+        &=\sumhead(\wii^2-\wi^2)\\
+        &=W_t^2\to W_t^2\quad\text{m.s.}\\
+        I_n-J_n&=\sumhead\left((2\lambda-1)\wi+(1-2\lambda)\wii\right)
+                         (\deltaw)\\
+               &=(1-2\lambda)\sumhead(\deltaw)^2
+               \to (1-2\lambda)t\quad\text{m.s.}
+    \end{aligned}\]
+    Therefore by the additivity of m.s. convergence, we have
+    that
+    \[\text{m.s.}\quad I_n\to\frac{W_t^2+(1-2\lambda)t}{2}
+    =\frac{W_t^2}{2}+\left(\frac{1}{2}-\lambda\right)t\]
+    in other words, the integral
+    \[\int_0^tW_s\diamond W_s
+    =\frac{W_t^2}{2}+\left(\frac{1}{2}-\lambda\right)t\]
+    which is the same as choosing the value of $\lambda$-point.
 \end{document}
