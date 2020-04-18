@@ -126,6 +126,7 @@
     which is the same as choosing the value of $\lambda$-point.
 
     \problem
+    \label{var and e}
     \newcommand{\wj}{W_{t_j}}
     \newcommand{\wjj}{W_{t_{j+1}}}
     \newcommand{\deltawj}{\wjj-\wj}
@@ -167,4 +168,50 @@
     where the limit is obtained by the definition of Riemann integral.
     Therefore
     \[\var(X_t)=E(X_t^2)=\frac{t^2}{2}\]
+
+    \problem
+    % TODO sponge bob abcd
+
+    \problem
+    % TODO about filtration
+
+    \problem
+    \begin{proof}
+        By isometry identity
+        \[\begin{aligned}
+            E\left(\int_a^b|X_n-X|^2\diff t\right)
+            &=E\left(\left|\int_a^b(X_n-X)\diff W_t\right|^2\right)\\
+            &=E\left(\left|
+            \int_a^bX_n\diff W_t-\int_a^bX\diff W_t
+            \right|^2\right)
+        \end{aligned}\]
+        hence
+        \[\lim_{n\to\infty}E\left(
+            \int_a^b|X_n-X|^2\diff t\right)=0\]
+        means
+        \[\lim_{n\to\infty}E\left(\left|
+            \int_a^bX_n\diff W_t-\int_a^bX\diff W_t
+            \right|^2\right)=0\]
+        i.e.,
+        \[\text{m.s.}\quad
+        \int_a^bX_n\diff W_t\to\int_a^bX\diff W_t\]
+    \end{proof}
+
+    \problem
+    In problem 5 at page \pageref{var and e} we know that
+    \[\begin{aligned}
+        E\left(\int_0^TW_s\diff W_s\right)&=0\\
+        \var\left(\int_0^TW_s\diff W_s\right)&=\frac{t^2}{2}
+    \end{aligned}\]
+    hence
+    \[E\left(\left(\int_0^TW_s\diff W_s\right)^2\right)=\frac{t^2}{2}\]
+    On the other hand, by isometry identity,
+    \[\begin{aligned}
+        E\left(\left(\int_0^TW_s\diff W_s\right)^2\right)
+        &=E\left(\int_0^TW_s^2\diff s\right)\\
+        &=\int_0^TE(W_s^2)\diff s\\
+        &=\int_0^Ts\diff s\\
+        &=\frac{t^2}{2}
+    \end{aligned}\]
+    which coincides with result we obtained above.
 \end{document}
