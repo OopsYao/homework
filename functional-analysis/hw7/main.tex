@@ -68,4 +68,57 @@
         三角不等式得证。
         因此$l^\infty$是一个赋范空间。
     \end{proof}
+
+    \problem
+    \begin{proof}
+        由于连续性，我们设
+        \[x(t_0)=\max_{a\leq t\leq b}|x(t)|\]
+        不失一般地，不妨假设$a<x_0<b$。
+        因此对于任意$0<\varepsilon\leq||x||_\infty$，
+        存在$\delta>0$，使得对于任意$t\in(x_0-\delta,x_0+\delta)$，
+        有$|x(t)|>||x||_\infty-\varepsilon$，于是
+        \[\int_a^b|x(t)|^p\diff t
+        \geq\int_{x_0-\delta}^{x_0+\delta}|x(t)|^p\diff t
+        \geq\int_{x_0-\delta}^{x_0+\delta}
+        \left(||x||_\infty-\varepsilon\right)^p\diff t
+        =2\delta(||x||_\infty-\varepsilon)^p\]
+        即
+        \[||x||_p\geq(2\delta)^\frac{1}{p}(||x||_\infty-\varepsilon)\]
+        
+        同时由于
+        \[\int_a^b|x(t)|^p\diff t\leq\int_a^b||x||_\infty^p\diff t
+        =(b-a)||x||_\infty^p\]
+        即
+        \[||x||_p\leq(b-a)^\frac{1}{p}||x||_\infty\]
+        因此有
+        \[(2\delta)^\frac{1}{p}(||x||_\infty-\varepsilon)
+        \leq||x||_p\leq(b-a)^\frac{1}{p}||x||_\infty\]
+        依次取$p\to\infty,\varepsilon\to0^+$即得
+        \[\lim_{p\to\infty}||x||_p=||x||_\infty\]
+    \end{proof}
+
+    \problem
+    \begin{subproblem}[(\arabic*)]
+        \item
+        \begin{proof}
+            由于
+            \[||x||=0\Leftrightarrow\sup_{0<t\leq 1}|x(t)|=0
+            \Leftrightarrow x(t)=0,0<t\leq 1\]
+            正则性得证。
+
+            而
+            \[||\alpha x||=\sup_{0<t\leq 1}|\alpha x(t)|
+            =|\alpha|\sup_{0<t\leq 1}|x(t)|=|\alpha|\cdot||x||\]
+            因此具有正齐次性。
+
+            同时
+            \begin{multline*}
+                ||x+y||=\sup_{0<t\leq 1}|x(t)+y(t)|
+                \leq\sup_{0<t\leq 1}(|x(t)|+|y(t)|)\\
+                \leq\sup_{0<t\leq 1}|x(t)|+\sup_{0<t\leq 1}|y(t)|
+                =||x||+||y||
+            \end{multline*}
+            因此三角不等式得证，故$||\cdot||$为范数。
+        \end{proof}
+    \end{subproblem}
 \end{document}
