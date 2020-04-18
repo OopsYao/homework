@@ -124,4 +124,47 @@
     \[\int_0^tW_s\diamond W_s
     =\frac{W_t^2}{2}+\left(\frac{1}{2}-\lambda\right)t\]
     which is the same as choosing the value of $\lambda$-point.
+
+    \problem
+    \newcommand{\wj}{W_{t_j}}
+    \newcommand{\wjj}{W_{t_{j+1}}}
+    \newcommand{\deltawj}{\wjj-\wj}
+    Denote
+    \[I_n:=\sumhead\wi(\deltaw)\]
+    where $0=t_0<t_1<\cdots<t_n=t$ is a partition of $[0,t]$,
+    then we know that
+    \[\text{m.s.}\quad I_n\to X_t:=\int_0^tW_s\diff W_s
+    \quad(n\to\infty)\]
+    i.e.,
+    \[E(|I_n-X_t|^2)\to 0\]
+    hence
+    % TODO Detail
+    \[\begin{aligned}
+        E(I_n)&\to E(X_t)\\
+        E(|I_n|^2)&\to E(X_t^2)
+    \end{aligned}\]
+
+    And it easy to see that
+    \[E(I_n)=\sumhead E(\wi)\cdot E(\deltaw)=0\]
+    thus
+    \[E(X_t)=0\]
+    As for $I_n^2$,
+    \[I_n^2=\sumhead\wi^2(\deltaw)^2
+    +\sum_{i<j}\wi\wj(\deltaw)(\deltawj)\]
+    do note that $\deltawj$ in the last term is independent
+    of $\wi\wj(\deltaw)$ when $i<j$, as the latter is before
+    time $t_j$, hence the expectation can be self cancelled
+    as $E(\deltawj)=0$,
+    \[\begin{aligned}
+        E(I_n^2)
+        &=\begin{aligned}[t]
+         &\sumhead E(\wi^2)\cdot E(|\deltaw|^2)\\
+         &+\sum_{i<j}E\left(\wi\wj(\deltaw)\right)\cdot E(\deltawj)
+         \end{aligned}\\
+        &=\sumhead t_i(t_{i+1}-t_i)
+        \to\int_0^ts\diff s=\frac{t^2}{2}
+    \end{aligned}\]
+    where the limit is obtained by the definition of Riemann integral.
+    Therefore
+    \[\var(X_t)=E(X_t^2)=\frac{t^2}{2}\]
 \end{document}
