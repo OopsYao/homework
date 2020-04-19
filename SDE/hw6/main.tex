@@ -214,4 +214,83 @@
         &=\frac{t^2}{2}
     \end{aligned}\]
     which coincides with result we obtained above.
+
+    \problem
+    \begin{subproblem}[(\arabic*).]
+        \item
+        Since It\^o integral has zero-mean, then
+        we know that
+        \[E(X)=0\]
+        and in light of isometry identity,
+        \[E(X^2)=E\left(\int_1^T\left(\frac{1}{\sqrt s}\right)^2
+        \diff s\right)=\ln T\]
+        therefore,
+        \[\var(X)=E(X^2)=\ln T\]
+
+        \item
+        Similarly, we have that
+        \[E(Y)=0\]
+        and by implies identity,
+        \[E(Y^2)=E\left(\int_0^Ts^{2\alpha}\diff s\right)
+        =\frac{T^{2\alpha+1}}{2\alpha+1}\]
+        if $\alpha>0$.
+
+        When $\alpha\leq 0$, however,
+        the problem of improper integral arises\sidenote{It is
+        about whether the It\^o integral can be well defined.}.
+        Recall how we define the It\^o integral.
+        If there exists some random variable $Y$ s.t.
+        \begin{equation}
+            \label{eq:Ito def}
+            E(|I_n-Y|^2)\to 0
+        \end{equation}
+        where
+        \[I_n=\sum_{i=0}^{n-1}t_i^\alpha(\deltaw)\]
+        for an arbitrary partition,
+        then we say
+        \[\int_0^Ts^\alpha\diff W_s:=Y\]
+        And \cref{eq:Ito def} yields
+        \[E(I_n^2)\to E(Y^2)\]
+        % TODO illustrate
+        and in the deduction of isometry identity, we know that
+        \[E(I_n^2)=\sum_{i=0}^{n-1}E(t_i^{2\alpha})(t_{i+1}-t_i)
+        =\sum_{i=0}^{n-1}t_i^{2\alpha}\Delta t_i\]
+        which is a partitial sum of Riemann integral
+        \begin{equation}
+            \label{eq:Riemann int}
+            \int_0^Ts^{2\alpha}\diff s
+        \end{equation}
+        It follows that Riemann integral above exists\sidenote{
+            I admit there is a flaw that the sample point of
+            It\^o is not arbitrary, so the existence of Riemann
+            integral is not promised.
+
+            But all I want is to
+            illustrate the relationship between the existence of It\^o integral
+            and square Riemann integral, and this is a good start point
+            in my opinion -- as it can lead to some useful results,
+            though may not so rigorous.
+        }
+        and
+        \[E(Y^2)=\int_0^Ts^{2\alpha}\diff s\]
+        That being said, the It\^o integral does not exists
+        without the existence of the Riemann integral.
+        In other words, a well defined It\^o integral
+        $\int_0^Ts^\alpha\diff W_s$
+        leads to
+        \[E\left(\int_0^Ts^{2\alpha}\diff s\right)<\infty\]
+
+        From calculus we know that \cref{eq:Riemann int} does
+        not exists if $2\alpha+1\leq 0$.
+        So in conclusion,
+        when\sidenote{If $-1/2<\alpha\leq 0$, it is an improper
+        integral indeed as the integrand $s^{\alpha}$ is unbounded on $[0,T]$.
+        } $\alpha>-1/2$,
+        \[\begin{aligned}
+            E(Y)&=0\\
+            \var(Y)&=\frac{T^{2\alpha+1}}{2\alpha+1}
+        \end{aligned}\]
+        when $\alpha\leq -1/2$, $Y$ is not well defined, then
+        we can not talk about its expectation and variation either.
+    \end{subproblem}
 \end{document}
