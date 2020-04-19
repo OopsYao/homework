@@ -40,7 +40,7 @@
 \if@tweaktufte
   \newcommand{\problem}{\stepcounter{problem}\section{题\theproblem}}
 \else
-  \newcommand{\problem}{\stepcounter{problem}\section{Problem \theproblem}}
+  \newcommand{\problem}{\refstepcounter{problem}\section{Problem \theproblem}}
 \fi
 \counterwithin{equation}{problem}
 
