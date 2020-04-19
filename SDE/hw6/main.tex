@@ -333,4 +333,25 @@
     i.e.,
     \[\cov\left(W_t,\int_0^tf(s)\diff W_s\right)=
     \int_0^tf(s)\diff s\]
+
+    \problem
+    % TODO definition of differential
+
+    \problem
+    \begin{proof}
+        Since $W_t$ is continuous w.r.t. $t$, then the
+        integral $\int_0^tW_s\diff s$ is continuous too.
+        Hence $A_t$ is continuous. And by basic rules of
+        differential we leart in class,
+        \[\diff Z_t=\diff(tA_t)=t\diff A_t+A_t\diff t\]
+        as $t$ is determinisitic.
+
+        From problem 13 we know that
+        \[\diff Z_t=W_t\diff t\]
+        therefore,
+        \[W_t\diff t=t\diff A_t+A_t\diff t\]
+        i.e.,
+        \[\diff A_t=\frac{1}{t}(W_t-A_t)\diff t
+        =\frac{1}{t}\left(W_t-\frac{1}{t}Z_t\right)\diff t\]
+    \end{proof}
 \end{document}
