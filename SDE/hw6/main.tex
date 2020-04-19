@@ -3,6 +3,7 @@
 \title{Homework 6}
 
 \newcommand{\var}{\mathrm{Var}}
+\newcommand{\cov}{\mathrm{Cov}}
 
 \begin{document}
     \maketitle    
@@ -293,4 +294,43 @@
         when $\alpha\leq -1/2$, $Y$ is not well defined, then
         we can not talk about its expectation and variation either.
     \end{subproblem}
+
+    \problem
+    By isometry identity, we have that
+    \[\begin{aligned}
+        E\left(
+            \left|\frac{\int_0^ts\diff W_s}{t^\alpha}\right|^2
+        \right)&=\frac{E(|\int_0^ts\diff W_s|^2)}{t^{2\alpha}}\\
+        &=\frac{E(\int_0^ts^2\diff s)}{t^{2\alpha}}\\
+        &=\frac{t^{3-2\alpha}}{3}\to
+        \begin{cases}
+            0,&3-2\alpha>0\\
+            \frac{1}{3},&3-2\alpha=0\\
+            \infty,&3-2\alpha<0
+        \end{cases}
+    \end{aligned}\]
+    hence if $\alpha<3/2$ we have that
+    \[E\left(
+            \left|\frac{\int_0^ts\diff W_s}{t^\alpha}\right|^2
+        \right)\to 0\]
+    i.e.,
+    \[\text{m.s.-}\lim_{t\to0}\frac{1}{t^\alpha}\int_0^ts\diff W_s=0\]
+
+    \problem
+    It easy to see that
+    \[W_t=\int_0^t\diff W_s\]
+    as $\sum_{i=0}^{n-1}(\deltaw)=W_t$,
+    then we know that
+    \[E\left(\int_0^t\diff W_s\cdot\int_0^tf(s)\diff W_s\right)
+    =E\left(\int_0^tf(s)\diff t\right)=\int_0^tf(s)\diff s\]
+    as $f(t)$ is integrable in $(0,t)$.
+    Since It\^o integral has zero mean, we have that
+    \[\begin{aligned}
+        \cov\left(\int_0^t\diff W_s,\int_0^tf(s)\diff W_s\right)
+        =E\left(\int_0^t\diff W_s\cdot\int_0^tf(s)\diff W_s\right)
+        =\int_0^tf(s)\diff s
+    \end{aligned}\]
+    i.e.,
+    \[\cov\left(W_t,\int_0^tf(s)\diff W_s\right)=
+    \int_0^tf(s)\diff s\]
 \end{document}
