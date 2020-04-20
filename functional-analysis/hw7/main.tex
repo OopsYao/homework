@@ -6,6 +6,57 @@
     \maketitle
 
     \problem
+    \begin{proof}
+        先证明必要性，由于$X$完备，而$S\subset X$，则对于
+        $S$中的Cauchy列$\{x_n\}$，存在$x\in X$使得$x_n\to x$。
+        又由于范数的连续性，
+        \[||x||=\left\|\lim_{n\to\infty}x_n\right\|
+        =\lim_{n\to\infty}||x_n||=1\]
+        即$x\in S$，因此$S$是完备的。
+
+        下证充分性。对于$X$中的Cauchy列$\{x_n\}$，倘若$x_n\to 0$，
+        则自然收敛，倘若$x_n\not\to 0$，则存在$d>0$，使得
+        某个子列$\{x_{n_k}\}$满足$||x_{n_k}||\geq d$。
+        下面我们将证明$\{x_{n_k}/||x_{n_k}||\}$是$S$中的Cauchy列。
+
+        由于Cauchy列的子列亦为Cauchy列，因此对于任意$\varepsilon>0$，
+        存在$N$使得当$i,j>N$时，
+        \newcommand{\norm}[1]{\Big\| #1 \Big\|}
+        \newcommand{\xni}{x_{n_i}}
+        \newcommand{\xnj}{x_{n_j}}
+        \newcommand{\si}{\frac{\xni}{\norm\xni}}
+        \newcommand{\sj}{\frac{\xnj}{\norm\xnj}}
+        \[\norm{\xni-\xnj}<\varepsilon\]
+        因此由范数的三角不等式，
+        \begin{equation}
+            \label{eq:tri inequality on s}
+            \begin{aligned}
+            \left\|\si-\sj\right\|&=
+            \left\|\frac{\xni-\xnj}{\norm\xni}
+            +\left(\frac{1}{\norm\xni}-\frac{1}{\norm\xnj}\right)\xnj\right\|\\
+            &\leq\frac{\norm{\xni-\xnj}}{\norm\xni}
+              +\frac{\left|\norm\xni-\norm\xnj\right|}{\norm\xni}
+            \end{aligned}
+        \end{equation}
+        同时应该注意到同样可以由范数的三角不等式得到
+        \[\left|\norm\xni-\norm\xnj\right|
+        \leq\left\|\xni-\xnj\right\|\]
+        因此\cref{eq:tri inequality on s}变为
+        \[\left\|\si-\sj\right\|<\frac{2\varepsilon}{\norm\xni}
+        \leq\frac{2\varepsilon}{d}\]
+        因此$\{x_{n_k}/||x_{n_k}||\}$为$S$上的Cauchy列以及
+        $\{||x_{n_k}||\}$为$\mathbb R$上的Cauchy列，故
+        由于$S,\mathbb R$是完备的，分别存在$s\in S,\alpha\in\mathbb R$
+        使得
+        \[\begin{aligned}
+            \frac{x_{n_k}}{\norm{x_{n_k}}}&\to s\\
+            \norm{x_{n_k}}&\to \alpha
+        \end{aligned}\]
+        因此
+        \[x_{n_k}\to \alpha s\in X\]
+        即Cauchy列$\{x_n\}$的一个子列收敛，因此$\{x_n\}$收敛，
+        故$X$是完备的，为Banach空间。
+    \end{proof}
 
     \problem
     \begin{proof}
