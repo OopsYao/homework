@@ -174,7 +174,35 @@
     % TODO sponge bob abcd
 
     \problem
-    % TODO about filtration
+    \begin{proof}
+        \newcommand{\conde}[1]{E\left(\left. #1\right|\mathcal F_s\right)}
+        By partition property, we have that
+        \[\int_0^tf(u,W_u)\diff W_u=\int_0^sf(u,W_u)\diff W_u
+        +\int_s^tf(u,W_u)\diff W_u\]
+        And it is apparent that the first term is
+        $\mathcal F_s$~-predictable, i.e.,
+        \[\conde{\int_0^sf(u,W_u)\diff W_u}=\int_0^sf(u,W_u)\diff W_u\]
+        
+
+        In light of Fubini theorem\sidenote{Here we assume that $f(u,W_u)$
+        satisfies all the necessary conditions.}, we have that
+        \[\conde{\int_s^tf(u,W_u)\diff W_u}
+            =\int_s^t\conde{f(u,W_u)\diff W_u}\]
+        Since $f(u,W_u)$ and $\diff W_u$ are independent, we obtain
+        \[\conde{f(u,W_u)\diff W_u}=\conde{f(u,W_u)}\cdot\conde{\diff W_u}
+        =0\]
+        as $\diff W_u$ is also independent of $\mathcal F_s$ which implies
+        $\conde{\diff W_u}=E(\diff W_u)=0$. It follows that
+        \[\conde{\int_s^tf(u,W_u)\diff W_u}=0\]
+
+        Therefore,
+        \[\begin{aligned}
+        \conde{\int_0^tf(u,W_u)\diff W_u}
+        &=\conde{\int_0^sf(u,W_u)\diff W_u}\\
+        &=\int_0^sf(u,W_u)\diff W_u
+        \end{aligned}\]
+    \end{proof}
+
 
     \problem
     \begin{proof}
