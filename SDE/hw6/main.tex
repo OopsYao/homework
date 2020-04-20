@@ -171,7 +171,75 @@
     \[\var(X_t)=E(X_t^2)=\frac{t^2}{2}\]
 
     \problem
-    % TODO sponge bob abcd
+    \newcommand{\ptt}[1]{%
+        \frac{\partial^2f(t_{#1},W_{t_{#1}})}{\partial t^2}
+    }
+    \newcommand{\dw}[1]{\Delta W_{#1}^{#1+1}}
+    \newcommand{\dws}[1]{\Delta W_{#1}^{#1+\frac{1}{2}}}
+    \begin{subproblem}[(\alph*)]
+        \item
+        \begin{proof}
+            Denote
+            \[I_n=\sum_{i=0}^{n-1}\ptt i\left(\frac{\Delta t}{2}\right)^2
+            \dw i\]
+            then all we need is to show that
+            \[E(I_n^2)\to 0\]
+            and
+            \begin{multline}
+                \label{eq: In square of a}
+                I_n^2=
+                \left(\frac{\Delta t}{2}\right)^4
+                \left\{
+                \sum_{i=0}^{n-1}\left(\ptt i\right)^2
+                \left(\dw i\right)^2\right.\\
+                \left.+\sum_{i<j}\ptt i\ptt j\dw i\dw j
+                \right\}
+            \end{multline}
+            Note that in the last term $\dw j$ is only relavent
+            to the filtration from $t_j$ to $t_{j+1}$ while
+            others are before $t_j$, hence
+            \[\begin{aligned}
+             &E\left(\ptt i\ptt j\dw i\dw j\right)\\
+            =&E\left(\ptt i\ptt j\dw i\right)\cdot
+            E\left(\dw j\right)\\
+            =&0\\
+            \end{aligned}\]
+            as $E\left(\dw j\right)=0$.
+
+            For the same reason, in the first term of \cref{eq: In square of a},
+            $\dw i$ is independent of $\ptt i$, thus
+            \[\begin{aligned}
+                &E\left(\left(\ptt i\right)^2\left(\dw i\right)^2\right)\\
+                =&E\left[\left(\ptt i\right)^2\right]
+                 \cdot E\left[\left(\dw i\right)^2\right]\\
+            \end{aligned}\]
+            \newcommand{\integrand}[1][]{%
+                \if\relax\detokenize{#1}\relax
+                E\left[
+                \left(\frac{\partial^2f(t,W_t)}{\partial t^2}\right)^2
+                \right]
+                \else
+                E\left[\left(\ptt #1\right)^2\right]
+                \fi
+            }
+            It follows that
+            \[E(I_n^2)=
+            \left(\frac{\Delta t}{2}\right)^4
+            \sum_{i=0}^{n-1}
+            \integrand[i]\Delta t
+            \]
+            where the right part\sidenote{Here we assume the
+            integral is finite.}
+            \[\sum_{i=0}^{n-1}\integrand[i]\Delta t
+            \to\int_0^T\integrand\diff t<\infty\]
+            therefore
+            \[E(I_n^2)\to 0\]
+            as $\Delta t\to 0^+$, i.e.,
+            \[\text{m.s.-}\lim_{n\to\infty}I_n=0\]
+        
+        \end{proof}
+        
+    \end{subproblem}
 
     \problem
     \begin{proof}
