@@ -54,4 +54,102 @@
             从而$S$具有Markov性，转移密度为$p(\tau,x,y)$。
         \end{proof}
     \end{subproblem}
+
+    \problem[习题3.7]
+    \begin{subproblem}
+        \item
+        \begin{proof}
+            由于
+            \[Z(t)=Z(s)\e^{\sigma(W(t)-W(s))-\frac{\sigma^2}{2}(t-s)}\]
+            而$Z(s)$为$\mathcal F(s)$~-可测，$W(t)-W(s)$与$\mathcal F(s)$独立，
+            故
+            \[\E[Z(t)|\mathcal F(s)]
+            =Z(s)\cdot\E\e^{\sigma(W(t)-W(s))-\frac{\sigma^2}{2}(t-s)}\]
+            而$W(t)-W(s)\sim\mathcal N(0,t-s)$，有
+            \[\E\e^{\sigma(W(t)-W(s))}
+            =\e^{\frac{\sigma^2(t-s)}{2}}\]
+            因此
+            \[\E[Z(t)|\mathcal F(s)]=Z(s)\]
+            即$Z(t)$为鞅。
+        \end{proof}
+
+        \item
+        \begin{proof}
+            由于$Z(t)$为鞅，故其停止过程$Z(t\land\tau_m)$亦为鞅，
+            因此
+            \[\E[Z(t\land\tau_m)]=Z(0\land\tau_m)=Z(0)=1\]
+        \end{proof}
+
+        \item
+        \begin{proof}
+            由于当$\tau_m<\infty$时，则有逐点收敛
+            \[\lim_{t\to\infty}Z(t\land\tau_m)
+            =\e^{\sigma m-\left(\sigma\mu+\frac{\sigma^2}{2}\right)\tau_m}\]
+            而当$\tau_m=\infty$时，则由$\sigma> 0,\mu\geq 0$
+            \[Z(t\land\tau_m)=Z(t)\leq
+            \e^{\sigma m-\left(\sigma\mu+\frac{\sigma^2}{2}\right)t}
+            \to 0\]
+            因此对于任意路径都有
+            \[\lim_{t\to\infty}Z(t\land\tau_m)
+            =\e^{\sigma m-\left(\sigma\mu+\frac{\sigma^2}{2}\right)\tau_m}
+            \mathbb I_{\{\tau_m<\infty\}}\]
+            于是
+            \[\E\left[
+            \e^{\sigma m-\left(\sigma\mu+\frac{\sigma^2}{2}\right)\tau_m}
+            \mathbb I_{\{\tau_m<\infty\}}\right]
+            =\E\left[\lim_{t\to\infty}Z(t\land\tau_m)\right]\]
+            而对于任意路径
+            \[|Z(t\land\tau_m)|\leq\e^{\sigma m}\]
+            因此由控制收敛定理
+            \[\E\left[\lim_{t\to\infty}Z(t\land\tau_m)\right]
+            =\lim_{t\to\infty}\E[Z(t\land\tau_m)]=1\]
+            即
+            \[\E\left[
+                \exp\left\{
+                    \sigma m-\left(\sigma\mu+\frac{\sigma^2}{2}\right)\tau_m
+                    \right\}
+                \mathbb I_{\{\tau_m<\infty\}}
+            \right]=1\]
+            移项得
+            \begin{equation}
+                \label{eq:laplace}
+                \E\left[\e^{-\left(\sigma\mu+\frac{\sigma^2}{2}\right)\tau_m}
+                \mathbb I_{\{\tau_m<\infty\}}\right]
+                =\e^{-\sigma m}
+            \end{equation}
+            而对于任意给定路径，
+            \[\e^{-\left(\sigma\mu+\frac{\sigma^2}{2}\right)\tau_m}
+            \mathbb I_{\{\tau_m<\infty\}}\]
+            关于$\sigma$单调，因此由单调收敛定理，
+            \[\begin{aligned}
+                \E\left[
+                \lim_{\sigma\to0^+}
+                \e^{-\left(\sigma\mu+\frac{\sigma^2}{2}\right)\tau_m}
+                \mathbb I_{\{\tau_m<\infty\}}
+            \right]&=
+            \lim_{\sigma\to0^+}
+            \E\left[\e^{-\left(\sigma\mu+\frac{\sigma^2}{2}\right)\tau_m}
+            \mathbb I_{\{\tau_m<\infty\}}\right]\\
+            &=\lim_{\sigma\to0^+}\e^{-\sigma m}\\
+            &=1\\
+            \end{aligned}\]
+            而
+            \[\lim_{\sigma\to0^+}
+            \e^{-\left(\sigma\mu+\frac{\sigma^2}{2}\right)\tau_m}
+            \mathbb I_{\{\tau_m<\infty\}}
+            =\mathbb I_{\{\tau_m<\infty\}}\]
+            因此
+            \[\mathbb P\{\tau_m<\infty\}
+            =\E\left[\mathbb I_{\{\tau_m<\infty\}}\right]=1\]
+            从而\cref{eq:laplace}变为
+            \[\E\left[\e^{-\left(\sigma\mu+\frac{\sigma^2}{2}\right)\tau_m}\right]
+            =\e^{-\sigma m}\]
+            令$\alpha=\sigma\mu+\sigma^2/2>0$，则由$\sigma>0$可解得
+            \[\alpha=-\nu+\sqrt{\mu^2+2\alpha}\]
+            因此拉普拉斯变换为
+            \[\E\left[\e^{-\alpha\tau_m}\right]
+            =\e^{m\mu-m\sqrt{\mu^2+2\alpha}}\]
+            
+        \end{proof}
+    \end{subproblem}
 \end{document}
