@@ -171,5 +171,39 @@
             \end{multline*}
             因此三角不等式得证，故$||\cdot||$为范数。
         \end{proof}
+
+        \item
+        \begin{proof}
+            对于任意$\xi=\{\xi^{(k)}\}\in l^\infty$，
+            考虑如下构造的$x(t)$：
+            对于任意$t\in(0,1]$，由于总有
+            $k_t=\lfloor1/t\rfloor\in\mathbb N^+$
+            使得
+            \[\frac{1}{k_t+1}<t\leq\frac{1}{k_t}\]
+            取$x(t)$为$\xi^{(k_t)},\xi^{(k_t+1)}$两点的线性插值，即
+            \[x(t)=\frac{\xi^{(k_t)}-\xi^{(k_t+1)}}{\frac{1}{k_t}-\frac{1}{k_t+1}}
+            \left(t-\frac{1}{k_t+1}\right)\]
+            因此$x(t)$在$[1/(k_t+1),1/k_t]$上连续，且在端点处有
+            左右极限为端点值，故$x\in C(0,1]$。
+
+            由此考虑映射
+            \[T:\xi\mapsto x\]
+            从$x$的构造方式中不难发现，$T$是一个线性映射，因此
+            证明$T$为等距映射等价于证明
+            \[||\xi||=||T\xi||\]
+
+            而对于任意$\xi^{(k)}\in\{\xi^{(k)}\}$总有
+            \[\xi^{(k)}=x\left(\frac{1}{k}\right)\]
+            因此
+            \[\sup_{k}|\xi^{(k)}|\leq\sup_{t\in(0,1]}|x(t)|\]
+            反之对于任意$t\in(0,1]$，容易发现
+            \[x(t)\leq\sup_{k}|\xi^{(k)}|\]
+            故
+            \[\sup_{k}|\xi^{(k)}|=\sup_{t\in(0,1]}x(t)\]
+            即
+            \[||\xi||=||x||=||T\xi||\]
+            因此由于$T$为线性映射从而为等距映射。
+            故$l^\infty$与$C(0,1]$的一个子空间等距同构。
+        \end{proof}
     \end{subproblem}
 \end{document}
