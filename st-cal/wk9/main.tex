@@ -36,13 +36,14 @@
             考虑变换$x\e^\xi=y$，则上述积分变为
             \[\begin{aligned}
             \int_{-\infty}^\infty
+            f(x\e^\xi)
             \npdf{(\xi-\nu\tau)}{\sigma^2\tau}
             \diff\xi
-            =
+            &=
             \int_{0}^\infty
             f(y)\npdf{\left(\log\frac{y}{x}-\nu\tau\right)}{\sigma^2\tau}
-            \frac{\diff y}y
-            =\int_0^\infty f(y)p(\tau,x,y)\diff y
+            \frac{\diff y}y\\
+            &=\int_0^\infty f(y)p(\tau,x,y)\diff y
             \end{aligned}\]
             于是
             \[g(x)=\E[f(x\e^{\sigma(W(t)-W(s))+\nu\tau})]\]
