@@ -14,8 +14,9 @@
             由于
             \[x+X(t)-X(s)\sim\mathcal N(x+\mu(t-s),t-s)\]
             则显然$g(x)$可以改写为
-            \[g(x)=\E(x+X(t)-X(s))\]
-            考虑到$X(t)-X(s)$与$X(s)$独立，则由独立性引理
+            \[g(x)=\E[x+X(t)-X(s)]\]
+            考虑到$X(t)-X(s)$与$\mathcal F(s)$独立，$X(s)$为
+            $\mathcal F(s)$~-可测，则由独立性引理
             \[\E[f(X(t))|\mathcal F(s)]=\E[f(X(t)-X(s)+X(s))|\mathcal F(s)]
             =g(X(s))\]
             即证。
@@ -23,7 +24,33 @@
 
         \item
         \begin{proof}
-            
+            \newcommand{\npdf}[2]{\frac{\e^{-\frac{{#1}^2}{2 #2}}}{\sqrt{2\pi #2}}}
+            由于
+            \[\sigma(W(t)-W(s))+\nu\tau\sim\mathcal N(\nu\tau,\sigma^2\tau)\]
+            则对于$x>0$，
+            \[\E[f(x\e^{\sigma(W(t)-W(s))+\nu\tau})]
+            =\int_{-\infty}^\infty
+            f(x\e^\xi)
+            \npdf{(\xi-\nu\tau)}{\sigma^2\tau}
+            \diff\xi\]
+            考虑变换$x\e^\xi=y$，则上述积分变为
+            \[\begin{aligned}
+            \int_{-\infty}^\infty
+            \npdf{(\xi-\mu\tau)}{\sigma^2\tau}
+            \diff\xi
+            =
+            \int_{0}^\infty
+            f(y)\npdf{\left(\log\frac{y}{x}-\nu\tau\right)}{\sigma^2\tau}
+            \frac{\diff y}y
+            =\int_0^\infty f(y)p(\tau,x,y)\diff y
+            \end{aligned}\]
+            于是
+            \[g(x)=\E[f(x\e^{\sigma(W(t)-W(s))+\nu\tau})]\]
+            而由于$\e^{\sigma(W(t)-W(s))+\nu\tau}$与$\mathcal F(s)$独立而$S(s)$为
+            $\mathcal F(s)$~-可测，则由独立性引理，
+            \[\E[f(S(t))|\mathcal F(s)]=\E[f(S(s)\e^{\sigma(W(t)-W(s))+\nu\tau})|\mathcal F(s)]
+            =g(S(s))\]
+            从而$S$具有Markov性，转移密度为$p(\tau,x,y)$。
         \end{proof}
     \end{subproblem}
 \end{document}
