@@ -1,0 +1,29 @@
+\documentclass[cn]{homework}
+
+\title{第九周作业}
+
+\newcommand{\E}{\mathbb E}
+
+\begin{document}
+    \maketitle
+
+    \problem[习题3.6]
+    \begin{subproblem}
+        \item
+        \begin{proof}
+            由于
+            \[x+X(t)-X(s)\sim\mathcal N(x+\mu(t-s),t-s)\]
+            则显然$g(x)$可以改写为
+            \[g(x)=\E(x+X(t)-X(s))\]
+            考虑到$X(t)-X(s)$与$X(s)$独立，则由独立性引理
+            \[\E[f(X(t))|\mathcal F(s)]=\E[f(X(t)-X(s)+X(s))|\mathcal F(s)]
+            =g(X(s))\]
+            即证。
+        \end{proof}
+
+        \item
+        \begin{proof}
+            
+        \end{proof}
+    \end{subproblem}
+\end{document}
