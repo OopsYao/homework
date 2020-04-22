@@ -244,7 +244,7 @@
         \newcommand{\gt}[1]{g(#1,W_{#1})}
         \newcommand{\increment}{\left(\frac{\Delta t}{2}\right)}
         \[\gt{t_i}\increment^k\left(\dws i\right)^l\dw i\]
-        we can handle it at once.
+        then we can handle it at once.
         Denote
         \[I_n=\sum_{i=0}^{n-1}
         \increment^k M_i\]
@@ -253,23 +253,20 @@
         \gt{t_i}\left(\dws i\right)^l\dw i\]
         then
         \[
-            I_n^2=\increment^{2k}\left(
-            \sum_{i=0}^{n-1} M_i^2
-            +2\sum_{i<j}M_iM_j\right)
+            I_n^2=\increment^{2k}
+            \sum_{i,j}M_iM_j
         \]
 
         For the term $M_iM_j$, in light of H\"older's inequality,
         we have that
         \[E(M_iM_j)\leq E(|M_iM_j|)\leq \sqrt{E(M_i^2)}\cdot\sqrt{E(M_j^2)}\]
-        it follows that
+        It follows that
         \begin{equation}
             \label{eq:EIn2<=}
             \begin{aligned}
             E(I_n^2)&\leq
-            \increment^{2k}\left(
-            \sum_{i=0}^{n-1}\sqrt{E(M_i^2)}\cdot\sqrt{E(M_i^2)}
-            +2\sum_{i<j}\sqrt{E(M_i^2)}\cdot\sqrt{E(M_j^2)}
-            \right)\\
+            \increment^{2k}
+            \sum_{i,j}\sqrt{E(M_i^2)}\cdot\sqrt{E(M_j^2)}\\
         &=\increment^{2k}\left(\sum_{i=0}^{n-1}\sqrt{E(M_i^2)}\right)^2\\
         \end{aligned}\end{equation}
         Since $\gt{t_i}$ is adapted to the filtration up to time $t_i$
@@ -323,7 +320,8 @@
         It follows that all we need is to show
         \[\varphi(\Delta t)=\increment^{2k-2}p\increment\to 0\quad(\Delta t\to 0^+)\]
 
-        In fact we have that
+        In fact we have that\sidenote{See appendix: \nameref{sec:deduction of p}
+        for details.}
         \[p\increment=(2l+2)\cdot(2l-1)!!\increment^{l+1}\]
         hence
         \[\varphi(\Delta t)
@@ -597,7 +595,10 @@
             =&0\\
         \end{aligned}\]
         then we have
-        \[\begin{aligned}
+        \renewcommand{\theequation}{A.\arabic{equation}}
+        \begin{equation}
+            \label{eq:def of p}
+            \begin{aligned}
             &E\left[
             \left(\dws i\right)^{2l}
             \left(\dw i\right)^2
@@ -605,12 +606,45 @@
             =&\frac{\Delta t}{2}E\left[\left(\dws i\right)^{2l}\right]
             +E\left[\left(\dws i\right)^{2l+2}\right]\\
             =&p\left(\frac{\Delta t}{2}\right)
-        \end{aligned}\]
+            \end{aligned}
+        \end{equation}
         where $p(\Delta t/2)$ is a function of $\Delta t/2$
         as $\dws i\sim\mathcal N(0,\Delta t/2)$.
     \end{proof}
 
     \section[Deduction Of p(Delta t/2)]{Deduction Of $p(\Delta t/2)$}
     \label{sec:deduction of p}
-    % TODO dectuction of p(Delta t/2)
+    Deduction of $E(X^{2l})$ is all we need, where $X\sim\mathcal N(0,\Delta t/2)$.
+    For any $l\geq 1$, we have that
+    \[\begin{aligned}
+        E(X^{2l})&=\int_{-\infty}^\infty
+        x^{2l}\frac{\e^{-\frac{x^2}{\Delta t}}}{\sqrt{\pi\Delta t}}
+        \diff x\\
+        &=2\int_{0}^\infty
+        x^{2l}\frac{\e^{-\frac{x^2}{\Delta t}}}{\sqrt{\pi\Delta t}}
+        \diff x\\
+        &=2\int_{0}^\infty
+        \frac{x^{2l}}{\sqrt{\pi\Delta t}}
+        \left(-\frac{2x}{\Delta t}\right)^{-1}
+        \diff \e^{-\frac{x^2}{\Delta t}}\\
+        &=-\frac{\Delta t}{\sqrt{\pi\Delta t}}
+        \left(\left.x^{2l-1}\e^{-\frac{x^2}{\Delta t}}\right|^\infty_0
+        -\int_0^\infty(2l-1)x^{2l-2}\e^{-\frac{x^2}{\Delta t}}\diff x
+        \right)\\
+        &=\frac{\Delta t}{2}(2l-1)\cdot
+        2\int_0^\infty x^{2l-2}\frac{\e^{-\frac{x^2}{\Delta t}}}{\sqrt{\pi\Delta t}}\diff x\\
+        &=\frac{\Delta t}{2}(2l-1)\cdot E(X^{2(l-1)})
+    \end{aligned}\]
+    It follows that
+    \[E(X^{2l})=(2l-1)!!\left(\frac{\Delta t}{2}\right)^l\]
+    as
+    \[E(X^0)=1\]
+    Therefore, in sight of \cref{eq:def of p},
+    \[\begin{aligned}
+        &E\left[\left(\dws i\right)^{2l}
+        \left(\dw i\right)^2\right]\\
+        =&(2l-1)!!\left(\frac{\Delta t}{2}\right)^{l+1}
+        +(2l+1)!!\left(\frac{\Delta t}{2}\right)^{l+1}\\
+        =&(2l+2)\cdot(2l-1)!!\left(\frac{\Delta t}{2}\right)^{l+1}
+    \end{aligned}\]
 \end{document}
