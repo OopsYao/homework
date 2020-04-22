@@ -276,7 +276,7 @@
         of which $\dws i,\dw i$ is independent, we have that
         \begin{equation}
             \label{eq:EMi2}
-            E(M_i^2)=E(\gt{t_i})\cdot
+            E(M_i^2)=E[(\gt{t_i})^2]\cdot
             E\left[\left(\dws i\right)^{2l}\left(\dw i\right)^2\right]
         \end{equation}
         and note that $\dw i-\dws i$ is independent of $\dws i$ 
@@ -285,68 +285,33 @@
             \dw i-\dws i&=W_{t_{i+1}}-W_{t_{i+\frac{1}{2}}}\\
             \dws i&=W_{t_{i+\frac{1}{2}}}-W_{t_i}
         \end{aligned}\]
-        then we have that
-        \[\begin{aligned}
-            &E\left[
-            \left(\dws i\right)^{2l}
-            \left(\dw i\right)^2
-            \right]\\
-            =&E\left[
-            \left(\dws i\right)^{2l}
-            \left(\dw i-\dws i+\dws i\right)^2
-            \right]\\
-            =&\begin{aligned}[t]
-            &E\left[
-            \left(\dws i\right)^{2l}\left(\dw i-\dws i\right)^2
-            \right]\\
-            &+2E\left[
-            \left(\dws i\right)^{2l+1}\left(\dws i-\dw i\right)
-            \right]\\
-            &+E\left[\left(\dws i\right)^{2l+2}\right]\\
-            \end{aligned}\\
-        \end{aligned}\]
-        In the equation above we have the first term
-        \[\begin{aligned}
+        then we obatin\sidenote{
+            Details are put in appendix: \nameref{sec:proof for expectation}.
+        }
+        \[
             E\left[
-            \left(\dws i\right)^{2l}\left(\dw i-\dws i\right)^2
-            \right]
-            =\frac{\Delta t}{2}E\left[\left(\dws i\right)^{2l}\right]
-        \end{aligned}\]
-        and the middle term
-        \[\begin{aligned}
-            &E\left[\left(\dws i\right)^{2l+1}\left(\dws i-\dw i\right)\right]\\
-            =&
-            E\left[\left(\dws i\right)^{2l+1}\right]
-            \cdot E\left(\dws i-\dw i\right)\\
-            =&0\\
-        \end{aligned}\]
-        then we have
-        \[\begin{aligned}
-            &E\left[
             \left(\dws i\right)^{2l}
             \left(\dw i\right)^2
-            \right]\\
-            =&\frac{\Delta t}{2}E\left[\left(\dws i\right)^{2l}\right]
-            +E\left[\left(\dws i\right)^{2l+2}\right]\\
-            =&p\left(\frac{\Delta t}{2}\right)
-        \end{aligned}\]
-        where $p(\Delta t/2)$ is a function of $\Delta t/2$ which
-        we will see later,
-        as $\dws i\sim\mathcal N(0,\Delta t/2)$.
+            \right]
+            =p\left(\frac{\Delta t}{2}\right)
+        \]
+        where $p(\Delta t/2)$ is a function only depends on $\Delta t/2$
+        of which the specific form we will see later.
+
         It follows that \cref{eq:EMi2} becomes
         \[E(M_i^2)=p\left(\frac{\Delta t}{2}\right)
-        \cdot E(\gt{t_i})\]
+        \cdot E[(\gt{t_i})^2]\]
         thus \cref{eq:EIn2<=} reads
         \[\begin{aligned}
             E(I_n^2)&\leq
             \increment^{2k}p\increment\left(\sum_{i=0}^{n-1}
-            \sqrt{E(\gt{t_i})}\right)^2\\
+            \sqrt{E[(\gt{t_i})^2]}\right)^2\\
             &=\increment^{2k-2}p\increment
-            \left(\frac12\sum_{i=0}^{n-1}\sqrt{E(\gt{t_i})}\Delta t\right)^2
+            \left(\frac12\sum_{i=0}^{n-1}\sqrt{E[(\gt{t_i})^2]}\Delta t\right)^2
         \end{aligned}\]
 
         So if we assume that
-        \[\int_0^T\sqrt{E(\gt{t})}\diff t<\infty\]
+        \[\int_0^T\sqrt{E[(\gt{t})^2]}\diff t<\infty\]
         then
         \[
             \left(\frac12\sum_{i=0}^{n-1}\sqrt{E(\gt{t_i})}\Delta t\right)^2
@@ -356,7 +321,28 @@
         \]
         as the mesh $\Delta t\to 0^+$.
         It follows that all we need is to show
-        \[\increment^{2k-2}p\increment\to 0\quad(\Delta t\to 0^+)\]
+        \[\varphi(\Delta t)=\increment^{2k-2}p\increment\to 0\quad(\Delta t\to 0^+)\]
+
+        In fact we have that
+        \[p\increment=(2l+2)\cdot(2l-1)!!\increment^{l+1}\]
+        hence
+        \[\varphi(\Delta t)
+        =(2l+2)\cdot(2l-1)!!\increment^{2k+l-1}\]
+        therefore
+        \[2k+l>1\]
+        is the necessary condition.
+        Here in problem (b) we have that
+        \[k=l=1\]
+        therefore
+        \[\varphi(\Delta t)=(\Delta t)^2\to 0\]
+
+        \item
+        Since
+        \[k=0,l=2\]
+
+        \item
+        Since
+        \[k,l\geq 2\]
         
     \end{subproblem}
 
@@ -570,4 +556,61 @@
         \[\diff A_t=\frac{1}{t}(W_t-A_t)\diff t
         =\frac{1}{t}\left(W_t-\frac{1}{t}Z_t\right)\diff t\]
     \end{proof}
+
+    \appendix
+    \section{Proof For Expectation}
+    \label{sec:proof for expectation}
+    \begin{proof}
+        Since
+        \[\begin{aligned}
+            &E\left[
+            \left(\dws i\right)^{2l}
+            \left(\dw i\right)^2
+            \right]\\
+            =&E\left[
+            \left(\dws i\right)^{2l}
+            \left(\dw i-\dws i+\dws i\right)^2
+            \right]\\
+            =&\begin{aligned}[t]
+            &E\left[
+            \left(\dws i\right)^{2l}\left(\dw i-\dws i\right)^2
+            \right]\\
+            &+2E\left[
+            \left(\dws i\right)^{2l+1}\left(\dws i-\dw i\right)
+            \right]\\
+            &+E\left[\left(\dws i\right)^{2l+2}\right]\\
+            \end{aligned}\\
+        \end{aligned}\]
+        In the equation above we have the first term
+        \[\begin{aligned}
+            E\left[
+            \left(\dws i\right)^{2l}\left(\dw i-\dws i\right)^2
+            \right]
+            =\frac{\Delta t}{2}E\left[\left(\dws i\right)^{2l}\right]
+        \end{aligned}\]
+        and the middle term
+        \[\begin{aligned}
+            &E\left[\left(\dws i\right)^{2l+1}\left(\dws i-\dw i\right)\right]\\
+            =&
+            E\left[\left(\dws i\right)^{2l+1}\right]
+            \cdot E\left(\dws i-\dw i\right)\\
+            =&0\\
+        \end{aligned}\]
+        then we have
+        \[\begin{aligned}
+            &E\left[
+            \left(\dws i\right)^{2l}
+            \left(\dw i\right)^2
+            \right]\\
+            =&\frac{\Delta t}{2}E\left[\left(\dws i\right)^{2l}\right]
+            +E\left[\left(\dws i\right)^{2l+2}\right]\\
+            =&p\left(\frac{\Delta t}{2}\right)
+        \end{aligned}\]
+        where $p(\Delta t/2)$ is a function of $\Delta t/2$
+        as $\dws i\sim\mathcal N(0,\Delta t/2)$.
+    \end{proof}
+
+    \section[Deduction Of p(Delta t/2)]{Deduction Of $p(\Delta t/2)$}
+    \label{sec:deduction of p}
+    % TODO dectuction of p(Delta t/2)
 \end{document}
