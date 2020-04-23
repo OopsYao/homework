@@ -635,7 +635,80 @@
     \end{proof}
 
     \problem
-    % TODO Should I prove Ito lemma?
+    By definition,
+    \[\begin{aligned}
+        \diff\e^{W_t}&=\e^{W_{t+\diff t}}-\e^{W_t}\\
+        &=\e^{W_t+\diff W_t}-\e^{W_t}\\
+        &=\e^{W_t}(\e^{\diff W_t}-1)
+    \end{aligned}\]
+    And we have that
+    \[\e^{\diff W_t}-1=\diff W_t+\frac{(\diff W_t)^2}{2!}
+    +\frac{(\diff W_t)^3}{3!}+\cdots\]
+    Note that $(\diff W_t)^2=\diff t$ and for higher terms
+    \begin{equation}
+        \label{eq:high term 0}
+        (\diff W_t)^k=(\diff W_t)^{k-2}(\diff W_t)^2
+        =(\diff W_t)^{k-2}\cdot\diff t=0\quad(k\geq 3)
+    \end{equation}
+    as $t$ is determinisitic. It follows that
+    \[\e^{\diff W_t}-1=\diff W_t+\frac{\diff t}{2}\]
+    thus
+    \[\diff\e^{W_t}=\e^{W_t}\left(\diff W_t+\frac{\diff t}{2}\right)\]
+
+    As for $(t+W_t)^k$, we take $t+W_t$ as a group, and denote
+    \[X_t:=t+W_t\]
+    then
+    \[\begin{aligned}
+        \diff X_t^k&=(X_t+\diff X_t)^k-X_t^k\\
+        &=\begin{aligned}[t]
+        &kX_t^{k-1}\diff X_t+\frac{k(k-1)}{2!}X_t^{k-2}(\diff X_t)^2\\
+        &+\frac{k(k-1)(k-2)}{3!}X_t^{k-3}(\diff X_t)^3+\cdots
+        \end{aligned}
+    \end{aligned}\]
+    as
+    \begin{multline*}
+        (x+\Delta x)^k-x^k=kx^{k-1}\Delta x
+        +\frac{k(k-1)x^{k-2}}{2!}(\Delta x)^2\\
+        +\frac{k(k-1)(k-2)x^{k-3}}{3!}(\Delta x)^3+\cdots
+    \end{multline*}
+    And we have the fact that
+    \[(\diff X_t)^2=(\diff t)^2+(\diff W_t)^2+2\diff W_t\cdot\diff t
+    =\diff t\]
+    For the same reason as \cref{eq:high term 0}, terms with index
+    greater than 3 is 0, thus,
+    \[\begin{aligned}
+        \diff X_t^k&=kX_t^{k-1}\diff X_t+\frac{k(k-1)}{2}X_t^{k-2}\diff t\\
+        &=kX_t^{k-2}\left(\left(X_t+\frac{k-1}{2}\right)\diff t+X_t\diff W_t\right)
+    \end{aligned}\]
+    i.e.,
+    \[\diff \left((t+W_t)^k\right)=
+    k(t+W_t)^{k-2}
+    \left(\left(t+W_t+\frac{k-1}{2}\right)\diff t
+    +(t+W_t)\diff W_t\right)
+    \]
+
+    For $\int_0^t\e^{W_s}\diff s/t^\alpha$, denote
+    \[A_t:=\frac{\int_0^t\e^{W_s}\diff s}{t^\alpha}\]
+    then
+    \[\begin{aligned}
+        \diff(t^\alpha A_t)=A_t\diff t^\alpha+t^\alpha\diff A_t
+        +\diff t^\alpha\cdot\diff A_t
+        =\alpha t^{\alpha-1}A_t\diff t+t^\alpha\diff A_t
+    \end{aligned}\]
+    as
+    \[\diff t^\alpha\cdot\diff A_t=0\]
+    Also note that (similar to problem \ref{dZt})
+    \[\diff (t^\alpha A_t)=\diff\left(\int_0^t\e^{W_s}\diff s\right)
+    =\e^{W_t}\diff t\]
+    hence
+    \[\e^{W_t}\diff t=\alpha t^{\alpha-1}A_t\diff t+t^\alpha\diff A_t\]
+    It follows that
+    \[\begin{aligned}
+        \diff A_t&=t^{-\alpha}\e^{W_t}\diff t-\frac{\alpha}{t}A_t\diff t\\
+        &=\frac{1}{t^\alpha}\left(
+            \e^{W_t}-\frac{\alpha}{t}\int_0^t\e^{W_s}\diff s
+        \right)\diff t
+    \end{aligned}\]
 
     \problem
     % TODO Bessel
