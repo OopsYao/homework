@@ -139,8 +139,22 @@
     \quad(n\to\infty)\]
     i.e.,
     \[E(|I_n-X_t|^2)\to 0\]
-    hence
-    % TODO Detail
+    hence\sidenote{
+        \label{side:norm limit}
+        The first one can be proved by Jensen's inequality,
+        \[(E(I_n-X_t))^2\leq E(|I_n-X_t|^2)\]
+        and Minkovski inequality yields the second one
+        as
+        \[\begin{aligned}
+            \sqrt{E(I_n^2)}&\leq\sqrt{E(|I_n-X_t|^2)}+\sqrt{E(X_t^2)}\\
+            \sqrt{E(X_t)}&\leq\sqrt{E(|I_n-X_t|^2)}+\sqrt{E(I_n^2)}\\
+        \end{aligned}\]
+        which implies
+        \[\left|\sqrt{E(I_n^2)}-\sqrt{E(X_t^2)}\right|
+        \leq\sqrt{E(|I_n-X_t|^2)}\]
+        thus
+        \[\sqrt{E(I_n^2)}\to\sqrt{E(X_t^2)}\]
+    }
     \[\begin{aligned}
         E(I_n)&\to E(X_t)\\
         E(|I_n|^2)&\to E(X_t^2)
@@ -489,8 +503,10 @@
         \[\int_0^Ts^\alpha\diff W_s:=Y\]
         And \cref{eq:Ito def} yields
         \[E(I_n^2)\to E(Y^2)\]
-        % TODO illustrate
-        and in the deduction of isometry identity, we know that
+        as convergence in norm yields the convergence of norm\sidenote{
+            See sidenote \ref{side:norm limit} for details.
+        }.
+        And in the deduction of isometry identity, we know that
         \[E(I_n^2)=\sum_{i=0}^{n-1}E(t_i^{2\alpha})(t_{i+1}-t_i)
         =\sum_{i=0}^{n-1}t_i^{2\alpha}\Delta t_i\]
         which is a partitial sum of Riemann integral
@@ -499,7 +515,7 @@
             \int_0^Ts^{2\alpha}\diff s
         \end{equation}
         It follows that Riemann integral above exists\sidenote{
-            I admit there is a flaw that the sample point of
+            I admit there is a fatal flaw that the sample point of
             It\^o is not arbitrary, so the existence of Riemann
             integral is not promised.
 
@@ -573,9 +589,23 @@
 
     \problem
     \label{dZt}
-    % TODO definition of differential
+    \begin{proof}
+        By partition property,
+        \[Z_{t+\diff t}=\int_0^{t+\diff t}W_s\diff s
+        =Z_t+\int_t^{t+\diff t}W_s\diff s\]
+        And in sight of intermediate value theorem, there exists some
+        $\xi\in[t,t+\diff]$, s.t.
+        \[\int_t^{t+\diff t}W_s\diff s
+        =W_\xi\diff t\]
+        Since $\diff t$ is sufficiently small and $W_t$ is continuous,
+        we have that
+        \[W_\xi=W_t\]
+        thus by definition,
+        \[\diff Z_t=Z_{t+\diff t}-Z_t=W_t\diff t\]
+    \end{proof}
 
     \problem
+    \label{pr:over dt}
     \begin{proof}
         Since $W_t$ is continuous w.r.t. $t$, then the
         integral $\int_0^tW_s\diff s$ is continuous too.
@@ -592,6 +622,23 @@
         \[\diff A_t=\frac{1}{t}(W_t-A_t)\diff t
         =\frac{1}{t}\left(W_t-\frac{1}{t}Z_t\right)\diff t\]
     \end{proof}
+
+    \problem
+    \begin{proof}
+        Similar to problem \ref{dZt},
+        we obtain
+        \[\diff\int_0^t\e^{W_s}\diff s=\e^{W_t}\diff t\]
+        as $\e^{W_s}$ is continuous over $s$.
+        Then based on the result of problem \ref{pr:over dt},
+        we have that (by substitution of $\e^{W_t}$ for $W_t$)
+        \[\diff G_t=\frac1t(\e^{W_t}-G_t)\diff t\]
+    \end{proof}
+
+    \problem
+    % TODO Should I prove Ito lemma?
+
+    \problem
+    % TODO Bessel
 
     \appendix
     \section{Proof For Expectation}
