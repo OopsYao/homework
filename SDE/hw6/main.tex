@@ -240,10 +240,18 @@
         \end{proof}
 
         \item
+        \begin{proof}
         Since (b), (c), (d) all take the form of
         \newcommand{\gt}[1]{g(#1,W_{#1})}
         \newcommand{\increment}{\left(\frac{\Delta t}{2}\right)}
         \[\gt{t_i}\increment^k\left(\dws i\right)^l\dw i\]
+        where $\gt{t_i}$ equals
+        \[\begin{aligned}
+            \frac{\partial^2f(t_i,W_{t_i})}{\partial t\partial W_t},
+            \frac{\partial^2f(t_i,W_{t_i})}{\partial W_t^2},
+            \frac{\partial^{k+l}f(t_i,W_{t_i})}{\partial^kt\partial^l W_t}\\
+        \end{aligned}\]
+        accordingly,
         then we can handle it at once.
         Denote
         \[I_n=\sum_{i=0}^{n-1}
@@ -269,6 +277,7 @@
             \sum_{i,j}\sqrt{E(M_i^2)}\cdot\sqrt{E(M_j^2)}\\
         &=\increment^{2k}\left(\sum_{i=0}^{n-1}\sqrt{E(M_i^2)}\right)^2\\
         \end{aligned}\end{equation}
+        which is the key to this problem.
         Since $\gt{t_i}$ is adapted to the filtration up to time $t_i$
         of which $\dws i,\dw i$ is independent, we have that
         \begin{equation}
@@ -276,15 +285,12 @@
             E(M_i^2)=E[(\gt{t_i})^2]\cdot
             E\left[\left(\dws i\right)^{2l}\left(\dw i\right)^2\right]
         \end{equation}
-        and note that $\dw i-\dws i$ is independent of $\dws i$ 
-        since
-        \[\begin{aligned}
-            \dw i-\dws i&=W_{t_{i+1}}-W_{t_{i+\frac{1}{2}}}\\
-            \dws i&=W_{t_{i+\frac{1}{2}}}-W_{t_i}
-        \end{aligned}\]
-        then we obatin\sidenote{
+        And it is not difficult to see that\sidenote{
             Details are put in appendix: \nameref{sec:proof for expectation}.
         }
+        the expectation only depends
+        on the gap $\Delta t/2$ since we choose an equi-distant partition,
+        i.e.,
         \[
             E\left[
             \left(\dws i\right)^{2l}
@@ -292,8 +298,8 @@
             \right]
             =p\left(\frac{\Delta t}{2}\right)
         \]
-        where $p(\Delta t/2)$ is a function only depends on $\Delta t/2$
-        of which the specific form we will see later.
+        where the specific form of $p(\Delta t/2)$
+        we will see later.
 
         It follows that \cref{eq:EMi2} becomes
         \[E(M_i^2)=p\left(\frac{\Delta t}{2}\right)
@@ -308,7 +314,7 @@
         \end{aligned}\]
 
         So if we assume that
-        \[\int_0^T\sqrt{E[(\gt{t})^2]}\diff t<\infty\]
+        \[\int_0^t\sqrt{E[(\gt{s})^2]}\diff s<\infty\]
         then
         \[
             \left(\frac12\sum_{i=0}^{n-1}\sqrt{E(\gt{t_i})}\Delta t\right)^2
@@ -320,28 +326,60 @@
         It follows that all we need is to show
         \[\varphi(\Delta t)=\increment^{2k-2}p\increment\to 0\quad(\Delta t\to 0^+)\]
 
-        In fact we have that\sidenote{See appendix: \nameref{sec:deduction of p}
-        for details.}
+        In fact we have that (see appendix: \nameref{sec:deduction of p} for details)
         \[p\increment=(2l+2)\cdot(2l-1)!!\increment^{l+1}\]
         hence
         \[\varphi(\Delta t)
         =(2l+2)\cdot(2l-1)!!\increment^{2k+l-1}\]
         therefore
         \[2k+l>1\]
-        is the necessary condition.
+        is a sufficient condition.
         Here in problem (b) we have that
         \[k=l=1\]
         therefore
-        \[\varphi(\Delta t)=(\Delta t)^2\to 0\]
+        \[\varphi(\Delta t)\to 0\]
+        in sight of the assumption
+        \[
+            \int_0^t
+            \sqrt{E\left[\left(\frac{\partial^2f(s,W_{s})}{\partial t\partial W_s}\right)^2\right]}
+            \diff s
+            <\infty
+        \]
+        thus
+        \[E(I_n^2)\to 0\]
+        \end{proof}
 
         \item
+        \begin{proof}
         Since
         \[k=0,l=2\]
+        then
+        \[2k+l=2>1\]
+        thus the proof is done on the assumption that
+        \[
+            \int_0^t
+            \sqrt{E\left[\left(\frac{\partial^2f(s,W_{s})}{\partial W_s^2}\right)^2\right]}
+            \diff s
+            <\infty
+        \]
+        \end{proof}
 
         \item
+        \begin{proof}
         Since
         \[k,l\geq 2\]
-        
+        then
+        \[2k+l\geq 6>1\]
+        thus the proof is done on the assumption that
+        \[
+            \int_0^t
+            \sqrt{E\left[\left(\frac{\partial^{k+l}f(s,W_{s})}{\partial^k s\partial^l W_s}\right)^2\right]}
+            \diff s
+            <\infty
+        \]
+        \end{proof}
+
+
     \end{subproblem}
 
     \problem
@@ -559,7 +597,13 @@
     \section{Proof For Expectation}
     \label{sec:proof for expectation}
     \begin{proof}
-        Since
+        Note that $\dw i-\dws i$ is independent of $\dws i$ 
+        since
+        \[\begin{aligned}
+            \dw i-\dws i&=W_{t_{i+1}}-W_{t_{i+\frac{1}{2}}}\\
+            \dws i&=W_{t_{i+\frac{1}{2}}}-W_{t_i}
+        \end{aligned}\]
+        Then we have that
         \[\begin{aligned}
             &E\left[
             \left(\dws i\right)^{2l}
