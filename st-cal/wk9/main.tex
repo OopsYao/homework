@@ -86,9 +86,12 @@
             \[\lim_{t\to\infty}Z(t\land\tau_m)
             =\e^{\sigma m-\left(\sigma\mu+\frac{\sigma^2}{2}\right)\tau_m}\]
             而当$\tau_m=\infty$时，则由$\sigma> 0,\mu\geq 0$
-            \[Z(t\land\tau_m)=Z(t)\leq
-            \e^{\sigma m-\left(\sigma\mu+\frac{\sigma^2}{2}\right)t}
-            \to 0\]
+            \begin{equation}
+                \label{eq:tau infty to 0}
+                Z(t\land\tau_m)=Z(t)\leq
+                \e^{\sigma m-\left(\sigma\mu+\frac{\sigma^2}{2}\right)t}
+                \to 0
+            \end{equation}
             因此对于任意路径都有
             \[\lim_{t\to\infty}Z(t\land\tau_m)
             =\e^{\sigma m-\left(\sigma\mu+\frac{\sigma^2}{2}\right)\tau_m}
@@ -99,7 +102,10 @@
             \mathbb I_{\{\tau_m<\infty\}}\right]
             =\E\left[\lim_{t\to\infty}Z(t\land\tau_m)\right]\]
             而对于任意路径
-            \[|Z(t\land\tau_m)|\leq\e^{\sigma m}\]
+            \begin{equation}
+                \label{eq:control}
+                |Z(t\land\tau_m)|\leq\e^{\sigma m}
+            \end{equation}
             因此由控制收敛定理
             \[\E\left[\lim_{t\to\infty}Z(t\land\tau_m)\right]
             =\lim_{t\to\infty}\E[Z(t\land\tau_m)]=1\]
@@ -120,7 +126,7 @@
             而对于任意给定路径，
             \[\e^{-\left(\sigma\mu+\frac{\sigma^2}{2}\right)\tau_m}
             \mathbb I_{\{\tau_m<\infty\}}\]
-            关于$\sigma$单调，因此由单调收敛定理，
+            关于$\sigma$单调（考虑到$\sigma>0$），因此由单调收敛定理，
             \[\begin{aligned}
                 \E\left[
                 \lim_{\sigma\to0^+}
@@ -150,6 +156,79 @@
             \[\E\left[\e^{-\alpha\tau_m}\right]
             =\e^{m\mu-m\sqrt{\mu^2+2\alpha}}\]
             
+        \end{proof}
+
+        \item
+        \begin{proof}
+        由于
+        \[\frac{\diff}{\diff \alpha}
+        \E\left[\e^{-\alpha\tau_m}\right]
+        =-\E\left[\tau_m\e^{-\alpha\tau_m}\right]\]
+        因此
+        \[\E\tau_m=\left.-\frac{\diff}{\diff\alpha}
+        \E\left[\e^{-\alpha\tau_m}\right]\right|_{\alpha=0}
+        =-\left.\frac{\diff\e^{m\mu-m\sqrt{2\alpha+\mu^2}}}{\diff\alpha}\right|_{\alpha=0}
+        =\frac{m}{\mu}<\infty\]
+        \end{proof}
+
+        \item
+        \begin{proof}
+            由于$\sigma>-2\mu$，则
+            \[\sigma\mu+\frac{\sigma^2}{2}>0\]
+            依然成立，从而式(\ref{eq:tau infty to 0}),(\ref{eq:control})依然成立，
+            因此仍有
+            \[\E\left[
+                \exp\left\{
+                    \sigma m-\left(\sigma\mu+\frac{\sigma^2}{2}\right)\tau_m
+                    \right\}
+                \mathbb I_{\{\tau_m<\infty\}}
+            \right]=1\]
+            于是移项得
+            \begin{equation}
+                \label{eq:laplace again}
+                \E\left[\e^{-\left(\sigma\mu+\frac{\sigma^2}{2}\right)\tau_m}
+                \mathbb I_{\{\tau_m<\infty\}}\right]
+                =\e^{-\sigma m}
+            \end{equation}
+            考虑到对于任意给定路径，
+            \[\e^{-\left(\sigma\mu+\frac{\sigma^2}{2}\right)\tau_m}
+            \mathbb I_{\{\tau_m<\infty\}}\]
+            作为$\sigma$的函数在$(-2\mu,\infty)$上单调，于是由
+            单调收敛定理
+            \[\begin{aligned}
+                \E\left[\mathbb I_{\{\tau_m<\infty\}}\right]
+                &=
+                \E\left[
+                \lim_{\sigma\to -2\mu^+}
+                \e^{-\left(\sigma\mu+\frac{\sigma^2}{2}\right)\tau_m}
+                \mathbb I_{\{\tau_m<\infty\}}
+                \right]\\
+                &=\lim_{\sigma\to -2\mu^+}
+                \E\left[
+                \e^{-\left(\sigma\mu+\frac{\sigma^2}{2}\right)\tau_m}
+                \mathbb I_{\{\tau_m<\infty\}}
+                \right]\\
+                &=\lim_{\sigma\to -2\mu^+}\e^{-\sigma m}\\
+                &=\e^{-2m|\mu|}
+            \end{aligned}\]
+            即
+            \[\mathbb P\{\tau_m<\infty\}
+            =\E\left[\mathbb I_{\{\tau_m<\infty\}}\right]
+            =\exp\{-2m|\mu|\}\]
+
+            对于$\tau_m=\infty$的路径，根据定义，此时
+            \[\e^{-\left(\sigma\mu+\frac{\sigma^2}{2}\right)\tau_m}
+            =1\]
+            故
+            \[\E\left[\e^{-\left(\sigma\mu+\frac{\sigma^2}{2}\right)\tau_m}
+            \mathbb I_{\{\tau_m=\infty\}}\right]=
+            \mathbb P\{\tau_m=\infty\}=1-\e^{-2m|\mu|}\]
+            结合\cref{eq:laplace again}可知
+            \[\E\left[\e^{-\left(\sigma\mu+\frac{\sigma^2}{2}\right)\tau_m}\right]
+            =1-\e^{-2m|\mu|}+\e^{\sigma m}\]
+            同样令$\alpha=\sigma\mu+\sigma^2/2>0$可得拉普拉斯变换为
+            \[\E\left[\e^{-\alpha\tau_m}\right]
+            =1-\e^{-2m|\mu|}+\e^{m\mu-m\sqrt{2\alpha+\mu^2}}\]
         \end{proof}
     \end{subproblem}
 \end{document}
