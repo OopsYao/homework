@@ -43,6 +43,7 @@
   \newcommand{\problem}{\refstepcounter{problem}\section{Problem \theproblem}}
 \fi
 \counterwithin{equation}{problem}
+\newcommand{\skipproblem}{\stepcounter{problem}}
 
 % Subproblem environment
 \newenvironment{subproblem}%

@@ -44,8 +44,7 @@
         uniqueness of limit.
     \end{proof}
 
-    \problem
-    % TODO What do you mean by NOT turn in
+    \skipproblem
 
     \problem
     \begin{subproblem}[(\arabic*).]
@@ -711,7 +710,100 @@
     \end{aligned}\]
 
     \problem
-    % TODO Bessel
+    \begin{proof}
+        By definition,
+        \[\begin{aligned}
+            \diff R_t&=R_{t+\diff t}-R_t\\
+            &=\sqrt{(X_t+\diff t)^2+(Y_t+\diff t)^2}-R_t\\
+            &=\sqrt{X_t^2+Y_t^2+(\diff X_t)^2+(\diff Y_t)^2
+            +2X_t\diff X_t+2Y_t\diff Y_t}-R_t\\
+            &=\sqrt{R_t^2+2(X_t\diff X_t+Y_t\diff Y_t+\diff t)}-R_t\\
+            &=R_t\left(\sqrt{1+\frac{2M_t}{R_t^2}}-1\right)
+        \end{aligned}\]
+        where\sidenote{For convenience, assume that
+        $R_t\neq 0$.}
+        \[M_t=X_t\diff X_t+Y_t\diff Y_t+\diff t\]
+        Then we can see that,
+        \[\begin{aligned}
+            M_t^2&=X_t^2(\diff X_t)^2+Y_t^2(\diff Y_t)+(\diff t)^2
+            +2X_tY_t\diff X_t\diff Y_t\\
+            &=R_t^2\diff t+2X_tY_t\diff X_t\diff Y_t
+        \end{aligned}\]
+        as $\diff X_t\diff t=\diff Y_t\diff t=0$.
+
+        Since $X_t$ and $Y_t$ is independent, then we have that
+        \[\begin{aligned}
+            E\left(\Delta X_{t_i}\Delta X_{t_j}
+                   \Delta Y_{t_i}\Delta Y_{t_j}\right)
+            &=E\left(\Delta X_{t_i}\Delta X_{t_j}\right)\cdot
+              E\left(\Delta Y_{t_i}\Delta Y_{t_j}\right)\\
+            &=\begin{cases}
+                (\Delta t)^2,&i=j\\
+                0,&i\neq j
+            \end{cases}
+        \end{aligned}\]
+        thus
+        \[\begin{aligned}
+            E\left[\left(\sum_i\Delta X_{t_i}\Delta Y_{t_i}\right)^2\right]
+            &=\sum_{i,j}
+            E\left(\Delta X_{t_i}\Delta X_{t_j}
+                   \Delta Y_{t_i}\Delta Y_{t_j}\right)\\
+            &=\sum_{i}(\Delta t)^2\\
+            &=t\Delta t\to 0
+        \end{aligned}\]
+        therefore we can claim that
+        \[\diff X_t\diff Y_t=0\]
+        hence
+        \begin{equation}
+            \label{eq:magic equation}
+            M_t^2=R_t^2\diff t
+        \end{equation}
+        thus higher terms $(k\geq 3)$
+        \[M_t^k=R_t^2M_t^{k-3}\cdot M_t\diff t
+        =R_t^2M_t^{k-3}(X_t\diff X_t\diff t+Y_t\diff Y_t\diff t+(\diff t)^2)
+        =0\]
+
+        By Taylor's expansion, we also have the fact that
+        \[\sqrt{1+x}-1=\frac{1}{2}x-\frac{1}{2!\cdot 4}x^2+\frac{3}{3!\cdot 8}x^3
+        +\cdots\]
+        It follows that
+        \[\sqrt{1+\frac{2M_t}{R_t^2}}-1
+        =\frac{M_t}{R_t^2}-\frac{M_t^2}{2R_t^4}\]
+        since the high order terms is proved to be 0.
+        i.e.,
+        \[\diff R_t=\frac{M_t}{R_t}-\frac{M_t^2}{2R_t^3}
+        =\frac{M_t}{R_t}-\frac{\diff t}{2R_t}
+        =\frac{X_t\diff X_t+Y_t\diff Y_t}{R_t}+\frac{\diff t}{2R_t}\]
+
+        Finally, we claim that
+        \[\frac{X_t\diff X_t+Y_t\diff Y_t}{R_t}=\diff W_t\]
+        where $W_t$ is a Wiener process. To see this, note that
+        the differential of quadratic variation
+        \[\left(\frac{X_t\diff X_t+Y_t\diff Y_t}{R_t}\right)^2
+        =\frac{R_t^2\diff t+2X_tY_t\diff X_t\diff Y_t}{R_t^2}=\diff t\]
+        and for any $s<t$,
+        \[E\left(\left.\frac{X_t\diff X_t}{R_t}\right|\mathcal F_s\right)
+        =E\left(\left.\frac{X_t}{R_t}\right|\mathcal F_s\right)
+        \cdot E(\diff X_t|\mathcal F_s)=0\]
+        as $X_t/R_t$ is independent of $\diff X_t$.
+        Similarly, we also have
+        \[E\left(\left.\frac{Y_t\diff Y_t}{R_t}\right|\mathcal F_s\right)=0\]
+        thus,
+        \[E\left(\left.\frac{X_t\diff X_t+Y_t\diff Y_t}{R_t}\right|\mathcal F_s\right)=0\]
+        therefore,
+        \[\begin{aligned}
+            E\left(\left.\int_0^t\frac{X_u\diff X_u+Y_u\diff Y_u}{R_u}\right|\mathcal F_s\right)
+            &=\int_0^tE\left(\left.\frac{X_u\diff X_u+Y_u\diff Y_u}{R_u}\right|\mathcal F_s\right)\\
+            &=\int_0^sE\left(\left.\frac{X_u\diff X_u+Y_u\diff Y_u}{R_u}\right|\mathcal F_s\right)\\
+            &=E\left(\left.\int_0^s\frac{X_u\diff X_u+Y_u\diff Y_u}{R_u}\right|\mathcal F_s\right)\\
+        \end{aligned}\]
+        It follows that $(X_t\diff X_t+Y_t\diff Y_t)/R_t$ is a differential of a
+        martingale, then by L\'evy characterisation of Brownian motion,
+        \[\frac{X_t\diff X_t+Y_t\diff Y_t}{R_t}=\diff W_t\]
+        where $W_t$ is a Wiener process, which is what claimed.
+        Therefore,
+        \[\diff R_t=\diff W_t+\frac{\diff t}{2R_t}\]
+    \end{proof}
 
     \appendix
     \section{Proof For Expectation}
