@@ -81,6 +81,7 @@
         \end{proof}
 
         \item
+        \label{subp:laplace}
         \begin{proof}
             由于当$\tau_m<\infty$时，则有逐点收敛
             \[\lim_{t\to\infty}Z(t\land\tau_m)
@@ -218,17 +219,17 @@
 
             对于$\tau_m=\infty$的路径，根据定义，此时
             \[\e^{-\left(\sigma\mu+\frac{\sigma^2}{2}\right)\tau_m}
-            =1\]
-            故
-            \[\E\left[\e^{-\left(\sigma\mu+\frac{\sigma^2}{2}\right)\tau_m}
-            \mathbb I_{\{\tau_m=\infty\}}\right]=
-            \mathbb P\{\tau_m=\infty\}=1-\e^{-2m|\mu|}\]
-            结合\cref{eq:laplace again}可知
-            \[\E\left[\e^{-\left(\sigma\mu+\frac{\sigma^2}{2}\right)\tau_m}\right]
-            =1-\e^{-2m|\mu|}+\e^{\sigma m}\]
-            同样令$\alpha=\sigma\mu+\sigma^2/2>0$可得拉普拉斯变换为
+            =0\]
+            故由\cref{eq:laplace again}，同样地有
+            \[\begin{aligned}
+                &\E\left[\e^{-\sigma\mu+\frac{\sigma^2}{2}}\tau_m\right]\\
+            =&\E\left[\e^{-\sigma\mu+\frac{\sigma^2}{2}}\tau_m\mathbb I_{\{\tau_m<\infty\}}\right]
+            +\E\left[\e^{-\sigma\mu+\frac{\sigma^2}{2}}\tau_m\mathbb I_{\{\tau_m=\infty\}}\right]\\
+            =&\e^{\sigma m}
+            \end{aligned}\]
+            于是同题\ref{subp:laplace}一样同样有拉普拉斯变换
             \[\E\left[\e^{-\alpha\tau_m}\right]
-            =1-\e^{-2m|\mu|}+\e^{m\mu-m\sqrt{2\alpha+\mu^2}}\]
+            =\e^{m\mu-m\sqrt{\mu^2+2\alpha}}\]
         \end{proof}
     \end{subproblem}
 \end{document}
