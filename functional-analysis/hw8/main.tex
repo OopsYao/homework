@@ -1,0 +1,70 @@
+\documentclass[cn]{homework}
+
+\title{第九周作业}
+
+\begin{document}
+    \maketitle
+
+    \problem
+    由于
+    \[\left(\int_0^t|f(t)|^2\right)^{\frac{1}{2}}
+    \leq
+    \left(\int_0^t(1+t)|f(t)|^2\right)^{\frac{1}{2}}
+    \leq
+    \left(\int_0^t2|f(t)|^2\right)^{\frac{1}{2}}\]
+    故
+    \[||f||_2\leq||f||_3\leq\sqrt{2}||f||_2\]
+    即$||\cdot||_2$和$||\cdot||_3$等价。
+
+    如果$||\cdot||_1$和$||\cdot||_2$等价，则存在$K$使得
+    对于任意$f\in L^2[0,1]$有
+    \[||f||_2\leq K||f||_1\]
+    因此对于$f\neq \boldsymbol 0$应有
+    \[\frac{||f||_2}{||f||_1}\leq K\]
+    而考虑$f(t)=a^t\in L^2[0,1](a\neq 1)$，则
+    \[\frac{||f||_2}{||f||_1}
+    =\frac{\sqrt{(a^2-1)/\ln a}}{(a-1)/\ln a}
+    =\sqrt{\frac{a^2-1}{(a-1)^2}\ln a}\to\infty\]
+    因此$||\cdot||_1$和$||\cdot||$不可能等价。
+
+    \problem
+    \begin{proof}
+        对于$Z$中任意Cauchy列$\{z_n\}$，对于任意$\varepsilon>0$，
+        存在$N$使得对于任意$m,n\geq N$有
+        \begin{equation}
+            \label{eq:Cauchy seq inequality}
+            ||z_n-z_m||=||x_{1n}-x_{1m}||+||x_{2n}-x_{2m}||
+            <\varepsilon
+        \end{equation}
+        因此$\{x_1n\},\{x_2n\}$分别为$X_1,X_2$中的Cauchy列，
+        而分别由其完备性，则存在$x_1\in X_1,x_2\in X_2$使得
+        $x_{1n}\to x_1,x_{2n}\to x_2$。
+
+        从而在\cref{eq:Cauchy seq inequality}中取$m\to\infty$，
+        由范数的连续性有
+        \[||x_{1n}-x_1||+||x_{2n}-x_2||\leq\varepsilon\]
+        从而有对于$z=(x_1,x_2)\in Z$，
+        \[||z_n-z||\leq\varepsilon\]
+        即$z_n\to z$。因此$Z$是Banach空间。
+    \end{proof}
+
+    \problem
+    % TODO Examples of norm space where norm can not be generated inner product
+
+    \problem
+    \begin{proof}
+        由于
+        \[(x_n,x)\to(x,x)=||x||^2\quad(n\to\infty)\]
+        故
+        \[\overline{(x_n,x)}\to\overline{(x,x)}=||x||^2\]
+        从而
+        \[\begin{aligned}
+            ||x_n-x||^2&=(x_n-x,x_n-1)\\
+            &=||x_n||^2+||x||^2-\overline{(x_n,x)}-(x_n,x)
+            \to 0
+            \quad(n\to\infty)
+        \end{aligned}\]
+        即
+        \[x_n\to x\quad(n\to\infty)\]
+    \end{proof}
+\end{document}
