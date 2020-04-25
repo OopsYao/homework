@@ -1,0 +1,195 @@
+\documentclass{homework}
+
+\title{Homework 7}
+
+\begin{document}
+    \maketitle
+
+    \problem
+    \begin{proof}
+        Denote
+        \[f(t,W_t):=\frac{1}{2}W_t^2-\frac{1}{2}t\]
+        then it is equivalent to show that
+        \[W_t\diff W_t=\diff f(t,W_t)\]
+        as
+        \[\int_0^T\diff f(s,W_s)=f(T,W_T)-f(0,W_0)=
+        \frac{1}{2}W_T^2-\frac{1}{2}T\]
+        And we have from It\^o's lemma that
+        \[\diff f(t,W_t)=-\frac{\diff t}{2}+W_t\diff W_t
+        +\frac{\diff t}{2}=W_t\diff W_t\]
+        which is what we need exactly.
+    \end{proof}
+
+    \problem
+    \begin{proof}
+        Denote
+        \[f(t,W_t):=S_t\]
+        then it easy to see that
+        \[\begin{aligned}
+            \frac{\partial f}{\partial t}(t,W_t)
+            &=\left(\mu-\frac{\sigma^2}{2}\right)f(t,W_t)
+            =\left(\mu-\frac{\sigma^2}{2}\right)S_t\\
+            \frac{\partial f}{\partial W_t}(t,W_t)
+            &=\sigma f(t,W_t)=\sigma S_t\\
+            \frac{\partial^2 f}{\partial^2 W_t}(t,W_t)
+            &=\sigma^2 f(t,W_t)=\sigma^2 S_t
+        \end{aligned}\]
+        Then we have from It\^o's lemma that
+        \[\begin{aligned}
+            \diff S_t&=\diff f(t,W_t)\\
+            &=\left(\mu-\frac{\sigma^2}{2}\right)S_t\diff t
+            +\sigma S_t\diff W_t+\frac{\sigma^2 S_t}{2}\diff t\\
+            &=\mu S_t\diff t+\sigma S_t\diff W_t
+        \end{aligned}\]
+    \end{proof}
+
+    \problem
+    \begin{subproblem}[(\alph*)]
+        \item
+        \begin{proof}
+            % TODO Proof by definition
+        \end{proof}
+
+        \item
+        \begin{proof}
+            We have from It\^o's lemma that
+            \[\begin{aligned}
+                \diff\left(\frac{X_t}{Y_t}\right)&=
+                \frac{\diff X_t}{Y_t}-\frac{X_t}{Y_t^2}\diff Y_t
+                +\frac{1}{2}\left(
+                    -\frac{2}{Y_t^2}\diff X_t\diff Y_t
+                    +\frac{2X_t}{Y_t^3}(\diff Y_t)^2
+                \right)\\
+                &=\frac{Y_t\diff X_t-X_t\diff Y_t-\diff X_t\diff Y_t}%
+                  {Y_t^2}+\frac{X_t}{Y_t^3}(\diff Y_t)^2
+            \end{aligned}\]
+        \end{proof}
+
+        Therefore,
+        \[\diff\left(\frac{X_t}{f(t)}\right)
+        =\frac{f(t)\diff X_t-X_t\diff f(t)}{(f(t))^2}\]
+        as $f(t)$ is determinstic which implies that
+        \[\diff X_t\diff f(t)=(\diff f(t))^2=0\]
+    \end{subproblem}
+
+    \problem
+    \begin{subproblem}[(\alph*)]
+        \item
+        Since $X_t^{(1)},X_t^{(2)}$ are two It\^o diffusions,
+        then we have that, for $i=1,2$,
+        \[\left(\diff W_t^{(i)}\right)^2=\mu_i^2(\diff t)^2
+        +\sigma_i^2\left(\diff W_t^{(i)}\right)^2
+        +2\mu_i\sigma_i\diff t\diff W_t^{(i)}
+        =\sigma_i^2\diff t\]
+        as $W_t^{(1)},W_t^{(2)}$ are independent, where
+        $\mu_i,\sigma_i$ is short for
+        \[\mu_i\left(t,W_t^{(i)}\right),
+        \sigma_i\left(t,W_t^{(i)}\right)\]
+        accordingly.
+
+        And we have from multi-dimensional Taylor's expansion that
+        \[\begin{aligned}
+            \diff f\left(t,X_t^{(1)},X_t^{(2)}\right)=
+            \begin{aligned}[t]
+            &\frac{\partial f}{\partial t}\diff t
+            +\frac{\partial f}{\partial x_1}\diff X_t^{(1)}
+            +\frac{\partial f}{\partial x_2}\diff X_t^{(2)}\\
+            &+\frac{1}{2}\left(
+                \frac{\partial^2 f}{\partial x_1^2}\left(\diff X_t^{(1)}\right)^2
+                +\frac{\partial^2 f}{\partial x_2^2}\left(\diff X_t^{(2)}\right)^2
+            \right)
+            \end{aligned}
+        \end{aligned}\]
+        where $\frac{\partial f}{\partial x_1}$ is short for
+        \[\left.\frac{f(t,x_1,x_2)}{\partial x_1}
+        \right|_{(t,x_1,x_2)=\left(t,X_t^{(1)},X_t^{(2)}\right)}\]
+        and so on.
+        Note that in the equation above we throw away terms that contain,
+        \[\left(\diff X_t^{(1)}\right)^p\left(\diff X_t^{(2)}\right)^q,
+        \left(\diff X_t^{(i)}\right)^k(k\geq 3)\]
+        as they all equal 0 due to the independence and high order
+        terms being zero, i.e.,
+        \[\left(\diff X_t^{(i)}\right)^k
+        =\left(\diff X_t^{(i)}\right)^{k-2}\cdot\sigma_i^2\diff t=0,
+        k\geq 3\]
+        hence 2-dimensional It\^o's lemma can be obtained as
+        \begin{equation}
+            \label{eq:2-d Ito lemma}
+            \begin{aligned}
+            \diff f\left(t,X_t^{(1)},X_t^{(2)}\right)&=
+            \begin{aligned}[t]
+            &\frac{\partial f}{\partial t}\diff t
+            +\frac{\partial f}{\partial x_1}\diff X_t^{(1)}
+            +\frac{\partial f}{\partial x_2}\diff X_t^{(2)}\\
+            &+\frac{1}{2}\left(
+                \frac{\partial^2 f}{\partial x_1^2}\sigma_1^2\diff t
+                +\frac{\partial^2 f}{\partial x_2^2}\sigma_2^2\diff t
+            \right)
+            \end{aligned}\\
+            &=\begin{aligned}[t]
+            &\left(
+                \frac{\partial f}{\partial t}+     
+                \frac{1}{2}\left(
+                \frac{\partial^2 f}{\partial x_1^2}\sigma_1^2
+                +\frac{\partial^2 f}{\partial x_n^2}\sigma_n^2
+                \right)
+            \right)\diff t\\
+            &+\frac{\partial f}{\partial x_1}\diff X_t^{(1)}
+            +\frac{\partial f}{\partial x_2}\diff X_t^{(2)}
+            \end{aligned}
+            \end{aligned}
+        \end{equation}
+
+        \item
+        The generalization is rather straight-forward since
+        the critical condition independence still holds and,
+        \[\diff W_t^{i}\diff W_t^{(j)}=
+        \begin{cases}
+            \sigma_j^2\diff t,&i=j\\
+            0,&i\neq j
+        \end{cases}\]
+        Therefore \cref{eq:2-d Ito lemma} can be simply generalized
+        to $n$-dimension,
+        \begin{equation*}
+            \begin{aligned}
+            \diff f\left(t,X_t^{(1)},\ldots,X_t^{(n)}\right)&=
+            \begin{aligned}[t]
+            &\frac{\partial f}{\partial t}\diff t
+            +\frac{\partial f}{\partial x_1}\diff X_t^{(1)}
+            +\cdots
+            +\frac{\partial f}{\partial x_n}\diff X_t^{(n)}\\
+            &+\frac{1}{2}\left(
+                \frac{\partial^2 f}{\partial x_1^2}\sigma_1^2\diff t
+                +\ldots
+                +\frac{\partial^2 f}{\partial x_n^2}\sigma_n^2\diff t
+            \right)
+            \end{aligned}\\
+            % TODO Better notation
+            &=\left(\frac{\partial f}{\partial t}
+            +\frac{1}{2}\right)\diff t
+            +\nabla f\cdot\diff\boldsymbol X_t
+            \end{aligned}
+        \end{equation*}
+        where gradient operator $\nabla$ is defined as\sidenote{
+            Here the notation $\frac{\partial f}{\partial x_1}$ is
+            similar to the 2-dimension case, as well as other notations
+            like $\mu_1,\sigma_1$.
+        }
+        \[\nabla f:=\left(\frac{\partial f}{\partial x_1},\ldots,\frac{\partial f}{\partial x_n}\right)\]
+        and
+        \[\begin{aligned}
+            \diff\boldsymbol X_t&:=
+            \left(\diff W_t^{(1)},\ldots,\diff W_t^{(n)}\right)\\
+            \boldsymbol\sigma&:=
+            \left(\sigma_1,\ldots,\sigma_n\right)
+        \end{aligned}\]
+        
+        \item
+        % TODO Generalization with coefficients
+    \end{subproblem}
+
+    \problem
+    By It\^o's lemma, we have that
+    \[\diff (tW_t^2)=W_t^2\diff t+2tW_t\diff W_t+\frac{2t}{2}\diff t
+    =(W_t^2+t)\diff t+2tW_t\diff W_t\]
+\end{document}
