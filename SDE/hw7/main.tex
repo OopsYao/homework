@@ -192,4 +192,145 @@
     By It\^o's lemma, we have that
     \[\diff (tW_t^2)=W_t^2\diff t+2tW_t\diff W_t+\frac{2t}{2}\diff t
     =(W_t^2+t)\diff t+2tW_t\diff W_t\]
+
+    \problem
+    \begin{proof}
+        Denote
+        \[\diff X_t=\mu(t,W_t)\diff t+\sigma(t,W_t)\diff W_t\]
+        where $W_t$ is a Wiener process, as $X_t$ is an It\^o diffusion.
+        Therefore,
+        \[\diff f(t)\diff X_t=\mu(t,W_t)\diff t\diff f(t)
+        +\sigma(t,W_t)\diff W_t\diff f(t)=0\]
+        as $f(t)$ is determinstic which implies that
+        \[\diff t\diff f(t)=\diff W_t\diff f(t)=0\]
+    \end{proof}
+
+    \problem
+    \newcommand{\img}{\mathrm i}
+    \begin{proof}
+        We have from Euler's formula that,
+        \[\begin{aligned}
+            \int_0^T\e^{\frac{t}{2}+\img W_t}\diff W_t
+            =\int_0^T\e^{\frac{t}{2}}\cos W_t\diff W_t
+            +\img\int_0^T\e^{\frac{t}{2}}\sin W_t\diff W_t
+        \end{aligned}\]
+        and
+        \[\begin{aligned}
+            \img(1-\e^{\frac{T}{2}+\img W_T})
+        &=\e^{\frac{T}{2}}\sin W_T+\img(1-\e^{\frac{T}{2}}\cos W_T)\\
+        &=\int_0^T\diff\left(\e^{\frac{t}{2}}\sin W_t\right)
+        +\img\int_0^T\diff\left(1-\e^{\frac{t}{2}}\cos W_t\right)
+        \end{aligned}\]
+        Therefore, it is equivalent to show that
+        \[\begin{aligned}
+            \diff\left(\e^{\frac{t}{2}}\sin W_t\right)
+            &=\e^{\frac{t}{2}}\cos W_t\diff W_t\\
+            \diff\left(1-\e^{\frac{t}{2}}\cos W_t\right)
+            &=\e^{\frac{t}{2}}\sin W_t\diff W_t
+        \end{aligned}\]
+
+        By It\^o's lemma, we have that
+        \[\begin{aligned}
+            \diff\left(\e^{\frac{t}{2}}\sin W_t\right)
+            &=\frac{1}{2}\e^{\frac{t}{2}}\sin W_t\diff t
+            +\e^{\frac{t}{2}}\cos W_t\diff W_t
+            -\frac{1}{2}\e^{\frac{t}{2}}\sin W_t\diff t\\
+            &=\e^{\frac{t}{2}}\cos W_t\diff W_t\\
+            \diff\left(1-\e^{\frac{t}{2}}\cos W_t\right)
+            &=-\frac{1}{2}\e^{\frac{t}{2}}\cos W_t
+            +\e^{\frac{t}{2}}\sin W_t\diff W_t
+            +\frac{1}{2}\e^{\frac{t}{2}}\cos W_t\diff t\\
+            &=\e^{\frac{t}{2}}\sin W_t\diff W_t
+        \end{aligned}\]
+        which is what we need exactly.
+    \end{proof}
+
+    \problem
+    \begin{proof}
+        Denote
+        \[f(t):=1,g(W_t):=\arctan W_t\]
+        thus it easy to see that
+        \[\begin{aligned}
+            g'(W_t)&=\frac{1}{1+W_t^2}\\
+            g''(W_t)&=-\frac{2W_t}{(1+W_t^2)^2}\\
+            f'(t)&=0
+        \end{aligned}\]
+        then we have from integration by parts that
+        \[\begin{aligned}
+            \int_0^T\frac{1}{1+W_t^2}\diff W_t
+            &=\left.\arctan W_t\right|_0^T
+            -\frac{1}{2}\int_0^T-\frac{2W_t}{(1+W_t^2)^2}\diff t\\
+            &=\arctan W_T+\int_0^T\frac{W_t}{(1+W_t^2)^2}\diff t
+        \end{aligned}\]
+    \end{proof}
+
+    Therefore, in sight of zero mean property of It\^o integral and
+    Fubini theorem,
+    \[E(\arctan W_T)=-E\left(\int_0^T\frac{W_t}{(1+W_t^2)^2}\diff t\right)
+    =-\int_0^TE\left(\frac{W_t}{(1+W_t^2)^2}\right)\diff t\]
+
+    \problem
+    \begin{proof}
+        Denote
+        \[g(W_t):=(W_t-1)\e^{W_t}\]
+        thus
+        \[g'(W_t)=W_t\e^{W_t},g''(W_t)=(W_t+1)\e^{W_t}\]
+        hence we have from integration by parts that
+        \begin{equation}
+            \label{eq:WeW}
+            \begin{aligned}
+            \int_0^TW_t\e^{W_t}\diff W_t&=
+            \left.g(W_t)\right|_0^T
+            -\frac{1}{2}\int_0^Tg''(W_t)\diff t\\
+            &=\left.(W_t-1)\e^{W_t}\right|_0^T
+            -\frac{1}{2}\int_0^T(W_t+1)\e^{W_t}\diff t\\
+            &=W_T\e^{W_T}+1-\e^{W_T}
+            -\frac{1}{2}\int_0^T(W_t+1)\e^{W_t}\diff t\\
+            \end{aligned}
+        \end{equation}
+        as the determinstic part is 1 of which the derivative is 0.
+    \end{proof}
+
+    Denote
+    \[h(t):=E(g(W_t))\]
+    then we have from \cref{eq:WeW} that
+    \[\left.h(t)\right|_0^T
+    -\frac{1}{2}E\left(\int_0^T(W_t+1)\e^{W_t}\diff t\right)=0\]
+    as the expectation of LHS which is an It\^o integral is 0.
+    Thus, by Fubini theorem,
+    \[h(t)|_0^T=\frac{1}{2}\int_0^TE\left((W_t+1)\e^{W_t}\right)\diff t
+    =\frac{1}{2}\int_0^T\left(2E(\e^{W_t})+h(t)\right)\diff t\]
+    i.e.,
+    \[\int_0^T\diff h(t)=\int_0^T\left(\frac{h(t)}{2}
+    +E(\e^{W_t})\right)\diff t\]
+    which is equivalent to an ODE
+    \[h'(t)=\frac{h(t)}{2}+E(\e^{W_t})\]
+
+    And we have the fact that
+    \[E(\e^{uW_t})=\e^{\frac{u^2t}2}\]
+    hence we obtain the solution
+    \[h(t)=(t-1)\e^{\frac{t}{2}}\]
+    as $h(0)=E\left((W_0-1)\e^{W_0}\right)=-1$.
+    Therefore,
+    \[E(W_t\e^{W_t})=h(t)+\e^{\frac{t}{2}}=t\e^{\frac{t}{2}}\]
+    thus
+    \def\cov{\mathrm{Cov}}
+    \def\var{\mathrm{Var}}
+    \def\corr{\mathrm{Corr}}
+    \[\cov(W_t,\e^{W_t})=E(W_t\e^{W_t})-E(W_t)\cdot E(\e^{W_t})
+    =t\e^{\frac{t}{2}}\]
+    and
+    \[\corr(W_t,\e^{W_t})=\frac{\cov(W_t,\e^{W_t})}%
+    {\sqrt{\var(W_t)\cdot\var(\e^{W_t})}}
+    =\sqrt{\frac{t^2\e^t}{t\e^t(\e^t-1)}}
+    =\sqrt{\frac{t}{\e^t-1}}\]
+    as
+    \[\var(\e^{W_t})=E(\e^{2W_t})-(E(\e^{W_t}))^2
+    =\e^{2t}-\e^t=
+    \e^t(\e^t-1)\]
+    It follows that
+    \[\begin{aligned}
+        \corr(W_t,\e^{W_t})&\to 1\quad(t\to 0^+)\\
+        \corr(W_t,\e^{W_t})&\to 0\quad(t\to \infty)
+    \end{aligned}\]
 \end{document}
