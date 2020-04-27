@@ -25,17 +25,14 @@ script:
   # Texliveonfly will download packages automatically
   - texliveonfly main.tex
   # You can use latexmk to automatically handle bibtex and references (recommended)
-  - 'TEXINPUTS=../../latex-template:' latexmk -synctex=1 -interaction=nonstopmode -file-line-error -pdf main.tex
-
+  - "TEXINPUTS=../../latex-template: latexmk -synctex=1 -interaction=nonstopmode -file-line-error -pdf main.tex"
   # But you could use any other compiler as well instead of latexmk. Example:
   #  - pdflatex main.tex
   #  - bibtex main
   #  - pdflatex main.tex
   #  - pdflatex main.tex # Compile twice to fix references
-
   # You can also pass arguments to texliveonfly:
   #  - texliveonfly --arguments='-shell-escape' main.tex
-
 ## Uncomment the following lines to see the packages installed in travis
 # after_script:
 #  - export PATH=/tmp/texlive/bin/x86_64-linux:$PATH
