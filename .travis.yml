@@ -1,4 +1,5 @@
-language: generic
+language: node_js
+node_js: lts/*
 os: linux
 dist: bionic
 
@@ -13,6 +14,7 @@ dist: bionic
 
 install:
   - source ./texlive/texlive_install.sh
+  - yarn install
 
 cache:
   directories:
@@ -21,6 +23,7 @@ cache:
 
 script:
   - source build-sub.sh SDE
+  - cd server && yarn build
 ## Uncomment the following lines to see the packages installed in travis
 # after_script:
 #  - export PATH=/tmp/texlive/bin/x86_64-linux:$PATH

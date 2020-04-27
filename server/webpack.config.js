@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     module: {
@@ -12,12 +13,24 @@ module.exports = {
                         presets: ["@babel/preset-env", "@babel/preset-react"]
                     }
                 }
-            }
+            },
+            {
+                test: /\.css$/,
+                use: [
+                    'style-loader',
+                    'css-loader',
+                ],
+            },
         ]
     },
     plugins: [
         new HtmlWebpackPlugin({
             template: 'public/index.html'
-        })
+        }),
+        new CopyPlugin([
+            {
+                from: 'public/pdf/', to: 'pdf',
+            }
+        ]),
     ]
 };
