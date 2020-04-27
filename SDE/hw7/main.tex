@@ -333,4 +333,75 @@
         \corr(W_t,\e^{W_t})&\to 1\quad(t\to 0^+)\\
         \corr(W_t,\e^{W_t})&\to 0\quad(t\to \infty)
     \end{aligned}\]
+
+    \problem
+    \begin{proof}
+        We have from integration by parts that
+        \[\begin{aligned}
+            \int_0^T\frac{2W_t}{1+W_t^2}\diff W_t
+            &=\left.\ln(1+W_t^2)\right|_0^T
+            -\int_0^T\frac{1+W_t^2-2W_t^2}{(1+W_t^2)^2}\diff t\\
+            &=\ln(1+W_T^2)-\int_0^T\frac{1-W_t^2}{(1+W_t^2)^2}\diff t
+        \end{aligned}\]
+        Therefore,
+        \[E(\ln(1+W_T^2))=E\left(
+            \int_0^T\frac{1-W^2_t}{(1+W_t^2)^2}\diff t
+        \right)\]
+        as the expectation of It\^o integral is 0.
+        And note that
+        \[\begin{aligned}
+            \frac{1-W_t^2}{(1+W_t^2)^2}\leq\frac{1+W_t^2}{(1+W_t^2)^2}
+            =\frac{1}{1+W_t^2}\leq 1
+        \end{aligned}\]
+        and
+        \[\frac{1-W_t^2}{(1+W_t^2)^2}+\frac{1}{8}
+        =\frac{8(1-W_t^2)+(1+W_t^2)^2}{8(1+W_t^2)^2}
+        =\frac{(W_t^2-3)^2}{8(1+W_t^2)^2}\geq 0\]
+        hence
+        \[-\frac{T}{8}=-E\left(\int_0^T\frac{1}{8}\diff t\right)
+        \leq E(\ln(1+W_T^2))
+        \leq E\left(\int_0^T\diff t\right)=T\]
+
+        % TODO Contradicton in upper bound?
+    \end{proof}
+
+    \problem
+    Denote
+    \[\begin{aligned}
+        f(t)&=t^{-\frac{1}{2}}\\
+        g(t,W_t)&=\e^{-\frac{W_t^2}{2t}}
+    \end{aligned}\]
+    thus
+    \[\begin{aligned}
+        \frac{\partial g(t,W_t)}{\partial W_t}
+        &=-\frac{W_t\e^{-\frac{W_t^2}{2t}}}{t}\\
+        \frac{\partial^2 g(t,W_t)}{\partial W_t^2}
+        &=\frac{1}{t}\left(\frac{W_t^2}{t}-1\right)\e^{-\frac{W_t^2}{2t}}
+    \end{aligned}\]
+    then we have from integration by parts that
+    \[\begin{aligned}
+        \int_a^bt^{-\frac{3}{2}}W_t\e^{-\frac{W_t^2}{2t}}\diff W_t
+        &=-\int_a^bf(t)\frac{\partial g(t,W_t)}{\partial W_t}\diff W_t\\
+        &=\begin{aligned}[t]
+        &-\left.f(t)g(t,W_t)\right|_a^b
+         +\int_a^b\frac{\partial}{\partial t}\left(f(t)g(t,W_t)\right)\diff t\\
+        &+\frac{1}{2}\int_a^bf(t)\frac{\partial^2g(t,W_t)}{\partial W_t^2}\diff t
+        \end{aligned}
+    \end{aligned}\]
+    Also note the fact that
+    % TODO There must be something wrong
+    \[\frac{\partial}{\partial t}\left(f(t)g(t,W_t)\right)
+    =\left(\frac{W_t^2}{2}t^{-\frac{5}{2}}-\frac{t^{-\frac{3}{2}}}{2}\right)
+    \e^{-\frac{W_t^2}{2t}}\]
+    and
+    \[f(t)\frac{\partial^2g(t,W_t)}{\partial W_t^2}
+    =\left(t^{-\frac{5}{2}}W_t^2-t^{-\frac{3}{2}}\right)\e^{-\frac{W_t^2}{2t}}\]
+    i.e.,
+    \[\frac{\partial}{\partial t}\left(f(t)g(t,W_t)\right)
+    +\frac{f(t)}{2}\frac{\partial^2g(t,W_t)}{\partial W_t^2}=0\]
+    therefore,
+    \[\int_a^bt^{-\frac{3}{2}}W_t\e^{-\frac{W_t^2}{2t}}\diff W_t
+    =f(a)g(a,W_a)-f(b)g(b,W_b)=
+    \frac{\e^{-\frac{W_a^2}{2a}}}{\sqrt a}
+    -\frac{\e^{-\frac{W_b^2}{2b}}}{\sqrt b}\]
 \end{document}
