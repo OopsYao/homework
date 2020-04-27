@@ -19,3 +19,6 @@ homework.cls
 # Virtual envs
 envs/
 py/
+
+# Output dir (for all sub projs)
+output/
