@@ -23,7 +23,7 @@ cache:
 before_script: cd $TRAVIS_BUILD_DIR/SDE/hw7
 script:
   # Texliveonfly will download packages automatically
-  - texliveonfly main.tex
+  - "TEXINPUTS=../../latex-template: texliveonfly main.tex"
   # You can use latexmk to automatically handle bibtex and references (recommended)
   - "TEXINPUTS=../../latex-template: latexmk -synctex=1 -interaction=nonstopmode -file-line-error -pdf main.tex"
   # But you could use any other compiler as well instead of latexmk. Example:
