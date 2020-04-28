@@ -14,7 +14,7 @@ dist: bionic
 
 install:
   - source ./texlive/texlive_install.sh
-  - yarn install
+  - yarn install --cwd server
 
 cache:
   directories:
