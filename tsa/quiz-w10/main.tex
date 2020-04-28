@@ -1,0 +1,50 @@
+\documentclass[cn]{homework}
+
+\title{第十周测试}
+
+\begin{document}
+    \maketitle
+
+    \begin{proof}
+        根据定义
+        \[\int_0^1rW(r)\diff r
+        :=\lim_{n\to\infty}\sum_{i=0}^{n-1}r_iW(r_i)\Delta r_i\]
+        这里$0=r_0<r_1<\cdots<r_n=1$为$[0,1]$的一个分划。
+        不妨设
+        \[I_n:=\sum_{i=0}^{n-1}r_iW(r_i)\Delta r_i\]
+        则$I_n$逐点收敛到$\int_0^1rW(r)\diff r$。
+        又$I_n$服从正态分布，故其极限$\int_0^1rW(r)\diff r$
+        亦服从正态分布。于是只需计算期望与方差即可。
+
+        直接计算期望得
+        \[E\left(\int_0^1rW(r)\diff r\right)
+        =\int_0^1E(rW(r)\diff r)=0\]
+        从而方差
+        \begin{equation}
+            \label{eq:variance}
+            \begin{aligned}
+            \mathrm{Var}\left(\int_0^1rW(r)\diff r\right)
+            &=E\left[\left(\int_0^1rW(r)\diff r\right)^2\right]\\
+            &=E\left[\left(\int_0^1rW(r)\diff r\right)
+                \left(\int_0^1sW(s)\diff s\right)\right]\\
+            &=E\left(\iint_{[0,1]^2}rsW(r)W(s)\diff r\diff s\right)\\
+            &=\iint_{[0,1]^2}rsE[W(r)W(s)]\diff r\diff s\\
+            \end{aligned}
+        \end{equation}
+        同时对于$r\geq s$我们有
+        \[E[W(r)W(s)]=E[(W(r)-W(s)+W(s))W(s)]=E(W(s)^2)=s\]
+        于是一般地有
+        \[E[W(r)W(s)]=\min\{r,s\}\]
+        故\cref{eq:variance}由对称性变为
+        \[\begin{aligned}
+            \mathrm{Var}\left(\int_0^1rW(r)\diff r\right)
+            &=\iint_{[0,1]^2}rs\min\{r,s\}\diff r\diff s\\
+            &=2\iint_{\{0\leq r\leq s\leq 1\}}r^2s\diff r\diff s\\
+            &=2\int_0^1\diff s\int_0^sr^2s\diff r\\
+            &=\frac{2}{15}
+        \end{aligned}\]
+        因此
+        \[\int_0^1rW(r)\diff r
+        \sim\mathcal N\left(0,\frac{2}{15}\right)\]
+    \end{proof}
+\end{document}
