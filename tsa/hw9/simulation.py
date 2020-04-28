@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from scipy.stats import norm
 
 sigma = 2
 T = 800
@@ -44,12 +45,20 @@ plt.legend()
 N = 10000  # N times experiments
 rho = np.array([rho_stat(0.1, 0.01) for i in range(N)])
 Trho = T * (rho - 1)
+
 plt.figure()
-plt.hist(rho, bins='auto', label=f'$T={T}$')
+plt.hist(rho, bins='auto', density=True, label=f'$T={T}$')
+# Fit with normal dist
+xmin, xmax = plt.xlim()
+x = np.linspace(xmin, xmax, 100)
+p = norm.pdf(x, *(norm.fit(rho)))
+plt.plot(x, p, 'k')
+
 plt.title(f'$\\hat\\rho$ of {N} experiments')
 plt.xlabel('$\\hat\\rho$')
 plt.ylabel('Frequency')
 
+# T * (rho - 1)
 plt.figure()
 plt.hist(Trho, bins='auto')
 plt.title(f'$T(\\hat\\rho-1)$ of {N} experiments')
