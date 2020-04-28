@@ -2,6 +2,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.stats import norm
 
+import seaborn as sns
+
 sigma = 2
 T = 800
 y0 = 0
@@ -44,25 +46,16 @@ plt.legend()
 # rho statistic
 N = 10000  # N times experiments
 rho = np.array([rho_stat(0.1, 0.01) for i in range(N)])
-Trho = T * (rho - 1)
 
 plt.figure()
-plt.hist(rho, bins='auto', density=True, label=f'$T={T}$')
+sns.distplot(rho, label='HIST')
 # Fit with normal dist
 xmin, xmax = plt.xlim()
 x = np.linspace(xmin, xmax, 100)
 p = norm.pdf(x, *(norm.fit(rho)))
-plt.plot(x, p, 'k')
-
+plt.plot(x, p, color='#00aaffff', linestyle='-.', label='Normal density fit')
+plt.legend()
 plt.title(f'$\\hat\\rho$ of {N} experiments')
 plt.xlabel('$\\hat\\rho$')
-plt.ylabel('Frequency')
-
-# T * (rho - 1)
-plt.figure()
-plt.hist(Trho, bins='auto')
-plt.title(f'$T(\\hat\\rho-1)$ of {N} experiments')
-plt.xlabel('$T(\\hat\\rho-1)$')
-plt.ylabel('Frequency')
 
 plt.show()
