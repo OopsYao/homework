@@ -400,8 +400,10 @@
     \[\frac{\partial}{\partial t}\left(f(t)g(t,W_t)\right)
     +\frac{f(t)}{2}\frac{\partial^2g(t,W_t)}{\partial W_t^2}=0\]
     therefore,
-    \[\int_a^bt^{-\frac{3}{2}}W_t\e^{-\frac{W_t^2}{2t}}\diff W_t
-    =f(a)g(a,W_a)-f(b)g(b,W_b)=
-    \frac{\e^{-\frac{W_a^2}{2a}}}{\sqrt a}
-    -\frac{\e^{-\frac{W_b^2}{2b}}}{\sqrt b}\]
+    \[\begin{aligned}
+        \int_a^bt^{-\frac{3}{2}}W_t\e^{-\frac{W_t^2}{2t}}\diff W_t
+        &=f(a)g(a,W_a)-f(b)g(b,W_b)\\
+        &=\frac{\e^{-\frac{W_a^2}{2a}}}{\sqrt a}
+        -\frac{\e^{-\frac{W_b^2}{2b}}}{\sqrt b}
+    \end{aligned}\]
 \end{document}
