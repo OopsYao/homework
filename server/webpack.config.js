@@ -29,7 +29,7 @@ module.exports = {
         }),
         new CopyPlugin([
             {
-                from: 'public/pdf/', to: 'pdf',
+                from: 'pdf/', to: 'pdf',
             }
         ]),
     ]

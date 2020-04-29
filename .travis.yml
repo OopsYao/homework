@@ -3,8 +3,9 @@ node_js: lts/*
 os: linux
 dist: bionic
 
+before_install:
+  - openssl aes-256-cbc -K $encrypted_47d48945fed9_key -iv $encrypted_47d48945fed9_iv -in server/deploy/keypair.config.js.enc -out server/deploy/keypair.config.js -d
 ## Uncomment the following lines if you require extra dependencies
-# before_install:
 # - sudo apt-get install ghostscript # If you use latex > dvips > ps2pdf
 # - sudo apt-get install python-pygments # If you use the minted package
 # If you use custom fonts:

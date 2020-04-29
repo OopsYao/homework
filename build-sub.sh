@@ -2,17 +2,17 @@
 export TEXINPUTS=../../latex-template:
 
 # Go the subproject
+PROJ_NAME=$(basename $PWD)
 ROOTDIR=$PWD
 cd $1
 
 for d in */ ; do
     if [ -f $d/main.tex ]; then
         cd $d
-        echo $d
         texliveonfly main.tex
         latexmk -interaction=nonstopmode \
             -file-line-error -pdf \
-            -outdir=../output \
+            -outdir=../server/pdf/$PROJ_NAME \
             -jobname=${d%/} \
             main.tex
         cd ..
