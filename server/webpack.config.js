@@ -25,12 +25,16 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: 'public/index.html'
+            template: 'public/index.html',
+            base: '/'
         }),
         new CopyPlugin([
             {
                 from: 'pdf/', to: 'pdf',
             }
         ]),
-    ]
+    ],
+    devServer: {
+        historyApiFallback: true
+    }
 };

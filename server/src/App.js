@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 
 import PDFView from './PDFView';
+import 'normalize.css';
 
 export default function App() {
     return (
