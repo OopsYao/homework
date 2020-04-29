@@ -6,8 +6,9 @@ import {
     Link
 } from "react-router-dom";
 
-import PDFView from './PDFView';
+// import PDFView from './PDFView';
 // import 'normalize.css';
+import ViewPage from './ViewPage';
 
 export default function App() {
     return (
@@ -16,7 +17,8 @@ export default function App() {
                 <Route exact path="/">
                     <Home />
                 </Route>
-                <Route path="/:cat/:subcat" children={<PDFView />} />
+                {/* <Route path="/:cat/:subcat" children={<PDFView />} /> */}
+                <Route path="/:cat/:subcat" children={<ViewPage />} />
             </Switch>
         </Router>
     )

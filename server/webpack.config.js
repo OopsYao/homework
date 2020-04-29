@@ -29,9 +29,8 @@ module.exports = {
             base: '/'
         }),
         new CopyPlugin([
-            {
-                from: 'pdf/', to: 'pdf',
-            }
+            { from: 'pdf/', to: 'pdf' },
+            { from: 'public' }
         ]),
     ],
     devServer: {
