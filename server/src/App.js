@@ -28,6 +28,12 @@ function Home() {
             <li>
                 <Link to="/SDE/hw5">SDE HW5</Link>
             </li>
+            <li>
+                <Link to="/SDE/hw6">SDE HW6</Link>
+            </li>
+            <li>
+                <Link to="/SDE/hw7">SDE HW7</Link>
+            </li>
         </ul>
     )
 }
