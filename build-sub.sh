@@ -2,9 +2,9 @@
 export TEXINPUTS=../../latex-template:
 
 # Go the subproject
-PROJ_NAME=$(basename $PWD)
 ROOTDIR=$PWD
 cd $1
+PROJ_NAME=$(basename $PWD)
 
 for d in */ ; do
     if [ -f $d/main.tex ]; then

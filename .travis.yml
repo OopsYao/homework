@@ -19,6 +19,7 @@ cache:
 script:
   - source build-sub.sh SDE
   - cd server && yarn build
+  - ls pdf && ls dist/pdf # For test
 ## Uncomment the following lines to see the packages installed in travis
 # after_script:
 #  - export PATH=/tmp/texlive/bin/x86_64-linux:$PATH
