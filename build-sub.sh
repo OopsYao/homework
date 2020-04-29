@@ -12,7 +12,7 @@ for d in */ ; do
         texliveonfly main.tex
         latexmk -interaction=nonstopmode \
             -file-line-error -pdf \
-            -outdir=../server/pdf/$PROJ_NAME \
+            -outdir=../../server/pdf/$PROJ_NAME \
             -jobname=${d%/} \
             main.tex
         cd ..
