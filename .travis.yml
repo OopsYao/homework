@@ -4,7 +4,7 @@ os: linux
 dist: bionic
 
 before_install:
-  - openssl aes-256-cbc -K $encrypted_d9a19cc931b8_key -iv $encrypted_d9a19cc931b8_iv
+  - openssl aes-256-cbc -K $encrypted_47d48945fed9_key -iv $encrypted_47d48945fed9_iv
     -in server/deploy/keypair.config.js.enc -out server/deploy/keypair.config.js -d
 
 install:
