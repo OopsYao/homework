@@ -86,4 +86,54 @@
         即
         \[x_n\to x\quad(n\to\infty)\]
     \end{proof}
+
+    \problem
+    \begin{proof}
+        必要性，考虑数域最多为实数域\sidenote{考虑到复数域的情况，
+        题目疑似有误，事实上对于$\mathbb C$作为复线性空间来说，
+        其为1维的，此时$(x,y)=xy$，显然不满足共轭对称的条件。
+        但若定义
+        \[(x,y):=\sum_{i,j}\alpha x_i\overline y_j\]
+        这里$(\alpha_{ij})$为埃尔米特矩阵（共轭对称），则满足
+        内积的条件。}的情况，则由于$(\alpha_{ij})$
+        为实对称矩阵
+        \[\begin{aligned}
+            (y,x)&=
+            \sum_{i,j}\alpha_{ij}y_ix_j\\
+            &=\sum_{i,j}\alpha_{ji}y_ix_j\\
+            &=(x,y)
+        \end{aligned}\]
+        同时
+        \[\begin{aligned}
+            (x+y,z)&=\sum_{i,j}\alpha_{ij}(x_i+y_i)z_j\\
+            &=\sum_{i,j}\alpha_{ij}x_iz_j
+              +\sum_{i,j}\alpha_{ij}y_iz_j\\
+            &=(x,z)+(y,z)
+        \end{aligned}\]
+        以及
+        \[\begin{aligned}
+            (kx,y)&=\sum_{i,j}\alpha_{ij}kx_iy_j\\
+            &=k(x,y)
+        \end{aligned}\]
+        故满足对第一个元素的线性性。同时由于$(\alpha_{ij})$的正定性，
+        有
+        \[(x,x)=\sum_{i,j}x_ix_j\geq 0\]
+        且仅在$x_1=x_2=\cdots=x_n=0$即$x=\boldsymbol 0$时取得等号，
+        故$(\cdot,\cdot)$为内积。
+
+        反之，考虑矩阵
+        \[\alpha_{ij}:=(e_i,e_j)\]
+        则由内积的线性性
+        \[\begin{aligned}
+            (x,y)&=\left(\sum_{i=1}^nx_ie_i,\sum_{j=1}^ny_je_j\right)\\
+            &=\sum_{i,j}x_iy_j(e_i,e_j)\\
+            &=\sum_{i,j}\alpha_{ij}x_iy_j\\
+        \end{aligned}\]
+        同时由内积的正定性，对于任意$x_1,x_2,\ldots,x_n\in\mathbb R$，
+        \[\begin{aligned}
+            \sum_{i,j}\alpha_{ij}x_ix_j
+            &=(x,x)\geq 0
+        \end{aligned}\]
+        这里$x=\sum_{i=1}^nx_ie_i$，显然有$(\alpha_{ij})$的正定性。
+    \end{proof}
 \end{document}
