@@ -9,8 +9,9 @@
 \titleformat*{\section}{\Large\bfseries}
 
 % Font setting under xetex
-\setmainfont{TeX Gyre Pagella}
-\setmathfont{TeX Gyre Pagella Math} % Specific package needed. `unicode-math` satisfies
+% Specific package needed. `unicode-math` satisfies
+\IfFontExistsTF{TeX Gyre Pagella}{\setmainfont{TeX Gyre Pagella}}{}
+\IfFontExistsTF{TeX Gyre Pagella Math}{\setmathfont{TeX Gyre Pagella Math}}{}
 
 % Reformat title, author and date
 \LetLtxMacro{\OldTitle}{\title}
