@@ -12,18 +12,21 @@ PROJ_NAME=$(basename $PWD)
 
 if [ "$1" == 'SDE' ]; then
     flag='-pdf'
+    compiler='pdflatex'
 else
     flag='-pdfxe'
+    compiler='xelatex'
 fi
 
 for d in */ ; do
     if [ -f $d/main.tex ]; then
         cd $d
-        texliveonfly main.tex
-        latexmk -interaction=nonstopmode \
-            "$flag" \
-            -outdir=$OUT_DIR/$PROJ_NAME \
-            -jobname=${d%/} \
+        texliveonfly -c latexmk \
+            --terminal_only \
+            -a "-interaction=nonstopmode
+            $flag
+            -outdir=$OUT_DIR/$PROJ_NAME
+            -jobname=${d%/}" \
             main.tex
         cd ..
     fi
