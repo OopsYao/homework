@@ -18,7 +18,7 @@ cache:
   yarn: true
 
 script:
-  - source build-sub.sh SDE
+  - source start.sh
   - cd server && yarn build
   - yarn deploy
 ## Uncomment the following lines to see the packages installed in travis
