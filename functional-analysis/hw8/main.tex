@@ -50,6 +50,25 @@
 
     \problem
     % TODO Examples of norm space where norm can not be generated inner product
+    考虑$C[0,1]$，则对于$x=f(t)\equiv 1$以及$y=g(t)=t$，有
+    \[\begin{aligned}
+        ||x||&=||y||=1\\
+        ||x+y||&=2\\
+        ||x-y||&=1\\
+    \end{aligned}\]
+    于是
+    \[2(||x||^2+||y||^2)=4\neq ||x+y||^2+||x-y||^2=5\]
+    不满足平行四边形法则，故无法由内积导出。
+
+    再考虑$L^1[0,1]$，同样地对于$x=f(t)\equiv 1$以及$y=g(t)=2t$，有
+    \[\begin{aligned}
+        ||x||&=||y||=1\\
+        ||x+y||&=2\\
+        ||x-y||&=\frac{1}{2}
+    \end{aligned}\]
+    于是
+    \[2(||x||^2+||y||^2)=4\neq ||x+y||^2+||x-y||^2=\frac{17}{4}\]
+    不满足平行四边形法则，故无法由内积导出。
 
     \problem
     \begin{proof}
