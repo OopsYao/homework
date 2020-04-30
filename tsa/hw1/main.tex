@@ -54,41 +54,41 @@
 
     \section{题2}
     \begin{proof}
-        % 首先考察$X(t)$的期望，
-        % 由白噪声序列的定义知期望存在且$E\varepsilon_i=u$为一与下标无关的常量。
-        % 而$\sum |a_i|<\infty$即序列绝对收敛，故
-        % \begin{align*}
-        %     EX(t)&=E(\sum a_i\varepsilon_{t-i})\\
-        %          &=\sum a_iE\varepsilon_{t-i}\\
-        %          &=u\sum a_i < \infty
-        % \end{align*}
-        % 亦为与时间无关的常量。
+        首先考察$X(t)$的期望，
+        由白噪声序列的定义知期望存在且$E\varepsilon_i=u$为一与下标无关的常量。
+        而$\sum |a_i|<\infty$即序列绝对收敛，故
+        \begin{align*}
+            EX(t)&=E(\sum a_i\varepsilon_{t-i})\\
+                 &=\sum a_iE\varepsilon_{t-i}\\
+                 &=u\sum a_i < \infty
+        \end{align*}
+        亦为与时间无关的常量。
 
 
-    %     对于任意的$t,s\in\mathbb N$，不妨设$t-s=d\geq 0$，考虑协方差
-    %     \begin{align*}
-    %         \mathrm{Cov}(X(t),X(s))&=\mathrm{Cov}(\sum a_i\varepsilon_{t-i},\sum a_j\varepsilon_{s-j})\\
-    %     \end{align*}
+        对于任意的$t,s\in\mathbb N$，不妨设$t-s=d\geq 0$，考虑协方差
+        \begin{align*}
+            \mathrm{Cov}(X(t),X(s))&=\mathrm{Cov}(\sum a_i\varepsilon_{t-i},\sum a_j\varepsilon_{s-j})\\
+        \end{align*}
 
-    %     又由$\{\varepsilon_i\}$为白噪声序列，则
-    %     \[\mathrm{Cov}(\varepsilon_i,\varepsilon_j)=\begin{cases}
-    %         \sigma^2,&i=j\\
-    %         0,       &i\neq j
-    %     \end{cases}\]
-    %     这里$\sigma^2$为一个与$i,j$无关的常数。
+        又由$\{\varepsilon_i\}$为白噪声序列，则
+        \[\mathrm{Cov}(\varepsilon_i,\varepsilon_j)=\begin{cases}
+            \sigma^2,&i=j\\
+            0,       &i\neq j
+        \end{cases}\]
+        这里$\sigma^2$为一个与$i,j$无关的常数。
 
-    %     又由极限的保号性和幂函数的连续性
-    %     \[\sum_{i-j=d}a_ia_j\leq\lim_{n\to\infty}\left(\sum_{i=0}^n|a_i|\right)^2
-    %     <\infty\]
+        又由极限的保号性和幂函数的连续性
+        \[\sum_{i-j=d}a_ia_j\leq\lim_{n\to\infty}\left(\sum_{i=0}^n|a_i|\right)^2
+        <\infty\]
 
-    %     因此
-    %     \begin{align*}
-    %         \mathrm{Cov}(X(t),X(s))&=\mathrm{Cov}(\sum a_i\varepsilon_{t-i},\sum a_j\varepsilon_{s-j})\\
-    %                                &=\sum_{t-i=s-j}a_ia_j\mathrm{Cov}(\varepsilon_{t-i},\varepsilon_{s-j})\\
-    %                                &=\sigma^2\sum_{i-j=d}a_ia_j
-    %     \end{align*}
-    %     即协方差仅与$t,s$的差$d$有关，具有平移不变性。
+        因此
+        \begin{align*}
+            \mathrm{Cov}(X(t),X(s))&=\mathrm{Cov}(\sum a_i\varepsilon_{t-i},\sum a_j\varepsilon_{s-j})\\
+                                   &=\sum_{t-i=s-j}a_ia_j\mathrm{Cov}(\varepsilon_{t-i},\varepsilon_{s-j})\\
+                                   &=\sigma^2\sum_{i-j=d}a_ia_j
+        \end{align*}
+        即协方差仅与$t,s$的差$d$有关，具有平移不变性。
 
-    %     因此$\{X(t)\}$为宽平稳序列。
+        因此$\{X(t)\}$为宽平稳序列。
     \end{proof}
 \end{document}
