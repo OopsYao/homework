@@ -1,14 +1,14 @@
 echo 'Start building SDE'
-source build-sub.sh SDE
+bash build-sub.sh SDE
 
 echo 'Start building FA'
-source build-sub.sh functional-analysis
+bash build-sub.sh functional-analysis
 
 echo 'Start building TSA'
-source build-sub.sh tsa
+bash build-sub.sh tsa
 
 echo 'Start building StCal'
-source build-sub.sh st-cal
+bash build-sub.sh st-cal
 
 # Do the cleanning
 WORKSPACE=$PWD
