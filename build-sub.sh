@@ -3,6 +3,8 @@
 set -e
 export TEXINPUTS=../../latex-template:
 
+OUT_DIR=$(realpath server/pdf)
+
 # Go the subproject
 ROOTDIR=$PWD
 cd $1
@@ -19,8 +21,8 @@ for d in */ ; do
         cd $d
         texliveonfly main.tex
         latexmk -interaction=nonstopmode \
-            -file-line-error $flag \
-            -outdir=../../server/pdf/$PROJ_NAME \
+            "$flag" \
+            -outdir=$OUT_DIR/$PROJ_NAME \
             -jobname=${d%/} \
             main.tex
         cd ..
