@@ -2,6 +2,9 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
+    output: {
+        filename: '[name].[contenthash].js'
+    },
     module: {
         rules: [
             {
