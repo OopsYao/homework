@@ -1,9 +1,16 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require('copy-webpack-plugin');
+const path = require('path');
 
 module.exports = {
     output: {
         filename: '[name].[contenthash].js'
+    },
+    resolve: {
+        alias: {
+            '@': path.resolve(__dirname, './src/'),
+            '@components': path.resolve(__dirname, './src/components'),
+        }
     },
     module: {
         rules: [
