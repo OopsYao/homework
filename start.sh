@@ -23,6 +23,7 @@ if [ $? -ne 0 ]; then
 fi
 
 # Do the cleanning
+cp -r outputs/* server/pdf
 WORKSPACE=$PWD
 cd server/pdf
 for d in */ ; do

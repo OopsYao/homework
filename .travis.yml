@@ -15,6 +15,7 @@ cache:
   directories:
     - /tmp/texlive
     - $HOME/.texlive
+    - outputs
   yarn: true
 
 script:

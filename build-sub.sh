@@ -3,7 +3,7 @@
 set -e
 export TEXINPUTS=../../latex-template:
 
-OUT_DIR=$(realpath server/pdf)
+OUT_DIR=$(realpath outputs)
 
 # Go the subproject
 ROOTDIR=$PWD
