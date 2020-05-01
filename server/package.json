@@ -4,9 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "@phuocng/react-pdf-viewer": "^1.5.0",
     "normalize.css": "^8.0.1",
-    "pdfjs-dist": "^2.3.200",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.1.2"
