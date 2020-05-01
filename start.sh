@@ -23,6 +23,7 @@ if [ $? -ne 0 ]; then
 fi
 
 # Do the cleanning
+mkdir -p server/pdf
 cp -r outputs/* server/pdf
 WORKSPACE=$PWD
 cd server/pdf
