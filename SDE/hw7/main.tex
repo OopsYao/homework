@@ -2,6 +2,8 @@
 
 \title{Homework 7}
 
+\newcommand{\trans}{\mathrm T}
+
 \begin{document}
     \maketitle
 
@@ -47,12 +49,36 @@
     \begin{subproblem}[(\alph*)]
         \item
         \begin{proof}
-            % TODO Proof by definition
+            We calculate $\diff(1/Y_t)$ first, then achieve the final goal by
+            product rule.
+            We have from Taylor's expansion that
+            \[\diff\left(\frac{1}{Y_t}\right)
+            =-\frac{\diff Y_t}{Y_t^2}+\frac{(\diff Y_t)^2}{Y_t^3}
+            -\frac{(\diff Y_t)^3}{Y_t^4}+\cdots\]
+            but the high order terms is 0 since $Y_t$ is an It\^o diffusion, i.e.,
+            \[(\diff Y_t)^k=(\diff Y_t)^{k-2}(\diff Y_t)^2=\sigma^2(\diff Y_t)^{k-2}\diff t=0
+            ,k\geq 3\]
+            Therefore,
+            \[\diff\left(\frac{1}{Y_t}\right)
+            =-\frac{\diff Y_t}{Y_t^2}+\frac{(\diff Y_t)^2}{Y_t^3}\]
+            It follows by product rule that
+            \[\begin{aligned}
+                \diff\left(\frac{X_t}{Y_t}\right)
+                &=X_t\diff\left(\frac{1}{Y_t}\right)+\frac{\diff X_t}{Y_t}
+                +\diff X_t\diff\left(\frac{1}{Y_t}\right)\\
+                &=-\frac{X_t\diff Y_t}{Y_t^2}+\frac{X_t(\diff Y_t)^2}{Y_t^3}
+                +\frac{\diff X_t}{Y_t}
+                -\frac{\diff X_t\diff Y_t}{Y_t^2}
+                +\frac{\diff X_t(\diff Y_t)^2}{Y_t^3}\\
+                &=\frac{Y_t\diff X_t-X_t\diff Y_t-\diff X_t\diff Y_t}%
+                  {Y_t^2}+\frac{X_t}{Y_t^3}(\diff Y_t)^2
+            \end{aligned}\]
+            as $\diff X_t(\diff Y_t)^2=0$ for the same reason.
         \end{proof}
 
         \item
         \begin{proof}
-            We have from It\^o's lemma that
+            We have from (bivariate) It\^o's lemma that
             \[\begin{aligned}
                 \diff\left(\frac{X_t}{Y_t}\right)&=
                 \frac{\diff X_t}{Y_t}-\frac{X_t}{Y_t^2}\diff Y_t
@@ -164,9 +190,8 @@
                 +\frac{\partial^2 f}{\partial x_n^2}\sigma_n^2\diff t
             \right)
             \end{aligned}\\
-            % TODO Better notation
             &=\left(\frac{\partial f}{\partial t}
-            +\frac{1}{2}\right)\diff t
+            +\frac{1}{2}\boldsymbol\sigma^\trans A\boldsymbol\sigma\right)\diff t
             +\nabla f\cdot\diff\boldsymbol X_t
             \end{aligned}
         \end{equation*}
@@ -181,11 +206,66 @@
             \diff\boldsymbol X_t&:=
             \left(\diff X_t^{(1)},\ldots,\diff X_t^{(n)}\right)\\
             \boldsymbol\sigma&:=
-            \left(\sigma_1,\ldots,\sigma_n\right)
+            \left(\sigma_1,\ldots,\sigma_n\right)^\trans\\
+            A&:=\mathrm{diag}\left\{\frac{\partial^2 f}{\partial x_1^2},
+           \frac{\partial^2 f}{\partial x_2^2},\ldots,
+           \frac{\partial^2 f}{\partial x_n^2}\right\}
         \end{aligned}\]
         
         \item
-        % TODO Generalization with coefficients
+        Here we claim that
+        \[\diff W_t^{(i)}\diff W_t^{(j)}=\rho_{ij}\diff t\]
+        to see this,
+        we assume that for any $i,j$, the pair$(W_t^{(i)},W_t^{(j)})$
+        has a joint normal distribution\sidenote{
+            Two normally distributed random variables need not be jointly bivariate normal.
+            But here we need this condition to achieve our claim.
+        }. Take $(W_t^{(1)},W_t^{(2)})$ for example,
+        then there exists a matrix $A\in\mathbb R^{2\times l}$ s.t.
+        \[\boldsymbol W_t:=(W_t^{(1)},W_t^{(2)})^\trans
+        =A\boldsymbol Z_t\]
+        where $\boldsymbol Z_t$ is a random vector composed of independent normally
+        distributed processes, i.e.,
+        \[\boldsymbol Z_t:=(Z_t^{(1)},Z_t^{(2)},\ldots,Z_t^{(l)})^\trans\]
+        and $Z_t^{(i)}\overset{\text{i.i.d.}}\sim\mathcal N(0,t),i=1,2,\ldots,l$.
+        To keep things simple, we put the details in appendix: \nameref{app:jn}.
+
+        It follows that
+        \[\diff X_t^{(i)}\diff X_t^{(j)}
+        =\left(\mu_i\diff t+\sigma_i\diff W_t^{(i)}\right)
+        \left(\mu_j\diff t+\sigma_j\diff W_t^{(j)}\right)
+        =\rho_{ij}\sigma_i\sigma_j\diff t\]
+
+        So any other high order terms like
+        \[\diff X_t^{(i)}\diff X_t^{(j)}\diff X_t^{(k)}\text{ or }
+        \left(\diff X_t^{(i)}\right)^2\diff X_t^{(j)}\]
+        is 0. Then we can have from multivariate Taylor's expansion
+        that
+        \[\begin{aligned}
+            \diff f\left(t,X_t^{(1)},\ldots,X_t^{(n)}\right)&=
+            \begin{aligned}[t]
+            &\frac{\partial f}{\partial t}\diff t
+            +\frac{\partial f}{\partial x_1}\diff X_t^{(1)}
+            +\cdots
+            +\frac{\partial f}{\partial x_n}\diff X_t^{(n)}\\
+            &+\frac{1}{2}\sum_{i,j}\frac{\partial^2 f}{\partial x_i\partial x_j}
+            \diff X_t^{(i)}\diff X_t^{(j)}\\
+            \end{aligned}\\
+            &=\left(\frac{\partial f}{\partial t}
+            +\frac{1}{2}\sum_{i,j}\rho_{ij}\sigma_i\sigma_j
+            \frac{\partial^2 f}{\partial x_i\partial x_j}
+            \right)\diff t
+            +\sum_{i=1}^n\frac{\partial f}{\partial x_n}\diff X_t^{(n)}\\
+            &=\left(\frac{\partial f}{\partial t}
+            +\frac{1}{2}\boldsymbol\sigma^\trans(\mathcal Lf)\boldsymbol\sigma\right)
+            \diff t
+            +\nabla f\cdot\diff\boldsymbol X_t
+        \end{aligned}\]
+        where
+        \[\mathcal Lf:=\left(\rho_{ij}\sigma_i\sigma_j
+            \frac{\partial^2 f}{\partial x_i\partial x_j}\right)_{n\times n}\]
+        and other notations is similar to above.
+
     \end{subproblem}
 
     \problem
@@ -361,9 +441,10 @@
         \[-\frac{T}{8}=-E\left(\int_0^T\frac{1}{8}\diff t\right)
         \leq E(\ln(1+W_T^2))
         \leq E\left(\int_0^T\diff t\right)=T\]
-
-        % TODO Contradicton in upper bound?
     \end{proof}
+    There is no contradiction -- they both are correct, while the
+    bound yielded by Jensen's inequality is finer, as
+    \[\ln(1+T)\leq T\]
 
     \problem
     Denote
@@ -389,7 +470,6 @@
         \end{aligned}
     \end{aligned}\]
     Also note the fact that
-    % TODO There must be something wrong
     \[\frac{\partial}{\partial t}\left(f(t)g(t,W_t)\right)
     =\left(\frac{W_t^2}{2}t^{-\frac{5}{2}}-\frac{t^{-\frac{3}{2}}}{2}\right)
     \e^{-\frac{W_t^2}{2t}}\]
@@ -398,12 +478,48 @@
     =\left(t^{-\frac{5}{2}}W_t^2-t^{-\frac{3}{2}}\right)\e^{-\frac{W_t^2}{2t}}\]
     i.e.,
     \[\frac{\partial}{\partial t}\left(f(t)g(t,W_t)\right)
-    +\frac{f(t)}{2}\frac{\partial^2g(t,W_t)}{\partial W_t^2}=0\]
+    +\frac{f(t)}{2}\frac{\partial^2g(t,W_t)}{\partial W_t^2}
+    =t^{-\frac{5}{2}}(W_t^2-t)\e^{-\frac{W_t^2}{2t}}\]
     therefore,
     \[\begin{aligned}
         \int_a^bt^{-\frac{3}{2}}W_t\e^{-\frac{W_t^2}{2t}}\diff W_t
-        &=f(a)g(a,W_a)-f(b)g(b,W_b)\\
+        &=-\left.f(t)g(t,W_t)\right|_a^b
+        +\int_a^bt^{-\frac{5}{2}}(W_t^2-t)\e^{-\frac{W_t^2}{2t}}\diff t\\
         &=\frac{\e^{-\frac{W_a^2}{2a}}}{\sqrt a}
         -\frac{\e^{-\frac{W_b^2}{2b}}}{\sqrt b}
+        +\int_a^bt^{-\frac{5}{2}}(W_t^2-t)\e^{-\frac{W_t^2}{2t}}\diff t\\
     \end{aligned}\]
+
+    \appendix
+    \section{Proof About Joint Normal Distribution}
+    \label{app:jn}
+    \begin{proof}
+        Take $(W_t^{(1)},W_t^{(j)})$ for example.
+        Denote $A=(\alpha_1,\alpha_2)^\trans$,
+        it follows that
+        \[W_t^{(1)}=\alpha_1^\trans\boldsymbol Z_t,
+        W_t^{(2)}=\alpha_2^\trans\boldsymbol Z_t\]
+        hence
+        \[\diff W_t^{(1)}\diff W_t^{(2)}
+        =\alpha_1^\trans\diff\boldsymbol Z_t
+        \alpha_2^\trans\diff\boldsymbol Z_t
+        =\alpha_1^\trans(\diff\boldsymbol Z_t\diff\boldsymbol Z_t^\trans)\alpha_2
+        =\alpha_1^\trans\alpha_2\diff t
+        \]
+        as
+        \[\diff\boldsymbol Z_t\diff\boldsymbol Z_t^\trans
+        =\left(\diff Z_t^{(i)}\diff Z_t^{(j)}\right)_{l\times l}=I\diff t\]
+        where $I$ represents the unit matrix.
+        On the other hand,
+        \[\cov\left(W_t^{(1)},W_t^{(2)}\right)
+        =\cov(\alpha_1^\trans\boldsymbol Z_t,\alpha_2^\trans\boldsymbol Z_t)
+        =\alpha_1^\trans\alpha_2 t\]
+        due to the independence of components of $\boldsymbol Z_t$,
+        thus the coefficient
+        \[\rho_{12}=\alpha_1^\trans\alpha_2\]
+        It follows that
+        \[\diff W_t^{(1)}\diff W_t^{(2)}=\rho_{12}\diff t\]
+        Therefore in general,
+        \[\diff W_t^{(i)}\diff W_t^{(j)}=\rho_{ij}\diff t\]
+    \end{proof}
 \end{document}
