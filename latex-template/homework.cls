@@ -38,7 +38,7 @@
 % Problem
 \newcounter{problem}
 \if@tweaktufte
-  \newcommand{\problem}[1][题\theproblem]{\stepcounter{problem}\section{#1}}
+  \newcommand{\problem}[1][题\theproblem]{\refstepcounter{problem}\section{#1}}
 \else
   \newcommand{\problem}{\refstepcounter{problem}\section{Problem \theproblem}}
 \fi

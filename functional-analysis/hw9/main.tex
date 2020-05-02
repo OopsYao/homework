@@ -1,0 +1,52 @@
+\documentclass[cn]{homework}
+
+\title{第十周作业}
+
+\begin{document}
+    \maketitle
+
+    \problem
+    \label{pb:scale}
+    \begin{subproblem}[(\arabic*)]
+        \item
+        \begin{proof}
+            由于该等式成立等价于等式两端平方成立，即
+            \[||x+y||^2=(||x||+||y||)^2\]
+            展开即得
+            \[(x,y)+(y,x)=2||x||\cdot||y||\]
+            于是下面的复数模的三角不等式与Cauchy不等式均取得等号
+            \[|(x,y)+(y,x)|\leq|(x,y)|+|(y,x)|\leq 2||x||\cdot||y||\]
+            因此应有
+            % TODO So what's next?
+
+        \end{proof}
+
+        \item
+        \begin{proof}
+            % TODO Same to p1?
+        \end{proof}
+
+        \item
+        \begin{proof}
+            由于$x-y=x-z+z-y$，倘若$x-z,z-y$非零，即$x\neq z,y\neq z$，
+            因此存在$k>0$使得
+            \[x-z=k(z-y)\]
+            即
+            \[z=\frac{1}{1+k}x+\frac{k}{1+k}y\]
+            因此存在$\alpha=1/(1+k)\in[0,1]$使得题述等式成立。
+            倘若$x-z,z-y$其一为零，不妨设$x=z$，则存在$\alpha=1$符合题述，
+            因此满足条件的$\alpha$总是成立的。
+        \end{proof}
+    \end{subproblem}
+
+    \problem
+    \begin{proof}
+        特别地，对于$\lambda=0$，可以得到$||x||=||y||$，对于$\lambda=1/2$有
+        \[||x+y||=2||x||=||x||+||y||\]
+        因此倘若$x,y$非零，由题\ref{pb:scale}可得$y$为$x$的正倍数，同时注意到
+        二者范数相同，因此只能有$x=y$。倘若其一为零向量，则二者同具有零范数，
+        从而同为零向量。
+
+        % TODO What about normed space
+    \end{proof}
+\end{document}
