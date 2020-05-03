@@ -49,4 +49,40 @@
 
         % TODO What about normed space
     \end{proof}
+
+    \problem
+    % TODO Equivalence of orthogonality
+
+    \problem
+    对于实空间来说，等式等价于
+    \[2(x,y)=0\]
+    从而知其正交。考虑复数域上的复空间$\mathbb C$，
+    则内积$(x,y)=x\bar y$，诱导的范数为复数的模，考虑到
+    \newcommand{\img}{\mathrm i}
+    \[|1+\img|^2=|1|^2+|\img|^2=2\]
+    但$(1,\img)=-\img\neq 0$，并不正交。
+
+    \problem
+    \begin{subproblem}
+        \item
+        \begin{proof}
+        由于$M\perp N$，则对于任意$x\in M,y\in N$，有$x\perp N,y\perp M$，
+        从而$x\in N^{\perp},y\in M^{\perp}$，即$M\subset N^{\perp},N\subset M^{\perp}$。
+        \end{proof}
+
+        \item
+        \begin{proof}
+            \newcommand{\cl}[1]{\overline{#1}}
+            对于任意$x\in(\cl M)^{\perp}$，$x\perp\cl M$，而$M\subset\cl M$，
+            因此$x\perp M$，即$x\in M^\perp$，故$(\cl M)^\perp\subset M^\perp$。
+
+            反过来对于任意$x\in M^\perp$，则$x\perp M$。考虑$\cl M$中任意一点$y$，
+            则存在$\{y_n\}\subset M$使得$y_n\to y$。而由于$x\perp M$，故
+            $(y_n,x)=0$，则由内积的连续性
+            \[(y,x)=\lim_{n\to\infty}(y_n,x)=0\]
+            即有$x\in(\cl M)^\perp$，因此$M^\perp\subset(\cl M)^\perp$。
+            综上可得$M^\perp=(\cl M)^\perp$。
+        \end{proof}
+        
+    \end{subproblem}
 \end{document}
