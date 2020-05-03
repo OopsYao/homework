@@ -242,13 +242,13 @@
     \end{aligned}\]
     which derives the ODE of expectation accordingly
     \[\begin{aligned}
-        \frac{\diff X_t}{\diff t}&=Y_t-\frac{\sigma^2}{2}X_t\\
-        \frac{\diff Y_t}{\diff t}&=-X_t-\frac{\sigma^2}{2}Y_t
+        \frac{\diff E(X_t)}{\diff t}&=E(Y_t)-\frac{\sigma^2}{2}E(X_t)\\
+        \frac{\diff E(Y_t)}{\diff t}&=-E(X_t)-\frac{\sigma^2}{2}E(Y_t)
     \end{aligned}\]
     If we further denote
     \[\X:=\begin{pmatrix}
-        X_t\\
-        Y_t
+        E(X_t)\\
+        E(Y_t)
     \end{pmatrix},
     A:=\begin{pmatrix}
         -\frac{\sigma^2}{2} & 1\\
@@ -257,7 +257,8 @@
     then the ODEs become
     \[\frac{\diff\X}{\diff t}=A\X\]
     with initial condition $\X_0=(0,1)^\mathrm T$.
-    Here the symbol $\diff\X/\diff t$ represents $(\diff X_t/\diff t,\diff Y_t/\diff t)^\mathrm T$.
+    Here the symbol $\diff\X/\diff t$ represents
+    $(\diff E(X_t)/\diff t,\diff E(Y_t)/\diff t)^\mathrm T$.
 
     \newcommand{\img}{\mathrm i}
     After some basic calculation one can see that the matrix $A$ has eigenvalues
