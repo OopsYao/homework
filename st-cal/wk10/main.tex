@@ -19,18 +19,18 @@
         \[\begin{aligned}
             &\E[\Delta(t_k)(M(t_{k+1})-M(t_k))\mid\mathcal F(s)]\\
             =&\E\{\E[\Delta(t_k)M(t_{k+1})-M(t_k))\mid\mathcal F(t_k)]\mid \mathcal F(s)\}\\
-            =&\E\{\Delta(t_k)\cdot E[M(t_{k+1})-M(t_k)\mid\mathcal F(t_k)]\mid\mathcal F(s)\}\\
+            =&\E\{\Delta(t_k)\cdot \E[M(t_{k+1})-M(t_k)\mid\mathcal F(t_k)]\mid\mathcal F(s)\}\\
             =&0\\
             &\E[\Delta(t_l)(M(s)-M(t_l))\mid\mathcal F(s)]\\
             =&\Delta(t_l)\cdot\E[M(s)-M(t_l)\mid\mathcal F(s)]\\
             =&0\\
             &\E[\Delta (t_m)(M(t)-M(t_m))\mid\mathcal F(s)]\\
-            =&\E\{[\Delta(t_m)(M(t)-M(t_m)\mid\mathcal F(\max\{s,t_m\})]\mid F(s)\}\\
+            =&\E\{\E[\Delta(t_m)(M(t)-M(t_m)\mid\mathcal F(\max\{s,t_m\})]\mid F(s)\}\\
             =&\E\{\Delta(t_m)\cdot\E[M(t)-M(t_m)\mid\mathcal F(\max\{s,t_m\})]\mid F(s)\}\\
             =&0
         \end{aligned}\]
         注意到在上面的推导中我们利用了
-        \[\E\{[X\mid \mathcal F]\mid\mathcal G\}=E[X\mid\mathcal G],
+        \[\E\{\E[X\mid \mathcal F]\mid\mathcal G\}=\E[X\mid\mathcal G],
         \mathcal G\subset \mathcal F\]
         于是
         \[\begin{aligned}
@@ -38,4 +38,58 @@
         \end{aligned}\]
         即$I(s)$为鞅。
     \end{proof}
+
+    \problem[习题4.2]
+    \begin{subproblem}
+        \item
+        \label{spb:independence}
+        \begin{proof}
+            对于分点$t_k<t_l$，有
+            \begin{equation}
+                \label{eq:delta I}
+                I(t_l)-I(t_k)=\sum_{j=l}^{k-1}\Delta(t_j)[W(t_{j+1})-W(t_j)]
+            \end{equation}
+            而由于$\Delta(t_j)$非随机，$W(t_{j+1})-W(t_j),j\geq l$独立于$\mathcal F(t_k)$，
+            故$I(t_l)-I(t_k)$独立于$\mathcal F(t_k)$，从而$I(t)-I(s)$独立于$\mathcal F(s)$。
+        \end{proof}
+
+        \item
+        \label{spb:normal}
+        \begin{proof}
+            也只需证明对于任意分点$t_k<t_l$的情况。
+            由于$W(t_{j+1})-W(t_j)$相互独立，故
+            由\cref{eq:delta I}知，
+            \[I(t_l)-I(t_k)\sim\mathcal N\left(0,\sum_{j=l}^{k-1}(\Delta(t_j))^2(t_{j+1}-t_j)\right)\]
+            而注意到
+            \[\int_{t_l}^{t_k}\Delta^2(u)\diff u=\sum_{j=l}^{k-1}(\Delta(t_j))^2(t_{j+1}-t_j)\]
+            故有题述结论。
+        \end{proof}
+
+        \item
+        \begin{proof}
+            由\ref{spb:independence}的独立性和\ref{spb:normal}知，
+            \[\E[I(t)-I(s)\mid\mathcal F(s)]=\E[I(t)-I(s)]=0\]
+            而$I(s)$是$\mathcal F(s)$可测的，因此$I(t)$为鞅。
+        \end{proof}
+        
+        \item
+        \begin{proof}
+            由于$I(t)-I(s)$独立于$\mathcal F(s)$，$I(s)$为$\mathcal F(s)$可测，
+            \[\begin{aligned}
+                &\E[I^2(t)\mid\mathcal F(s)]\\
+                =&\begin{aligned}[t]
+                &\E[(I(t)-I(s))^2\mid\mathcal F(s)]\\
+                &+2\E[I(s)(I(t)-I(s))\mid\mathcal F(s)]
+                +\E[I^2(s)\mid\mathcal F(s)]
+                \end{aligned}\\
+                =&\E[(I(t)-I(s))^2]+2\E[I(s)]\cdot\E[I(t)-I(s)]
+                +I^2(s)\\
+                =&\int_s^t\Delta^2(u)\diff u+I^2(s)
+            \end{aligned}\]
+            从而
+            \[\E\left[\left.I^2(t)-\int_0^t\Delta^2(u)\diff u\right|\mathcal F(s)\right]
+            =I^2(s)-\int_0^s\Delta^2(u)\diff u\]
+            即$I^2(t)-\int_0^t\Delta^2(u)\diff u$为鞅。
+        \end{proof}
+    \end{subproblem}
 \end{document}
