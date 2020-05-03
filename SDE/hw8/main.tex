@@ -42,7 +42,7 @@
             \frac{1}{\lambda}\e^{-\frac{\lambda^2t}{2}+\lambda x}+C_0,&\lambda\neq 0\\
             x+C_0,&\lambda=0
         \end{cases}\]
-        Via head equation method, it follows that
+        Via heat equation method, it follows that
         \[\int_0^T\e^{-\frac{\lambda^2t}{2}+\lambda W_t}\diff W_t
         =\left.f(t,W_t)\right|_0^T
         =\begin{cases}
@@ -61,7 +61,7 @@
         \newcommand{\thisf}[1]{\e^{\frac{\lambda^2t}2}\cos(\lambda #1)}
         \[\int_0^T\thisf{W_t}\diff W_t=W_T\]
         For $\lambda\neq 0$,
-        the coresponded head equation is
+        the corresponded heat equation is
         \[\left\{\begin{aligned}
             &\frac{\partial f}{\partial t}+\frac{1}{2}\frac{\partial^2 f}{\partial x^2}=0,t\geq 0\\
             &\frac{\partial f}{\partial x}=\thisf{x}
@@ -89,7 +89,7 @@
         If $\lambda=0$, we obtain the integral directly
         \renewcommand{\thisf}[1]{\e^{\frac{\lambda^2t}2}\sin(\lambda #1)}
         \[\int_0^T\thisf{W_t}\diff W_t=0\]
-        Otherwise the coresponded head equation reads
+        Otherwise the coresponded heat equation reads
         \[\left\{\begin{aligned}
             &\frac{\partial f}{\partial t}+\frac{1}{2}\frac{\partial^2 f}{\partial x^2}=0,t\geq 0\\
             &\frac{\partial f}{\partial x}=\thisf{x}
@@ -159,4 +159,129 @@
     \end{aligned}\]
     as $f(t,x)$ satisfies
     \[\frac{\partial f}{\partial t}+\frac{1}{2}\frac{\partial^2 f}{\partial x^2}=G(t)\]
+
+    \problem
+    The corresponded heat equation is
+    \[\left\{\begin{aligned}
+        &\frac{\partial\varphi}{\partial t}
+        +\frac{1}{2}\frac{\partial^2\varphi}{\partial x^2}=0\\
+        &\frac{\partial\varphi}{\partial x}=x^2+g(t)
+    \end{aligned}\right.\]
+    The second equation gives us
+    \[\varphi(t)=\frac{x^3}{3}+xg(t)+c(t)\]
+    where $c(t)$ is a function of $t$. Substituting this form into
+    the heat equation yields $c'(t)=-x-xg'(t)$. Hence we can choose
+    $g(t)=-t$ to make $c'(t)=0$ being valid, thus $c(t)=c_0$ being an aribitary
+    constant. Therefore,
+    \[\int_0^TW_t^2+g(t)\diff W_t=\left.\frac{W_t^3}{3}-tW_t\right|_0^T
+    =\frac{W_T^3}{3}-TW_T\]
+
+    As for $\int_0^Tg(t)\diff W_t$, we can obtain by product rule that
+    \[\int_0^Tg(t)\diff W_t=W_tg(t)|_0^T-\int_0^TW_t\diff g(t)
+    =-TW_T+\int_0^TW_t\diff t\]
+    and we further conclude that
+    \[\int_0^TW_t^2\diff W_t
+    =\int_0^TW_t^2+g(t)\diff W_t-\int_0^Tg(t)\diff W_t
+    =\frac{W_T^3}{3}-\int_0^TW_t\diff t\]
+
+    \problem
+    Denote $X_t:=W_t\e^{kW_t}$, then we have from It\^o's lemma that
+    \[\begin{aligned}
+        \diff X_t&=(1+kW_t)\e^{kW_t}\diff W_t
+        +\frac{1}{2}(2k+k^2W_t)\e^{kW_t}\diff t\\
+        &=(1+kW_t)\e^{kW_t}\diff W_t+\left(k\e^{kW_t}+\frac{k^2}{2}X_t\right)\diff t
+    \end{aligned}\]
+    hence
+    \[\begin{aligned}
+        E(X_t-X_0)&=E\left(\int_0^t\left(k\e^{kW_s}+\frac{k^2}{2}X_s\right)\diff s\right)\\
+        &=\int_0^t\left(kE(\e^{kW_s})+\frac{k^2}{2}E(X_s)\right)\diff s
+    \end{aligned}\]
+    i.e.,
+    \[\frac{\diff E(X_t)}{\diff t}=\frac{k^2}{2}E(X_t)+kE(\e^{kW_t})
+    =\frac{k^2}{2}E(X_t)+k\e^{\frac{k^2t}{2}}\]
+    as
+    \[E(\e^{kW_t})=\e^{\frac{k^2t}{2}}\]
+    The ODE above gives us
+    \begin{equation}
+        \label{eq:EXt}
+        E(W_t\e^{kW_t})=E(X_t)=kt\e^{\frac{k^2t}{2}}
+    \end{equation}
+    since $E(X_0)=0$.
+
+    Denote $Y_t:=W_t^2\e^{W_t}$, then we can derive the corresponded SDE as
+    \[\begin{aligned}
+        \diff Y_t&=W_t(2+W_t)\e^{W_t}\diff W_t+\frac{1}{2}(2+4W_t+W_t^2)\e^{W_t}\diff t\\
+        &=W_t(2+W_t)\diff W_t+\left((1+2W_t)\e^{W_t}+\frac{X_t}{2}\right)\diff t
+    \end{aligned}\]
+    Similarly we can obtain the ODE of $E(Y_t)$ after dropping the It\^o integral term,
+    \[\frac{\diff E(Y_t)}{\diff t}=\frac{1}{2}E(X_t)+E((1+2W_t)\e^{W_t})
+    =\frac{1}{2}E(X_t)+(1+2t)\e^{\frac{t}{2}}\]
+    since \cref{eq:EXt} gives us
+    \[E((1+2W_t)\e^{W_t})=E(\e^{W_t})+2E(W_t\e^{W_t})=(1+2t)\e^{\frac{t}{2}}\]
+    With initial condition $E(Y_0)=0$, the ODE is solved as
+    \[E(W_t^2\e^{W_t})=E(Y_t)=t(1+t)\e^{\frac{t}{2}}\]
+
+    \problem
+    % TODO EW^{2k}
+
+    \problem
+    \newcommand{\X}{\boldsymbol Z}
+    Denote $X_t:=\sin(t+\sigma W_t),Y_t:=\cos(t+\sigma W_t)$,
+    then we have from It\^o's lemma that
+    \[\begin{aligned}
+        \diff X_t&=
+        \begin{aligned}[t]
+        &\left(\cos(t+\sigma W_t)-\frac{\sigma^2}{2}\sin(t+\sigma W_t)\right)\diff t\\
+        &+\sigma\cos(t+\sigma W_t)\diff W_t\\
+        \end{aligned}\\
+        \diff Y_t&=
+        \begin{aligned}[t]
+        &-\left(\sin(t+\sigma W_t)+\frac{\sigma^2}{2}\cos(t+\sigma W_t)\right)\diff t\\
+        &-\sigma\sin(t+\sigma W_t)\diff W_t
+        \end{aligned}
+    \end{aligned}\]
+    which derives the ODE of expectation accordingly
+    \[\begin{aligned}
+        \frac{\diff X_t}{\diff t}&=Y_t-\frac{\sigma^2}{2}X_t\\
+        \frac{\diff Y_t}{\diff t}&=-X_t-\frac{\sigma^2}{2}Y_t
+    \end{aligned}\]
+    If we further denote
+    \[\X:=\begin{pmatrix}
+        X_t\\
+        Y_t
+    \end{pmatrix},
+    A:=\begin{pmatrix}
+        -\frac{\sigma^2}{2} & 1\\
+        -1 & -\frac{\sigma^2}{2}
+    \end{pmatrix}\]
+    then the ODEs become
+    \[\frac{\diff\X}{\diff t}=A\X\]
+    with initial condition $\X_0=(0,1)^\mathrm T$.
+    Here the symbol $\diff\X/\diff t$ represents $(\diff X_t/\diff t,\diff Y_t/\diff t)^\mathrm T$.
+
+    \newcommand{\img}{\mathrm i}
+    After some basic calculation one can see that the matrix $A$ has eigenvalues
+    $\lambda_1=-\sigma^2/2+\img,\lambda_2=-\sigma^2/2-\img$, with eigenvectors $(-\img,1)^\mathrm T,(\img,1)^\mathrm T$
+    accordingly. It follows that the general solution to the ODEs is
+    \[\X=C_1\begin{pmatrix}
+        -\img\\
+        1
+    \end{pmatrix}\e^{\img t}
+    +C_2\begin{pmatrix}
+        \img\\
+        1
+    \end{pmatrix}\e^{-\img t}\]
+    where $C_1,C_2$ are constants to be determined.
+    Substituting initial condition into the entity above gives us
+    \[C_1=C_2=\frac{1}{2}\]
+    Therefore in sight of Euler's formula,
+    \[\X=\begin{pmatrix}
+        \frac{\img}{2}(\e^{-\img t}-\e^{\img t})\\
+        \frac{1}{2}(\e^{-\img t}+\e^{\img t})
+    \end{pmatrix}
+    =\begin{pmatrix}
+        \sin t\\
+        \cos t
+    \end{pmatrix}\]
+    i.e., $E(\sin(t+\sigma W_t))=\sin t,E(\cos(t+\sigma W_t))=\cos t$.
 \end{document}
