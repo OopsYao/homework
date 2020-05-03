@@ -1,0 +1,41 @@
+\documentclass[cn]{homework}
+
+\title{第十周作业}
+
+\newcommand{\E}{\mathbb E}
+\begin{document}
+    \maketitle
+
+    \problem[习题4.1]
+    \begin{proof}
+        对于$s\leq t$，不妨设$t_l\leq s<t_{l+1},t_m\leq t<t_{m+1}$，
+        且$t_l\leq t_m$，则根据定义
+        \begin{multline*}
+            I(t)=I(s)+\sum_{k=l+1}^{m-1}\Delta(t_k)[M(t_{k+1})-M(t_k)]\\
+            +\Delta(t_l)[M(s)-M(t_l)]+\Delta(t_m)[M(t)-M(t_m)]
+        \end{multline*}
+        由于$\Delta(t)$适应于$\mathcal F(t)$，$M(t)$为鞅（从而也适应于
+        $\mathcal F(t)$），从而有
+        \[\begin{aligned}
+            &\E[\Delta(t_k)(M(t_{k+1})-M(t_k))\mid\mathcal F(s)]\\
+            =&\E\{\E[\Delta(t_k)M(t_{k+1})-M(t_k))\mid\mathcal F(t_k)]\mid \mathcal F(s)\}\\
+            =&\E\{\Delta(t_k)\cdot E[M(t_{k+1})-M(t_k)\mid\mathcal F(t_k)]\mid\mathcal F(s)\}\\
+            =&0\\
+            &\E[\Delta(t_l)(M(s)-M(t_l))\mid\mathcal F(s)]\\
+            =&\Delta(t_l)\cdot\E[M(s)-M(t_l)\mid\mathcal F(s)]\\
+            =&0\\
+            &\E[\Delta (t_m)(M(t)-M(t_m))\mid\mathcal F(s)]\\
+            =&\E\{[\Delta(t_m)(M(t)-M(t_m)\mid\mathcal F(\max\{s,t_m\})]\mid F(s)\}\\
+            =&\E\{\Delta(t_m)\cdot\E[M(t)-M(t_m)\mid\mathcal F(\max\{s,t_m\})]\mid F(s)\}\\
+            =&0
+        \end{aligned}\]
+        注意到在上面的推导中我们利用了
+        \[\E\{[X\mid \mathcal F]\mid\mathcal G\}=E[X\mid\mathcal G],
+        \mathcal G\subset \mathcal F\]
+        于是
+        \[\begin{aligned}
+            \E[I(t)\mid\mathcal F(s)]=I(s)
+        \end{aligned}\]
+        即$I(s)$为鞅。
+    \end{proof}
+\end{document}
