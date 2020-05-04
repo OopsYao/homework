@@ -1,0 +1,43 @@
+\documentclass[cn]{homework}
+
+\title{第十一周作业}
+
+\begin{document}
+    \maketitle
+    
+    \problem[习题4.5]
+    \begin{subproblem}
+        \item
+        由伊藤公式
+        \[\diff\log S(t)=\frac{\diff S(t)}{S(t)}-\frac{(\diff S(t))^2}{2S^2(t)}\]
+        代入化简即得
+        \begin{equation}
+            \label{eq:d ln}
+            \diff\log S(t)=\left(\alpha(t)-\frac{\sigma^2(t)}{2}\right)\diff t
+            +\sigma(t)\diff W(t)
+        \end{equation}
+
+        \item
+        \cref{eq:d ln}两端积分即得
+        \[\log S(t)-\log S(0)
+        =\int_0^t\left(\alpha(s)-\frac{\sigma^2(s)}{2}\right)\diff s
+        +\int_0^t\sigma(s)\diff W(s)\]
+        即
+        \[S(t)=S(0)\exp\left\{
+        \int_0^t\left(\alpha(s)-\frac{\sigma^2(s)}{2}\right)\diff s
+        +\int_0^t\sigma(s)\diff W(s)
+        \right\}\]
+    \end{subproblem}
+
+    \problem[习题4.6]
+    由于
+    \[S^p(t)=S^p(0)\e^{p\alpha W(t)+p\left(\alpha-\frac{\sigma^2}{2}\right)t}\]
+    从而由伊藤公式
+    \[\begin{aligned}
+        \diff(S^p(t))&=p\left(\alpha-\frac{\sigma^2}{2}\right)S^p(t)\diff t
+        +p\sigma S^p(t)\diff W(t)+\frac{1}{2}p^2\sigma^2S^p(t)\diff t\\
+        &=pS^p(t)\left(
+        \left(\alpha+\frac{\sigma^2(p-1)}{2}\right)\diff t+\sigma\diff W(t)
+        \right)
+    \end{aligned}\]
+\end{document}
