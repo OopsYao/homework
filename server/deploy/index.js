@@ -56,14 +56,15 @@ async function upload(filelist) {
         // Set MIME, A remote name is sufficient
         const putExtra = new qiniu.form_up.PutExtra(mimeType = mime.lookup(remoteFile));
         pl.push(
-            putFile(uploadToken, remoteFile, localFile, putExtra).catch(error => {
-                console.log(error);
-                throw file;
-            })
+            putFile(uploadToken, remoteFile, localFile, putExtra)
+                .then(_ => undefined)
+                .catch(error => {
+                    console.log(error);
+                    return file;
+                })
         )
     });
     // Collect failed filelist after all promises resolved
-    // Since there is no resolve handler for `push`, the resolved value would be `undefined`
     return (await Promise.all(pl)).filter(errFile => errFile !== undefined);
 }
 
