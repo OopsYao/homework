@@ -1,6 +1,7 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require('copy-webpack-plugin');
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
     output: {
@@ -42,6 +43,9 @@ module.exports = {
             { from: 'pdf/', to: 'pdf' },
             { from: 'public' }
         ]),
+        new webpack.DefinePlugin({
+            DOC_TREE: JSON.stringify(require('./doc-structure')('./pdf'))
+        })
     ],
     devServer: {
         historyApiFallback: true
