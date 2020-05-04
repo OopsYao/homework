@@ -9,6 +9,9 @@ texliveonfly latexmk
 collection-langeuropean
 collection-fontsrecommended
 
+# XeTeX
+xetex
+
 # LuaTeX
 luaotfload
 
