@@ -44,25 +44,27 @@ filelist.push(['errno-404', `${DIST_DIR}/index.html`])
 
 // Upload files in filelist
 async function upload(filelist) {
-    const failurelist = []
-    for (const file of filelist) {
-        try {
-            const localFile = file[1]
-            const remoteFile = file[0]
-            // To cover an existed file
-            const options = { scope: `${bucket}:${remoteFile}` };
-            const putPolicy = new qiniu.rs.PutPolicy(options);
-            const uploadToken = putPolicy.uploadToken(mac);
+    const pl = []
+    filelist.forEach(file => {
+        const localFile = file[1];
+        const remoteFile = file[0];
+        // To cover an existed file
+        const options = { scope: `${bucket}:${remoteFile}` };
+        const putPolicy = new qiniu.rs.PutPolicy(options);
+        const uploadToken = putPolicy.uploadToken(mac);
 
-            // Set MIME, A remote name is sufficient
-            const putExtra = new qiniu.form_up.PutExtra(mimeType = mime.lookup(remoteFile));
-            await putFile(uploadToken, remoteFile, localFile, putExtra)
-        } catch (error) {
-            console.log(error)
-            failurelist.push(file)
-        }
-    }
-    return failurelist
+        // Set MIME, A remote name is sufficient
+        const putExtra = new qiniu.form_up.PutExtra(mimeType = mime.lookup(remoteFile));
+        pl.push(
+            putFile(uploadToken, remoteFile, localFile, putExtra).catch(error => {
+                console.log(error);
+                throw file;
+            })
+        )
+    });
+    // Collect failed filelist after all promises resolved
+    // Since there is no resolve handler for `push`, the resolved value would be `undefined`
+    return (await Promise.all(pl)).filter(errFile => errFile !== undefined);
 }
 
 (async () => {
