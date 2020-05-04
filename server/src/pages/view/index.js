@@ -11,29 +11,24 @@ class View extends React.Component {
         super()
         this.state = { docAvailable: false }
     }
-    handleRes(res) {
-        if (res.ok) {
-            this.setState({ docAvailable: true })
-        } else {
-            import('@/pages/404').then(md => {
-                this.setState({ md })
-            })
-        }
-    }
     componentDidMount() {
+        // TODO use cat and subcat
         const { url } = this.props.match;
-        fetch(`/pdf${url}.pdf`, { method: 'HEAD' })
-            .then(this.handleRes.bind(this))
+        import(`~/pdf${url}.pdf`).then(url => {
+            console.log(`PDF url: ${JSON.stringify(url)}`)
+            this.setState({ doc: url.default })
+        }).catch(_ => {
+            this.setState({ doc: null })
+            import('@/pages/404').then(md => {
+                this.setState({ view404: md.default })
+            })
+        })
     }
     render() {
-        // TODO How to get :cat and :subcat
-        const { url } = this.props.match;
-        if (this.state.docAvailable) {
-            return <Viewer src={`/pdf${url}.pdf`} />
-        } else if (this.state.md) {
-            // TODO Ask myself? What is default
-            // TODO and the dynamic takes effect? (can be replaced by import)
-            return React.createElement(this.state.md.default)
+        if (this.state.doc) {
+            return <Viewer src={`/${this.state.doc}`} />
+        } else if (this.state.doc === null && this.state.view404) {
+            return React.createElement(this.state.view404)
         } else {
             return <div />
         }

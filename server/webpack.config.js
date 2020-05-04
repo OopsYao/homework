@@ -10,6 +10,7 @@ module.exports = {
     resolve: {
         alias: {
             '@': path.resolve(__dirname, './src/'),
+            '~': path.resolve(__dirname),
             '@components': path.resolve(__dirname, './src/components'),
         }
     },
@@ -32,6 +33,13 @@ module.exports = {
                     'css-loader',
                 ],
             },
+            {
+                test: /\.pdf$/,
+                loader: 'file-loader',
+                options: {
+                    outputPath: 'd',
+                },
+            }
         ]
     },
     plugins: [
@@ -40,7 +48,6 @@ module.exports = {
             base: '/'
         }),
         new CopyPlugin([
-            { from: 'pdf/', to: 'pdf' },
             { from: 'public' }
         ]),
         new webpack.DefinePlugin({
