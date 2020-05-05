@@ -2,6 +2,8 @@
 
 \title{第十一周作业}
 
+\newcommand{\E}{\mathbb{E}}
+
 \begin{document}
     \maketitle
     
@@ -40,4 +42,58 @@
         \left(\alpha+\frac{\sigma^2(p-1)}{2}\right)\diff t+\sigma\diff W(t)
         \right)
     \end{aligned}\]
+
+    \problem[习题4.7]
+    \begin{subproblem}
+        \item
+        由伊藤公式，
+        \[\diff W^4(t)=4W^3(t)\diff W(t)+6W^2(t)\diff t\]
+        两端在$[0,T]$上积分得
+        \begin{equation}
+            \label{eq:W^4}
+            W^4(T)=4\int_0^TW^3(t)\diff W(t)+6\int_0^TW^2(t)\diff t
+        \end{equation}
+
+        \item
+        由伊藤积分的零期望特性，\cref{eq:W^4}两端取期望得
+        \[\E W^4(t)=6\E\int_0^TW^2(t)\diff t=6\int_0^T\E W^2(t)\diff t
+        =6\int_0^Tt\diff t=3T^2\]
+
+        \item
+        由伊藤公式
+        \[\diff W^6(t)=6W^5(t)\diff W(t)+15W^4(t)\diff t\]
+        两端积分取期望得
+        \[\begin{aligned}
+            \E W^6(T)&=15\E\int_0^TW^4(t)\diff t\\
+            &=15\int_0^T\E W^4(t)\diff t\\
+            &=15\int_0^T3t^2\diff t\\
+            &=15T^3
+        \end{aligned}\]
+
+    \end{subproblem}
+
+    \problem[习题4.8]
+    \begin{subproblem}
+        \item
+        由韦萨切克方程知$R(t)$为伊藤过程，因此由伊藤引理
+        \[\diff (\e^{\beta t}R(t))=\beta\e^{\beta t}R(t)\diff t
+        +\e^{\beta t}R(t)\diff R(t)\]
+        这里注意到$\partial^2(\e^{\beta tR(t)})/\partial R(t)^2=0$。
+        从而代入$\diff R(t)$即得
+        \begin{equation}
+            \label{eq: deR}
+            \diff (\e^{\beta t}R(t))=\e^{\beta t}(\alpha\diff t+\sigma\diff W(t))
+        \end{equation}
+
+        \item
+        \cref{eq: deR}积分即得
+        \[\begin{aligned}
+            \e^{\beta t}R(t)-R(0)&=\alpha\int_0^t\e^{\beta s}\diff s
+            +\sigma\int_0^t\e^{\beta s}\diff W(s)\\
+            &=\frac{\alpha}{\beta}(\e^{\beta t}-1)+\sigma\int_0^t\e^{\beta s}\diff W(s)
+        \end{aligned}\]
+        即
+        \[R(t)=\e^{-\beta t}R(t)+\frac{\alpha}{\beta}(1-\e^{-\beta t})
+        +\sigma\e^{-\beta t}\int_0^t\e^{\beta s}\diff W(s)\]
+    \end{subproblem}
 \end{document}
