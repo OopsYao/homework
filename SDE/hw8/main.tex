@@ -222,7 +222,34 @@
     \[E(W_t^2\e^{W_t})=E(Y_t)=t(1+t)\e^{\frac{t}{2}}\]
 
     \problem
-    % TODO EW^{2k}
+    \begin{proof}
+        It is easy to see that $E(W_t^{2k+1})=0$ due to the symmetric distribution
+        of $W_t$. And to show the even order case, we argue by mathmatical induction.
+
+        For the base case $k=0$, it is evident that
+        \[E(W_t^0)=\frac{0!}{2^0\cdot 0!}t^0=1\]
+        Assume the induction hypothesis that for a particular $n$, the
+        single case $k=n-1$ holds, i.e.,
+        \[E(W_t^{2(n-1)})=\frac{(2(n-1))!}{2^{n-1}(n-1)!}t^{n-1}\]
+        And we have from It\^o's lemma that
+        \[\diff (W_t^{2n})=2nW_t^{2n-1}\diff W_t+n(2n-1)W_t^{2n-2}\diff t\]
+        thus
+        \[E(W_t^{2n})-E(W_0^{2n})=E\left(\int_0^tW_s^{2n-2}\diff s\right)
+        =\int_0^tE(W_s^{2n-2})\diff s\]
+        It follows that
+        \[\begin{aligned}
+            E(W_t^{2n})&=n(2n-1)\int_0^t\frac{(2(n-1))!}{2^{n-1}(n-1)!}s^{n-1}\diff s\\
+            &=\frac{(2n-1)!}{2^{n-1}(n-1)!}t^n\\
+            &=\frac{(2n)!}{2^nn!}t^n
+        \end{aligned}\]
+        as
+        \[\frac{(2n-1)!}{2^{n-1}(n-1)!}=\frac{(2n)!}{2^nn!}\]
+        That is, the statement about case $k=n$ also holds true, establishing
+        the inductive step.
+        So we can conclude that the statement holds true for any non-negative integer $k$
+        by mathmatical induction.
+
+    \end{proof}
 
     \problem
     \newcommand{\X}{\boldsymbol Z}
