@@ -2,6 +2,10 @@
 
 \title{第十周作业}
 
+\newcommand{\re}{\mathrm{Re}}
+\newcommand{\im}{\mathrm{Im}}
+\newcommand{\img}{\mathrm i}
+
 \begin{document}
     \maketitle
 
@@ -10,20 +14,32 @@
     \begin{subproblem}[(\arabic*)]
         \item
         \begin{proof}
+            充分性是显然的，下证必要性。
             由于该等式成立等价于等式两端平方成立，即
             \[||x+y||^2=(||x||+||y||)^2\]
             展开即得
-            \[(x,y)+(y,x)=2||x||\cdot||y||\]
-            于是下面的复数模的三角不等式与Cauchy不等式均取得等号
-            \[|(x,y)+(y,x)|\leq|(x,y)|+|(y,x)|\leq 2||x||\cdot||y||\]
-            因此应有
-            % TODO So what's next?
-
+            \[\re(x,y)=||x||\cdot||y||\neq 0\]
+            于是考虑
+            \[z=y-\frac{||y||^2}{\re(x,y)}x\]
+            从而
+            \[\begin{aligned}
+               ||z||^2&=||y||^2-2\frac{||y||^2}{\re(x,y)}\re(x,y)
+               +\left(\frac{||y||^2}{\re(x,y)}\right)^2||x||^2\\
+               &=||y||^2\left(\frac{||x||^2||y||^2}{\left(\re(x,y)\right)^2}-1\right)\\
+               &=0
+            \end{aligned}\]
+            因此$z=\boldsymbol 0$，即存在$k=||y||^2/\re(x,y)>0$使得$y=kx$。必要性得证。
         \end{proof}
 
         \item
         \begin{proof}
-            % TODO Same to p1?
+            由于
+            \[||x-y||=\left|\|x\|-\|y\|\right|\]
+            等价于
+            \[||x-y||^2=\left|\|x\|-\|y\|\right|^2\]
+            即
+            \[\re(x,y)=||x||\cdot||y||\]
+            因此由上题即证。
         \end{proof}
 
         \item
@@ -47,18 +63,65 @@
         二者范数相同，因此只能有$x=y$。倘若其一为零向量，则二者同具有零范数，
         从而同为零向量。
 
-        % TODO What about normed space
+        当$X$仅为赋范空间时，考虑$X=L^\infty[0,2]$，则考虑
+        \[x(t)=\begin{cases}
+            2,&t\in[0,1]\\
+            0,&t\in(1,2]
+        \end{cases}
+        \quad
+        y(t)=\begin{cases}
+            2,&t\in[0,1]\\
+            -1,&t\in(1,2]
+        \end{cases}\]
+        有对于任意$\lambda\in[0,1]$
+        \[\lambda x(t)+(1-\lambda)y(t)=\begin{cases}
+            2,&t\in[0,1]\\
+            -(1-\lambda),&t\in (1,2]
+        \end{cases}\]
+        于是
+        \[||\lambda x+(1-\lambda)y||=2=||x||\]
+        但$x\neq y$。
     \end{proof}
 
     \problem
-    % TODO Equivalence of orthogonality
+    \begin{proof}
+        由于$||x+\alpha y||\geq ||x||$等价于
+        \[||x+\alpha y||^2\geq ||x||^2\]
+        即
+        \begin{equation}
+            \label{eq:second}
+            \re(x,\alpha y)\geq -\frac{1}{2}|\alpha|^2||y||^2
+        \end{equation}
+        易见(1)$\Rightarrow$(2)。反过来，考虑$\alpha=t\in\mathbb R,t\neq 0$，
+        则\cref{eq:second}变为
+        \[t\re(x,y)\geq -\frac{1}{2}t^2||y||^2\]
+        当$t>0$时，$\re(x,y)\geq -t||y||^2/2$，由$t$的任意性得$\re(x,y)\geq 0$，
+        当$t<0$同样可得$\re(x,y)\leq 0$，于是$\re(x,y)=0$。
+
+        再考虑$\alpha=\img t\neq 0,t\in\mathbb R$，只需注意到
+        \[\re(x,\img ty)
+        =\frac{(x,\img ty)+(\img ty,x)}{2}
+        =\frac{\img t(y,x)-\img t(x,y)}{2}
+        =t\im(x,y)\]
+        则同样地可以得到$\im(x,y)=0$，于是$(x,y)=0$，
+        从而(2)$\Rightarrow$(1)，
+        即(1)$\Leftrightarrow$(2)。
+
+        而$||x+\alpha y||=||x-\alpha y||$等价于其两端平方，即得
+        \[\re(x,\alpha y)=0,\forall \alpha\in\mathbb C\]
+        同样地考虑$\alpha=1$与$\alpha=\img$，分别得到
+        \[\re(x,y)=0,\im(x,y)=0\]
+        从而$(x,y)=0$，即有(3)$\Rightarrow$(1)，反过来若(1)成立，则
+        对于任意$\alpha\in\mathbb C$，$(x,\alpha y)=0$，故(3)成立。
+
+        综上，(1)(2)(3)三者等价。
+    \end{proof}
 
     \problem
     对于实空间来说，等式等价于
     \[2(x,y)=0\]
     从而知其正交。考虑复数域上的复空间$\mathbb C$，
     则内积$(x,y)=x\bar y$，诱导的范数为复数的模，考虑到
-    \newcommand{\img}{\mathrm i}
     \[|1+\img|^2=|1|^2+|\img|^2=2\]
     但$(1,\img)=-\img\neq 0$，并不正交。
 
