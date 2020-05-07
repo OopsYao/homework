@@ -285,7 +285,7 @@
     \[\frac{\diff\X}{\diff t}=A\X\]
     with initial condition $\X_0=(0,1)^\mathrm T$.
     Here the symbol $\diff\X/\diff t$ represents
-    $(\diff E(X_t)/\diff t,\diff E(Y_t/\diff t)^\mathrm T$.
+    $(\diff E(X_t)/\diff t,\diff E(Y_t)/\diff t)^\mathrm T$.
 
     \newcommand{\img}{\mathrm i}
     After some basic calculation one can see that the matrix $A$ has eigenvalues
@@ -312,4 +312,42 @@
         \cos t
     \end{pmatrix}\]
     i.e., $E(\sin(t+\sigma W_t))=\sin t,E(\cos(t+\sigma W_t))=\cos t$.
+
+    \problem
+    \begin{proof}
+        We hold the truth that
+        \[\begin{aligned}
+            -ax^2+bx&=-a\left(x-\frac{b}{2a}\right)^2+\frac{b^2}{4a}\\
+            &=-\frac{y^2}{2\cdot\frac{1}{2a}}+\frac{b^2}{4a}
+        \end{aligned}\]
+        where $y=x-b/(2a)$.
+        It follows that
+        \[\begin{aligned}
+            \int_{-\infty}^\infty x\e^{-ax^2+bx}\diff x
+            &= \sqrt{\frac{\pi}{a}}\e^{\frac{b^2}{4a}}
+            \int_{-\infty}^\infty \left(y+\frac{b}{2a}\right)
+            \frac{\e^{-\frac{y^2}{2\cdot\frac{1}{2a}}}}{\sqrt{2\pi\cdot\frac{1}{2a}}}\diff y\\
+            &=\sqrt{\frac{\pi}{a}}\e^{\frac{b^2}{4a}}E\left(W_{\frac{1}{2a}}+\frac{b}{2a}\right)\\
+            &=\sqrt{\frac{\pi}{a}}\left(\frac{b}{2a}\right)\e^{\frac{b^2}{4a}}
+        \end{aligned}\]
+        and similarly
+        \[\begin{aligned}
+            \int_{-\infty}^\infty x^2\e^{-ax^2+bx}\diff x
+            =\sqrt{\frac{\pi}{a}}\e^{\frac{b^2}{4a}}
+            E\left[\left(W_{\frac{1}{2a}}+\frac{b}{2a}\right)^2\right]
+        \end{aligned}\]
+        
+        And we have from It\^o's lemma that
+        \[\diff\left(\left(W_t+\frac{b}{2a}\right)^2\right)
+        =2\left(W_t+\frac{b}{2a}\right)\diff W_t+\diff t\]
+        hence
+        \[E\left[\left(W_t+\frac{b}{2a}\right)^2\right]
+        -\frac{b^2}{4a^2}=\int_0^t\diff s=t\]
+        which implies
+        \[E\left[\left(W_{\frac{1}{2a}}+\frac{b}{2a}\right)^2\right]
+        =\frac{b^2}{4a^2}+\frac{1}{2a}=\frac{1}{2a}\left(1+\frac{b^2}{2a}\right)\]
+        Therefore
+        \[\int_{-\infty}^\infty x^2\e^{-ax^2+bx}\diff x
+        =\sqrt{\frac{\pi}{a}}\frac{1}{2a}\left(1+\frac{b^2}{2a}\right)\e^{\frac{b^2}{4a}}\]
+    \end{proof}
 \end{document}
