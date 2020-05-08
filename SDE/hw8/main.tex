@@ -140,7 +140,7 @@
 
         \item
         By It\^o's lemma (or product rule),
-        \[t\diff W_t=d(tW_t)-W_t\diff t\]
+        \[t\diff W_t=\diff(tW_t)-W_t\diff t\]
         then we have that
         \[\diff X_t=3t^2\diff t+\diff(tW_t)\]
         hence
@@ -234,8 +234,10 @@
         And we have from It\^o's lemma that
         \[\diff (W_t^{2n})=2nW_t^{2n-1}\diff W_t+n(2n-1)W_t^{2n-2}\diff t\]
         thus
-        \[E(W_t^{2n})-E(W_0^{2n})=E\left(\int_0^tW_s^{2n-2}\diff s\right)
-        =\int_0^tE(W_s^{2n-2})\diff s\]
+        \[\begin{aligned}
+            E(W_t^{2n})-E(W_0^{2n})&=n(2n-1)E\left(\int_0^tW_s^{2n-2}\diff s\right)\\
+            &=n(2n-1)\int_0^tE(W_s^{2n-2})\diff s
+        \end{aligned}\]
         It follows that
         \[\begin{aligned}
             E(W_t^{2n})&=n(2n-1)\int_0^t\frac{(2(n-1))!}{2^{n-1}(n-1)!}s^{n-1}\diff s\\
@@ -337,7 +339,8 @@
             E\left[\left(W_{\frac{1}{2a}}+\frac{b}{2a}\right)^2\right]
         \end{aligned}\]
         
-        And we have from It\^o's lemma that
+        And we have from It\^o's lemma that\sidenote{I guess I did not get
+        your point of this problem, as the SDE is more or less trivial.}
         \[\diff\left(\left(W_t+\frac{b}{2a}\right)^2\right)
         =2\left(W_t+\frac{b}{2a}\right)\diff W_t+\diff t\]
         hence
