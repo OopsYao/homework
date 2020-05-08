@@ -1,6 +1,7 @@
 import React from 'react';
 import {
-    withRouter
+    withRouter,
+    Redirect
 } from 'react-router-dom';
 
 import Viewer from '@/components/PDFViewer';
@@ -26,10 +27,13 @@ class View extends React.Component {
     }
     render() {
         if (this.state.doc) {
+            document.title = 'DOC'
             return <Viewer src={`/${this.state.doc}`} />
         } else if (this.state.doc === null && this.state.view404) {
+            document.title = 'Oops 404';
             return React.createElement(this.state.view404)
         } else {
+            document.title = 'Loading ⏳'
             return <div />
         }
     }

@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import './Home.css';
+
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -27,6 +29,7 @@ const comparer = (a, b) => {
 docTree.forEach(v => v.sort(comparer))
 
 export default () => {
+    document.title = 'HOMEWORK';
     const classes = useStyles(); // Hook must be inside
     return (
         <div className={classes.root}>
