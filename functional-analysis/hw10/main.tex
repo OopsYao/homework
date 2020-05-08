@@ -1,0 +1,24 @@
+\documentclass[cn]{homework}
+
+\title{第十一周作业}
+
+\begin{document}
+    \maketitle
+
+    \problem
+    % TODO M is closed
+
+    \problem
+    \begin{proof}
+        考虑到$X,Y$为子空间，则$\boldsymbol 0\in X,Y$，
+        从而有$X,Y\subset X+Y$，因此对于任意$z_0\perp X+Y,z_0\in H$，
+        有$z_0\perp X,z_0\perp Y$，
+        即$(X+Y)^\perp\subset X^\perp\cap Y^\perp$。
+
+        反过来，对于任意$z_0\in H$满足$z_0\perp X,z_0\perp Y$，
+        则对于任意$z=x+y\in (X+Y)$，
+        \[(z_0,z)=(z_0,x)+(z_0,y)=0\]
+        即$z_0\perp (X+Y)$。从而$X^\perp\cap Y^\perp\subset (X+Y)^\perp$，
+        综上有$(X+Y)^\perp=X^\perp\cap Y^\perp$。
+    \end{proof}
+\end{document}
