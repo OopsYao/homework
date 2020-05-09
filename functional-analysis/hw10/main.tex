@@ -22,4 +22,33 @@
         即$z_0\perp (X+Y)$。从而$X^\perp\cap Y^\perp\subset (X+Y)^\perp$，
         综上有$(X+Y)^\perp=X^\perp\cap Y^\perp$。
     \end{proof}
+
+    \problem
+    % TODO L closed <=> M, N closed
+
+    \problem
+    \newcommand{\cg}{\overline}
+    对于$M_1$来说，考虑任意$g\in M_1^\perp$，则
+    对于
+    \[f(x)=\begin{cases}
+        0,&x\leq 0\\
+        |x|\cdot g(x),&x>0
+    \end{cases}\]
+    由于$f\in M_1$，于是应有
+    \[(f,g)=\int_0^1|x|\cdot|g(x)|^2\diff x=0\]
+    从而知$|x|\cdot g(x)=0,\forall x\in[0,1]$，
+    进一步由连续性知$g$在$[0,1]$上恒为$0$。
+    反过来对于任意满足此条件的$g(x)$，
+    也容易验证$g\perp M_1$。从而
+    \[M_1^\perp=\{g\in X|g(x)=0,\forall x\geq 0\}\]
+
+    对于任意$g\in M_2^\perp$，则由于
+    \[f(x)=|x|\cdot g(x)\in M_2\]
+    于是
+    \[(f,g)=\int_{-1}^1|x|\cdot|g(x)|^2\diff x=0\]
+    从而$|x|\cdot |g(x)|^2=0,\forall x\in[-1,1]$，进一步由
+    $g$的连续性知$g(x)=0,\forall x\in[-1,1]$。于是反过来
+    对于任意$f\in M_2$有$(f,g)=0$。从而
+    \[M_2^\perp=\{g\in X|g(x)=0,\forall x\in[-1,1]\}\]
+
 \end{document}
