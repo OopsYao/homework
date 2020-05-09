@@ -1,0 +1,62 @@
+\documentclass{homework}
+
+\title{Homework 9}
+
+\begin{document}
+    \maketitle
+
+    \problem
+    Denote the drift pattern $a(t,W_t)=2tx^3+3t^2(1+x)$
+    and the volatility pattern $b(t,x)=3t^2x^2+1$, then
+    it easy to see that
+    \[\frac{\partial a}{\partial x}
+    =\frac{\partial b}{\partial t}+
+    \frac{1}{2}\frac{\partial^2 b}{\partial x^2}
+    =6tx^2+3t^2\]
+    It follows that this is an exact equation, hence the
+    corresponded function $f(t,x)$ satisfies
+    \[\left\{\begin{aligned}
+        &\frac{\partial f}{\partial t}+\frac{1}{2}\frac{\partial^2 f}{\partial x^2}
+        =2tx^3+3t^2(1+x)\\
+        &\frac{\partial f}{\partial x}=3t^2x^2+1
+    \end{aligned}\right.\]
+    And the second equation gives us $f(t,x)=t^2x^3+x+C(t)$ where $C(t)$ is
+    a function of $t$. Substituting this into the first equation yields
+    \[2tx^3+C'(t)+3t^2x=2tx^3+3t^2(1+x)\]
+    which gives us $C'(t)=3t^2$ thus $C(t)=t^3+C_0$ where $C_0$ is an arbitrary constant.
+    Hence $f(t,x)=t^2x^3+x+t^3+C_0$.
+
+    Therefore, this SDE is solved as
+    \[X_t=X_0+f(s,W_s)|_0^t=t^2W_t^3+W_t+t^3\]
+
+    \problem
+    \begin{subproblem}[(2.\arabic*)]
+        \item
+        Denote $f(t,x)$ is a function that satisfies the following
+        \[\left\{\begin{aligned}
+            &f_t+\frac{f_{xx}}{2}=x+3t^2\\
+            &f_x=t
+        \end{aligned}\right.\]
+        then the second equation gives us $f(t,x)=tx+C(t)$.
+        Together with the first equation, we obtain that
+        \[x+C'(t)=x+3t^2\]
+        hence $C(t)=t^3+C_0$ where $C_0$ is a constant,
+        thus $f(t,x)=tx+t^3+C_0$. 
+        It follows that
+        \[X_t=X_0+f(s,W_s)|_0^t=tW_t+t^3\]
+        if we assume that $X_0=0$.
+
+        \item[(2.3)]
+        Denote $f(t,x)$ is a function satisfing the following
+        \[\left\{\begin{aligned}
+            &f_t+\frac{f_{xx}}{2}=1+x\\
+            &f_x=t+2x
+        \end{aligned}\right.\]
+        then the second equation gives us $f(t,x)=tx+x^2+C(t)$.
+        Substituting this into the first one yields
+        \[x+C'(t)+1=1+x\]
+        hence $C(t)=C_0$ being a constant, thus $f(t,x)=tx+x^2+C_0$.
+        Therefore,
+        \[X_t=X_0+f(s,W_s)|_0^t=tW_t+W_t^2\]
+    \end{subproblem}
+\end{document}
