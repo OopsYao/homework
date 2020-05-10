@@ -120,4 +120,28 @@
 
     \end{subproblem}
 
+    \problem
+    Denote $f(t,W_t)=\alpha W_t+C(t,W_t)$, then we have from
+    It\^o's lemma directly that
+    \[\begin{aligned}
+        \diff X_t&=\diff \e^{f(t,W_t)}\\
+        &=\e^{f(t,W_t)}f_t\diff t+\e^{f(t,W_t)}f_x\diff W_t
+        +\frac{1}{2}\e^{f(t,W_t)}(f_x^2+f_{xx})\diff t\\
+        &=X_t\left(f_t+\frac{f_x^2+f_{xx}}{2}\right)\diff t
+        +X_tf_x\diff W_t
+    \end{aligned}\]
+    where $f_t$ is short for $\partial f(t,W_t)/\partial t$ and etc.
+    Hence we have
+    \[\left\{\begin{aligned}
+        &f_t+\frac{f_x^2+f_{xx}}{2}=0\\
+        &f_x=\alpha
+    \end{aligned}\right.\]
+    The second equation gives us $C_x(t,W_t)=0$, thus we can use $C(t)$
+    instead actually. Substituting this into the first one gives us
+    $C_t(t,W_t)=-\alpha^2/2$; it follows that $C(t,W_t)=-\alpha^2 t/2+C_0$,
+    where $C_0$ is an arbitrary constant.
+    Therefore,
+    \[X_t=\e^{C_0}\e^{\alpha W_t-\frac{\alpha^2t}{2}}\]
+    % TODO Extract C0
+
 \end{document}
