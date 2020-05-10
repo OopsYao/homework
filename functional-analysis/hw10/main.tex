@@ -6,7 +6,24 @@
     \maketitle
 
     \problem
-    % TODO M is closed
+    \begin{proof}
+        显然$M$对数乘与加法封闭，从而$M$是一个子空间。考虑$M$中任意
+        收敛点列$x_n=\{x_n^{(k)}\}_{k=1}^\infty,n=1,2,\ldots$，
+        不妨设其收敛到$x=\{x^{(k)}\}_{k=1}^\infty\in l^2$。则由于
+        对于任意$k$，
+        \[\left(x^{(2k)}\right)^2=\left(x_n^{(2k)}-x^{(2k)}\right)^2
+        \leq\sum_{k=1}^\infty \left(x_n^{(k)}-x^{(k)}\right)^2
+        =||x_n-x||^2\]
+        取$n\to\infty$即得$x^{(2k)}=0$，从而知$x\in M$，故$M$为闭子空间。
+    \end{proof}
+
+    对于任意$y\in M^\perp$，考虑如下构造的$x$，满足
+    \[x=\{x_n|x_{2n-1}=y_{2n-1},x_{2n}=0,n=1,2,\ldots\}\]
+    从而知道$x\in M$，于是应有$x\perp y$，即
+    \[(x,y)=\sum_{n=1}^\infty x_ny_n=\sum_{n=1}^\infty y_{2n-1}^2=0\]
+    因此$y_{2n-1}=0,n=1,2,\ldots$，反过来对于满足此条件的$y$显然有
+    $y\perp M$，于是
+    \[M^\perp=\{y|y=\{y_n\}\in l^2,y_{2n-1}=0,n=1,2,\ldots\}\]
 
     \problem
     % TODO Go to check whether the Hilbert space make sense
@@ -24,7 +41,15 @@
     \end{proof}
 
     \problem
-    % TODO L closed <=> M, N closed
+    \begin{proof}
+        对于充分性，考虑
+        $L$中的收敛点列$z_n=x_n+y_n\to z$，这里$x_n\in M,y_n\in N$，
+        由于$||z_n-z||\to 0$
+        % TODO Can we prove that x_n is Cauchy?
+
+        % TODO Prove => use orthogonality
+        
+    \end{proof}
 
     \problem
     \newcommand{\cg}{\overline}
