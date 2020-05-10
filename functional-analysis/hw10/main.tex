@@ -44,8 +44,11 @@
     \begin{proof}
         对于充分性，考虑
         $L$中的收敛点列$z_n=x_n+y_n\to z$，这里$x_n\in M,y_n\in N$，
-        由于$||z_n-z||\to 0$
-        % TODO Can we prove that x_n is Cauchy?
+        由勾股定理，
+        \[||z_n-z_m||^2=||x_n-x_m+y_n-y_m||^2=||x_n-x_m||^2+||y_n-y_m||^2\]
+        从而$\{z_n\}$为Cauchy列蕴含$\{x_n\},\{y_n\}$为Cauchy列，
+        则由$H$为Hilbert空间以及$M,N$的闭性，分别存在$x\in M,y\in N$使得
+        $x_n\to x,y_n\to y$，从而$z=x+y\in L$，即$L$为闭子空间。
 
         % TODO Prove => use orthogonality
         
