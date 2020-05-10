@@ -59,4 +59,65 @@
         Therefore,
         \[X_t=X_0+f(s,W_s)|_0^t=tW_t+W_t^2\]
     \end{subproblem}
+
+    \problem
+    \begin{subproblem}[(3.\arabic*)]
+        \item
+        We rewrite the equation as
+        \[X_t\diff t+\diff X_t=2\diff t+\e^{-t}W_t\diff W_t\]
+        Note that the LHS $X_t\diff t+\diff X_t=\e^{-t}\diff (\e^tX_t)$,
+        hence we obtain
+        \[\diff (\e^t X_t)=2\e^t\diff t+W_t\diff W_t\]
+        which gives us
+        \[\e^tX_t-X_0=2\int_0^t\e^s\diff s+\int_0^tW_s\diff W_s\]
+        thus
+        \[X_t=X_0\e^{-t}+2+\frac{W_t^2-t}{2\e^t}
+        =2+\left(X_0-\frac{t}{2}\right)\e^{-t}+\frac{W_t^2}{2}\e^{-t}\]
+        since we have from integration by parts that
+        \[\int_0^tW_s\diff W_s=\left.\frac{W_s^2}{2}\right|_0^t
+        -\frac{1}{2}\int_0^t\diff s=\frac{W_t^2}{2}-\frac{t}{2}\]
+       
+        \item
+        Similarly we rewrite the equation as
+        \[-\frac{X_t}{2}\diff t+\diff X_t=\diff t+\e^t\cos W_t\diff W_t\]
+        And we have that
+        \[\diff(\e^{-\frac{t}{2}}X_t)
+        =\e^{-\frac{t}{2}}\left(-\frac{X_t}{2}\diff t+\diff X_t\right)\]
+        It follows that
+        \begin{equation}
+            \label{eq:3.2}    
+            \diff (\e^{-\frac{t}{2}}X_t)=\e^{-\frac{t}{2}}+\e^{\frac{t}{2}}\cos W_t\diff W_t
+        \end{equation}
+        And we have from integration by parts that
+        \[\begin{aligned}
+            \int_0^t\e^{\frac{s}{2}}\cos W_s\diff W_s
+            &=\e^{\frac{s}{2}}\cos W_s|_0^t
+            -\int_0^t\frac{1}{2}\e^{\frac{t}{2}}\sin W_t\diff t
+            +\int_0^t\frac{1}{2}\e^{\frac{t}{2}}\sin W_t\diff t\\
+            &=\e^{\frac{t}{2}}\cos W_t-1
+        \end{aligned}\]
+        Therefore, take integration on BHS of \cref{eq:3.2} and we obtain
+        \[\e^{-\frac{t}{2}}X_t-X_0=2(1-\e^{-\frac{t}{2}})+\e^{\frac{t}{2}}\cos W_t-1\]
+        which gives us
+        \[X_t=(1+X_0)\e^{\frac{t}{2}}-2+\e^t\cos W_t\]
+        
+        \item
+        The equation is rewritten as
+        \[-4X_t\diff t+\diff X_t=-\diff t+2\diff W_t\]
+        And we also have the fact that
+        \[\e^{4t}\diff(\e^{-4t}X_t)=4X_t\diff t+\diff X_t\]
+        hence
+        \[\e^{-4t}X_t=-\e^{-4t}\diff t+2\e^{-4t}\diff W_t\]
+        From integration by parts we have that
+        \[\int_0^t\e^{-4s}\diff W_s=\left.W_s\e^{-4s}\right|_0^t
+        +4\int_0^tW_s\e^{-4s}\diff s
+        =W_t\e^{-4t}+4\int_0^tW_s\e^{-4s}\diff s\]
+        It follows that
+        \[\e^{-4t}X_t-X_0=\frac{\e^{-4t}-1}{4}+2W_t\e^{-4t}+8\int_0^tW_s\e^{-4s}\diff s\]
+        which gives us
+        \[X_t=\frac{1}{4}+\left(X_0-\frac{1}{4}\right)\e^{4t}+2W_t
+        +8\e^{4t}\int_0^tW_s\e^{-4s}\diff s\]
+
+    \end{subproblem}
+
 \end{document}
