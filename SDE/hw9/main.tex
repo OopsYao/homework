@@ -145,14 +145,44 @@
     % TODO Extract C0
 
     \problem
-    % TODO Induction
-    See \cref{fig:p5}.
+    We can rewrite the iteration expression as
+    \[\hat X_{t+1}=
+    \beta_0+\beta_1\hat X_t
+    +\varepsilon_t\]
+    where $\beta_0:=r\Delta t,\beta_1:=(1-\mu\Delta t)$
+    and $\varepsilon_t:=\sigma(W_{t+\Delta t}-W_t)
+    \sim\mathcal N(0,\sigma^2\Delta t)$.
+    Then we can take advantage of statistic software to
+    estimate the corresponded parameters as following.
+
+    We denote the OLS estimates of $\beta_0,\beta_1,\sigma^2\Delta t$
+    by $\hat\beta_0,\hat\beta_1,s^2$, then we have that
+    \[\left\{\begin{aligned}
+        \hat\beta_0&=\hat r\Delta t\\
+        \hat\beta_1&=1-\hat\mu\Delta t\\
+        s^2&=\hat\sigma^2\Delta t
+    \end{aligned}\right.\]
+    which is equivalent to
+    \[\left\{\begin{aligned}
+        \hat r&=\frac{\hat\beta_0}{\Delta t}\\
+        \hat\mu&=\frac{1-\hat\beta_1}{\Delta t}\\
+        \hat\sigma&=\sqrt{\frac{s^2}{\Delta t}}
+    \end{aligned}\right.\]
+    where $\hat r,\hat\mu,\hat\sigma$ are the estimates of $r,\mu,\sigma$
+    accordingly.
+
+    When we choose $\sigma=0$, there is no stochastic pattern
+    as $X_0=x_0$ is degenerated;
+    when $\sigma\neq 0$, we can simulate a path.
+    See \cref{fig:p5} for details.
     \begin{figure}[h]
         \centering
         \includegraphics[width=\textwidth]{figure}
         \caption{Comparsion}
         \label{fig:p5}
     \end{figure}
+
+    \newpage
     \appendix
     \section{Python Code for Graphing}
     \lstinputlisting[language=Python]{estimate.py}
