@@ -43,6 +43,6 @@ def unitroot_test(series):
     print(pp_rho.summary())
 
 
-# unitroot_test(ind_prod)
+unitroot_test(ind_prod)
 unitroot_test(ln_rgdp)
 plt.show()

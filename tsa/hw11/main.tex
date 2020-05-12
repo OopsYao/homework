@@ -62,6 +62,7 @@
     \subsection{rGDP}
     先对数据进行对数变换，画出时序图与PACF如\cref{fig:rGDP}，
     也能很明显地看出数据是非平稳的，同时截断阶数差不多在2,3左右。
+
     \begin{figure}[h]
         \centering
         \includegraphics[width=0.48\textwidth]{rGDP-trend}
@@ -73,6 +74,7 @@
     从$p=12$开始不断减少尝试拟合AR($p$)，得到AIC与BIC如\cref{tab:rGDP ABIC}，
     AIC以$p=6$最佳，BIC以$p=3$最佳，于是选择较小的$p=3$做AR模型。
     做ADF检验知$t=-2.648$以及相应的p值$0.083$，显著高于0.05，从而无法拒绝具有单位根的原假设。
+
     \begin{margintable}
         \centering
         \begin{tabular}{ccc}
@@ -99,4 +101,9 @@
 
     选取$q=3$做pp检验得到$Z_\rho-0.794,Z_\tau=-2.274$，相应有p值
     $0.904,0.180$，均显著高于0.05，从而无法拒绝具有单位根的原假设。
+
+    \newpage
+    \appendix
+    \section{代码(Python)}
+    \lstinputlisting[language=Python]{unit-root.py}
 \end{document}
