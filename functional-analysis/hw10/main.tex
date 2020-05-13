@@ -26,7 +26,6 @@
     \[M^\perp=\{y|y=\{y_n\}\in l^2,y_{2n-1}=0,n=1,2,\ldots\}\]
 
     \problem
-    % TODO Go to check whether the Hilbert space make sense
     \begin{proof}
         考虑到$X,Y$为子空间，则$\boldsymbol 0\in X,Y$，
         从而有$X,Y\subset X+Y$，因此对于任意$z_0\perp X+Y,z_0\in H$，
@@ -42,6 +41,16 @@
 
     \problem
     \begin{proof}
+        先证必要性，对于任意$M$中的收敛点列$x_n\to x\in H$，
+        由于$M\perp N$，
+        因此对于任意$y\in N$有
+        \[(x,y)=(\lim_{n\to\infty}x_n,y)=\lim_{n\to\infty}(x_n,y)=0\]
+        从而$x\perp N$。
+        同时由于$M\subset L$，而$L$为闭集，因此
+        $x\in L$，不妨设$x=x^*+y^*$，这里 
+        $x^*\in M,y^*\in N$，则由前述结论知$(x,y^*)=||y^*||^2=0$，可得$y^*=0$，
+        因此$x=x^*\in M$。同理可证对于$N$的情况，因此必要性得证。
+
         对于充分性，考虑
         $L$中的收敛点列$z_n=x_n+y_n\to z$，这里$x_n\in M,y_n\in N$，
         由勾股定理，
@@ -49,9 +58,6 @@
         从而$\{z_n\}$为Cauchy列蕴含$\{x_n\},\{y_n\}$为Cauchy列，
         则由$H$为Hilbert空间以及$M,N$的闭性，分别存在$x\in M,y\in N$使得
         $x_n\to x,y_n\to y$，从而$z=x+y\in L$，即$L$为闭子空间。
-
-        % TODO Prove => use orthogonality
-        
     \end{proof}
 
     \problem
