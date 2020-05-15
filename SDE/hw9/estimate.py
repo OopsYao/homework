@@ -17,6 +17,9 @@ s2 = sum(r ** 2 for r in res.resid) / res.df_resid
 r = res.params[0] / dt
 mu = (1 - res.params[1]) / dt
 sigma = (s2 / dt) ** 0.5
+print('r:', format(r, '.3g'))
+print('mu:', format(mu, '.3g'))
+print('sigma:', format(sigma, '.3g'))
 
 # Simulation
 # res.plot_predict(dynamic=True)  # Following can be replaced by this line

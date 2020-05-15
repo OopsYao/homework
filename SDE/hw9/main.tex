@@ -142,7 +142,11 @@
     where $C_0$ is an arbitrary constant.
     Therefore,
     \[X_t=\e^{C_0}\e^{\alpha W_t-\frac{\alpha^2t}{2}}\]
-    % TODO Extract C0
+    Actually, we can assume that $X_t=-\e^{\alpha W_t}+C(t,W_t)$ as well,
+    which derives $X_t=-\e^{C_0}\e^{\alpha W_t-\frac{\alpha^2t}{2}}$,
+    and assumption $X_t=0$ also holds. In summary, we find that
+    \[X_t=C\e^{\alpha W_t-\frac{\alpha^2t}{2}}\]
+    where $C$ is an arbitrary constant.
 
     \problem
     We can rewrite the iteration expression as
@@ -170,6 +174,8 @@
     \end{aligned}\right.\]
     where $\hat r,\hat\mu,\hat\sigma$ are the estimates of $r,\mu,\sigma$
     accordingly.
+    And we obtain the estimates as
+    $\hat r=29.6,\hat\mu=0.00682,\hat\sigma=71.4$.
 
     When we choose $\sigma=0$, there is no stochastic pattern
     as $X_0=x_0$ is degenerated;
