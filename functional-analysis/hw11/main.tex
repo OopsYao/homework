@@ -31,6 +31,24 @@
 
     \problem
     \begin{proof}
+        首先$M^\perp$为闭子空间，事实上对于任意收敛点列$y_n\in M^\perp,y_n\to y$，
+        以及$x\in M$，由内积的连续性
+        \[(y,x)=\left(\lim_{n\to\infty}y_n,x\right)
+        =\lim_{n\to\infty}(y_n,x)=0\]
+        从而可知$M^\perp$为闭子空间（子空间是显然的）。
+
+        故对于任意$z\in H$，作正交分解$z=x+y$，其中$x\in M,y\in M^\perp$，
+        则由于$M,M^\perp$为闭集，故分别有$x_n\in M,y_n\in M^\perp$使得
+        $x_n\to x,y_n\to y$，不妨设
+        \[x_n=\sum_{k=1}^{K_n}\alpha_ke_k,
+        y_n=\sum_{k=1}^{K_n'}\beta_ke_k'\]
+        则令
+        \[z_n=x_n+y_n\in\mathrm{span}\{e_k,e_k'\}\]
+        同时有$z_n\to x+y=z$，因此标准正交系$\{e_n\},\{e_n'\}$为$H$的标准正交基。
+    \end{proof}
+
+    \problem
+    \begin{proof}
         由于
         \[\left(x-\sum_{k=1}^n(x,e_k)e_k,e_i\right)=0,i=1,2,\ldots n\]
         因此
