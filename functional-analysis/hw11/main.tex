@@ -1,0 +1,58 @@
+\documentclass[cn]{homework}
+
+\title{第十二周作业}
+
+\begin{document}
+    \maketitle
+
+    \problem
+    % TODO P1
+
+    \problem
+    % TODO P2
+
+    \problem
+    \begin{proof}
+        不失一般的，我们直接设指标集$I$不可数，下面我们
+        证明对于任意$\delta>0$，只有有限个Fourier系数的模大于$\delta$。
+
+        反证法，倘若不然，则存在$\delta>0$，可以构造出一个Fourier系数列使得数列
+        中所有项的模大于$\delta$，即$|(x,e_{\alpha_k})|>\delta,k=1,2,\ldots$，
+        因此
+        \[\sum_{k=1}^\infty|(x,e_{\alpha_k})|^2>\infty\]
+        这与Bessel不等式矛盾，从而上述
+        结论不成立。
+
+        同时由于
+        \[\{\alpha\in I|(x,e_\alpha)\neq 0\}
+        =\bigcup_{n=1}^\infty\left\{\alpha\in I\left||(x,e_\alpha)|>\frac{1}{n}\right.\right\}\]
+        即不为0的指标集是可数集的可数并，从而也是可数的。
+    \end{proof}
+
+    \problem
+    \begin{proof}
+        由于
+        \[\left(x-\sum_{k=1}^n(x,e_k)e_k,e_i\right)=0,i=1,2,\ldots n\]
+        因此
+        \[\left\|x-\sum_{k=1}^n(x,e_k)e_k\right\|^2
+        =\left(x-\sum_{k=1}^n(x,e_k)e_k,x\right)
+        =||x||^2-\sum_{k=1}^n|(x,e_k)|^2\geq 0\]
+        从而
+        \[\sum_{k=1}^n|(x,e_k)|^2\leq ||x||^2\]
+        同理有
+        \[\sum_{k=1}^n|(y,e_k)|^2\leq ||y||^2\]
+        于是由Cauchy不等式
+        \[\left(\sum_{k=1}^n|(x,e_k)|\cdot|(y,e_k)|\right)^2
+        \leq
+        \left(\sum_{k=1}^n|(x,e_k)|^2\right)
+        \left(\sum_{k=1}^n|(y,e_k)|^2\right)
+        \leq ||x||^2||y||^2\]
+        即
+        \[\sum_{k=1}^n|(x,e_k)(y,e_k)|\leq
+        ||x||\cdot||y||\]
+        从而
+        \[\sum_{k=1}^\infty|(x,e_k)(y,e_k)|\leq ||x||\cdot||y||\]
+
+
+    \end{proof}
+\end{document}
