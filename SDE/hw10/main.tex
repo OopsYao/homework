@@ -1,0 +1,34 @@
+\documentclass{homework}
+
+\title{Homework 10}
+
+\begin{document}
+    \maketitle
+
+    \problem
+    % TODO Prove existence
+
+    \problem
+    Denote
+    \[A_t:=-\int_0^tg(s)\diff W_s+\frac{1}{2}\int_0^tg^2(s)\diff s\]
+    then $A_t$ is an It\^o process as
+    \[\diff A_t=-g(t)\diff W_t+\frac{1}{2}g^2(t)\diff t\]
+    hence
+    \[\begin{aligned}
+        \diff I_t&=\diff \e^{A_t}\\
+        &=\e^{A_t}\left(\diff A_t+\frac{1}{2}(\diff A_t)^2\right)\\
+        &=\e^{A_t}(-g(t)\diff W_t+g^2(t)\diff t)\\
+        &=I_t(-g(t)\diff W_t+g^2(t)\diff t)
+    \end{aligned}\]
+    It follows that
+    \[\diff I_t\diff X_t=-\e^{A_t}g^2(t)X_t\diff t=-I_tX_tg^2(t)\diff t\]
+    therefore,
+    \[\begin{aligned}
+        &\diff(I_tX_t)\\
+        =&I_t\diff X_t+X_t\diff I_t+\diff I_t\diff X_t\\
+        =&I_tf(t,X_t)\diff t+I_tg(t)\diff W_t+I_tX_t(-g(t)\diff W_t+g^2(t)\diff t)
+        -I_tX_tg^2(t)\diff t\\
+        =&I_tf(t,X_t)\diff t
+    \end{aligned}\]
+
+\end{document}
