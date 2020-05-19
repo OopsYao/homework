@@ -93,4 +93,76 @@
         \label{fig:blowup}
     \end{figure}
 
+    \problem
+    \begin{subproblem}[\roman*)]
+        \item
+        We have from Taylor's expansion that
+        \[\diff X_t=\diff\left(\frac{1}{1-W_t}\right)
+        =\frac{\diff W_t}{(1-W_t)^2}
+        +\frac{1}{2}\frac{2(\diff W_t)^2}{(1-W_t)^3}
+        =X_t^2\diff W_t+X_t^3\diff t\]
+        and apparently $X_0=1/(1-W_0)=1$.
+
+        \item
+        Denote $X_t=f(t,W_t)$, then we have from It\^o's lemma that
+        \[\diff X_t=\left(f_t+\frac{f_{xx}}{2}\right)\diff t+f_x\diff W_t\]
+        where $f_t$ is short for $\partial f(t,W_t)/\partial t$, $f_{xx}$ for
+        $\partial^2 f(t,W_t)/\partial W_t^2$, etc.
+
+        It follows that
+        \[f_x=f^2,f_t+\frac{f_{xx}}{2}=f^3\]
+        The first equation gives us
+        \[f_{xx}=2ff_x=2f^3\]
+        Substituting this into the second one gives us
+        \[f_t+f^3=f^3\]
+        i.e., $f_t=0$.
+        Therefore $f_x=f^2$ is an ODE actually, to which the solution is
+        \[f(t,W_t)=\frac{1}{C-W_t}\]
+        And initial condition $X_0=1$ yields $C=1$, hence
+        \begin{equation}
+            \label{eq:blow sol}
+            X_t=\frac{1}{1-W_t}
+        \end{equation}
+        With the uniqueness of the SDE, we can conclude that
+        the solution is \cref{eq:blow sol}.
+
+        \item
+        See \cref{fig:blowup}.
+
+        \item
+        We use the average of trials to estimate the expectation.
+        After trials of 1000 times with maxtime\marginnote{
+            Given an finite time, chances are that the path
+            does not hit the line, so we choose the
+            hitting time to be assigned to the maxtime.
+            And we adjust the maxtime to see the difference
+            (the ideal occasion is that the
+            maxtime is infinite).
+
+            Actually, we know that the expectation of hitting time of Brownian
+            motion is infinite, i.e.,
+            \[E(\inf{\{t:W_t=m\}})=\infty,m\in\mathbb R\]
+        } 1000, 5000, 10000,
+        we have an estimate
+        of 385.5, 1029.2, 1425.4 accordingly. See \cref{fig:dist}
+        for the distributions.
+        \begin{figure}[h]
+            \centering
+            \begin{subfigure}[b]{0.3\textwidth}
+                \includegraphics[width=\textwidth]{max=1000}
+                \caption{Maxtime 1000}
+            \end{subfigure}
+            \begin{subfigure}[b]{0.3\textwidth}
+                \includegraphics[width=\textwidth]{max=5000}
+                \caption{Maxtime 5000}
+            \end{subfigure}
+            \begin{subfigure}[b]{0.3\textwidth}
+                \includegraphics[width=\textwidth]{max=10000}
+                \caption{Maxtime 10000}
+            \end{subfigure}
+            \caption[][2.53cm]{Distribution of hitting time with different max time}
+            \label{fig:dist}
+        \end{figure}
+    \end{subproblem}
+
 \end{document}
