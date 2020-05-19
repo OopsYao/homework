@@ -31,4 +31,57 @@
         =&I_tf(t,X_t)\diff t
     \end{aligned}\]
 
+    \problem
+    \begin{subproblem}[(\alph*)]
+        \item
+        We have that
+        \[f(t,X_t)=0,g(t)=\alpha\]
+        thus
+        \[I_t=\e^{-\alpha W_t+\alpha^2t/2}\]
+        and
+        \[\diff(I_tX_t)=0\]
+        which gives us
+        \[I_tX_t=I_0X_0=X_0\]
+        i.e.,
+        \[X_t=\frac{X_0}{I_t}=X_0\e^{\alpha W_t-\alpha^2t/2}\]
+
+        \item
+        $I_t$ and following ones are the same as above
+        since $g(t)=\alpha$ is not changed.
+        And we have that $f(t,X_t)=r$, hence
+        \[\diff(I_tX_t)=rI_t\diff t\]
+        Therefore,
+        \[\begin{aligned}
+            X_t&=I_t^{-1}\left(I_0X_0+r\int_0^tI_s\diff s\right)\\
+            &=X_0\e^{\alpha W_t-\alpha^2/t}+r\int_0^t\e^{\alpha(W_t-W_s)-\alpha^2(t-s)/2}\diff s
+        \end{aligned}\]
+
+        \item
+        We have that $f(t,X_t)=X_t$, thus
+        \[\diff(I_tX_t)=I_tX_t\diff t\]
+        Therefore,
+        \[I_tX_t=I_0X_0\e^t=X_0\e^t\]
+        as the quadratic variation
+        \[\diff(I_t^2X_t^2)=0\]
+        i.e.,
+        \[X_t=X_0\e^{\alpha W_t-(\alpha^2/2-1)t}\]
+
+        \item
+        We have that $f(t,X_t)=1/X_t$, thus
+        \[\diff Y_t=\diff(I_tX_t)=\frac{I_t\diff t}{X_t}
+        =\frac{I_t^2\diff t}{Y_t}\]
+        i.e.,
+        \[Y_t\diff Y_t=I_t^2\diff t\]
+        Therefore,
+        \[\int_0^tY_s\diff Y_s=\frac{Y_t^2-Y_0^2}{2}=\int_0^tI_s^2\diff s\]
+        i.e.,
+        % TODO X0 > 0 cancels minus sign ?
+        \[\begin{aligned}
+            X_t&=\pm I_t^{-1}\sqrt{Y_0^2+2\int_0^tI_s^2\diff s}\\
+            &=\pm\sqrt{X_0^2\e^{2\alpha W_t-\alpha^2t}
+            +2\int_0^t\e^{-2\alpha(W_s-W_t)+\alpha^2(s-t)}\diff s}
+        \end{aligned}\]
+
+    \end{subproblem}
+
 \end{document}
