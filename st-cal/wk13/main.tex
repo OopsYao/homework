@@ -1,0 +1,41 @@
+\documentclass[cn]{homework}
+
+\title{第十三周作业}
+
+\begin{document}
+    \maketitle
+
+    \problem[习题4.15]
+    \begin{subproblem}
+        \item
+        \begin{proof}
+            由于
+            \[\diff B_i(t)=
+            \sum_{j=1}^d\frac{\sigma_{ij}(t)}{\sigma_i(t)}\diff W_j(t)\]
+            则$B_i(t)$为关于此$d$维布朗运动的连续鞅，同时
+            \[\begin{aligned}
+                (\diff B_i(t))^2
+                &=\sum_{j,k}\frac{\sigma_{ij}(t)\sigma_{ik}(t)}{\sigma_i^2(t)}
+                \diff W_j(t)\diff W_k(t)\\
+                &=\sum_{j=1}^d\frac{\sigma_{ij}^2(t)}{\sigma_i^2(t)}(\diff W_j(t))^2\\
+                &=\diff t
+            \end{aligned}\]
+            故由列维引理知$B_i(t)$为布朗运动。
+        \end{proof}
+
+        \item
+        \begin{proof}
+            直接计算可得
+            \[\begin{aligned}
+                \diff B_i(t)\diff B_k(t)
+                &=\left(\sum_{j=1}^d\frac{\sigma_{ij}(t)}{\sigma_i(t)}\diff W_j(t)\right)
+                \left(\sum_{l=1}^d\frac{\sigma_{kl}(t)}{\sigma_k(t)}\diff W_l(t)\right)\\
+                &=\sum_{j,l}\frac{\sigma_{ij}(t)\sigma_{kl}(t)}{\sigma_i(t)\sigma_k(t)}
+                \diff W_j(t)\diff W_i(t)\\
+                &=\sum_{j=1}^d\frac{\sigma_{ij}(t)\sigma_{kj}(t)}{\sigma_i(t)\sigma_k(t)}
+                (\diff W_j(t))^2\\
+                &=\rho_{ik}(t)\diff t
+            \end{aligned}\]
+        \end{proof}
+    \end{subproblem}
+\end{document}
