@@ -9,11 +9,21 @@ t_bill <- data.matrix(design["Tbill"])
 r5 <- data.matrix(design["r5"])
 r10 <- data.matrix(design["r10"])
 
-index <- seq_len(nrow(design))
-ggplot(data.frame(index, design)) +
-    geom_point(aes(index, r5), color = "blue") +
-    geom_point(aes(index, r10), color = "green") +
-    geom_point(aes(index, t_bill), color = "red")
+# Visualization
+data_refactor <- function(df, name) {
+    idx <- seq_len(nrow(df))
+    fr <- data.frame(idx, df, name)
+    colnames(fr) <- c("idx", "val", "name")
+    fr
+}
+df_grh <- rbind(
+    data_refactor(t_bill, "tBill"),
+    data_refactor(r5, "r5"),
+    data_refactor(r10, "r10")
+)
+ggplot(df_grh) +
+    geom_line(aes(idx, val, color = name))
+ggsave("hw12/ts.pdf", width = 8, height = 5)
 
 # ADF test for the 3 sequences
 adf.test(t_bill)
@@ -26,6 +36,10 @@ print(coint_lm)
 
 # ADF test of residual
 coint_res <- resid(coint_lm)
+df_res <- data.frame("index" = seq_len(length(coint_res)), coint_res)
+ggplot(df_res) +
+    geom_line(aes(index, coint_res))
+ggsave("hw12/residual.pdf", width = 5, height = 5)
 adf.test(coint_res)
 
 # ECM
