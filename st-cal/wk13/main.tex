@@ -1,6 +1,8 @@
 \documentclass[cn]{homework}
 
 \title{第十三周作业}
+\newcommand{\E}{\mathbb E}
+\newcommand{\prob}{\mathbb P}
 
 \begin{document}
     \maketitle
@@ -37,5 +39,63 @@
                 &=\rho_{ik}(t)\diff t
             \end{aligned}\]
         \end{proof}
+    \end{subproblem}
+
+    \problem[习题4.19]
+    \begin{subproblem}
+        \item
+        \newcommand{\sgn}{\mathrm{sign}}
+        \begin{proof}
+            由$B(t)$为伊藤积分知其为连续鞅且$B(0)=0$，而
+            \[\diff B(t)=\sgn(W(t))\diff W(t)\]
+            于是
+            \[(\diff B(t))^2=(\diff W(t))^2=\diff t\]
+            从而由列维引理知$B(t)$为布朗运动。
+        \end{proof}
+
+        \item
+        \begin{proof}
+            由于
+            \[\begin{aligned}
+                \diff[B(t)W(t)]&=B(t)\diff W(t)+W(t)\diff B(t)+\diff B(t)\diff W(t)\\
+                &=[B(t)+W(t)\sgn(W(t))]\diff W(t)+\sgn(W(t))\diff t
+            \end{aligned}\]
+            从而两端积分并取期望，由伊藤积分的零期望性得，
+            \[\begin{aligned}
+                \E[B(t)W(t)]-E[B(0)W(0)]&=\E\int_0^t\sgn(W(s))\diff s\\
+                &=\int_0^t\E[\sgn(W(s))]\diff s\\
+                &=\int_0^t\left(\int_{W(s)\geq 0}\diff\prob
+                -\int_{W(s)<0}\diff\prob\right)\diff s\\
+                &=\int_0^t(\prob(W(s)\geq 0)-\prob(W(s)<0))\diff s\\
+                &=0
+            \end{aligned}\]
+            从而
+            \[\E[B(t)W(t)]=\E[B(0)W(0)]=0\]
+        \end{proof}
+
+        \item
+        由乘积法则
+        \[\diff W^2(t)=2W(t)\diff W(t)+(\diff W(t))^2=2W(t)\diff W(t)+\diff t\]
+
+        \item
+        由于
+        \[\begin{aligned}
+            \diff[B(t)W^2(t)]&=W^2(t)\diff B(t)+B(t)\diff W^2(t)+\diff B(t)\diff W^2(t)\\
+            &=\begin{aligned}[t]
+                &[2W(t)\sgn(W(t))+B(t)]\diff t\\
+                &+[W^2(t)\sgn(W(T))+2B(t)W(t)]\diff W(t)
+            \end{aligned}\\
+        \end{aligned}\]
+        两端积分取期望得
+        \[\begin{aligned}
+            &\E[B(t)W^2(t)]-\E[B(0)W^2(0)]\\
+            =&\E\int_0^t[2W(s)\sgn(W(s))+B(s)]\diff s\\
+            =&\int_0^t2\E[W(s)\sgn(W(s))]\diff t+\int_0^t\E[B(s)]\diff s
+        \end{aligned}\]
+        注意到
+        \[W(s)\sgn(W(s))=|W(s)|\]
+        而$B(s)$为伊藤积分，故$\E[B(s)]=0$，从而
+        \[\E[B(t)W^2(t)]=2\int_0^t\E[|W(s)|]\diff s>0=\E[B(t)]\cdot\E[W^2(t)]\]
+        尽管$B(t)$与$W(t)$不相关，但它们并不服从二元联合正态分布，因此不足以蕴含独立。
     \end{subproblem}
 \end{document}
