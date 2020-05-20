@@ -1,0 +1,143 @@
+\documentclass[cn]{homework}
+
+\title{作业13}
+
+\newcommand{\cov}{\mathrm{Cov}}
+
+\begin{document}
+    \maketitle
+
+    \problem
+    \begin{subproblem}[(\alph*)]
+        \item
+        \begin{proof}
+            由于$Z_t$并不满足不同项直接不相关的要求，倘若存在可逆
+            线性变换$U_t=MZ_t$，使得$\Sigma_U$为对角阵，这里要求$M$可逆。
+
+            原模型可以表示为
+            \begin{equation}
+                \label{eq:X var}
+                X_t=\mu+\Pi_iX_{t-1}+\Pi_2X_{t-2}+Z_t
+            \end{equation}
+            同左乘$M$得
+            \[\begin{aligned}
+                MX_t&=M\mu+M\Pi_1+M\Pi_2X_{t-2}+MZ_t\\
+            \end{aligned}\]
+            即关于$Y_t$的VAR(2)模型，这里$Y_t=MX_t$，
+            \begin{equation}
+                \label{eq:Y var}
+                Y_t=M\mu+M\Pi_1M^{-1}Y_t+M\Pi_2M^{-1}Y_{t-2}+U_t
+            \end{equation}
+            同时由于
+            \[EY_t=M\cdot EX_t,\Sigma_Y=M\Sigma_XM'\]
+            从而$X_t$与$Y_t$同平稳。
+
+            而\cref{eq:Y var}的平稳条件为
+            \[B_1=\begin{pmatrix}
+                M\Pi_1 M^{-1} & M\Pi_2 M^{-1} \\
+                I &
+            \end{pmatrix}
+            =NA_1N^{-1}\]
+            的特征值全在单位圆以内，这里
+            \[N=\begin{pmatrix}
+                M & \\
+                  & M
+            \end{pmatrix},
+            A_1=\begin{pmatrix}
+                \Pi_1 & \Pi_2 \\
+                I
+            \end{pmatrix}\]
+            又注意到相似矩阵的特征值相同，故只需判断$A_1$的
+            特征值即可。
+
+            由于$\Sigma_{Z}=PP'$，而$\det P\neq 0$，故可以选取$M=P^{-1}$，
+            使得$\Sigma_{U}=M\Sigma_{Z}M'=I$，从而
+            $M$的存在性得到保证。
+        
+            经过计算可以发现$A_1$的6个特征值全在单位圆以内，
+            % TODO Detail
+            故$B_1$的特征值也如此，故$Y_t$
+            是平稳的，从而$X_t$平稳。
+
+
+        \end{proof}
+
+        \item
+        \cref{eq:X var}两端同取期望，由平稳性可知
+        \[EX_t=\mu+\Pi_1EX_t+\Pi_2EX_t\]
+        即
+        \[(I-\Pi_1-\Pi_2)EX_t=\mu\]
+        解得
+        \[EX_t=\frac{5}{61}\begin{pmatrix}
+            2\\
+            26\\
+            -1
+        \end{pmatrix}\]
+
+        \item
+        由于\cref{eq:Y var}的VAR(1)形式为
+        \[
+            \begin{pmatrix}
+                Y_t\\
+                Y_{t-1}
+            \end{pmatrix}
+        =\begin{pmatrix}
+            \mu \\
+            0
+        \end{pmatrix}
+        +B_1\begin{pmatrix}
+            Y_{t-1}\\
+            Y_{t-2}
+        \end{pmatrix}+
+        \begin{pmatrix}
+            U_t\\
+            0
+        \end{pmatrix}\]
+        故两端左乘$N^{-1}$得
+        \[\begin{pmatrix}
+            X_t\\
+            X_{t-1}
+        \end{pmatrix}
+        =\begin{pmatrix}
+            M^{-1}\mu\\
+            0
+        \end{pmatrix}
+        +A_1\begin{pmatrix}
+            X_{t-1}\\
+            X_{t-2}
+        \end{pmatrix}
+        +\begin{pmatrix}
+            Z_t\\
+            0
+        \end{pmatrix}\]
+        即
+        \[\begin{pmatrix}
+            X_t\\
+            X_{t-1}
+        \end{pmatrix}
+        =\begin{pmatrix}
+            1.1\\
+            0.3\\
+            0   \\
+            0   \\
+            0   \\
+            0
+        \end{pmatrix}
+        +\begin{pmatrix}
+            0.7 & 0.1 &     & -0.2 &     &     \\
+                & 0.4 & 0.1 &      & 0.1 & 0.1 \\
+            0.9 &     & 0.8 &      &     &     \\
+            1   &     &     &      &     &     \\
+                & 1   &     &      &     &     \\
+                &     & 1   &      &     &     \\
+        \end{pmatrix}
+        \begin{pmatrix}
+            X_{t-1}\\
+            X_{t-2}
+        \end{pmatrix}
+        +\begin{pmatrix}
+            Z_t\\
+            \boldsymbol 0
+        \end{pmatrix}\]
+    \end{subproblem}
+\end{document}
