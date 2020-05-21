@@ -175,7 +175,33 @@
     \problem
     \begin{subproblem}
         \item
-        % TODO Prove uniqueness
+        \begin{proof}
+            Denote $a(t,x)=\sqrt{1+x}+x/2,b(t,x)=\sqrt{1+x^2}$, then
+            \[\diff X_t=a(t,X_t)\diff t+b(t,X_t)\diff W_t\]
+            And it is easy to see that $a,b$ statisfies Lipschitz condition as
+            for any $x,y\in\mathbb R$,
+            \[\begin{aligned}
+                |a(t,x)-a(t,y)|
+                &=\left|\sqrt{1+x^2}-\sqrt{1+y^2}+\frac{x-y}{2}\right|\\
+                &\leq\left|\sqrt{1+x^2}-\sqrt{1+y^2}\right|+\frac{1}{2}|x-y|\\
+                &=\left(\left|\frac{x+y}{\sqrt{1+x^2}+\sqrt{1+y^2}}\right|+\frac{1}{2}\right)|x-y|\\
+                &\leq\left(\left|\frac{x}{\sqrt{1+x^2}}\right|
+                +\left|\frac{y}{\sqrt{1+y^2}}\right|+\frac{1}{2}\right)|x-y|\\
+                &\leq\frac{5}{2}|x-y|
+            \end{aligned}\]
+            and similarly
+            \[|b(t,x)-b(t,x)|\leq 2|x-y|\]
+            We can also verify the sublinear growth condition,
+            \[\begin{aligned}
+                |a(t,x)|+|b(t,x)|&=\left|\sqrt{1+x^2}+\frac{x}{2}\right|
+                +\left|\sqrt{1+x^2}\right|\\
+                &\leq 2\left|\sqrt{1+x^2}\right|+\frac{|x|}{2}\\
+                &\leq 2(1+|x|)+\frac{|x|}{2}\\
+                &\leq \frac{5}{2}(1+|x|)
+            \end{aligned}\]
+            Then the existence and uniqueness follows as
+            as $X_0=x_0$ is a constant.
+        \end{proof}
 
         \item
         Denote\sidenote{The solution is from
