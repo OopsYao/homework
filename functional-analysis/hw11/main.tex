@@ -10,7 +10,23 @@
     \problem
     \begin{subproblem}[(\arabic*)]
         \item
-        % TODO Stone-Weierstrass
+        \begin{proof}
+            由Stone-Weierstrass定理知
+            $\{\e^{2\pi\img nx}\}$是$L^2[-1/2,1/2]$的正交基，
+            对于$b-a=1$的情况，
+            考虑从$L^2[-1/2,1/2]$到$L^2[a,a+1]$的平移变换，
+            \[T:f(x)\mapsto f(x-a-\frac{1}{2})\]
+            则容易验证，在两个空间中
+            \[(Tf,Tg)=(f,g)\]
+            这里内积分别为相应空间的内积。
+            从而$L^2[-1/2,1/2]$的正交基在$L^2[a,a+1]$中的象为象空间
+            的基，即
+            \[T\e^{2\pi\img nx}=\e^{2\pi\img n(x-a-1/2)}
+            =\e^{-2n(a+1/2)\pi\img}\e^{2\pi\img nx},n\in\mathbb Z\]
+            为$L^2[a,a+1]$的正交基，注意到我们将系数$\e^{-2n(a+1/2)\pi\img}$
+            去除后可知，$\{\e^{2\pi\img nx}\}$亦为正交基，从而知其完全，
+            即$S^\perp=\{\boldsymbol 0\}$。
+        \end{proof}
 
         \item
         \begin{proof}
