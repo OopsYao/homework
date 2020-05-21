@@ -204,5 +204,38 @@
             &=x_0\cosh(t+W_t)+\sqrt{1+x_0^2}\sinh(t+W_t)
         \end{aligned}\]
     \end{subproblem}
+    
+    \problem
+    \begin{subproblem}
+        \item[(a)]
+        We rewrite the SDE as
+        \[\diff X_t-4X_t\diff t=-\diff t+2\diff W_t\]
+        and we have from the product rule that
+        \[\diff(X_t\e^{-4t})=\e^{-4t}(\diff X_t-4X_t\diff t)\]
+        thus
+        \[\diff(X_t\e^{-4t})=-\e^{-4t}\diff t+2\e^{-4t}\diff W_t\]
+        which gives us
+        \[X_t\e^{-4t}-X_0=\frac{\e^{-4t}-1}{4}+2\int_0^t\e^{-4s}\diff W_s\]
+        And we also have from integration by parts that
+        \[\int_0^t\e^{-4s}\diff W_s=W_s\e^{-4s}|_0^t+4\int_0^tW_s\e^{-4s}\diff s
+        =W_t\e^{-4t}+4\int_0^tW_s\e^{-4s}\diff s\]
+        Finally we obtain $X_t$ as
+        \[X_t=\frac{1}{4}+\left(X_0-\frac{1}{4}\right)\e^{4t}+2W_t+8\int_0^tW_s\e^{-4s}\diff s\]
+
+        \item[(e)]
+        We rewrite the SDE as (assume that $t>0$)
+        \[\diff X_t-\frac{3}{t}X_t\diff t=\frac{\diff t}{t^2}+t^3\diff W_t\]
+        and we have from the product rule that
+        \[\diff\left(\frac{X_t}{t^3}\right)=t^{-3}\diff X_t+X_t\diff(t^{-3})
+        =t^{-3}\left(\diff X_t-\frac{3}{t}X_t\diff t\right)\]
+        It follows that
+        \[\diff\left(\frac{X_t}{t^3}\right)=\frac{\diff t}{t^5}+\diff W_t\]
+        which gives us
+        \[\frac{X_t}{t^3}-X_1=\int_1^t\frac{1}{s^5}\diff s+W_t-W_1
+        =\frac{1}{4}\left(1-\frac{1}{t^4}\right)+W_t-W_1\]
+        Therefore,
+        \[X_t=\frac{1}{4}\left(t^3-\frac{1}{t}\right)+t^3(W_t-W_1)\]
+        as $X_1=0$.
+    \end{subproblem}
 
 \end{document}
