@@ -2,6 +2,8 @@
 
 \title{Homework 10}
 
+\newcommand{\arcsinh}{\mathrm{arcsinh}}
+
 \begin{document}
     \maketitle
 
@@ -163,6 +165,44 @@
             \caption[][2.53cm]{Distribution of hitting time with different max time}
             \label{fig:dist}
         \end{figure}
+    \end{subproblem}
+
+    \problem
+    \begin{subproblem}
+        \item
+        % TODO Prove uniqueness
+
+        \item
+        Denote\sidenote{The solution is from
+        \url{https://math.stackexchange.com/questions/3364842/when-is-e-n-a-basis-for-l20-b}}
+        $\sigma(x):=\sqrt{1+x^2}$, then
+        \[\diff X_t=(\sigma(X_t)+X_t/2)\diff t+\sigma(X_t)\diff W_t\]
+        And denote $Z_t:=f(X_t)$, where
+        \[f(x)=\int_0^x\frac{1}{\sigma(y)}\diff y\]
+        then we know that
+        \[f'(x)=\frac{1}{\sigma(x)},f''(x)=-\frac{\sigma'(x)}{\sigma^2(x)}\]
+        And we have from It\^o's lemma that
+        \[\begin{aligned}
+            \diff Z_t&=\diff f(X_t)\\
+            &=f'(X_t)\diff X_t+\frac{1}{2}f''(X_t)(\diff X_t)^2\\
+            &=\left(\frac{f''\sigma^2}{2}
+            +\left(\sigma+\frac{X_t}{2}\right)f'\right)\diff t
+            +f'\sigma\diff W_t\\
+            &=\left(-\frac{\sigma'}{2}+\frac{X_t}{2\sigma}+1\right)\diff t+\diff W_t
+        \end{aligned}\]
+        where $f$ is short for $f(X_t)$, $\sigma$ for $\sigma(X_t)$ etc.
+        But do note that $X_t/\sigma=X_t/\sqrt{1+X_t^2}=\sigma'$, then
+        we obtain that
+        \[\diff Z_t=\diff t+\diff W_t\]
+        which gives us
+        \[Z_t=Z_0+t+W_t=f(x_0)+t+W_t\]
+        Indeed, one can show that $f(x)=\arcsinh x$
+        thus we obtain $X_t$ as
+        \[\begin{aligned}
+            X_t&=\sinh Z_t\\
+            &=\sinh(\arcsinh x_0+t+W_t)\\
+            &=x_0\cosh(t+W_t)+\sqrt{1+x_0^2}\sinh(t+W_t)
+        \end{aligned}\]
     \end{subproblem}
 
 \end{document}
