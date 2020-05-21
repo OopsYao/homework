@@ -2,11 +2,28 @@
 
 \title{第十二周作业}
 
+\newcommand{\img}{\mathrm i}
+
 \begin{document}
     \maketitle
 
     \problem
-    % TODO P1
+    \begin{subproblem}[(\arabic*)]
+        \item
+        % TODO Stone-Weierstrass
+
+        \item
+        \begin{proof}
+            考虑$\e^{\pi\img x}\in L^2[-1,1]$，则对于任意$n\in\mathbb Z$，
+            \[\begin{aligned}
+                (\e^{\pi\img x},\e^{2\pi\img nx})
+                &=\int_{-1}^1\e^{\pi\img(2n-1)x}\diff x\\
+                &=\int_{-1}^1\cos(2n-1)\pi x\diff x+\img\int_{-1}^1\sin(2n-1)\pi x\diff x\\
+                &=0
+            \end{aligned}\]
+            于是$\e^{\pi\img x}\in S^\perp$，但$\e^{\pi\img x}\neq\boldsymbol 0$。
+        \end{proof}
+    \end{subproblem}
 
     \problem
     % TODO P2
@@ -72,5 +89,18 @@
         \[\sum_{k=1}^\infty|(x,e_k)(y,e_k)|\leq ||x||\cdot||y||\]
 
 
+    \end{proof}
+
+    \problem
+    \begin{proof}
+        不妨设$\{e_k\}$是完备的，而对于任意$f\perp\{e_k'\}$，
+        \[|(f,e_k)|=|(f,e_k-e_k')|\leq||f||\cdot||e_k-e_k'||\]
+        于是
+        \[\sum_{k=1}^\infty |(f,e_k)|^2
+        \leq||f||^2\sum_{k=1}^\infty||e_k-e_k'||^2\]
+        而上式左端由$\{e_k\}$的完备性知
+        \[||f||^2=\sum_{k=1}^\infty|(f,e_k)|^2\]
+        于是由$\sum_{k=1}^\infty||e_k-e_k'||^2<1$可知$||f||^2=0$，
+        从而$f=\boldsymbol 0$，即$\{e_k'\}$是完全的，因此也是完备的。
     \end{proof}
 \end{document}
