@@ -26,7 +26,20 @@
     \end{subproblem}
 
     \problem
-    % TODO P2
+    \begin{proof}
+        倘若存在$\alpha_1^*,\alpha_2^*$使得，$x^*=\alpha_1^*x_1+\alpha_2^*x_2-x_3$
+        与$x_1,x_2$正交，则
+        \[\begin{aligned}
+            (f_(\alpha_1,\alpha_2))^2
+            &=||(\alpha_1-\alpha_1^*)x_1+(\alpha_2-\alpha_2^*)x_2+x^*||^2\\
+            &=||(\alpha_1-\alpha_1^*)x_1+(\alpha_2-\alpha_2^*)x_2||^2
+            +||x^*||^2
+        \end{aligned}\]
+        从而$f$在$\alpha_i=\alpha_i^*,i=1,2$时取得最小值。
+
+        由于$x_1,x_2$为单位正交列，从而$x_3-(x_3,x_1)x_1-(x_3,x_2)x_2$正交于
+        $x_1,x_2$，即$\alpha_i^*=(x_3,x_i),i=1,2$符合要求，故证得。
+    \end{proof}
 
     \problem
     \begin{proof}
