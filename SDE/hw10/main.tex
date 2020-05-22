@@ -8,7 +8,73 @@
     \maketitle
 
     \problem
-    % TODO Prove existence
+    \begin{proof}
+        Consider the solution in a given interval $[0,T]$.
+        For any fixed but arbitrary $\omega\in\Omega$,
+        we construct $X_t^{(n)}$ as follows,
+        \begin{equation}
+            \label{eq:induction formula}
+            X_t^{(n+1)}=x_0+\int_0^ta(s,X_s^{(n)})\diff s
+            +\int_0^tb(s,X_s^{(n)})\diff W_s,
+            \ X_t^{(0)}=x_0
+        \end{equation}
+        And we claim that for any $t\in[0,T]$,
+        \[\left|X_t^{(n+1)}-X_t^{(n)}\right|
+        \leq x_0\frac{K^n}{n!}(t+W_t)^{n}\]
+        To see this\marginnote{I have to say the proof about the claim
+        is not correct -- or even the claim is not.
+        Actually you can find that I did a bad job when handling
+        $(t+W_t)^n$ and $|t+W_t|^n$ (I exchanged them to access my goal).
+
+        I guess my claim holds true
+        at least for a subsequence (I tried but failed), in this way the subsequence
+        is Cauchy, and we still can prove the existence of the solution.
+        },
+        we argue by mathematical induction.
+        It is easy to see that the base case $n=0$ holds true.
+        Assume the induction hypothesis that for a particular
+        $k$, case $n=k-1$ holds, i.e.,
+        \[\left|X_t^{(k)}-X_t^{(k-1)}\right|
+        \leq x_0\frac{K^{k-1}}{(k-1)!}|t+W_t|^{k-1}\]
+        It follows that
+        \[\begin{aligned}
+            &\left|X_t^{(k+1)}-X_t^{(k)}\right|\\
+            =&\left|\int_0^t\left(a(s,X_s^{(k)})-a(s,X_s^{(k-1)})\right)\diff s
+            +\int_0^t\left(b(s,X_s^{(k)})-b(s,X_s^{(k-1)})\right)\diff W_s\right|\\
+            \leq&K\int_0^t\left|X_s^{(k)}-X_s^{(k-1)}\right|(\diff s+\diff W_s)\\
+            \leq&x_0\frac{K^k}{(k-1)!}\int_0^t(s+W_s)^{k-1}(\diff s+\diff W_s)
+        \end{aligned}\]
+        And we have from It\^o's lemma that
+        \[\diff\left(\frac{(t+W_t)^{n+1}}{n+1}\right)
+        =(t+W_t)^n\diff W_t+(t+W_t)^n\diff t+\frac{1}{2}n(t+W_t)^{n-1}\diff W_t\]
+        i.e.,
+        \[(t+W_t)^n(\diff t+\diff W_t)
+        =\frac{\diff\left((t+W_t)^{n+1}\right)}{n+1}
+        -\frac{n}{2}(t+W_t)^{n-1}\diff W_t\]
+        Hence
+        \[\left|X_t^{(k+1)}-X_t^{(k)}\right|\leq
+        x_0\frac{K^k}{(k-1)!}\int_0^t(s+W_s)^{n-1}(\diff s+\diff W_s)
+        \leq\frac{K^k}{k!}|t+W_t|^{k+1}\]
+        that is, the statement about case $n=k$ also holds true,
+        establishing the inductive step. So our claim follows by
+        mathematical induction.
+
+        Therefore,
+        \[\sup_{t\in[0,T]}
+        \left|X_t^{(n+1)}-X_t^{(n)}\right|
+        \leq\frac{x_0M(T)^n}{n!}\]
+        where $M(T)=K\max_{t\in[0,T]}|t+W_t|$.
+        Then for any $n<m$,
+        \[\sup_{t\in[0,T]}\left|X_t^{(n)}-X_t^{(m)}\right|
+        \leq x_0\sum_{i=n}^\infty\frac{M(T)^i}{i!}
+        \to 0\quad (n\to\infty)\]
+        It follows that $X_t^{(n)}$ is Cauchy,
+        thus there exists some $X_t$ s.t.
+        $X_t^{(n)}\to X_t$
+        uniformly as $n\to\infty$.
+        And it is easy to see that $X_t$ is the solution
+        if we send $n\to\infty$ on BHS of \cref{eq:induction formula}.
+    \end{proof}
 
     \problem
     Denote
@@ -108,6 +174,8 @@
         +\frac{1}{2}\frac{2(\diff W_t)^2}{(1-W_t)^3}
         =X_t^2\diff W_t+X_t^3\diff t\]
         and apparently $X_0=1/(1-W_0)=1$.
+
+        % TODO Prove uniqueness
 
         \item
         Denote $X_t=f(t,W_t)$, then we have from It\^o's lemma that
