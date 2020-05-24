@@ -1,0 +1,33 @@
+\documentclass{homework}
+\usepackage{import}
+\usepackage{xstring}
+
+% Determine the hw num
+\IfStrEq{\jobname}{\detokenize{wrapper}}{%
+    % Dev mode (no jobname specified)
+    % * Specify hw num mannually
+    \def\hnum{11}
+}{}
+
+% Prod mode
+\ifx\hnum\undefined
+    % See https://tex.stackexchange.com/questions/41650/reparing-the-jobname-for-use-in-titlehead
+    \begingroup
+    \catcode`\w=12
+    \def\extracthnum#1w#2\relax{#2}%
+    \xdef\hnum{\expandafter\extracthnum\jobname\relax}%
+    \endgroup
+\fi
+
+\InputIfFileExists{hw\hnum/meta}{}{}
+\ifx\mytitle\undefined
+    \title{Homework \hnum}
+\else
+    % Use title in meta.tex if defined
+    \title{\mytitle}
+\fi
+
+\begin{document}
+    \maketitle
+    \subimport{hw\hnum}{main}
+\end{document}
