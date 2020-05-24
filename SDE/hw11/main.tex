@@ -82,6 +82,75 @@
     =E\left[\mu f'+\frac{1}{2}\sigma f''\right]\]
     % TODO Something wrong, definition of infinitestimal generator?
 
+    \problem
+    % TODO
+
+    \problem
+    \begin{subproblem}[(\alph*)]
+        \item
+        It easy to find that the functions in Feymann-Kac formula
+        satisfy $\mu=\sigma=f=1,\psi=v=0$, then we have that 
+        \[u(t,x)=E\left[\left.\int_t^T\diff r\right|X_t=x\right]
+        =T-t\]
+        where $X_t$ is an It\^o process driven by
+        \[\diff X_t=\mu\diff t+\sigma\diff W_t\]
+
+        \item
+        Denote $\mathcal A$ is an infinitesimal of
+        then It\^o process driven by
+        \[\diff X_t=\diff t+\diff W_t\]
+        then it easy to find that
+        \[\mathcal Af(t,x)=f_t+f_x+\frac{1}{2}f_{xx}\]
+        Hence for the solution $u(x,t)$ of the PDE, we have
+        that $\mathcal Au=-1$.
+        Therefore,
+        % TODO Explain how this comes
+        \[\begin{aligned}
+            E\left[u(T,X_T)|X_t=x\right]
+            -u(t,x)&=
+            E\left[\left.\int_t^{T}
+            \mathcal Af(s,X_{s})\diff s\right|X_t=x\right]\\
+            &=t-T
+        \end{aligned}\]
+        which gives us
+        \[u(t,x)=E[u(T,X_T)|X_t=x]+T-t=T-t\]
+        And it is apparent that $u(t,x)=T-t$ is the solution to the
+        PDE indeed.
+    \end{subproblem}
+
+    \problem
+    Denote an It\^o diffusion $X_t$ driven by
+    \begin{equation}
+        \label{eq:a b Ito}
+        \diff X_t=\alpha(t,X_t)\diff t+\beta(t,X_t)\diff W_t
+    \end{equation}
+    then the corresponded infinitesimal generator $\mathcal A$
+    is given by
+    \[\mathcal A=\frac{\partial}{\partial t}+\alpha(t,x)\frac{\partial}{\partial x}
+    +\frac{\beta^2(t,x)}{2}\frac{\partial^2}{\partial x^2}\]
+    Hence it is easy to see that we can choose
+    \begin{equation}
+        \label{eq:param}
+        \alpha(t,x)=\mu x,\beta(t,x)=\sigma x
+    \end{equation}
+    to turn $\mathcal A$ the desired.
+
+    Therefore,
+    \[\begin{aligned}
+        E[u(T,X_T)|X_t=x]-u(t,x)
+        &=E\left[\left.\int_t^T\mathcal Au(s,X_s)\diff s\right|
+        X_t=x\right]\\
+        &=-\int_t^TE(X_s|X_t=x)\diff s
+    \end{aligned}\]
+    which gives us
+    \[u(t,x)=\int_t^TE(X_s|X_t=x)\diff s\]
+    as $u(T,X_T)=0$.
+    And \cref{eq:a b Ito} together with \cref{eq:param} gives us
+    \[E(X_s)-E(X_t)=\mu\int_t^sE(X_r)\diff r\]
+    thus by solving the ODE we have $E(X_s|X_t=x)=x\e^{\mu(s-t)}$.
+    Finally, we obatin $u(t,x)$ as
+    \[u(t,x)=\int_t^Tx\e^{\mu(s-t)}\diff s
+    =\frac{x}{\mu}\left(\e^{\mu(T-t)}-1\right)\]
 
     \appendix
     \section{Python Code}
