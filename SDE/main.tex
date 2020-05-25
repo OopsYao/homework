@@ -1,0 +1,20 @@
+\documentclass[nobib]{tufte-book}
+
+\usepackage{homework}
+\usepackage{import}
+\usepackage{forloop}
+
+\title{Workbook}
+
+\begin{document}
+    \maketitle
+    \tableofcontents
+
+    \newcounter{x}
+    \forloop{x}{1}{\value{x}<12}{
+        {
+        \chapter{Homework \arabic{x}}
+        \subimport{hw\arabic{x}}{main}
+        }
+    }
+\end{document}
