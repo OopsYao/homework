@@ -29,10 +29,10 @@ def ana_u(t, x):
     return quad(integrand, -np.inf, np.inf)[0] / (4 * math.pi * D * t) ** 0.5
 
 
-x = np.linspace(-5, 5, 5000)
-plt.plot(x, np.vectorize(phi)(x), label=f't=0')
+x = np.linspace(-4, 4, 5000)
+plt.plot(x, np.vectorize(phi)(x), label=f't=0', linewidth=0.5)
 for t in [0.01, 0.1, 0.5, 1]:
-    plt.plot(x, u(0.1, x), label=f't={t}')
+    plt.plot(x, u(0.1, x), label=f't={t}', linewidth=0.5)
 plt.title('Probabilistic Representation')
 plt.legend()
 
