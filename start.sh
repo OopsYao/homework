@@ -1,5 +1,5 @@
 echo 'Start building SDE'
-bash build-sub.sh SDE
+bash build-sub.sh SDE -w
 if [ $? -ne 0 ]; then
     status=1
 fi
