@@ -96,7 +96,7 @@
         \[\diff X_t=\mu\diff t+\sigma\diff W_t\]
 
         \item
-        Denote $\mathcal A$ is an infinitesimal of
+        Denote that $\mathcal A$ is an infinitesimal of
         then It\^o process driven by
         \[\diff X_t=\diff t+\diff W_t\]
         then it easy to find that
@@ -151,6 +151,48 @@
     Finally, we obatin $u(t,x)$ as
     \[u(t,x)=\int_t^Tx\e^{\mu(s-t)}\diff s
     =\frac{x}{\mu}\left(\e^{\mu(T-t)}-1\right)\]
+
+    \problem
+    We know that for the Brownian motion the infinitesimal generator
+    $\mathcal A$ is $\Delta/2$, hence if we denote that $X_t=x+W_t$, then
+    we have that
+    \[E\left[\int_0^{\tau_x}\mathcal Au(x)\diff t\right]
+    =E(u(X_{\tau_x}))-E(u(X_0))\]
+    And we have from the PDE that $Au(x)=-1$,
+    and since $X_{\tau_x}\in\partial\Omega$ thus $u(X_{\tau_x})=0$,
+    then we obtain
+    \[-E\left[\int_0^{\tau_x}\diff t\right]=-u(x)\]
+    i.e.,
+    \[u(x)=E(\tau_x)\]
+    
+    \problem
+    \begin{proof}
+        Denote $Y_t=u(X_t)\e^{\int_0^tc(X_s)\diff s}$,
+        then $Y_0=u(x)$ and
+        \[\diff Y_t=
+        \begin{aligned}[t]
+        u(X_t)\e^{-\int_0^tc(X_s)\diff s}(-c(X_t)\diff t)
+        +\e^{\int_0^tc(X_s)\diff s}(\diff u(X_t))\\
+        +\diff(u(X_t))\e^{-\int_0^tc(X_s)\diff s}(-c(X_t))\diff t
+        \end{aligned}\]
+        And we know that
+        \[\diff(u(X_t))=u'(X_t)\diff X_t+\frac{1}{2}u''(X_t)(\diff X_t)^2
+        =u'(X_t)\diff W_t+\frac{1}{2}u''(X_t)\diff t\]
+        Therefore,
+        \[\begin{aligned}
+            \diff Y_t&=
+            \left(\frac{1}{2}u''(X_t)-u(X_t)c(X_t)\right)\e^{-\int_0^tc(X_s)\diff s}\diff t
+            +u'(X_t)\e^{-\int_0^tc(X_s)\diff s}\diff W_t\\
+            &=\left(-f(X_t)\diff t+u'(X_t)\diff W_t\right)\e^{-\int_0^tc(X_s)\diff s}
+        \end{aligned}\]
+        where the last identity is due to the PDE.
+        Integral over $[0,\tau_x]$ and taking expectation gives us
+        \[E(Y_{\tau_x})-E(Y_0)
+        =-E\left[\int_0^{\tau_x}f(X_t)\e^{-\int_0^{\tau_x}c(X_s)\diff s}\diff t\right]\]
+        Note that $Y_0=u(x)$ and we have from boundary condition that $Y_{\tau_x}=0$,
+        finally we obtain $u(x)$ as
+        \[u(x)=E\left[\int_0^{\tau_x}f(X_t)\e^{-\int_0^{\tau_x}c(X_s)\diff s}\right]\]
+    \end{proof}
 
     \appendix
     \section{Python Code}
