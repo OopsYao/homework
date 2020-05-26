@@ -1,0 +1,63 @@
+\documentclass[cn]{homework}
+
+\title{第十四周作业}
+
+\newcommand{\E}{{\mathbb E}}
+
+\begin{document}
+    \maketitle
+
+    \problem[习题5.1]
+    \begin{subproblem}
+        \item
+        由于
+        \[\diff X(t)=\sigma(t)\diff W(t)
+        +\left(\alpha(t)-R(t)-\frac{1}{2}\sigma^2(t)\right)\diff t\]
+        从而$(\diff X(t))^2=\sigma^2(t)\diff t$。
+        于是由伊藤公式，
+        \[\begin{aligned}
+            \diff f(X_t)&=S(0)\e^{X(t)}\diff X(t)+\frac{1}{2}S(0)\e^{X(t)}(\diff X(t))^2\\
+            &=f(X(t))\left(\diff X(t)+\frac{1}{2}(\diff X(t))^2\right)\\
+            &=D(t)S(t)\left(\sigma(t)\diff W(t)+(\alpha(t)-R(t))\diff t\right)
+        \end{aligned}\]
+
+        \item
+        由于
+        \[\begin{aligned}
+            \diff S(t)&=S(t)(\alpha(t)\diff t+\sigma(t)\diff W(t))\\
+            \diff D(t)&=-R(t)D(t)\diff t
+        \end{aligned}\]
+        从而$\diff S(t)\diff D(t)=0$，
+        于是由乘法法则
+        \[\begin{aligned}
+            \diff(D(t)S(t))&=-S(t)R(t)D(t)\diff t+D(t)S(t)(\alpha(t)\diff t+\sigma(t)\diff W(t))\\
+            &=D(t)S(t)\left(\sigma(t)\diff W(t)+(\alpha(t)-R(t))\diff t\right)
+        \end{aligned}\]
+    \end{subproblem}
+
+    \problem[习题5.2]
+    \begin{proof}
+        由$Z(t)$的定义知$Z(t)$为$\mathbb P$下的鞅，即有
+        \[\E[Z(T)|\mathcal F(t)]=Z(t)\]
+        由于待证
+        \begin{equation}
+            \label{eq:conditional measure transform}
+            \frac{1}{Z(t)}\E[D(T)Z(T)V(T)|\mathcal F(t)]=\tilde\E[D(T)V(T)|\mathcal F(t)]
+        \end{equation}
+        而对于任意$A\in\mathcal F(t)$，
+        \[\begin{aligned}
+            &\tilde\E\left\{\frac{I_A}{Z(t)}\E[D(T)Z(T)V(T)|\mathcal F(t)]\right\}\\
+            =&\E\left\{\frac{I_AZ}{Z(t)}\E[D(T)Z(T)V(T)|\mathcal F(t)]\right\}
+        \end{aligned}\]
+        注意到$M(t):=\E[D(T)Z(T)V(T)|\mathcal F(t)]$为$\mathcal F(t)$可测，
+        从而
+        \[\begin{aligned}
+            \E\left[\frac{I_AZ}{Z(t)}M(t)\right]
+            &=\E\left\{\E\left[\left.\frac{I_AZ}{Z(t)}M(t)\right|\mathcal F(t)\right]\right\}\\
+            &=\E\left\{\frac{I_AM(t)}{Z(t)}\E\left[Z|\mathcal F(t)\right]\right\}\\
+            &=\E\left[\frac{I_AM(t)}{Z(t)}Z(t)\right]\\
+            &=\E[I_AM(t)]
+        \end{aligned}\]
+        从而证得\cref{eq:conditional measure transform}。
+    \end{proof}
+\end{document}
