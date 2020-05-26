@@ -27,5 +27,5 @@
     "latex-workshop.latex.search.rootFiles.include": [
         "wrapper.tex"
     ],
-    "python.pythonPath": "py/bin/python"
+    "python.pythonPath": ".venv/bin/python"
 }
