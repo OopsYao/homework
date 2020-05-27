@@ -15,7 +15,17 @@
             从而$x\in\mathcal N(f)$。显然$\mathcal N(f)$对数乘加法封闭，
             从而为闭子空间。
             
-            % TODO Adequacy: closed => continous
+            倘若$\mathcal N(f)=X$，则$f=0$，连续性显然。否则，存在
+            $z_0\in X$使得$f(z_0)\neq 0$，
+            对于任意$X$中的收敛点列$y_n\to y$，定义
+            \[x_n:=y_n-\frac{f(y_n)}{f(z_0)}z_0\]
+            则$f(x_n)=0$，从而$x_n\in\mathcal N(f)$，
+            同时
+            \[\lim_{n\to\infty} x_n=y-\frac{\displaystyle\lim_{n\to\infty}y_n}{f(z_0)}z_0\]
+            而由于$\mathcal N(f)$为闭空间，故
+            \[f\left(y-\frac{\displaystyle\lim_{n\to\infty}f(y_n)}{f(z_0)}z_0\right)
+            =f(y)-\lim_{n\to\infty}f(y_n)=0\]
+            从而$f$是连续的。
         \end{proof}
 
         \item
@@ -27,10 +37,19 @@
             从而$f$不连续。
 
             反过来\sidenote{必要性的逆否命题。}，
-            倘若$\mathcal N(f)$不在$X$中稠密，则存在$X$中的点$x$
-            不属于$\mathcal N(f)$的闭包，即
-            \[x\in X\]
-            % TODO Not dense => continuous
+            即证明
+            倘若$\mathcal N(f)$不在$X$中稠密，
+            则$f$连续。
+            首先我们说明任意包含$\mathcal N(f)$的子空间要么是自己$\mathcal N(f)$，
+            要么是全空间$X$。倘若子空间$A\supset\mathcal N(f)$且不等，则存在
+            $a\in A$使得$f(a)\neq 0$，从而对于任意$x\in X$，考虑分解
+            \[x=\left(x-\frac{f(x)}{f(a)}a\right)+\frac{f(x)}{f(a)}a\]
+            注意到
+            \[x-\frac{f(x)}{f(a)}a\in\mathcal N(f)\]
+            从而$x\in A$，从而$A=X$，也就证明了我们前面的结论。
+            同时子空间的闭包显然为子空间，于是$\mathcal N(f)$的闭包要么是自己要么是
+            全空间，而由于$\mathcal N(f)$不在$X$中稠密，故有$\mathcal N(f)$的闭包是自己，
+            于是$\mathcal N(f)$为闭子空间，从而由前一题的结论知$f$为连续的。
         \end{proof}
     \end{subproblem}
 
@@ -47,7 +66,16 @@
         \end{proof}
 
         \item
-        % TODO n(AB) <= n(A)n(B)
+        \begin{proof}
+            不妨设$A=(a_{ij}),B=(b_{ij})$，从而
+            \[n(AB)=\sum_{i,j}\left|\sum_ka_{ik}b_{kj}\right|
+            \leq\sum_{i,j}\sum_k|a_{ik}b_{kj}|\]
+            而
+            \[n(A)n(B)=\left(\sum_{i,j}|a_{ij}|\right)
+            \left(\sum_{k,l}|b_{kl}|\right)
+            =\sum_{i,j,k,l}|a_{ij}b_{kl}|\]
+        \end{proof}
+        显然有$n(AB)\leq n(A)n(B)$。
     \end{subproblem}
 
 \end{document}
