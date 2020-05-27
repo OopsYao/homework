@@ -59,24 +59,71 @@
 \end{subproblem}
 
 \problem
+% TODO Check if can be generalized as (t, Wt, Xt)
 Denote $X_t$ driven by $\diff X_t=\mu(t,W_t)\diff t+\sigma(t,W_t)\diff W_t$
 with initial value $X_0=x$
 is the corresponded It\^o process. Then we have from It\^o's lemma
 that
 \[\diff f(X_t)=f'(X_t)\diff X_t+f''(X_t)\frac{1}{2}(\diff X_t)^2
-=\left(\mu f'+\frac{1}{2}\sigma f''\right)\diff t+\sigma f'\diff W_t\]
+=\left(\mu f'+\frac{1}{2}\sigma^2 f''\right)\diff t+\sigma f'\diff W_t\]
 which gives us
-\[f(X_t)=f(X_0)+\int_0^t\left(\mu f'+\frac{1}{2}\sigma f''\right)\diff s
+\[f(X_t)=f(X_0)+\int_0^t\left(\mu f'+\frac{1}{2}\sigma^2 f''\right)\diff s
 +\int_0^t\sigma f'\diff W_s\]
 Taking expectation on BHS yields
-\[E[f(X_t)]=f(x)+\int_0^tE\left[\mu f'+\frac{1}{2}\sigma f''\right]\diff s\]
+\[E[f(X_t)]=f(x)+\int_0^tE\left[\mu f'+\frac{1}{2}\sigma^2 f''\right]\diff s\]
 Therefore,
-\[Af(x)=\lim_{t\to 0^+}\frac{E[f(X_t)]-f(x)}{t}
-=E\left[\mu f'+\frac{1}{2}\sigma f''\right]\]
-% TODO Something wrong, definition of infinitestimal generator?
+\[\begin{aligned}
+    Af(x)&=\lim_{t\to 0^+}\frac{E[f(X_t)]-f(x)}{t}\\
+    &=\left.E\left[\mu f'+\frac{1}{2}\sigma^2 f''\right]\right|_{t=0}\\
+    &=\mu f'(x)+\frac{1}{2}\sigma^2 f''(x)
+\end{aligned}\]
+Hence we can choose any function $\mu,\sigma$ s.t. $\mu=1,\sigma^2=2$ to
+satisfy our goal.
 
 \problem
-% TODO
+\begin{proof}
+    Denote that the two independent It\^o diffusion are driven by
+    \[\diff X_t=\mu_1\diff t+\sigma_1\diff W_t^{(1)},
+    \diff Y_t=\mu_2\diff t+\sigma_2\diff W_t^{(2)}\]
+    which start from from $x,y$ respectly,
+    where $W_t^{(1)},W_t^{(2)}$ are two independent Brownian motion.
+    And we have from It\^o's lemma that
+    \[\diff f(X_t,Y_t)=f_x\diff X_t+f_y\diff Y_t+\frac{1}{2}f_{xx}(\diff X_t)^2
+    +\frac{1}{2}f_{yy}(\diff Y_t)^2\]
+    as independence implies $\diff X_t\diff Y_t=0$. By forward calculation, we obtain
+    $\diff f(X_t,Y_t)$ as
+    \[\diff f(X_t,Y_t)=\begin{aligned}[t]
+    &\left(\mu_1f_x+\frac{\sigma^2_1}{2}f_{xx}
+    +\mu_2f_y+\frac{\sigma^2_2}{2}f_{yy}\right)\diff t\\
+    &+\sigma_1f_x\diff W_t^{(1)}+\sigma_2f_y\diff W_t^{(2)}
+    \end{aligned}\]
+    which gives us
+    \[E[f(X_t,Y_t)]-f(x,y)=E\left[\int_0^t
+    \left(\mu_1f_x+\frac{\sigma_1^2}{2}f_{xx}
+    +\mu_2f_y+\frac{\sigma_2^2}{2}f_{yy}\right)\diff t
+    \right]\]
+    impling that
+    \[\begin{aligned}
+        &A_Zf(x,y)\\
+        =&E\left[\left.\mu_1f_x(X_t,Y_t)+\frac{\sigma_1^2}{2}f_{xx}(X_t,Y_t)
+        +\mu_2f_y(X_t,Y_t)+\frac{\sigma_2^2}{2}f_{yy}(X_t,Y_t)\right]\right|_{t=0}\\
+        =&\mu_1f_x(x,y)+\frac{\sigma_1^2}{2}f_{xx}(x,y)
+        +\mu_2f_y(x,y)+\frac{\sigma_2^2}{2}f_{yy}(x,y)\\
+    \end{aligned}\]
+    In other words,
+    \[A_Z=\mu_1\frac{\partial}{\partial x}
+    +\frac{\sigma_1^2}{2}\frac{\partial^2}{\partial x^2}
+    +\mu_2\frac{\partial}{\partial y}
+    +\frac{\sigma_2^2}{2}\frac{\partial^2}{\partial y^2}
+    =A_X+A_Y\]
+    as we leart from class that (by similar induction)
+    \[A_X=\mu_1\frac{\partial}{\partial x}
+    +\frac{\sigma_1^2}{2}\frac{\partial^2}{\partial x^2},
+    A_Y=\mu_2\frac{\partial}{\partial y}
+    +\frac{\sigma_2^2}{2}\frac{\partial^2}{\partial y^2}\]
+
+
+\end{proof}
 
 \problem
 \begin{subproblem}[(\alph*)]
