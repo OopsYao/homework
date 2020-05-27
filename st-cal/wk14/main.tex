@@ -60,4 +60,50 @@
         \end{aligned}\]
         从而证得\cref{eq:conditional measure transform}。
     \end{proof}
+
+    \problem[习题4.18]
+    \begin{subproblem}
+        \item
+        \begin{proof}
+            由伊藤公式，
+            \[\begin{aligned}
+                \diff\zeta(t)&=
+                \begin{aligned}[t]
+                &\zeta(t)\left(-\theta\diff W(t)
+                -\left(r+\frac{1}{2}\theta^2\right)\diff t\right)\\
+                &+\frac{1}{2}\zeta(t)
+                \left(-\theta\diff W(t)
+                -\left(r+\frac{1}{2}\theta^2\right)\diff t\right)^2
+                \end{aligned}\\
+                &=\zeta(t)\left(-\theta\diff W(t)-r\diff t\right)
+            \end{aligned}\]
+        \end{proof}
+
+        \item
+        \begin{proof}
+            由于
+            \[\diff\zeta(t)\diff X(t)=-\theta\sigma\Delta(t)\zeta(t)S(t)\diff t\]
+            而
+            \[\begin{aligned}
+                X(t)\diff\zeta(t)&=X(t)\zeta(t)\left(-\theta\diff W(t)-r\diff t\right)\\
+                \zeta(t)\diff X(t)&=\begin{aligned}[t]
+                    &\left(rX(t)+(\alpha-r)\Delta(t)S(t)\right)\zeta(t)\diff t\\
+                    &+\sigma\Delta(t)S(t)\zeta(t)\diff W(t)
+                \end{aligned}
+            \end{aligned}\]
+            从而$\diff(\zeta(t)X(t))$中$\diff t$的系数为
+            \[\begin{aligned}
+                &-\theta\sigma\Delta(t)\zeta(t)S(t)-rX(t)\zeta(t)+\zeta(t)(rX(t)+(\alpha-r)\Delta(t)S(t))\\
+                =&(\alpha-r-\theta\sigma)\Delta(t)\zeta(t)S(t)\\
+                =&0
+            \end{aligned}\]
+            从而$\zeta(t)X(t)$为鞅。
+        \end{proof}
+
+        \item
+        \begin{proof}
+            由于$\zeta(t)X(t)$为鞅，于是
+            \[\E[\zeta(T)V(T)]=\E[\zeta(T)X(T)]=\E[\zeta(0)X(0)]=X(0)\]
+        \end{proof}
+    \end{subproblem}
 \end{document}
