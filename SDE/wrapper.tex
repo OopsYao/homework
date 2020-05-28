@@ -2,6 +2,9 @@
 \usepackage{import}
 \usepackage{xstring}
 
+% Question environment
+\input{addon}
+
 % Determine the hw num
 \IfStrEq{\jobname}{\detokenize{wrapper}}{%
     % Dev mode (no jobname specified)

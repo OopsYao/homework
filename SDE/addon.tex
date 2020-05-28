@@ -1,0 +1,77 @@
+% `question' environment
+\def\question{%
+    \itshape
+
+    % Macro by qw
+    \def\N{{\Bbb N}}
+    \def\Z{{\Bbb Z}}
+    \def\Q{{\Bbb Q}}
+    \def\R{{\Bbb R}}
+    \def\C{{\Bbb C}}
+    \def\SS{{\Bbb S}}
+
+    \newtheorem{theorem}{Theorem}[section]
+    \newtheorem{corollary}{Corollary}
+    %\newtheorem*{main}{Main Theorem}
+    \newtheorem{lemma}[theorem]{Lemma}
+    \newtheorem{proposition}{Proposition}
+    \newtheorem{conjecture}{Conjecture}
+    \newtheorem{solution}{Solution}
+    %\newtheorem{proof}{Proof}
+    \numberwithin{equation}{section}
+    %\newtheorem*{problem}{Problem}
+    %\theoremstyle{definition}
+    %\newtheorem{definition}[theorem]{Definition}
+    \newtheorem{remark}{Remark}
+    %\newtheorem*{notation}{Notation}
+    \newcommand{\ep}{\varepsilon}
+    % ##1 instead of #1
+    \newcommand{\eps}[1]{{##1}_{\varepsilon}}
+    \newcommand{\keywords}
+
+
+    \def\bb{\begin}
+    \def\bc{\begin{center}}       \def\ec{\end{center}}
+    \def\ba{\begin{array}}        \def\ea{\end{array}}
+    \def\be{\begin{equation}}     \def\ee{\end{equation}}
+    \def\bea{\begin{eqnarray}}    \def\eea{\end{eqnarray}}
+    \def\beaa{\begin{eqnarray*}}  \def\eeaa{\end{eqnarray*}}
+    \def\hh{\!\!\!\!}             \def\EM{\hh &   &\hh}
+    \def\EQ{\hh & = & \hh}        \def\EE{\hh & \equiv & \hh}
+    \def\LE{\hh & \le & \hh}      \def\GE{\hh & \ge & \hh}
+    \def\LT{\hh & < & \hh}        \def\GT{\hh & > & \hh}
+    \def\NE{\hh & \ne & \hh}      \def\AND##1{\hh & ##1 & \hh}
+
+    \def\r{\right}
+    \def\lf{\left}
+    \def\hs{\hspace{0.5cm}}
+    \def\dint{\displaystyle\int}
+    \def\dlim{\displaystyle\lim}
+    \def\dsup{\displaystyle\sup}
+    \def\dmin{\displaystyle\min}
+    \def\dmax{\displaystyle\max}
+    \def\dinf{\displaystyle\inf}
+
+    \def\al{\alpha}               \def\bt{\beta}
+    \def\ep{\varepsilon}
+    \def\la{\lambda}              \def\vp{\varphi}
+    \def\da{\delta}               \def\th{\theta}
+    \def\vth{\vartheta}           \def\nn{\nonumber}
+    \def\oo{\infty}
+    \def\dd{\cdots}               \def\pa{\partial}
+    \def\q{\quad}                 \def\qq{\qquad}
+    \def\dx{{\dot x}}             \def\ddx{{\ddot x}}
+    \def\f{\frac}                 \def\fa{\forall\,}
+    \def\z{\left}                 \def\y{\right}
+    \def\w{\omega}                \def\bs{\backslash}
+    \def\ga{\gamma}               \def\si{\sigma}
+    \def\iint{\int\!\!\!\!\int}
+    \def\dfrac##1##2{\frac{\displaystyle {##1}}{\displaystyle {##2}}}
+    \def\mathbb{\Bbb}
+    \def\bl{\Bigl}
+    \def\br{\Bigr}
+    \def\Real{\R}
+    \def\Proof{\noindent{\bf Proof}\quad}
+    \def\qed{\hfill$\square$\smallskip}
+}
+\def\endquestion{}
