@@ -59,10 +59,10 @@
 \end{subproblem}
 
 \problem
-% TODO Check if can be generalized as (t, Wt, Xt)
-Denote $X_t$ driven by $\diff X_t=\mu(t,W_t)\diff t+\sigma(t,W_t)\diff W_t$
-with initial value $X_0=x$
-is the corresponded It\^o process. Then we have from It\^o's lemma
+Denote that $X_t$ is an It\^o process
+ driven by $\diff X_t=\mu(t,W_t,X_t)\diff t+\sigma(t,W_t,X_t)\diff W_t$
+with initial value $X_0=x$.
+Then we have from It\^o's lemma
 that
 \[\diff f(X_t)=f'(X_t)\diff X_t+f''(X_t)\frac{1}{2}(\diff X_t)^2
 =\left(\mu f'+\frac{1}{2}\sigma^2 f''\right)\diff t+\sigma f'\diff W_t\]
@@ -75,10 +75,11 @@ Therefore,
 \[\begin{aligned}
     Af(x)&=\lim_{t\to 0^+}\frac{E[f(X_t)]-f(x)}{t}\\
     &=\left.E\left[\mu f'+\frac{1}{2}\sigma^2 f''\right]\right|_{t=0}\\
-    &=\mu f'(x)+\frac{1}{2}\sigma^2 f''(x)
+    &=\mu(0,0,x) f'(x)+\frac{1}{2}\sigma^2(0,0,x) f''(x)
 \end{aligned}\]
-Hence we can choose any function $\mu,\sigma$ s.t. $\mu=1,\sigma^2=2$ to
-satisfy our goal.
+Hence we can choose any function $\mu(t,w,x),\sigma(t,w,x)$
+s.t. $\mu(0,0,x)=1,\sigma^2(0,0,x)=2$ to
+our goal.
 
 \problem
 \begin{proof}
@@ -137,14 +138,28 @@ satisfy our goal.
 
     \item
     Denote that $\mathcal A$ is an infinitesimal of
-    then It\^o process driven by
+    the It\^o process driven by
     \[\diff X_t=\diff t+\diff W_t\]
     then it easy to find that
     \[\mathcal Af(t,x)=f_t+f_x+\frac{1}{2}f_{xx}\]
+    To see this, just notice that by It\^o's lemma,
+    \[\begin{aligned}
+        \diff f(t,X_t)&=f_t\diff t+f_x\diff X_t+\frac{1}{2}f_{xx}(\diff X_t)^2\\
+        &=\left(f_t+f_x+\frac{1}{2}f_{xx}\right)\diff t+f_x\diff W_t
+    \end{aligned}\]
+    which gives us (here we choose $s\geq t$)
+    \[f(s,X_s)-f(t,X_t)=\int_t^s\left(f_t+f_x+\frac{1}{2}f_{xx}\right)\diff r
+    +\int_t^s f_x\diff W_r\]
+    Taking conditional expectation on BHS with $X_t=x$ yields
+    \[\begin{aligned}
+        E[f(s,X_s)|X_t=x]-f(t,x)&=\int_t^s E\left[\left.f_t+f_x+\frac{1}{2}f_{xx}\right|X_t=x\right]\diff r\\
+        &=\int_t^s \left(f_t(t,x)+f_x(t,x)+\frac{1}{2}f_{xx}(t,x)\right)\diff r
+    \end{aligned}\]
+    Then we obtain our claim by the definition of infinitesimal generator
+    \[\mathcal Af(t,x):=\lim_{s\to t^+}\frac{E[f(s,X_s)|X_t=x]-f(t,x)}{s-t}\]
     Hence for the solution $u(x,t)$ of the PDE, we have
     that $\mathcal Au=-1$.
     Therefore,
-    % TODO Explain how this comes
     \[\begin{aligned}
         E\left[u(T,X_T)|X_t=x\right]
         -u(t,x)&=
@@ -231,7 +246,7 @@ i.e.,
     =-E\left[\int_0^{\tau_x}f(X_t)\e^{-\int_0^{\tau_x}c(X_s)\diff s}\diff t\right]\]
     Note that $Y_0=u(x)$ and we have from boundary condition that $Y_{\tau_x}=0$,
     finally we obtain $u(x)$ as
-    \[u(x)=E\left[\int_0^{\tau_x}f(X_t)\e^{-\int_0^{\tau_x}c(X_s)\diff s}\right]\]
+    \[u(x)=E\left[\int_0^{\tau_x}f(X_t)\e^{-\int_0^{\tau_x}c(X_s)\diff s}\diff t\right]\]
 \end{proof}
 
 \appendix
