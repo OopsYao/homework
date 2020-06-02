@@ -35,13 +35,7 @@ def case(mu, sigma):
     return rV, rC
 
 
-color_map = [
-    '#C742D6',
-    '#3D5EBA',
-    "#f7a278",
-    '#17C487',
-]
-# color_map = ["#6dd3ce", "#c8e9a0", , "#a13d63"]
+color_map = ['#eac435', '#345995', '#e40066', '#03cea4']
 t = np.linspace(0, T, 1 + N)
 for (mu, sigma), c in zip([(1, 1), (0.1, 1), (0.01, 1), (0.01, 0.01)], color_map):
     rV, rC = case(mu, sigma)
