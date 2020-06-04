@@ -2,7 +2,7 @@ import numpy as np
 from numpy.random import RandomState, SeedSequence, MT19937
 import matplotlib.pyplot as plt
 
-rs = RandomState(MT19937(SeedSequence(12345678911)))
+rs = RandomState(MT19937(SeedSequence(1024)))
 
 T = 1
 N = 2000
