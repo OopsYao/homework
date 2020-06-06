@@ -1,0 +1,34 @@
+\documentclass[cn]{homework}
+
+\title{第十五周作业}
+
+\begin{document}
+    \maketitle
+
+    \problem
+    \begin{proof}
+        由H\"older不等式知，
+        \[\sum_{k=1}^\infty |a_k\xi_k|
+        \leq\sup_{k\geq 1}|a_k|\sum_{k=1}^\infty|\xi_k|<\infty\]
+        从而$T$是$l^1$上的算子，显然$T$也是线性的。
+        又$\sup_{k\geq 1}|a_k|$与$\xi_k,k=1,2,\ldots$无关，
+        故$T$为有界线性算子。
+
+        % TODO ||T||
+    \end{proof}
+
+    \problem
+    \begin{proof}
+        必要性，对于$x(t)\equiv 1$，应有$(Tx)(t)=\alpha(t)\in C[a,b]$，即证。
+        
+        充分性，
+        对于任意$x\in C[a,b]$，由于$\alpha(\cdot)$连续，
+        应有$\alpha(t)x(t)$为关于$t$的连续函数，而$T$显然是线性的，
+        从而$T$为线性算子。
+        同时$\alpha(t)$在$[a,b]$上有界$M$（与$x$无关）使得
+        \[\alpha(t)x(t)\leq Mx(t),t\in[a,b]\]
+        从而
+        \[\sup_{t\in[a,b]}\alpha(t)x(t)\leq M\sup_{t\in[a,b]}x(t)\]
+        因此$T$为有界线性算子。
+    \end{proof}
+\end{document}
