@@ -31,4 +31,70 @@
         \[\sup_{t\in[a,b]}\alpha(t)x(t)\leq M\sup_{t\in[a,b]}x(t)\]
         因此$T$为有界线性算子。
     \end{proof}
+
+    \problem
+    \begin{subproblem}[(\arabic*)]
+        \item
+        由于
+        \[\begin{aligned}
+            ||Tx||&=\max_{-1\leq t\leq 1}|x'(t)|\\
+            &=\max\left\{\max_{-1\leq t\leq 1}|x(t)|,\max_{-1\leq t\leq 1}|x'(t)|\right\}\\
+            &=||x||_1
+        \end{aligned}\]
+        从而$T$是有界的
+        
+        \item
+        考虑形如$x(t)=t+b,b>1$的线性函数，则
+        \[||Tx||=1\]
+        而
+        \[||x||_2=\max_{-1\leq t\leq 1}(t+b)=b+1\]
+        % TODO More thinking
+    \end{subproblem}
+
+    \problem
+    \begin{subproblem}[(\arabic*)]
+        \item
+        由于
+        \[\begin{aligned}
+            ||Tf||&=\max_{x\in[a,b]}\left|\int_a^xf(t)\diff t\right|\\
+            &\leq\max_{x\in[a,b]}\int_a^x|f(t)|\diff t\\
+            &=\int_a^b|f(t)|\diff t\\
+            &=||f||
+        \end{aligned}\]
+        即对于$f\neq\boldsymbol 0$，$||Tf||/||f||$有上界1，
+        而当$f\equiv 1$时，
+        \[||Tf||=\max_{x\in[a,b]}|x-a|=b-a=\int_a^b\diff t=||f||\]
+        从而知
+        \[||T||=\sup_{f\neq\boldsymbol 0}\frac{||Tf||}{||f||}=1\]
+
+        \item
+        由于
+        \[\begin{aligned}
+            ||Tf||&=\int_a^b\left|\int_a^xf(t)\diff t\right|\diff x\\
+            &\leq\int_a^b\left(\int_a^x|f(t)|\diff t\right)\diff x\\
+            &=\int_a^b\left(\int_t^b|f(t)|\diff x\right)\diff t\\
+            &=\int_a^b(b-t)|f(t)|\diff t\\
+            &\leq(b-a)||f||
+        \end{aligned}\]
+        注意到上式中我们使用了二重积分的换序。
+
+        % TODO Find an example s.t. ||Tf||=(b-a)||f||
+    \end{subproblem}
+
+    \problem
+    \begin{proof}
+        显然$f$是一个线性泛函，我们只需要注意到对于$x\neq\boldsymbol 0$，
+        \[||fx||=|x(a)-x(b)|
+        \leq|x(a)|+|x(b)|
+        \leq 2\max_{t\in[a,b]}|x(t)|
+        =2||x||\]
+        故$||fx||\leq ||x||$具有上界1，
+        考虑$x(t)=t-(a+b)/2$（关于$((a+b)/2,0)$对称），从而
+        $||x||=(b-a)/2$，而$||fx||=b-a=2||x||$，故有
+        \[||f||=\sup_{f\neq\boldsymbol 0}\frac{||fx||}{||x||}
+        =2\]
+        上述确界的存在也证明了$f$为有界线性泛函。
+    \end{proof}
+
+    
 \end{document}
