@@ -44,10 +44,18 @@
         从而$T$是有界的
         
         \item
-        考虑形如$x(t)=t+b,b>1$的线性函数，则
-        \[||Tx||=1\]
-        而
-        \[||x||_2=\max_{-1\leq t\leq 1}(t+b)=b+1\]
+        由微分中值定理存在依赖于$t$的$\xi$满足$-1\leq\xi\leq t$使得
+        \[x(t)=x(-1)+(t+1)x'(\xi)\]
+        从而
+        \[\max_{-1\leq t\leq 1}|x(t)|
+        =\max_{-1\leq t\leq 1}|x(-1)+(t+1)x'(\xi)|\]
+
+        由于
+        \[\begin{aligned}
+            \max_{-1\leq t\leq 1}|x'(t)|
+            &\leq\max_{-1\leq t\leq 1}\left|x'(t)+\frac{1}{2}x(-1)\right|
+            +\frac{1}{2}|x(-1)|
+        \end{aligned}\]
         % TODO More thinking
     \end{subproblem}
 
