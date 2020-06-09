@@ -2,7 +2,7 @@ import pandas as pd
 from statsmodels.tsa.base.datetools import dates_from_str
 import numpy as np
 
-from arch.unitroot import ADF, PhillipsPerron
+from arch.unitroot import ADF
 from statsmodels.tsa.api import VAR
 
 import seaborn as sns
@@ -34,7 +34,7 @@ print('Selected Order:', results.k_ar)
 # AIC & BIC of different lags
 for p in range(8):
     res = VAR(mdata).fit(p, trend='nc')
-    print(res.k_ar, '&', res.aic, '&', res.bic, '\\\\')
+    print(res.k_ar, '&', round(res.aic, 6), '&', round(res.bic, 6), '\\\\')
 
 # Stability
 print(results.is_stable(True))
@@ -44,8 +44,7 @@ print(results.test_normality().summary())
 
 # Granger causality
 names = ['r', 'IndProd', 'Unemp']
-for i in range(len(names)):
-    n = names[i]
+for n in names:
     print('Granger for', n)
     # Factor `n` caused by its complement
     print(results.test_causality(n, list(set(names) - set(n))).summary())
