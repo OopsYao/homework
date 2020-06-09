@@ -81,11 +81,34 @@
 
     \problem
     \begin{subproblem}[(\alph*)]
-        % TODO
+        \def\by{\boldsymbol Y}
+        \def\be{\boldsymbol\varepsilon}
         \item
         \begin{proof}
-
+            考虑$\Phi$的特征值，
+            有$\lambda_1=1,\lambda_2=0.8$，
+            从而具有单位根，于是
+            变量是$I(1)$的。
         \end{proof}
+
+        \item
+        \begin{proof}
+            由于
+            \[\Pi=\Phi_1-I=\begin{pmatrix}
+                -0.1 & 0.1 \\
+                0.1  & -0.1
+            \end{pmatrix}\]
+            有$\mathrm{rank}(\Pi)=1<2$，从而$\Pi\by_{t-1}$是平稳的，即
+            系统中的变量具有协整关系。
+        \end{proof}
+
+        \item
+        VECM形式为
+        \[\Delta\by_t=\begin{pmatrix}
+            -0.1 & 0.1 \\
+            0.1  & -0.1
+        \end{pmatrix}\by_{t-1}
+        +\be_t\]
     \end{subproblem}
 
     \appendix
