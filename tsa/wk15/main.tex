@@ -6,6 +6,78 @@
     \maketitle
 
     \problem
+    先绘制三者的时序图如\cref{fig:trend}，我们也能得到他们的相关系数矩阵
+    \[\begin{pmatrix}
+        1.000000  & -0.709715 & -0.198659\\
+        -0.709715 & 1.000000 & 0.184690\\
+        -0.198659 & 0.184690 & 1.000000
+    \end{pmatrix}\]
+    以及ACF（\cref{fig:acf}）。
+
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=\textwidth]{trend}
+        \caption{时序图}
+        \label{fig:trend}
+    \end{figure}
+
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=\textwidth]{ACF}
+        \caption{ACF}
+        \label{fig:acf}
+    \end{figure}
+
+    \begin{margintable}
+        \centering
+        \begin{tabular}{ccc}
+            \toprule
+            $p$ & AIC  & BIC \\
+            \midrule
+            0 & -11.098202& -11.050546\\
+            1 & -13.551620& $-13.360357^*$ \\
+            2 & -13.536611& -13.200779\\
+            3 & -13.553569& -13.072193\\
+            4 & -13.512417& -12.884513\\
+            5 & -13.598659& -12.823232\\
+            6 & -13.618900& -12.694941\\
+            7 & $-13.661470^*$ & -12.587960\\
+            \bottomrule
+        \end{tabular}
+        \caption{不同滞后阶数下的AIC与BIC}
+        \label{tab:aic bic}
+    \end{margintable}
+    我们计算不同滞后阶数阶数下的AIC与BIC来合理选取滞后阶数，
+    从\cref{tab:aic bic}中，AIC以$p=7$最小，BIC以$p=1$最小，
+    考虑到1阶与7阶的AIC差异不是很明显，以简单的原则起见，我们
+    最终决定选取滞后阶数$p=1$。于是我们可以得到拟合模型如下
+    \begin{fullwidth}
+    \def\ind{\text{IndProd}}
+    \def\une{\text{Unemp}}
+    \def\rrr{\text{r}}
+    \[\begin{pmatrix}
+        \ind_t\\
+        \une_t\\
+        \rrr_t
+    \end{pmatrix}
+    =\begin{pmatrix}
+        -0.000062\\
+        0.130899\\
+        0.175411
+    \end{pmatrix}
+    +\begin{pmatrix}
+        0.578719 & -0.001196 & 0.002003\\
+        -7.488381 & 0.370410 & -0.048651\\
+        -2.584439 & 0.361500 & 0.893246
+    \end{pmatrix}
+    \begin{pmatrix}
+        \ind_{t-1}\\
+        \une_{t-1}\\
+        \rrr_{t-1}
+    \end{pmatrix}+\boldsymbol u_t\]
+    \end{fullwidth}
+
+
 
     \problem
     \begin{subproblem}[(\alph*)]
@@ -17,6 +89,6 @@
     \end{subproblem}
 
     \appendix
-    \section{代码(R)}
-    \lstinputlisting[language=R]{var.R}
+    \section{代码(Python)}
+    \lstinputlisting[language=R]{var.py}
 \end{document}
