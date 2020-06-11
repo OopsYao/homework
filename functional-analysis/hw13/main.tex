@@ -88,9 +88,28 @@
             &\leq(b-a)||f||
         \end{aligned}\]
         注意到上式中我们使用了二重积分的换序，于是有$||T||\leq b-a$。
-        \end{proof}
 
-        % TODO Find an example s.t. ||Tf|| >= (b-a)||f||
+        只需找到一个$f$使得$||Tf||/||f||\geq b-a$即证，
+        不失一般的，令$a>0$，以及
+        \[f(t)=\begin{cases}
+            1,&a\leq t\leq\frac{b+a}{2}\\
+            k,&\frac{b+a}{2}<t\leq b
+        \end{cases}\]
+        这里$k>0$，于是
+        \[(Tf)(x)=\begin{cases}
+            x-a,&a\leq x\leq\frac{b+a}{2}\\
+            \frac{b-a}{2}+k\left(x-\frac{b+a}{2}\right),
+            &\frac{b+a}{2}<x\leq b
+        \end{cases}\]
+        从而
+        \[||f||=\frac{1+k}{2}\]
+        以及
+        \[||Tf||=\frac{b}{2}(b-a)+\frac{k}{2}\left(\frac{b-a}{2}\right)^2\]
+        令$||Tf||=||f||(b-a)$可得
+        $k=4a/(3(b-a))$。
+        
+        综上，$||T||=b-a$。
+        \end{proof}
     \end{subproblem}
 
     \problem
