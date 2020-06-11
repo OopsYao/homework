@@ -12,9 +12,18 @@
         \leq\sup_{k\geq 1}|a_k|\sum_{k=1}^\infty|\xi_k|<\infty\]
         从而$T$是$l^1$上的算子，显然$T$也是线性的。
         又$\sup_{k\geq 1}|a_k|$与$\xi_k,k=1,2,\ldots$无关，
-        故$T$为有界线性算子。
+        故$T$为有界线性算子，且满足
+        \[\sup_{x\neq\boldsymbol 0}\frac{||Tx||}{||x||}\leq\sup_{n\geq 1}|a_n|\]
 
-        % TODO ||T||
+        考虑元素$x_n=\{\xi_k\}$满足$\xi_n=1$，其余为0，则有$y=Tx=\{\eta_k\}$满足$\eta_n=1$
+        其余为0。于是
+        \[\frac{||Tx_n||}{||x_n||}=|a_n|,n=1,2,\ldots\]
+        从而
+        \[\sup_{x\neq\boldsymbol 0}\frac{||Tx||}{||x||}
+        \geq\sup_{n\geq 1}\frac{||Tx_n||}{||x_n||}
+        =\sup_{n\geq 1}|a_n|\]
+        于是
+        \[||T||=\sup_{n\geq 1}|a_n|\]
     \end{proof}
 
     \problem
@@ -44,24 +53,16 @@
         从而$T$是有界的
         
         \item
-        由微分中值定理存在依赖于$t$的$\xi$满足$-1\leq\xi\leq t$使得
-        \[x(t)=x(-1)+(t+1)x'(\xi)\]
-        从而
-        \[\max_{-1\leq t\leq 1}|x(t)|
-        =\max_{-1\leq t\leq 1}|x(-1)+(t+1)x'(\xi)|\]
+        只需考虑$x_n(t)=\sin n\pi t$，则$(Tx_n)(t)=n\pi\cos n\pi t$，从而
+        \[\frac{||Tx_n||}{||x_n||_2}=n\]
+        无界。
 
-        由于
-        \[\begin{aligned}
-            \max_{-1\leq t\leq 1}|x'(t)|
-            &\leq\max_{-1\leq t\leq 1}\left|x'(t)+\frac{1}{2}x(-1)\right|
-            +\frac{1}{2}|x(-1)|
-        \end{aligned}\]
-        % TODO More thinking
     \end{subproblem}
 
     \problem
     \begin{subproblem}[(\arabic*)]
         \item
+        \begin{proof}
         由于
         \[\begin{aligned}
             ||Tf||&=\max_{x\in[a,b]}\left|\int_a^xf(t)\diff t\right|\\
@@ -74,8 +75,10 @@
         \[||Tf||=\max_{x\in[a,b]}|x-a|=b-a=\int_a^b\diff t=||f||\]
         从而知
         \[||T||=\sup_{f\neq\boldsymbol 0}\frac{||Tf||}{||f||}=1\]
+        \end{proof}
 
         \item
+        \begin{proof}
         由于
         \[\begin{aligned}
             ||Tf||&=\int_a^b\left|\int_a^xf(t)\diff t\right|\diff x\\
@@ -84,9 +87,10 @@
             &=\int_a^b(b-t)|f(t)|\diff t\\
             &\leq(b-a)||f||
         \end{aligned}\]
-        注意到上式中我们使用了二重积分的换序。
+        注意到上式中我们使用了二重积分的换序，于是有$||T||\leq b-a$。
+        \end{proof}
 
-        % TODO Find an example s.t. ||Tf||=(b-a)||f||
+        % TODO Find an example s.t. ||Tf|| >= (b-a)||f||
     \end{subproblem}
 
     \problem
