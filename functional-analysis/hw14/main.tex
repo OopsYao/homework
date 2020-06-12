@@ -1,0 +1,36 @@
+\documentclass[cn]{homework}
+
+\title{第十六周作业}
+
+\begin{document}
+    \maketitle
+
+    \problem
+    \begin{proof}
+        由于$x(t)$在$[0,1]$上连续，故一致连续，于是
+        对于任意$\varepsilon>0$，存在$N$使得对于任意$n>N$有
+        $\left|x(t)-x(t^{1+\frac{1}{n}})\right|<\varepsilon,t\in[0,1]$，
+        从而
+        \[||T_n x-x||<\varepsilon\]
+        即$T_n$强收敛于$T$，这里$T(x)=x$为有界线性算子。
+
+        % TODO Not in norm
+    \end{proof}
+    
+    \problem
+    考虑到
+    \[\begin{aligned}
+        ||S_nT_nx-STx||&=||S_nT_nx-S_nTx+S_nTx-STx||\\
+        &\leq||S_n(T_nx-Tx)||+||S_n(Tx)-S(Tx)||\\
+    \end{aligned}\]
+    由于$S_n$强收敛于$S$，故右半部分$||S_n(Tx)-S(Tx)||\to 0$，
+    对于左半部分，
+    同样由于$S_n$的强收敛，对于任意$y\in E_1$，有$S_ny\to Sy$，
+    从而$||S_ny||\to ||Sy||$，从而$||S_ny||$有界，
+    于是由于$E_1$2为Banach空间，从一致有界原则知，
+    $||S_n||$有界，从而结合$T_n$强收敛于$T$知
+    \[||S_n(T_nx-Tx)||\leq ||S_n||\cdot||T_nx-Tx||\to 0\]
+    于是
+    \[||S_nT_nx-STx||\to 0\]
+    即$S_nT_n$强收敛于$ST$。
+\end{document}
