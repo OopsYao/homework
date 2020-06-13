@@ -33,4 +33,41 @@
     于是
     \[||S_nT_nx-STx||\to 0\]
     即$S_nT_n$强收敛于$ST$。
+
+    \problem
+    \begin{proof}
+        必要性，对于任意$G=\mathrm{span}\{x_1,x_2,\ldots,x_n\}$中的元素
+        $x=\sum_{k=1}^n\beta_kx_k$来说，
+        应有
+        \[|f(x)|=\left|\sum_{k=1}^n\beta_kf(x_k)\right|
+        =\left|\sum_{k=1}^n\alpha_k\beta_k\right|
+        \leq M||x||=M\left\|\sum_{k=1}^n\beta_kx_k\right\|\]
+        即证。
+
+        充分性，考虑泛函$f_0:G\to\mathbb K$，定义为
+        \[f_0:x=\sum_{k=1}^n\beta_kx_k\mapsto\sum_{k=1}^n\alpha_k\beta_k\]
+        显然$f_0$为一线性泛函，则对于任意$x=\sum_{k=1}^n\beta_kx_k\in G$，
+        \[|f_0(x)|=\left|\sum_{k=1}^n\beta_kf_0(x_k)\right|
+        =\left|\sum_{k=1}^n\alpha_k\beta_k\right|\]
+        从而由题述不等式知，
+        \[|f_0(x)|\leq M\left\|\sum_{k=1}^n\beta_kx_k\right\|=M||x||\]
+        从而$f_0$为有界线性泛函。于是由泛函延拓定理知，$f_0$可以延拓为全空间上的
+        有界线性泛函$f$，且满足$||f||=||f_0||\leq M$，由于$f$为$f_0$的延拓，
+        自然有$f(x_k)=\alpha_k,k=1,2,\ldots,n$，充分性得证。
+    \end{proof}
+
+    \problem
+    \begin{proof}
+        由于$f$为非零泛函，故存在$x_0\in X$使得$f(x_0)\neq 0$，
+        对于任意$x\in X$，定义
+        \[y=x-\frac{f(x)}{f(x_0)}x_0\]
+        则$f(y)=f(x)-f(x)=0$，从而$y\in\mathscr N$，
+        于是$X=\mathscr N+\{\alpha x_0\}$，
+        而对于任意$\alpha x_0$，倘若$\alpha x_0\in\mathscr N$，应有
+        $f(\alpha x_0)=\alpha f(x_0)=0$，从而$\alpha=0$，即\footnote{这里不是很清楚
+        直和$\oplus$在一般的向量赋范空间中的含义，我们处理为被和空间的交为零元素。}
+        % TODO Direct sum in normed vector space?
+        \[\{\alpha x_0\}\cap\mathscr N=\{\boldsymbol 0\}\]
+        从而$X=\mathscr N\oplus\{\alpha x_0\}$。
+    \end{proof}
 \end{document}
