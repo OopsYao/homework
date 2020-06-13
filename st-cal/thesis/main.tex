@@ -1,0 +1,104 @@
+\documentclass{ctexart}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+
+\def\diff{\mathrm{d}}
+\def\E{\mathbb{E}}
+\def\prob{\mathbb{P}}
+
+\newtheorem*{theorem}{定理}
+
+\title{欧式看涨期权的风险中性定价方法}
+\date{}
+
+\begin{document}
+    \maketitle
+
+    \section{背景介绍}
+    原生资产的价格被假定为适应于布朗运动的过程$S(t)$，假设它满足几何布朗运动，
+    \begin{equation}
+        \label{eq:stock price}
+        \diff S(t)=\alpha(t)S(t)\diff t+\sigma(t)S(t)\diff W(t)
+    \end{equation}
+    关于资产的贴现率$D(t)$，我们假定其满足微分方程
+    \begin{equation}
+        \label{eq:discount}
+        \diff D(t)=-R(t)D(t)\diff t
+    \end{equation}
+    我们的目标在于知道终期价值的情况下，推导出看涨期权在任意时刻的价值$X(t)$，
+    从而得到定价$V(t)=X(t)$。
+
+    \section{风险中性定价方法}
+    \subsection{$\Delta$-对冲方法}
+    我们现在有货币与股票两个账户，
+    在$t$时刻，假定我们持有的股票头寸为$\Delta t$，
+    于是货币账户头寸为$X(t)-\Delta(t)S(t)$，
+    则我们总资产的增值由股票的增值与货币利息组成，即
+    \begin{equation}
+        \label{eq:asset value}        
+        \diff X(t)=\Delta(t)\diff S(t)+R(t)(X(t)-\Delta(t)S(t))\diff t
+    \end{equation}
+
+    \subsection{贴现资产}
+    下面我们将会展示，资产的贴现过程$D(t)X(t)$经过合适的测度变换会成为该测度下的鞅。
+    注意到$D(t)$与$X(t)$都是伊藤过程，故由式(\ref{eq:discount})知
+    \[\begin{aligned}
+        \diff(D(t)X(t))&=D(t)\diff X(t)+X(t)\diff D(t)\\
+        &=D(t)(\diff X(t)-R(t)X(t)\diff t)
+    \end{aligned}\]
+    进一步我们根据式(\ref{eq:asset value})拆解$\diff X(t)$可得
+    \[\diff(D(t)X(t))=\Delta(t)D(t)(\diff S(t)-R(t)S(t)\diff t)\]
+    最后根据式(\ref{eq:stock price})拆解$\diff S(t)$可得
+    \begin{equation}
+        \label{eq:asset discount}
+        \begin{aligned}
+        \diff (D(t)X(t))&=\Delta(t)D(t)S(t)[(\alpha(t)-R(t))\diff t+\sigma(t)\diff W(t)]\\
+        &=\sigma(t)\Delta(t)D(t)S(t)(\Theta(t)\diff t+\diff W(t))
+        \end{aligned}
+    \end{equation}
+    这里
+    \[\Theta(t)=\frac{\alpha(t)-R(t)}{\sigma(t)}\]
+    被称为风险的市场价格。
+    于是我们得到了资产价值贴现过程的微分形式，但其中含有$\diff t$项，
+    难以看出$D(t)X(t)$的显式格式。现在我们希望$\Theta(t)\diff t+\diff W(t)$
+    能在一个新的测度下称为一个布朗运动的微分，这样在新测度下计算$D(t)X(t)$
+    称为了一个鞅，计算显示格式是比较容易的。
+
+    \section{哥萨诺夫定理}
+    布朗运动加上漂移项之后不再是布朗运动，
+    但哥萨诺夫定理说明在一定的条件下，在根据漂移项所对应的一个新测度下，
+    该过程是一个布朗运动，达到了去掉漂移项的效果。
+
+    \begin{theorem}[哥萨诺夫]
+        假如随机过程$W(t),0\leq t\leq T$是概率空间$(\Omega,\mathcal F,\prob)$上的
+        布朗运动，$\mathcal F(t)$是该布朗运动所生成的域流。设$\Theta(t),0\leq t\leq T$
+        是适应于$\mathcal F(t)$的随机过程，定义如下的随机过程$\tilde W(t),Z(t)$，
+        \[\begin{aligned}
+            \diff\tilde W(t)&=\Theta(t)\diff t+\diff W(t)\\
+            \diff Z(t)&=-\Theta(t)Z(t)\diff W(t)
+        \end{aligned}\]
+        这里$\tilde W(t),Z(t)$满足初值条件$W(0)=0,Z(0)=1$。
+        则在$Z=Z(T)$所诱导的概率测度$\tilde\prob$下（不难验证$\E Z=1$），
+        $\tilde W(t)$是布朗运动。
+    \end{theorem}
+
+    % TODO Condition to apply this theorem
+    于是我们令
+    \[\diff\tilde W(t)=\Theta(t)+\diff W(t)\]
+    于是式(\ref{eq:asset discount})变为
+    \[\diff(D(t)X(t))=\sigma(t)\Delta(t)D(t)S(t)\diff\tilde W(t)\]
+    则根据哥萨诺夫定理，$\tilde W(t)$是$\tilde\prob$下的布朗运动，
+    从而$D(t)X(t)$是$\tilde\prob$下的鞅，
+    于是
+    \[D(t)X(t)=\tilde\E[D(T)X(T)|\mathcal F(t)]\]
+    这里$\tilde\E$是测度$\prob$下的期望。
+    结合无套利原理$X(t)=V(t)$我们知道
+    \[D(t)V(t)=\tilde\E[D(T)V(T)|\mathcal F(t)]\]
+    这就是衍生证券的风险中性定价公式。
+
+    \section{欧式看涨期权}
+    % TODO BSM formula
+
+\end{document}
