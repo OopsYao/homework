@@ -1,4 +1,21 @@
-    \section{Problem 1}
+\problem
+\begin{question}
+    Let $X$ be a random variable.  
+
+    (i) prove that for any positive number $\lambda$
+    \begin{equation}\label{3}
+    P(\omega; X(\omega) \geq\lambda)\leq \frac{E(e^{t X})}{e^{\lambda t}}, \forall t>0
+    \end{equation}
+    and
+    \begin{equation}\label{4}
+    P(\omega; X(\omega) \leq\lambda)\geq \frac{E(e^{t X})}{e^{\lambda t}}, \forall t>0.
+    \end{equation}
+
+    (ii)  let $X$ be be the sum of $n$ random variables $X_i$, $i=1,2,...,n$.  Prove that
+    \[P(\omega; X(\omega) \geq\lambda)\leq \frac{E(\prod_i^n e^{t X_i})}{e^{\lambda t}}, \forall t<0.\]
+
+\end{question}
+
     \begin{subproblem}
         \item
         \begin{proof}
@@ -41,7 +58,22 @@
         \end{proof}
     \end{subproblem}
 
-    \section{Problem 2}
+\problem
+\begin{question}
+    (\ref{3}) and (\ref{4}) are called Chernoff bounds
+    and $m(\lambda):=E(e^{t X})$ is called the \emph{moment generating function}
+    (mgf) of $X$.  These estimates sometimes can be very useful in various
+    applications if applied properly.  For example, let $X$ be a normal distributed
+    random variable $X\sim N(\mu,\sigma^2)$.  Prove that for any $\lambda>\mu$
+    \begin{equation}\label{5}
+    P(X\geq \lambda)\leq e^{-\frac{(\lambda-\mu)^2}{2\sigma^2}}.
+    \end{equation}
+
+    Hint: First show that the mgf of $X$ is $m(t)=e^{\mu t+\frac{1}{2}\sigma^2t^2}$;
+    then use the Chernoff bounds to obtain an upper bound for $P(X\geq \lambda)$,
+    finally find the minimum of the quadratic function to prove (\ref{5}).
+\end{question}
+
     \begin{proof}
         Since $X\sim N(\mu,\sigma^2)$,
         denote $Y=(X-\mu)/\sigma\sim N(0,1)$, therefore
@@ -70,7 +102,16 @@
         \end{align*}
     \end{proof}
 
-    \section{Problem 3}
+\problem
+\begin{question}
+    Let $X$ be a random variable with mean $\mu$ and variance $\sigma^2$.
+    Prove that for any real number $\lambda$
+    \[P\Big(\omega; \frac{|X(\omega)-\mu|}{\sigma}\geq \lambda\Big)\leq \frac{1}{\lambda^2}.\]
+    Remark: similar to the example I mentioned in lecture, only the case $\lambda>1$ is useful.
+    In this case, the estimate shows that the probability that value of $X$ lies $\lambda \sigma$
+    (units) away from its mean is bounded by $1/k^2$.
+\end{question}
+
     \begin{proof}
         Note that $P(|X(\omega)-\mu|/\sigma\geq\lambda)
         =P(|X(\omega)-\mu|^2/\sigma^2\geq\lambda^2)$,
@@ -90,7 +131,38 @@
         \leq\frac{1}{\lambda^2}\]
     \end{proof}
 
-    \section{Problem 4}
+\problem\label{pb:a.s. implies in prob}
+\begin{question}
+    Let $\{X_n\}_{n=1}^\infty$ be a sequence of random variables. We now discuss the
+    relationships between convergence almost surely and convergence in probability in
+    the following problems.  We proved in the lecture that if $X_n\rightarrow X$ in
+    probability, then there exists a subsequence $\{X_{n_j}\}$ that converges almost surely.
+    First of all, we want to show that convergence almost surely implies convergence in probability.
+    The proof is a little bit tricky and we divide it into the following steps.  Suppose that a.s.--$X_n\rightarrow X$,
+    then the set ($\sigma$--field) that $\lim X_n\neq X$ has a probability zero, i.e.,
+    for any $\epsilon>0$
+    \[P(\omega;\lim_{n\rightarrow \infty} |X_n(\omega)-X(\omega)|\geq\epsilon)=0\]
+    or \[P(\omega;\lim_{n\rightarrow \infty} |X_n(\omega)-X(\omega)|\leq\epsilon)=1,\]
+    and we want to show that
+    \[\lim_{i\rightarrow \infty }P(\omega;|X_n(\omega)-X(\omega)|\geq\epsilon)=0.\]
+    Here we shall adopt the first definition.
+
+    Let $\mathcal O=\{\omega;\lim X_n(\omega)\neq X(\omega)\}$, then $P(\mathcal O)=0$.
+    Remark: $\mathcal O$ is not necessarily empty but its probability/measure is zero
+    (think about the lengthy of a point but any singleton is not empty).
+
+    step 1  For each $\epsilon>0$, let \[A_n:=\cup_{m\geq n}\{\omega;|X_m(\omega)-X(\omega)|\geq\epsilon\}.\]
+    Prove that $\{A_n\}$ is decreasing in the sense that $A_j\subset A_i$ if $j\geq i$.
+
+    step 2  According to probability theory (set theory), it is known that $\cap_{n\geq1} A_n$ exists and we denote
+    \[A_\infty:=\cap_{n\geq1} A_n\]
+    hence $P(A_n)\rightarrow P(A_\infty)$.  Let $\omega_0$ be any point in $\mathcal O$.  Show that $\omega_0$ does
+    not belong to $A_n$ if $n$ is sufficiently large.
+
+    step 3  Now we know that $\omega_0$ does belong to $A_\infty$.  Use this to show that
+    $P(\omega;|X_n(\omega)-X(\omega)|\geq\epsilon)\rightarrow 0$
+\end{question}
+
     \begin{proof}
         Denote $\mathcal A_m^\varepsilon:=\{\omega;|X_m(\omega)-X|\geq\varepsilon\}$,
         then $A_n=\bigcap_{m\geq n}\mathcal A_m^\varepsilon$.
@@ -124,7 +196,24 @@
         $n\to\infty$.
     \end{proof}
 
-    \section{Problem 5}
+\problem
+\begin{question}
+    However, the opposite of the statement in Problem \ref{pb:a.s. implies in prob}
+    is not true:  consider the following
+    famous counter-example:
+
+    Let $X_n$ be a random variable such that $P(X_n=1)=\frac{1}{n}$
+    and $P(X_n=0)=1-\frac{1}{n}$.  Prove that $X_n\rightarrow X\equiv 0$
+    in probability, but not almost surely.  Hint: The first is easy. 
+    To show the latter, define as above
+    \[A_n:=\cup_{m\geq n} \mathcal A^\epsilon_{m}:=\cup_{m\geq n}  \{w;|X_m(\omega)-X(\omega)|\geq \epsilon\}.\]
+    Use the definition of convergence in probablity and Borel--Cantelli Lemma
+    to show that $P(\mathcal A^\epsilon_{m}~i.o.)=0$.
+    Then show that $X_n\not \rightarrow X$ almost surely.
+
+    Remark: As we have proved in class, there is a subsequence of $X_n$
+    such that $X_{n_j}\rightarrow X$ a.s.
+\end{question}
     \subsection{Convergence In Probability}
     \begin{proof}
         For any $\delta\in(0,1]$, we have that $P(\omega;|X_n|\geq\delta)
