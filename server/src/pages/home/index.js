@@ -23,7 +23,11 @@ const useStyles = makeStyles({
 const docTree = new Map(Object.entries(DOC_TREE))
 const comparer = (a, b) => {
     const reg = /(\d+)/
-    const extractNum = str => parseInt(str.match(reg)[0], 10)
+    const extractNum = str => {
+        const arrMatch = str.match(reg);
+        if (!arrMatch) return 999;
+        return parseInt(arrMatch[0], 10);
+    }
     return extractNum(a) - extractNum(b)
 }
 docTree.forEach(v => v.sort(comparer))
