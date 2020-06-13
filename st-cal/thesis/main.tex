@@ -1,8 +1,9 @@
-\documentclass{ctexart}
+\documentclass[12pt]{ctexart}
 
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amsthm}
+\usepackage{hyperref}
 
 \def\diff{\mathrm{d}}
 \def\E{\mathbb{E}}
@@ -17,7 +18,11 @@
     \maketitle
 
     \section{背景介绍}
-    原生资产的价格被假定为适应于布朗运动的过程$S(t)$，假设它满足几何布朗运动，
+    期权是一种重要的金融产品，但由于其价值依赖于原生资产如股票等，
+    而这些原生资产的价格往往是随机的，定价成为一个比较重要的问题。
+    但我们可以利用$\Delta$-对冲或者说是复制资产的方法，为期权定价。
+
+    原生资产的价格经常被假定为适应于布朗运动的过程$S(t)$，为几何布朗运动，
     \begin{equation}
         \label{eq:stock price}
         \diff S(t)=\alpha(t)S(t)\diff t+\sigma(t)S(t)\diff W(t)
@@ -27,19 +32,28 @@
         \label{eq:discount}
         \diff D(t)=-R(t)D(t)\diff t
     \end{equation}
-    我们的目标在于知道终期价值的情况下，推导出看涨期权在任意时刻的价值$X(t)$，
-    从而得到定价$V(t)=X(t)$。
+    
+    我们的目标在于知道终期价值（$T$时刻）的情况下，推导出欧式看涨期权
+    在任意时刻的价值$V(t)$
+    （知道$t$时刻及其以前的信息，比如当时的股价$S(t)$）。
 
     \section{风险中性定价方法}
-    \subsection{$\Delta$-对冲方法}
-    我们现在有货币与股票两个账户，
-    在$t$时刻，假定我们持有的股票头寸为$\Delta t$，
+    在针对欧式看涨期权定价之前，我们可以探索一般的衍生证券的定价方法。
+    其基本思想依然是复制资产，即$\Delta$-对冲。
+
+    \subsection[Delta-对冲方法]{$\Delta$-对冲方法}
+    假设我们有货币与股票两个账户，
+    在$t$时刻，若我们持有的股票头寸为$\Delta t$，
     于是货币账户头寸为$X(t)-\Delta(t)S(t)$，
     则我们总资产的增值由股票的增值与货币利息组成，即
     \begin{equation}
         \label{eq:asset value}        
         \diff X(t)=\Delta(t)\diff S(t)+R(t)(X(t)-\Delta(t)S(t))\diff t
     \end{equation}
+    特别地，当$V(T)=X(T)$
+    倘若我们能证明，我们这样构造的资产与衍生证券的回报是一样的，
+    那么根据无套利原理
+    % TODO Relationship between X(t) and V(t), why do we construct X(t)?
 
     \subsection{贴现资产}
     下面我们将会展示，资产的贴现过程$D(t)X(t)$经过合适的测度变换会成为该测度下的鞅。
@@ -63,10 +77,10 @@
     被称为风险的市场价格。
     于是我们得到了资产价值贴现过程的微分形式，但其中含有$\diff t$项，
     难以看出$D(t)X(t)$的显式格式。现在我们希望$\Theta(t)\diff t+\diff W(t)$
-    能在一个新的测度下称为一个布朗运动的微分，这样在新测度下计算$D(t)X(t)$
-    称为了一个鞅，计算显示格式是比较容易的。
+    能在一个新的测度下成为一个布朗运动的微分，这样在新测度下贴现过程$D(t)X(t)$
+    成为了一个鞅，具有许多良好的性质。
 
-    \section{哥萨诺夫定理}
+    \subsection{哥萨诺夫定理}
     布朗运动加上漂移项之后不再是布朗运动，
     但哥萨诺夫定理说明在一定的条件下，在根据漂移项所对应的一个新测度下，
     该过程是一个布朗运动，达到了去掉漂移项的效果。
@@ -79,18 +93,24 @@
             \diff\tilde W(t)&=\Theta(t)\diff t+\diff W(t)\\
             \diff Z(t)&=-\Theta(t)Z(t)\diff W(t)
         \end{aligned}\]
-        这里$\tilde W(t),Z(t)$满足初值条件$W(0)=0,Z(0)=1$。
+        这里$\tilde W(t),Z(t)$满足初值条件$W(0)=0,Z(0)=1$，
+        且满足
+        \[\E[\int_0^T\Theta^2(u)Z^2(u)\diff u]<\infty\]
+        
         则在$Z=Z(T)$所诱导的概率测度$\tilde\prob$下（不难验证$\E Z=1$），
         $\tilde W(t)$是布朗运动。
     \end{theorem}
 
-    % TODO Condition to apply this theorem
     于是我们令
-    \[\diff\tilde W(t)=\Theta(t)+\diff W(t)\]
-    于是式(\ref{eq:asset discount})变为
+    \begin{equation}
+        \label{eq:transform}
+        \diff\tilde W(t)=\Theta(t)\diff t+\diff W(t)
+    \end{equation}
+    从而式(\ref{eq:asset discount})变为
     \[\diff(D(t)X(t))=\sigma(t)\Delta(t)D(t)S(t)\diff\tilde W(t)\]
     则根据哥萨诺夫定理，$\tilde W(t)$是$\tilde\prob$下的布朗运动，
-    从而$D(t)X(t)$是$\tilde\prob$下的鞅，
+    从而$D(t)X(t)$是$\tilde\prob$下的鞅，事实上$\tilde\prob$也就是所谓的
+    风险中性测度，
     于是
     \[D(t)X(t)=\tilde\E[D(T)X(T)|\mathcal F(t)]\]
     这里$\tilde\E$是测度$\prob$下的期望。
@@ -99,6 +119,41 @@
     这就是衍生证券的风险中性定价公式。
 
     \section{欧式看涨期权}
-    % TODO BSM formula
+    欧式期权是一种买入方必须在期权到期日当天才能行使的期权。
+    对于欧式看涨期权来说，其到期日的支付为
+    \[V(T)=(S(T)-K)^+\]
+    这里$K$是期权的约定价格。
+    为了求出定价公式，我们需要将$V(T)$表示成关于$\tilde W(t),0\leq t\leq T$的表达式，
+    通过代换式(\ref{eq:transform})，原生资产（股价）可以从式(\ref{eq:stock price})
+    被表示为
+    \[\diff S(t)=R(t)\diff t+\sigma(t)\diff\tilde W(t)\]
+    特别地，为简单起见我们令$\sigma(t)=\sigma,R(t)=r$为常数，于是上式可以
+    得到显式解，从而在终止时刻
+    \[S(T)=S(t)\exp\left\{\sigma(\tilde W(T)-\tilde W(t))+(r-\sigma^2/2)(T-t))\right\}\]
+    由于布朗运动的独立增量，$\tilde W(T)-\tilde W(t)$独立于$\mathcal F(t)$，
+    而$S(t)$为$\mathcal F(t)$可测，$D(T)$是退化的（非随机）故由独立性引理，
+    $V(t)$可表示为
+    \[D(t)V(t)=D(T)\mu(t,S(t))\]
+    这里
+    \begin{equation}
+        \label{eq:mu}
+        \begin{aligned}
+            \mu(t,s)&=\tilde\E[(s\exp(\sigma Y+(r-\sigma^2/2)\tau)-K)^+]\\
+            \tau&=T-t\\
+            Y&=\tilde W(T)-\tilde W(t)\sim\mathcal N(0,\tau)
+        \end{aligned}
+    \end{equation}
+    求解式(\ref{eq:discount})可以得到
+    \[\frac{D(T)}{D(t)}=\exp(-r\tau)\]
+    从而最终我们得到
+    \[V(t)=\exp(-r\tau)\mu(t,S(t))\]
+    这里$\mu(t,s)$由式(\ref{eq:mu})决定。
 
+    通过进一步的计算可以得到式(\ref{eq:mu})的具体表达式，
+    \[\mu(t,s)=s\exp(r\tau)N(d_+(\tau,s))-KN(d_-(\tau,s))\]
+    其中$N(s)$为标准正态分布的累积分布函数，$d_\pm(\tau,s)$定义为
+    \[d_\pm (\tau,s)=\frac{1}{\sigma\sqrt\tau}
+    \left(\ln\frac{s}{K}+(r\pm\sigma^2/2)\tau\right)\]
+    从而有BSM公式
+    \[\nu(t,s)=\exp(-r\tau)\mu(t,s)=xN(d_+(\tau,s))-K\exp(-r\tau)N(d_-(\tau,s))\]
 \end{document}
