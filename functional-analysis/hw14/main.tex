@@ -66,8 +66,53 @@
         而对于任意$\alpha x_0$，倘若$\alpha x_0\in\mathscr N$，应有
         $f(\alpha x_0)=\alpha f(x_0)=0$，从而$\alpha=0$，即\footnote{这里不是很清楚
         直和$\oplus$在一般的向量赋范空间中的含义，我们处理为被和空间的交为零元素。}
-        % TODO Direct sum in normed vector space?
         \[\{\alpha x_0\}\cap\mathscr N=\{\boldsymbol 0\}\]
         从而$X=\mathscr N\oplus\{\alpha x_0\}$。
+    \end{proof}
+
+    \problem
+    \begin{proof}
+        如若不然，即$x\neq y$，考虑线性子空间$\mathrm{span}\{x-y\}$上的泛函
+        \[f_0:\alpha(x-y)\mapsto\alpha||x-y||\]
+        显然$f_0$为线性泛函，且有界（$||f_0||=1$），
+        从而由泛函延拓定理知其可以延拓为$X$上的有界线性泛函$f\in X^*$，
+        于是
+        \[f(x-y)=||x-y||\]
+        另一方面由题设知
+        \[f(x-y)=f(x)-f(y)=0\]
+        从而$||x-y||=0$，于是$x=y$，矛盾。
+    \end{proof}
+
+    \problem
+    \begin{proof}
+        对于任意$\{\eta_k\}\in l^\infty$，可以映射到如下的一个泛函$f\in\mathscr B(l^1,\mathbb K)$，
+        \[f:\{\xi_k\}\mapsto\sum_{k=1}^\infty\eta_k\xi_k\]
+        关于$f$是$l^1$上线性泛函是显然的，其有界性只需要注意到
+        \[\sup_{\{\xi_k\}\in l^1}
+        \frac{\left|\sum_{k=1}^\infty\eta_k\xi_k\right|}
+        {\sum_{k=1}^\infty|\xi_k|}
+        \leq\sup_{\{\xi_k\}\in l^1}
+        \frac{\sup_{k\geq 1}|\eta_k|\sum_{k=1}^\infty|\xi_k|}{\sum_{k=1}^\infty|\xi_k|}
+        =\sup_{k\geq 1}|\eta_k|\]
+        同时可以发现，对于$e_n\in l^1$，这里$e_n$表示第$n$个元素为1，其余为0的数列，
+        \[f(e_n)=\eta_n\]
+        从而
+        \[||f||\geq\sup_{e_n,n\geq 1}|f(e_n)|=\sup_{n\geq 1}|\eta_n|\]
+        于是有$||f||=||\{\eta_k\}||$，这说明$l^\infty$到$(l^1)^*$
+        的映射是等距的。
+
+        下面我们证明这个映射是一个满射，只需要考虑对于任意$f\in(l^1)^*$，
+        只需考虑$\eta_n=f(e_n)$即可，则由于$f$为有界线性泛函，应有
+        \[\sup_{n\geq 1}|\eta_n|=\sup_{n\geq 1}||f||=||f||<\infty\]
+        即$\{\eta_k\}\in l^\infty$，
+        我们还需要说明$f$可以被表示为
+        \[f:\{\xi_k\}\mapsto\sum_{k=1}^\infty f(e_k)\xi_k\]
+        % TODO How come? Complete basis
+        由于$l^1$的完备性，$\{\xi_k\}=\sum_{k=1}^\infty \xi_ke_k$，
+        从而由$f$是有界线性的，故连续，知
+        \[f(\{\xi_k\})=f(\sum_{k=1}^\infty\xi_ke_k)=\sum_{k=1}^\infty f(e_k)\xi_k\]
+        这就证明了是一个满射。
+
+        综上，$l^\infty$与$(l^1)^*$是等距同构的，故在这个意义上$(l^1)^*=l^\infty$。
     \end{proof}
 \end{document}
