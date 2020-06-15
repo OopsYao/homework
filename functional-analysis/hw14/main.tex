@@ -107,8 +107,11 @@
         即$\{\eta_k\}\in l^\infty$，
         我们还需要说明$f$可以被表示为
         \[f:\{\xi_k\}\mapsto\sum_{k=1}^\infty f(e_k)\xi_k\]
-        % TODO How come? Complete basis
-        由于$l^1$的完备性，$\{\xi_k\}=\sum_{k=1}^\infty \xi_ke_k$，
+        同时注意到\footnote{只需要注意到，当$n\to\infty$时，
+        由于$\{\xi_k\}\in l^1$，
+            \[\left\|\{\xi_k\}-\sum_{k=1}^n\xi_ke_k\right\|
+            =\sum_{k=n}^\infty|\xi_k|\to 0\]
+        }，$\{\xi_k\}=\sum_{k=1}^\infty \xi_ke_k$，
         从而由$f$是有界线性的，故连续，知
         \[f(\{\xi_k\})=f(\sum_{k=1}^\infty\xi_ke_k)=\sum_{k=1}^\infty f(e_k)\xi_k\]
         这就证明了是一个满射。
