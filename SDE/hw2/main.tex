@@ -3,6 +3,11 @@
 \newcommand{\Corr}{\mathrm{Corr}}
 
     \problem
+    \begin{question}
+        Find Cov$(B_t,B_s)$ and  Corr$(B_t,B_s)$ for the Brownian motion
+        $B_t$ and $\forall s,t\in\mathbb R$;
+    \end{question}
+
     Without loss of generality, assume that $t\geq s$.
     Then by the law of distributivity,
     \begin{align*}
@@ -23,6 +28,17 @@
     =\frac{\min\{t,s\}}{\sqrt{ts}}\]
 
     \problem
+    \begin{question}
+        We already know that both $B_t$ and $B^2_t-t$ are martingales. 
+        Now use the martingale's properties to find the followings for any $s,t\geq0$
+
+        \noindent i)  Find E$((B^2_t-t)(B^2_s-s))$;
+
+        \noindent ii)  Find E$(B^2_tB^2_s)$;
+
+        \noindent iii)  Find Cov$(B^2_t,B^2_s)$.
+    \end{question}
+
     Note that $E\left(B_t^2\right)=t$, so by definition of
     covariance,
     \begin{equation}
@@ -108,6 +124,45 @@
     \end{subproblem}
 
     \problem
+    \begin{question}
+        This problem is designated to give you a careful study of random walk
+        transferred into Brownian motion (distribution).  Assume that a particle
+        starting with the origin follows a random walk or jump on the 1D grid 
+        \[...,-3\Delta x, -2\Delta x, -\Delta x, 0,\Delta x,2\Delta x,3\Delta x,...\]
+        with a unit size $\Delta x$ over a unit time $\Delta t$ such that 
+        the probability it moves to left and to the right equals 1.
+        
+        Here the randomness is ascertained by specification of
+        the 50\% probability of each jump to either direction. 
+        The illustration above carries not only for the origin but also any location.
+
+        % TODO Fix figure
+        \begin{tikzpicture}
+        \draw (-5,0) -- (5,0) node[anchor=north west] {$x$};
+        \draw[thick,->] (-5,0) -- (5,0)
+         node[pos=0.25]{0}  node[pos=0.5]{$x$} node[pos=0.9]{9/10};
+          \draw[thick, ->] (0,0.2) arc (0:185:1);
+          \draw[thick, ->] (0,0.2) arc (1:185:2);
+        \end{tikzpicture}
+
+        Let us introduce the collection of a binary i.i.d. distribution
+        $\{X_i(\omega)\}_{i=1}^n$ such that
+        $P(\omega;X_i(\omega)=0)=P(\omega;X_i(\omega)=1)=\frac{1}{2}$.  Denote
+        \[S_n:=\sum_{i=1}^n X_i.\]
+        Then it is easy to see that $S_n$ counts how many steps
+        the particle has moved/jumped to the right by time $t=n\Delta t$.
+         Let $Y_t$ be the position of the particle at time $t$. 
+         Prove that $\forall a\leq b\in\mathbb R$
+        \[\lim_{n\rightarrow \infty, t=n\Delta t}P\big(a\leq Y_t\leq b\big)
+        =\frac{1}{\sqrt{2\pi Dt}}\int_a^b e^{-\frac{x^2}{2Dt}}dx,\]
+        where we denote $D:=\frac{(\Delta x)^2}{\Delta t}$. 
+        Hint: first write $Y_t$ in terms of $S_n$, then use Laplace-De
+        Moivre Theorem to prove this limit.  Now it is not hard to see
+        that $Y_t$ the limit of $n\rightarrow\infty$ is N$(0,Dt)$ distributed,
+        and this readily connects the discrete random walk with the continuous
+        Brownian motion.
+    \end{question}
+
     \begin{proof}
         Since $2X_i-1$ represents the movements of every step,
         we have that
@@ -133,6 +188,32 @@
     \end{proof}
 
     \problem
+    \begin{question}
+        We know that the probability of a Brownian motion particle $W_t$
+        stays in interval $(a,b)$ at time $t$ is
+        \[P(a\leq W_t\leq b)=\frac{1}{\sqrt{2\pi t}}\int_a^be^{-\frac{x^2}{2t}}dx.\]
+
+        % \begin{enumerate}[label=\roman*),itemindent=\labelwidth+\labelsep,leftmargin=0pt]
+            \noindent i)
+            find the probability $P(a_1\leq W_{t_1}\leq b_1,a_2\leq W_{t_2}\leq b_2)$;
+            then try to extend this to  $P(a_i\leq W_{t_i}\leq b_i,\text{for all~} i=1,2,..N)$
+            for a collection of time grids $0<t_1,<t_2<...<t_n$. Hint: check what happens 
+            if a Brownian motion does not starts at the origin.
+
+            \noindent ii)
+            suppose that $(a_i,b_i)\equiv (a,b)$ for each $i$ with $-\infty<a<b<\infty$.
+            Use your intuition to guess what is the limit $\lim_{N\rightarrow \infty}
+            P(a_i\leq W_{t_i}\leq b_i,\text{for all~} i=1,2,..N)$;
+
+            \noindent iii)
+            now set $(a_i,b_i)\equiv (-L,L)$ and $t_n=n\Delta t$.  You can use
+            a computer to calculate the probability $P_N:=P(a_i\leq W_{t_i}\leq b_i,
+            \text{for all~} i=1,2,..N)$ by evaluating the integral.  Let $L=1$ and 
+            $\Delta t=1$, find/plot $P_N$ for $N=1,2,...$.  Do the same by choosing 
+            your own $L$ and $\Delta t$.  The results should be matching your intuition.
+        % \end{enumerate}
+    \end{question}
+
     \begin{subproblem}[\roman*)]
         \item
         Let's start from the high dimension directly.
@@ -221,6 +302,27 @@
     \end{subproblem}
 
     \problem
+    \begin{question}
+        Consider $X_t:=e^{W_t}$.  This is called the Geometric
+        Brownian Motion or GBM for short.  Show that $X_t$
+        is not a martingale, however $e^{-\frac{t}{2}}X_t$
+        is a martingale.  For the latter case, you can actually
+        show in general that $Y_t=e^{aW_t-\frac{a^2t}{2}}$ is
+        a martingale for any constant $a\in\mathbb R$.  Now use
+        the martingale property to find Cov$(X_s,X_t)$. 
+        Remark:  I want to emphasize that in almost all
+        text books or lecture notes, you may find statement
+        like \emph{a geometric Brownian motion is a martingale}
+        with respect to... blabla...However there is
+        no contradiction to the fact that $X_t$ is not 
+        a martingale because it is $X_t=\exp\Big\{\Big(\mu-\frac{\sigma^2}{2}\Big)t
+        +\sigma W_t\Big\}$ how they define a GBM.  And then their statement is
+        that a GBM is a martingale when the drift parameter is 0, which is 
+        exactly our general case above with $a=\sigma$.  It seems necessary 
+        to mention that $X_t$ is log normally distributed, and I urge you to 
+        evaluate its pdf yourself. 
+    \end{question}
+
     \subsection{$X_t$ Is Not a Martingale}
     \begin{proof}
         Just verify equation
@@ -314,6 +416,16 @@
     \[\Cov(X_t,X_s)=\e^{\frac{t+s}{2}}\left(\e^{\min\{t,s\}}-1\right)\]
 
     \problem
+    \begin{question}
+        Prove that:
+
+        \noindent i) if $X_t$ is a martingale and $\phi$ a convex function 
+        such that $\phi(X_t)$ is integrable, then $\phi(X_t)$ is a submartingale;
+
+        \noindent ii) if $X_t$ is a submartingale and $\phi$ is an increasing convex 
+        function such that $\phi(X_t)$ is integrable, then $\phi(X_t)$ is a submartingale.
+    \end{question}
+
     \begin{subproblem}
         \item
         \begin{proof}
@@ -346,6 +458,10 @@
     \end{subproblem}
 
     \problem
+    \begin{question}
+        Prove that $X_t=e^{\sigma W_t+\mu t}$ is a submartingale with $\mu>0$.
+    \end{question}
+
     \begin{proof}
         For any $s>0$ we have that
         \newcommand{\conde}[1]{E\left(\left. #1 \right|\mathcal F_t\right)}
@@ -371,6 +487,20 @@
     \end{proof}
 
     \problem
+    \begin{question}
+        Given a Brownian Motion, we are able to define or introduce many
+        of its variants, based on the phenomenon that we want to model or 
+        describe.  For example,
+        \[X_t=W_t-tW_1, t\in[0,1]\]
+        is called a Brownian Bridge, since $W_0=0$ and $W_1=1$ and $W_t$ is 
+        like a bridge connecting these two points.
+
+        \noindent i)  Show that $X_t$ is normally distributed and find its pdf;
+
+        \noindent ii)  Find E$(X_t)$ and Var$(X_t)$;
+
+        \noindent iii) Let $Y_t=X_t^2$.  Find E$(Y_t)$ and Var$(Y_t)$.
+    \end{question}
     \begin{subproblem}
         \item
         \begin{proof}
