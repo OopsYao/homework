@@ -2,25 +2,29 @@
 
 \usepackage{graphicx}
 \usepackage{draftwatermark}
+\newfontfamily\BrushScriptMT{Brush Script MT}
+
+\setCJKfamilyfont{hwxw}{STXinwei}%华文新魏
+\newcommand{\hwxw}{\CJKfamily{hwxw}}
+
+% \let\kaishu\relax % 清除旧定义
+% \newCJKfontfamily\kaishu{KaiTi}[AutoFakeBold] % 重定义 \kaishu 
 
 \SetWatermarkText{\includegraphics{logo.png}}
 \begin{document}
     \thispagestyle{empty}
     \begin{center}
         % 华文新魏 小初 加粗
-        {\zihao{-0}\bfseries\kaishu 西南财经大学}
+        {\zihao{-0}\bfseries\hwxw 西南财经大学}
 
         % Brush Script 二号
-        {\zihao{2} Southwestern University of Finance and Economics}
+        {\zihao{2}\BrushScriptMT Southwestern University of Finance and Economics}
 
         % 小初 黑体 加粗
         {\zihao{-0}\bfseries\heiti 课程论文}
 
-        % \begin{minipage}
-        
-        
         % 仿宋 三号
-        {\zihao{3}
+        {\fangsong\zihao{3}
             \textbf{学年学期：}\uline{\hspace{1em}\hfill} \makebox[0.46em]{}\par
             \textbf{课程名称：}\uline{\hspace{1em}\hfill} \makebox[0.46em]{}\par
             \textbf{论文题目：}\uline{\hspace{1em}\hfill} \makebox[0.46em]{}\par
