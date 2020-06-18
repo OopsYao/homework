@@ -3,16 +3,13 @@ from multiprocessing import Pool
 from numpy import linalg as LA
 from progressbar import progressbar
 import matplotlib.pyplot as plt
+from celluloid import Camera
 
 
 class Particle:
     def __init__(self, position=np.array([0, 0]), velocity=np.array([0, 0])):
         self.position = position
         self.velocity = velocity
-
-
-N = 200
-system = [Particle(position=3 * np.random.rand(2)) for _ in range(N)]
 
 
 def attraction(ano, the):
@@ -28,32 +25,39 @@ def attraction(ano, the):
     return q(norm) / norm * r
 
 
-def particle_move(the):
-    dt = 0.001
-    impact = sum(attraction(ano, the) for ano in system)
-    U = 0
-    g = 1
-    the.velocity = impact + np.array([U, -g])
-    the.position += the.velocity * dt
-    if the.position[1] < 0:
-        the.position[1] = 0
-
-
 class System:
     def __init__(self, particle):
         self.particle = particle
 
+    def particle_move(self, the):
+        dt = 0.001
+        impact = sum(attraction(ano, the) for ano in self.particle)
+        U = 1
+        g = 1
+        the.velocity = impact + np.array([U, -g])
+        the.position += the.velocity * dt
+        if the.position[1] < 0:
+            the.position[1] = 0
+        return the
+
     def evolve(self):
         with Pool(5) as p:
-            p.map(particle_move, self.particle)
+            self.particle = p.map(self.particle_move, self.particle)
 
     def visual(self):
         pos = np.array([p.position for p in self.particle])
-        plt.scatter(*(pos.T))
+        plt.scatter(*(pos.T), color='black', linewidths=0.5)
 
 
+N = 200
+system = [Particle(position=3 * np.random.rand(2)) for _ in range(N)]
 env = System(system)
+fig, ax = plt.subplots()
+ax.autoscale_view()
+camera = Camera(fig)
 for _ in progressbar(range(2000)):
     env.evolve()
-env.visual()
-plt.show()
+    env.visual()
+    camera.snap()
+animation = camera.animate()
+animation.save('animation.mp4')
