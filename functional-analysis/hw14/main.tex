@@ -85,7 +85,8 @@
 
     \problem
     \begin{proof}
-        对于任意$\{\eta_k\}\in l^\infty$，可以映射到如下的一个泛函$f\in\mathscr B(l^1,\mathbb K)$，
+        对于任意$\{\eta_k\}\in l^\infty$，可以映射到如下的一个泛函$f\in
+        (l^1)^*=\mathscr B(l^1,\mathbb K)$，
         \[f:\{\xi_k\}\mapsto\sum_{k=1}^\infty\eta_k\xi_k\]
         关于$f$是$l^1$上线性泛函是显然的，其有界性只需要注意到
         \[\sup_{\{\xi_k\}\in l^1}
@@ -102,12 +103,12 @@
         的映射是等距的。
 
         下面我们证明这个映射是一个满射，只需要考虑对于任意$f\in(l^1)^*$，
-        只需考虑$\eta_n=f(e_n)$即可，则由于$f$为有界线性泛函，应有
+        定义$\eta_n=f(e_n)$，则由于$f$为有界线性泛函，应有
         \[\sup_{n\geq 1}|\eta_n|=\sup_{n\geq 1}||f||=||f||<\infty\]
         即$\{\eta_k\}\in l^\infty$，
         我们还需要说明$f$可以被表示为
         \[f:\{\xi_k\}\mapsto\sum_{k=1}^\infty f(e_k)\xi_k\]
-        同时注意到\footnote{只需要注意到，当$n\to\infty$时，
+        注意到\footnote{只需要注意到，当$n\to\infty$时，
         由于$\{\xi_k\}\in l^1$，
             \[\left\|\{\xi_k\}-\sum_{k=1}^n\xi_ke_k\right\|
             =\sum_{k=n}^\infty|\xi_k|\to 0\]
