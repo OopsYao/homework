@@ -1,3 +1,6 @@
 main.toc
 wrapper.pdf
 .venv
+
+# Particle video file
+particle/*.mp4
