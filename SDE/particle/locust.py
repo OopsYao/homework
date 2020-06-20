@@ -1,63 +1,53 @@
 import numpy as np
-from multiprocessing import Pool
-from numpy import linalg as LA
 from progressbar import progressbar
+from utils import delta_matrix, norm
 import matplotlib.pyplot as plt
 from celluloid import Camera
 
-
-class Particle:
-    def __init__(self, position=np.array([0, 0]), velocity=np.array([0, 0])):
-        self.position = position
-        self.velocity = velocity
-
-
-def attraction(ano, the):
-    """ Evaluate attraction on `the` by `ano` """
-    def q(r):
-        G = 0.5
-        L = 10
-        return G * np.exp(- r / L) - np.exp(-r)
-    r = ano.position - the.position
-    norm = LA.norm(r)
-    if norm == 0:
-        return 0
-    return q(norm) / norm * r
-
-
-class System:
-    def __init__(self, particle):
-        self.particle = particle
-
-    def particle_move(self, the):
-        dt = 0.001
-        impact = sum(attraction(ano, the) for ano in self.particle)
-        U = 1
-        g = 1
-        the.velocity = impact + np.array([U, -g])
-        the.position += the.velocity * dt
-        if the.position[1] < 0:
-            the.position[1] = 0
-        return the
-
-    def evolve(self):
-        with Pool(5) as p:
-            self.particle = p.map(self.particle_move, self.particle)
-
-    def visual(self):
-        pos = np.array([p.position for p in self.particle])
-        plt.scatter(*(pos.T), color='black', linewidths=0.5)
-
-
+D = 2  # Dimension
 N = 200
-system = [Particle(position=3 * np.random.rand(2)) for _ in range(N)]
-env = System(system)
+U = 1
+G = 0.5
+g = 1
+T = 200
+
+# Uniform dist in [0, 3] x [0, 3]
+x = 3 * np.random.rand(N, D)
+
+trace = [x[0]]
+
+
+def q(r):
+    L = 10
+    return G * np.exp(- r / L) - np.exp(- r)
+
+
+dt = 0.01
 fig, ax = plt.subplots()
 ax.autoscale_view()
 camera = Camera(fig)
-for _ in progressbar(range(2000)):
-    env.evolve()
-    env.visual()
-    camera.snap()
-animation = camera.animate()
-animation.save('animation.mp4')
+for _ in progressbar(range(int(T / dt))):
+    # plt.scatter(*(x.T), color='black', s=5)
+    # camera.snap()
+
+    r = delta_matrix(x)
+    r_norm = norm(r)
+    social = np.nan_to_num(q(r_norm) / norm(r) * r)
+    v = 10 * social.sum(axis=1) + np.tile([U, -g], (N, 1))
+    x += v * dt
+    # Offland
+    x = np.clip(x, [-np.inf, 0], np.inf)
+    trace.append(x[0])
+
+plt.scatter(*(x.T), color='black', s=5)
+
+_, z_trace = np.array(trace).T
+t = np.linspace(0, T, len(z_trace))
+
+plt.figure()
+plt.plot(t, z_trace)
+
+plt.show()
+# animation = camera.animate()
+# About 6s
+# animation.save('particle/locust-noise.mp4', fps=int(T / dt / 10))

@@ -1,6 +1,7 @@
 main.toc
 wrapper.pdf
 .venv
+__pycache__
 
 # Particle video file
 particle/*.mp4
