@@ -22,6 +22,9 @@ def blind(v, x):
     prod = (v * x).sum(axis=-1)
     return prod / (norm(v) * norm(x))
 
+def expand(ndarray):
+    return np.expand_dims(ndarray, axis=-1)
+
 
 class TestSuite(unittest.TestCase):
 
