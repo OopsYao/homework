@@ -9,7 +9,7 @@ N = 200
 U = 1
 G = 0.5
 g = 1
-T = 200
+T = 20
 
 # Uniform dist in [0, 3] x [0, 3]
 x = 3 * np.random.rand(N, D)
@@ -31,9 +31,9 @@ for _ in progressbar(range(int(T / dt))):
     # camera.snap()
 
     r = delta_matrix(x)
-    r_norm = norm(r)
-    social = np.nan_to_num(q(r_norm) / norm(r) * r)
-    v = 10 * social.sum(axis=1) + np.tile([U, -g], (N, 1))
+    r_norm = np.expand_dims(norm(r), axis=-1)
+    social = np.nan_to_num(q(r_norm) / r_norm * r)
+    v = social.sum(axis=1) + np.tile([U, -g], (N, 1))
     x += v * dt
     # Offland
     x = np.clip(x, [-np.inf, 0], np.inf)
