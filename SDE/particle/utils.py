@@ -16,10 +16,10 @@ def norm(matrix, p=1):
     return np.expand_dims(norm_matrix, axis=-1)
 
 
-def theta_matrix(x, y):
+def cos_matrix(x, y):
     xy = x @ y.T
     nor = norm(x) * (norm(y).T)
-    return np.arccos(xy / nor)
+    return xy / nor
 
 
 class TestSuite(unittest.TestCase):
@@ -34,12 +34,12 @@ class TestSuite(unittest.TestCase):
             [0, -1]
         ])
 
-        theta = theta_matrix(a, b)
+        cos = cos_matrix(a, b)
         asp = np.array([
             [7 / 12, 3 / 4],
             [1 / 6,  5 / 6]
         ]) * np.pi
-        npt.assert_almost_equal(theta, asp)
+        npt.assert_almost_equal(cos, np.cos(asp))
 
     def test_bound(self):
         x = np.array([
