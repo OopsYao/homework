@@ -3,3 +3,5 @@ vscode-R
 # Thesis
 thesis.pdf
 thesis.toc
+*.bbl
+*.blg

@@ -1,24 +1,90 @@
 \documentclass[nobib]{tufte-handout}
 \input{tweak-tufte}
 
-\title{XX实证研究}
-\input{.author.cn}
+% Code display
+\usepackage{xcolor}
+\definecolor{lbcolor}{rgb}{0.98,0.98,0.98} 
+\usepackage{listings}
+\lstset{
+    basicstyle=\ttfamily,
+    breaklines=true,
+    backgroundcolor=\color{lbcolor},
+    postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space}
+}
+
+% Crossref
+\usepackage{cleveref}
+\crefformat{equation}{式~(#2#1#3)}
+\crefformat{table}{表~#2#1#3}
+\crefformat{figure}{图~#2#1#3}
+
 
 \def\keywords#1{\noindent\textbf{关键词：}#1}
+
+\title{XX实证研究}
+\input{.author.cn}
 
 \begin{document}
     \maketitle    
 
     \section{摘要}
     \begin{abstract}
-        \keywords{时间序列\ VAR模型}
+        随着国民收入的提高，人们的物质文化需求不断增长，外出旅游成为
+        许多人的选择。
+
+        \keywords{时间序列；VAR模型；脉冲响应函数；方差分解}
     \end{abstract}
 
     \section{引言}
+    随着国民经济收入的不断增长，人们的物质文化需求逐渐提升，
+    旅游作为一种文化消遣方式的重要性逐渐提升，越来越多的人们
+    利用假期甚至是周末的休闲时光出门旅游，旅游业的迅速增长
+    促进了我国经济的发展，而反过来人们收入水平的提高亦会
+    增长人们的旅游需求。
 
     \section{文献综述}
-    \section{参考文献}
+    随着旅游业成为学术界研究的一个热点领域，各种各样的
+    模型和理论被运用其中，比较常见的有VAR、ECM、TVP等计量模型，
+    这大大促进了领域专业性的发展\cite{song2006forecasting}。
+    许多学者会利用VAR以及脉冲响应和方差分解分析的方式
+    进行建模，
+    余丹阳\cite{余丹阳2018基于}选取了湖南省的旅游数据，
+    构建VAR模型，并对其进行脉冲响应分析和方差分解分析，
+    研究了湖南省旅游总收入与湖南省GDP的相互影响关系；
+    王纯阳\cite{王纯阳2010基于}
+    利用美国客源市场的相关数据，
+    建立旅游需求与旅游价格、收入、替代价格等变量之间的
+    VAR模型发现美国对中国的旅游需求
+    受到自身的波动、旅游价格等影响；
+    吴丽云\cite{吴丽云2010我国旅游业与经济增长的关系分析}
+    采用协整性检验和Granger因果检验方法对我国1985年以来的
+    国内旅游、入境旅游、出境旅游和经济增长之间的关系进行了检验，
+    发现经济增长与国内旅游业的发展相辅相成，
+    但出境旅游对中国经济增长有一定的抑制作用。
 
+    总的说来
+
+    \section{变量选取与数据来源}
+    我们从中国统计年鉴\cite{中华2014中}中
+
+    \section{模型选取与实证分析}
+    \subsection{模型设定}
+
+    \subsection{平稳性检验}
+
+    \subsection{协整检验}
+
+    \subsection{Granger因果检验}
+
+    \subsection{脉冲响应函数分析}
+
+    \subsection{方差分解}
+
+    \section{结论}
+
+    \bibliographystyle{unsrt}
+    \bibliography{refs}
     \appendix
-    \section{代码}
+    \section{代码(Python)}
+    \lstinputlisting[language=Python]{var.py}
 \end{document}
