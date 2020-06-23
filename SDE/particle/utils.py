@@ -4,11 +4,15 @@ import unittest
 import numpy.testing as npt
 
 
-def delta_matrix(x):
-    """ Get delta along axis 0, xij = xj - xi """
+def delta_matrix(x, y=None):
+    """ Get delta along axis 0, zij = xj - yi """
     # 1 x N x D (1 x N if we view the last axis as a whole)
+    if y == None:
+        y = x
     x = np.expand_dims(x, axis=0)
-    return x - np.moveaxis(x, 0, 1)
+    y = np.expand_dims(y, axis=0)
+    # TODO Test of this func
+    return x - np.moveaxis(y, 0, 1)
 
 
 def norm(matrix, p=1):
