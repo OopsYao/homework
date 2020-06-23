@@ -1,4 +1,12 @@
     \problem
+    \begin{question}
+        Use Doob's submartingale inequality to prove the followings
+        for positive constants $t$ and $\lambda$:
+        \[P\Big(\max_{0\leq s\leq t} W_t^2\geq \lambda\Big)
+        \leq \frac{t}{\lambda}
+        \text{~and~}P\Big(\max_{0\leq s\leq t} |W_t|\geq \lambda\Big)
+        \leq \frac{\sqrt{2t/\lambda}}{\lambda}.\]
+    \end{question}
     \begin{proof}
         Denote $X_t:=W_t^2$, then by Doob's submartingale inequality
         we have that
@@ -29,6 +37,11 @@
     \end{proof}
 
     \problem
+    \begin{question}
+        Denote
+        \[X_t:=\frac{\max_{0\leq s\leq t}|W_s|}{t}.\]
+        Show that $X_t\rightarrow 0$ stochastically or in probability.
+    \end{question}
     \begin{proof}
         To prove convergence in probability, consider
         $\forall\sigma>0$,
@@ -45,6 +58,9 @@
     \end{proof}
 
     \problem
+    \begin{question}
+        Show that Doob's submartingale inequality implies Markov's inequality.
+    \end{question}
     For any random variable $X$ and $p>0$, denote stochastic process
     $Y_t=|X|^p,t\geq 0$,
     then it is obvious that
@@ -66,6 +82,24 @@
     which is the statement of Markov inequality.
 
     \problem
+    \begin{question}
+        Let us try to prove the Kolmogorov continuity Lemma that
+        \begin{equation}\label{kol}
+        E(|X(t)-X(s)|^\beta)\leq C|t-s|^{1+\alpha}
+        \end{equation}
+        implies the sample path is H\"older continuous with exponent
+        $\gamma\in(0,\alpha/\beta)$.  For simplicity, we choose $T=1$
+        and define for each $n\in\mathbb N^+$
+        \[A_n:=\Big\{\big|X(\frac{i+1}{2n})-X(\frac{i}{2n})\big|>\frac{1}{2^{\gamma n}}\Big\}
+        \text{~for some integer~} 0\leq i\leq 2^n\},\]
+        where $\omega$ is skipped without confusing you.
+
+        \noindent(i) prove that (\ref{kol}) implies $P(A_n)\leq C2^{-(\alpha-\beta\gamma)n}$ for some positive constant $C$;
+
+        \noindent(ii) (use Borel-Cantelli Lemma to ) prove that for a.e. $\omega\in\Omega$ the following holds for all $n\in\mathbb N^+$
+        \[\Big|X(\frac{i+1}{2n})-X(\frac{i}{2n})\Big|\leq \frac{C_1}{2^{\gamma n}}.\]
+        Then that this inequality leads to the H\"older continuity of the sample path is more or less standard in calculus.
+    \end{question}
     \newcommand{\absdelta}{\left|X\left(\frac{i+1}{2^n}\right)-X\left(\frac{i}{2^n}\right)\right|}
     \begin{subproblem}
         \item
@@ -151,6 +185,12 @@
     \end{subproblem}
 
     \problem
+    \begin{question}
+        Use computer to plot several sample paths for a GBM
+        $X_t=\exp(\mu t+\sigma W_t)$ over $(0,T)$. 
+        You can choose your own sets of parameters $\mu$,
+        $\sigma$ and $T$, and formally test how they (and/or their sizes) effect the paths.
+    \end{question}
     As we can see (\cref{fig:simulation}), the bigger $\sigma$ means more
     powerful zigzag, and $\mu$ determines the main trend,
     while larger $T$ shows something interesting, that though
