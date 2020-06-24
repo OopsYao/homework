@@ -1,6 +1,14 @@
 \newcommand{\var}{\mathrm{Var}}
 
     \problem
+    \begin{question}
+        Suppose that $f(t)$ is a continuous deterministic function
+        such that $f'$ is square integrable, i.e., $\int_{\mathbb R}|f'(s)|^2ds<\infty$.
+        Indeed this derivative could be understood in the ``weak sense" if this makes
+        sense to you.  Prove that $f$ is of zero quadratic variation.
+        This should give you an impression on the differences between the stochastic
+        process $W_t$ and deterministic functions.
+    \end{question}
     \begin{proof}
         Consider any interval $[a,b]$, then by definition the
         quadratic variation of $f$ is
@@ -36,6 +44,13 @@
     \end{proof}
 
     \problem
+    \begin{question}
+    Let us denote as in class 
+    \[R_N:=\sum^{N-1}_{i=0}\Delta Z_i(W_{t_{i+1}}-W_{t_{i}})\]
+    with 
+    \[\Delta Z_i=(W_{t^*_{i}}-W_{t_{i}})-(W_{t_{i+1}}-W_{t^*_{i}}), t^*_i=\frac{t_i+t_{i+1}}{2}.\]
+    Prove that m.s.-$R_N\rightarrow 0$ as $N\rightarrow \infty$.
+    \end{question}
     \begin{proof}
         Since
         \[\begin{aligned}
@@ -57,6 +72,22 @@
     \end{proof}
 
     \problem
+    \begin{question}
+        Let us recall that the stochastic integral is defined as the mean square
+        limit of finite sum, whence an concrete example shows
+        \[\int_0^T f(\omega,t)dW_t=\text{m.s.}-\lim_{N\rightarrow\infty}
+        \sum^{N-1}_{i=0}\Delta f(\omega,t^*_i)(W_{t_{i+1}}-W_{t_{i}}).\]
+        Here the choice $t^*_i=t_i$ leads to the It\^o, $t^*_i=\frac{t_{i+1}+t_{i}}{2}$
+        the Stratonovich integral.  As I mentioned in class, by default an integral
+        with respect to a stochastic process is defined as the It\^o.
+
+        Let us consider the general choice $t^*_i=(1-\lambda)t_i+\lambda t_{i+1}$,
+        with an arbitrary but fixed $\lambda\in[0,1]$.  Find the following limit
+        (I used the diamond for a generic notation)
+        \[\int_0^T W_t \diamond dW_t=\text{m.s.}-\lim_{N\rightarrow\infty}\sum^{N-1}_{i=0} W_{t^*_i}(W_{t_{i+1}}-W_{t_{i}}).\]
+        We collect the It\^o when $\lambda=0$ and the Stratonovich when
+        $\lambda=\frac{1}{2}$, therefore your result should recover theirs. 
+    \end{question}
     Denote
     \[I_N=\sum_{i=0}^{N-1}W_{t_i^*}(W_{t_{i+1}}-W_{t_i})\]
     then to avoid the overlap between interval $[0,t_i^*]$ and $[t_i,t_{i+1}]$
@@ -125,6 +156,19 @@
     \frac{W_T^2}{2}+\left(\lambda-\frac{1}{2}\right)T\]
 
     \problem
+    \begin{question}
+        Similar as the Riemann-Stieljes integral, one can define an integral not only against
+        a Brownian but any stochastic processes $X_t$ as follows, provided the result is well
+        and properly defined
+        \[\int_0^T f(\omega,t)dX_t=\text{m.s.}-\lim_{N\rightarrow\infty}\sum^{N-1}_{i=0}
+        \Delta f(\omega,t^*_i)(X_{t_{i+1}}-X_{t_{i}}).\]
+        Use definition to find 
+        \[\int_0^T s d(W^2_s).\]
+        You can also try to evaluate $\int_0^T s d(W^3_s)$, and $\int_0^T W_s d(W^3_s)$
+        by bare hand, but one will find that the calculations can be challenging and tedious
+        if merely by brutal forces.  Therefore they call for user-friendly formulas that we
+        shall introduce later in this course.
+    \end{question}
     By definition,
     \[\int_0^Ts\diff(W_s^2)
     =\lim_{N\to\infty}I_N
@@ -183,6 +227,48 @@
 
 
     \problem
+    \begin{question}
+        We will show later in this course that the following differential equation
+        with $\mu,\sigma\in\mathbb R$
+        \begin{equation}\label{GBM}
+        dX_t=\mu X_tdt+\sigma X_tdW_t, t>0, X_0=x_0\in\mathbb R.
+        \end{equation}
+        admits a unique and explicit solution: the GBM
+        $X_t=x_0\exp\{(\mu-\frac{\sigma^2}{2})t+\sigma W_t\}$.
+
+        We are not motivated to solve this equation analytically but numerically.
+        To this end, let us integrate (\ref{GBM}) over $(0,T)$, and then
+        one naturally have that
+        \begin{equation}\label{int}
+        X_T-x_0=\int_0^T\Big(\mu X_tdt+\sigma X_tdW_t\Big)=\mu \int_0^TX_tdt+\sigma  \int_0^T X_tdW_t.
+        \end{equation}
+        One can easily prove why the identities holds for the Riemann integral,
+        and indeed they also hold for the stochastic ones though we do not verify
+        them here rigorously.
+
+        According to (\ref{int}), solving for $X_t$ becomes evaluating the integrals
+        therein, and numerically this can only done iteratively since the explicit
+        formula of $X_t$ is not available.  We integrate (\ref{GBM}) over
+        $(k\Delta t,(k+1)\Delta t)$ for $\Delta t$ sufficiently small.  Therefore
+        \begin{fullwidth}
+        \[X_{(k+1)\Delta t}-X_{k\Delta t}=\mu \int_{k\Delta t}^{(k+1)\Delta t}X_tdt
+        +\sigma  \int_{k\Delta t}^{(k+1)\Delta t} X_tdW_t\approx \mu X_{k\Delta t}\Delta t
+        +\sigma X_{k\Delta t}(W_{(k+1)\Delta t}-W_{k\Delta t}),\]
+        \end{fullwidth}
+        and we use the equation
+        \[X_{(k+1)\Delta t}= X_{k\Delta t}+\mu X_{k\Delta t}\Delta t
+        +\sigma X_{k\Delta t}(W_{(k+1)\Delta t}-W_{k\Delta t}),\]
+        starting with $X_0=x_0$, with each $k\in\mathbb N^+$, as an approximation
+        of $X_t$ should $\Delta t$ be chosen properly small.
+        Here $W_{(k+1)\Delta t}-W_{k\Delta t}$ is a Brownian motion that we numerically
+        introduced last homework.  This is an analogy of the forward Euler's method for ODEs.
+        Iterating this difference equation to $T/\Delta t$ steps leads to an approximation
+        of the solutions.  I would like to elaborate that the discretization also gives us
+        a strong motivation why the left end-point should be chosen here once the forward
+        method is favored.  Plot the solution for $T=1$, $\mu=0.1$, $\sigma=2$ with $X_0=1$.
+        Needless to say, the solution $X_T$ is a stochastic process, therefore what
+        you plotted is a (realized) sample path of the solution.
+    \end{question}
     See \cref{fig:numerical solution}.
     \begin{figure}[h]
         \centering

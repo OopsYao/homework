@@ -116,7 +116,7 @@
     And to the convenience of following calculation, consider moment
     generating function of $W_s$,
     \begin{equation}
-        \label{eq:mgf}
+        \label{eq:mgf h4}
         \begin{aligned}
         E(\e^{uW_s})&=\int_{-\infty}^\infty\e^{ux}\cdot
         \frac{\e^{-\frac{x^2}{2s}}}{\sqrt{2\pi s}}\diff x\\
@@ -193,7 +193,7 @@
     Since we know that $X_t,X_s$ are normally distributioned,
     with zero expectation, then
     \[X_t-X_s\sim\mathcal N\left(0,\frac{t^3-s^3}{3}\right)\]
-    So in the light of the mgf stated in \cref{eq:mgf}, we have that
+    So in the light of the mgf stated in \cref{eq:mgf h4}, we have that
     \[E(\e^{X_t-X_s})=\e^{\frac{1}{2}\cdot\frac{t^3-s^3}{3}}
     =\e^{\frac{t^3-s^3}{6}}\]
     and
@@ -467,7 +467,7 @@
                 &=\e^{-t}\cdot E(\e^{2W_t})
                   -2\e^{-\frac t2}\cdot E(\e^{W_t})+1
             \end{aligned}\]
-            and by the mgf \cref{eq:mgf} we know that
+            and by the mgf \cref{eq:mgf h4} we know that
             \[\begin{aligned}
                 E(\e^{2W_t})&=\e^{2t}\\
                 E(\e^{W_t})&=\e^{\frac t2}\\
