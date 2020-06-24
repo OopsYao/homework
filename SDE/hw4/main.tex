@@ -2,6 +2,28 @@
 \newcommand{\cov}{\mathrm{Cov}}
 
     \problem
+    \begin{question}
+        Let $X_t=\int_0^t W_s ds$.  We have showed in class that
+        $X_t\sim N(0,\frac{t^3}{3})$ (except the rigourous convergence
+        of the random variable to $X_t$).  Indeed, to find $E(W_t)$
+        alternatively, it is easy to see that
+        \[E(X_t)=E\Big(\int_0^t W_s ds\Big)
+        =\int_\Omega \int_0^t W_s dsdP
+        \overset{Fubini}{=}\int_0^t \int_\Omega W_s dPds
+        =\int_0^t E(W_s)ds=\int_0^t0ds=0,\]
+        because here $t$ is a constant and integration is a
+        linear operation.  Similarly, we can also use straightforward
+        calculations to evaluate Var$(X_t)$ as follows
+        \begin{align*}
+            Var(X_t)= &E(X^2_t)-E^2(X_t)  \\
+            =&E\Big\{\Big(\int_0^t W_sds\Big)\Big(\int_0^t W_rdr\Big)\Big\} \\
+            \overset{\text{Fubini}}{=}&E \Big(\int_0^t\int_0^t W_s W_rdsdr\Big)... \\
+        \end{align*}
+        Now you can start from here to find Var$(X_t)$. We would like
+        to remark that by straightforward calculations, one may find all
+        kinds of statistics of $X_t$, such as mean, variance, kurtosis etc,
+        however we can not tell if it is normally distributed as we showed in class.
+    \end{question}
     Since
     \[\begin{aligned}
         \var(X_t)&=E(X_t^2)-(E(X_t))^2\\
@@ -38,6 +60,15 @@
     \end{aligned}\]
 
     \problem
+    \begin{question}
+        Let us revisit the integrated Brownian motion by choosing a different sample point, say
+        \[\int_0^t W_sds=m.s.-\lim_{N\rightarrow \infty} \sum^N_{i=1}W_{t_i}\Delta t,\]
+        under equidistant partition.  What is the limit now? What is the limit
+        \[\lim_{N\rightarrow \infty} \sum^N_{i=1}W_{t^*_i}\Delta t\]
+        if we choose any sample point $t_i^*\in(t_i,t_{i+1})$,
+        or $t^*_i=\lambda t_i+(1-\lambda)t_{i+1}$, $\lambda \in (0,1)$. 
+        Does the limit depend on the choice of the sample point (compared to what I said in class)?
+    \end{question}
     No matter what the partition is\sidenote{I have no idea about
     the convergence in mean square, since the limit itself is not
     friendly to me, and I just thinked about the
@@ -71,6 +102,10 @@
     equidistant partition.
 
     \problem
+    \begin{question}
+        Let $Y_t=\int_0^t e^{W_s}ds$ be the integral of a GBM.
+        Find $E(Y_t)$ and Var$(Y_t)$.
+    \end{question}
     By Fubini theorem, calculating $E(Y_t)$ falls to
     calculate $\int_0^tE(\e^{W_s})\diff s$ as
     \[\begin{aligned}
@@ -119,6 +154,12 @@
     \end{aligned}\]
 
     \problem
+    \begin{question}
+        Consider the following stochastic process
+        \[Y_t=e^{\int_0^t W_sds}.\]
+        Find $E(Y_t)$, Var$(Y_t)$ and Cov$(Y_s,Y_t)$. 
+        Hint:  We know that $\int_0^t W_sds\sim N(0,\frac{t^3}{3})$.
+    \end{question}
     Denote
     \[X_t=\int_0^tW_\xi\diff\xi\]
     then
@@ -179,6 +220,11 @@
     =\e^{\frac{t^3}{3}}\left(\e^{\frac{t^3}{3}}-1\right)\]
 
     \problem
+    \begin{question}
+        Let $X_t=W_t-tW_1$, $t\in[0,1]$, be a Brownian Bridge.
+        (i)  Find Cov$(X_s,X_t)$, $s,t\in[0,1]$;
+        (ii)  Let $Y_t=X^2_t$.  Find $E(Y_t)$ and Var$(Y_t)$.
+    \end{question}
     \begin{subproblem}
         \item
         Without loss of generality, assume that $s<t$.
@@ -244,6 +290,13 @@
     \end{subproblem}
     
     \problem
+    \begin{question}
+        Suppose that m.s.-$X_n\rightarrow X$ as $n\rightarrow \infty$
+        and $X$ is square integrable.  (i)  Show that
+        Var$(X_n)\rightarrow$Var$(X)$ as $n\rightarrow \infty$.
+        (ii) Show that Cov$(X_n,X)\rightarrow$Cov$(X,X)$.
+        Hint:  You may need to first prove $X_n\rightarrow X$ in mean by Jensen's inequality.
+    \end{question}
     \begin{subproblem}
         \item
         By Jensen's inequality, we have that
@@ -297,6 +350,70 @@
     \end{subproblem}
 
     \problem
+    \begin{question}
+        The following problems are to provide a list of important relationships
+        between the different notions of convergence of random variables.
+        You can prove them by definitions.
+
+        \noindent(i)  If m.s.-$X_n\rightarrow X$, then s.t. $X_n\rightarrow X$.
+        (convergence in mean/strong convergence implies convergence in probability)
+
+        \noindent(ii)  We know that convergence in mean square implies convergence
+        in mean.  However the oppositive is not true.  Give a counter--example,
+        either discrete or continuous R.V.
+
+        \noindent(iii)  Show that in (i), convergence in mean is enough,
+        i.e., if $X_n\rightarrow X$ in mean, then s.t. $X_n\rightarrow X$.
+        Indeed you can even show that $X_n\rightarrow X$ in $p$--th norm
+        for any $p>0$ is sufficient.
+
+        \noindent(iv) It is known (from our previous homework, or you go to show)
+        that $X_t=e^{W_t-\frac{t}{2}}$ is a martingale and $E(|X_t|)=1$.
+        Then the \emph{Doob's Martingale Convergence Theorem} implies that
+        there exists $L$ such that a.c.--$X_t\rightarrow L$.  Of course it natural
+        to guess that $L=1$ because each $|X_t|$ has mean $1$ and this guess
+        is indeed correct, i.e., a.c.--$X_t\rightarrow 1$.  Show that $X_t$
+        does not converge to $1$ in mean square.  This serves as an example
+        of convergence with probability 1/almost surely but not in mean square.
+
+        \noindent(v).  There are some very famous examples which show that
+        convergence in mean square does not imply the convergence with probability
+        1/almost surely (when you say something is famous or celebrated usually
+        it is nontrivial to construct one).  You can go to read this part yourself.
+        Now together with (iv), the story you can take home is that convergence
+        in quadratic mean does not imply, and is not implied by, convergence almost surely.
+
+        \noindent(vi)  We also want to mention that convergence in probability
+        does not imply Convergence in $p$--norm/Strong convergence.
+        One simple counter--example is the discrete R.V. $\{X_n\}_{n\geq1}$
+        with distribution function
+        \[P(\omega;X_n(\omega)=x)=
+        \left\{
+        \begin{array}{ll}
+        1-\frac{1}{n},&x=0  \\
+        \frac{1}{n},&x=n,\\
+        0,&\text{otherwise}
+        \end{array}
+        \right.\]
+        Prove by definition that $X_n\rightarrow 0$ in probability, but not in mean square.
+
+        \noindent(vii)  For the same $\{X_n\}$ above.  Prove that a.c.--$X_n\rightarrow 0$.
+        Therefore this also serves as a counter--example that convergence almost
+        surely does not imply convergence in mean square.
+
+        \noindent(viii)  Show that if $X_n \rightarrow X$ in probability, then in distribution.
+        For the sake of simplicity, let us assume that both $F_n(x)$ and $F(x)$ are continuous
+        functions.  Hint: Show that for any
+        $\epsilon>0$, $F_n(x)\leq F(x+\epsilon)+P(\omega;|X_n(\omega)-X(\omega)|\geq \epsilon)$
+        and $F(x-\epsilon)\leq F_n(x)+P(\omega;|X_n(\omega)-X(\omega)|\geq \epsilon)$.
+        Now send the limit $n\rightarrow \infty$.
+
+        \noindent(ix) However convergence in distribution does not imply convergence
+        in probability.  The simple counter example is: let $X\sim N(0,1)$ and $X_n=-X$
+        for $n=1,2,....$  It is easy to see that $X_n$ and $X$ has the same distribution
+        function because $P(-X\leq x)=P(X\geq -x)=P(X\leq x)$ (you can draw the pdf to see
+        this).  Prove that $X_n$ does not converge to $X$ in probability.
+    \end{question}
     \begin{subproblem}
         \item
         \begin{proof}
@@ -488,6 +605,13 @@
     \end{subproblem}
 
     \problem
+    \begin{question}
+        For any $a,b\in\mathbb R$, we consider equidistant of $(a,b)$
+        $\pi:\{t_k; a=t_0<t_1<...<t_{n-1}<t_n=b\}$ and $t_{k+1}-t_k=\Delta t_k$.
+        Show that in mean square
+        \[\lim_{n\rightarrow\infty}\sum_{i=0}^{n-1}(W_{t_{i+1}}-W_{t_{i}})^2=b-a.\]
+        Does the partition has to be equidistant? Provide a counter--example or prove why not.
+    \end{question}
     \begin{proof}
         Denote that
         \[X_n:=\sum_{i=0}^{n-1}(W_{t_{i+1}}-W_{t_i})^2\]
@@ -539,6 +663,11 @@
     then $X_t\to b-a$ m.s. as well.
 
     \problem
+    \begin{question}
+        Consider the equidistant partition $0=t_0<t_1<...<t_{n-1}<t_n=T$.  Show that
+        \[m.s.-\lim_{n\rightarrow \infty}\sum_{k=0}^{n-1}(W_{t_{k+1}}-W_{t_k})(t_{k+1}-t_k)=0.\]
+        Does the partition has to be equidistant? Provide a counter--example or prove why not.
+    \end{question}
     \begin{proof}
         Denote $\Delta t_k=t_{k+1}-t_k$, and
         \[X_n=\sum_{k=0}^{n-1}(W_{t_{k+1}}-W_{t_k})(t_{k+1}-t_k)\]
@@ -562,6 +691,10 @@
     \end{proof}
 
     \problem
+    \begin{question}
+        Assume that $X\sim N(0,\sigma^2)$.  Show that \text{Var}$(X^2)=2\sigma^4$
+        by straightforward calculations.
+    \end{question}
     \newcommand{\epower}{\e^{-\frac{x^2}{2\sigma^2}}}
     \newcommand{\const}{\sqrt{2\pi\sigma^2}}
     \begin{proof}
@@ -599,6 +732,12 @@
     \end{proof}
 
     \problem
+    \begin{question}
+        Prove that
+        \[m.s \lim_{n\rightarrow \infty}(X_n+Y_n)=m.s \lim_{n\rightarrow \infty}X_n+m.s \lim_{n\rightarrow \infty}Y_n.\]
+        Hint:  First prove this for the case when $\lim_{n\rightarrow \infty}X_n=\lim_{n\rightarrow \infty}Y_n=0$;
+        here you may need to show that $E(X_nY_n)\rightarrow 0$.  Now for this general case, apply this results to $\tilde X_n=X_n-\lim X_n$ and $\tilde Y_n=Y_n-\lim Y_n$.
+    \end{question}
     \begin{proof}
         Let's show the case when m.s. $X_n\to 0,Y_n\to 0$ at first.
         Since
@@ -637,6 +776,16 @@
     \end{proof}
 
     \problem
+    \begin{question}
+        \noindent(i)  Prove the squeeze theorem:  Let $X_n$, $Y_n$ and $Z_n$ be sequences
+        of random variables on $(\Omega,\mathcal F,P)$ such that
+        \[X_n\leq Y_n\leq Z_n, \text{a.s},\forall n\geq 1.\]
+        If $X_n$ and $Y_n$ converge to $L$ in mean square, then $Z_n$
+        converges to $L$ in mean square.  Remark:  the same conclusion holds
+        for different convergence manner.
+
+        \noindent(ii).  Show that \[m.s.--\lim_{t\rightarrow \infty}\frac{W_t\sin W_t}{t}=0\]
+    \end{question}
     \begin{subproblem}
         \item
         \begin{proof}
