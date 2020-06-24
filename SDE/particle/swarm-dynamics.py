@@ -14,9 +14,9 @@ def F(r, n=2):
 
 
 x = 2 * np.random.rand(N, 2) - np.tile(1, (N, 2))
-dB = np.random.randn(N - 1, 2) * (dt ** .5)
-dB = np.vstack(([0, 0], dB))
-B = np.cumsum(dB, axis=0)
+dB = np.random.randn(int(T / dt), N, 2) * (dt ** .5)
+# Stochastic process initial value
+Xt = np.tile(.1, (N, 2))
 
 fig, ax = plt.subplots()
 ax.set_aspect('equal')
@@ -27,7 +27,14 @@ for t in progressbar(range(int(T / dt))):
 
     r = delta_matrix(x)
     r_norm = np.expand_dims(norm(r), axis=-1)
+
     with np.errstate(divide='ignore', invalid='ignore'):
-        v = np.nansum(F(r_norm) / r_norm * r, axis=1) / N
+        v = np.nansum(F(r_norm) / r_norm * r, axis=1) / N + Xt
     x += v * dt
-camera.animate().save('particle/swarm.mp4', fps=int(T / dt / 10))
+    # Bessel process
+    Xt += dB[t] + dt / (2 * Xt)
+    # Brownian motion
+    # Xt += dB[t]
+animation = camera.animate()
+plt.show()
+# animation.save('particle/swarm-BM.mp4', fps=int(T / dt / 10))
