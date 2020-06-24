@@ -5,14 +5,13 @@ import numpy.testing as npt
 
 
 def delta_matrix(x, y=None):
-    """ Get delta along axis 0, zij = xj - yi """
+    """ Get delta along axis 0, zij = xi - yj """
     # 1 x N x D (1 x N if we view the last axis as a whole)
-    if y == None:
+    if type(y) == type(None):
         y = x
     x = np.expand_dims(x, axis=0)
     y = np.expand_dims(y, axis=0)
-    # TODO Test of this func
-    return x - np.moveaxis(y, 0, 1)
+    return np.moveaxis(x, 0, 1) - y
 
 
 def norm(matrix, p=1):
@@ -26,11 +25,29 @@ def blind(v, x):
     prod = (v * x).sum(axis=-1)
     return prod / (norm(v) * norm(x))
 
+
 def expand(ndarray):
     return np.expand_dims(ndarray, axis=-1)
 
 
 class TestSuite(unittest.TestCase):
+
+    def test_delta_matrix(self):
+        x = np.array([
+            [1, 3],
+            [3, 4],
+            [-2, 1]
+        ])
+        y = np.array([
+            [-1, 3],
+            [2, 1]
+        ])
+        asp = np.array([
+            [[2, 0], [-1, 2]],
+            [[4, 1], [1, 3]],
+            [[-1, -2], [-4, 0]]
+        ])
+        npt.assert_equal(asp, delta_matrix(x, y))
 
     def test_blind(self):
         v = np.array([

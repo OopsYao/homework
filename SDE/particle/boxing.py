@@ -51,7 +51,7 @@ for t in progressbar(range(int(T / dt))):
         social = np.nan_to_num(social)
 
     # axis 1 is the dummy varible
-    social = - social.sum(axis=1) / N
+    social = social.sum(axis=1) / N
 
     zx = x - np.tile(z, (N, 1))
 

@@ -35,7 +35,7 @@ for _ in progressbar(range(int(T / dt))):
     r = delta_matrix(x)
     r_norm = np.expand_dims(norm(r), axis=-1)
     with np.errstate(divide='ignore', invalid='ignore'):
-        social = np.nan_to_num(q(r_norm) / r_norm * r)
+        social = - np.nan_to_num(q(r_norm) / r_norm * r)
 
     if blind_consideration:
         valid = expand(blind(v, x) > np.cos(np.pi / 2))

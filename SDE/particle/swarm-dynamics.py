@@ -23,6 +23,6 @@ for _ in progressbar(range(int(T / dt))):
 
     r = delta_matrix(x)
     r_norm = np.expand_dims(norm(r), axis=-1)
-    v = - np.nansum(F(r_norm) / r_norm * r, axis=1) / N
+    v = np.nansum(F(r_norm) / r_norm * r, axis=1) / N
     x += v * dt
 camera.animate().save('particle/swarm.mp4', fps=int(T / dt / 10))
