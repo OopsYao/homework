@@ -55,13 +55,13 @@ class TestSuite(unittest.TestCase):
             [1, 3 ** .5]
         ])
         x = np.array([
-            [[0, 1], [1, -1]],
-            [[3 ** .5, 1], [1, -1]]
+            [[0, 1], [1, -1], [1, 1]],
+            [[3 ** .5, 1], [1, -1], [1, 0]]
         ])
 
         asp = np.array([
-            [1 / 4, 1],
-            [1 / 6, 7 / 12]
+            [1 / 4, 1, 1 / 2],
+            [1 / 6, 7 / 12, 1 / 3 ]
         ]) * np.pi
         npt.assert_almost_equal(blind(v, x), np.cos(asp))
 
