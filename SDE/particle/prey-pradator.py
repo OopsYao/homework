@@ -13,28 +13,15 @@ N = 400  # Number of prey
 x = np.random.rand(N, D)
 z = np.random.rand(D)
 
-
-# def delta_matrix(x):
-#     """ Get delta along axis 0, xij = xj - xi """
-#     x = np.expand_dims(x, axis=0)
-#     return x - np.moveaxis(x, 0, 1)
-
-
-# def norm(matrix, p=2):
-#     # Norm along the last axis
-#     norm_matrix = LA.norm(matrix, axis=-1) ** p
-#     return np.expand_dims(norm_matrix, axis=-1)
-
-
 a = 1
 b = 0.2
 p = 3
-c = 0.15
+c = .15
 dt = 0.01
-T = 1
+T = 20
 
 fig, ax = plt.subplots()
-ax.autoscale_view()
+ax.set_aspect('equal')
 camera = Camera(fig)
 for t in progressbar(range(int(T / dt))):
     plt.scatter(*(x.T), color='black', s=5)
@@ -57,5 +44,5 @@ for t in progressbar(range(int(T / dt))):
     z += (c / N * (zx / expand(norm(zx, p))).sum(axis=0)) * dt
 
 animation = camera.animate()
-# About 6s
-animation.save('particle/prey-pradator.mp4', fps=int(T / dt / 6))
+# plt.show()
+animation.save(f'particle/prey-pradator{c}.mp4', fps=int(T / dt / 10))

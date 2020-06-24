@@ -10,7 +10,7 @@ U = 1
 G = 0.5
 g = 1
 T = 10
-blind_consideration = True
+blind_consideration = False
 
 # Uniform dist in [0, 3] x [0, 3]
 x = 3 * np.random.rand(N, D)
@@ -39,7 +39,7 @@ for _ in progressbar(range(int(T / dt))):
         social = - np.nan_to_num(q(r_norm) / r_norm * r)
 
         if blind_consideration:
-            valid = expand(blind(v, - r) >= np.cos(4 * np.pi / 5))
+            valid = expand(blind(v, - r) >= np.cos(np.pi / 4))
             v = np.nansum(social * valid, axis=1) + np.tile([U, -g], (N, 1))
         else:
             v = social.sum(axis=1) + np.tile([U, -g], (N, 1))
@@ -56,5 +56,5 @@ plt.figure()
 plt.plot(t, z_trace)
 
 animation = camera.animate()
-# animation.save('particle/locust-blind.mp4', fps=int(T / dt / 10))
-plt.show()
+animation.save('particle/locust.mp4', fps=int(T / dt / 10))
+# plt.show()

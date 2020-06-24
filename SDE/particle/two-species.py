@@ -5,12 +5,15 @@ import matplotlib.pyplot as plt
 from celluloid import Camera
 
 
-def V(s, i):
-    pass
+def V_neg_prime(s):
+    Cr, Ca = [1, 1]
+    lr, la = [.1, 1]
+    s = np.sqrt(2 * s)
+    return Cr * np.exp(- s / lr) / (lr * s) - Ca * np.exp(- s / la) / (la * s)
 
 
 a = [10, 10, 2]
-b = [.1, .1, -.3]
+b = [-.3, -.3, -.3]
 
 
 def g(s, i):
@@ -31,6 +34,8 @@ x = np.random.rand(N1, 2)
 y = np.random.rand(N2, 2)
 fig, ax = plt.subplots()
 ax.set_aspect('equal')
+mng = plt.get_current_fig_manager()
+mng.resize(*mng.window.maxsize())
 camera = Camera(fig)
 
 for _ in progressbar(range(int(T / dt))):
@@ -50,9 +55,9 @@ for _ in progressbar(range(int(T / dt))):
 
     with np.errstate(invalid='ignore'):
         vx = np.nansum(expand(g(rx / 2, 1)) * mx, axis=1) + \
-            np.nansum(expand(g(rxy / 2, 3)) * mxy, axis=1)
+            np.nansum(expand(V_neg_prime(rxy / 2)) * mxy, axis=1)
         vy = np.nansum(expand(g(ry / 2, 2)) * my, axis=1) + \
-            np.nansum(expand(g(ryx / 2, 3)) * myx, axis=1)
+            np.nansum(expand(V_neg_prime(ryx / 2)) * myx, axis=1)
     vx /= N1
     vy /= N1
 
@@ -61,4 +66,4 @@ for _ in progressbar(range(int(T / dt))):
 
 animation = camera.animate()
 # plt.show()
-animation.save(f'particle/two-species{b[2]}.mp4', fps=int(T / dt / 10))
+animation.save(f'particle/two-species-Morse1.mp4', fps=int(T / dt / 10))
