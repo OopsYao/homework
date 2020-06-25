@@ -1,0 +1,196 @@
+
+%\documentclass[12pt,reqno]{amsart}
+%\documentclass[twoside,smallextended]{article}
+\documentclass[twoside,12pt]{article}
+\usepackage{amsmath,amssymb,amsthm,amsfonts}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{paralist}
+\usepackage{graphics} %% add this and next lines if pictures should be in esp format
+\usepackage{epsfig} %For pictures: screened artwork should be set up with an 85 or 100 line screen
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{epstopdf}%This is to transfer.eps figure to.pdf figure; please compile your paper using PDFLeTex or PDFTeXify.
+\usepackage[colorlinks=true]{hyperref}
+%\usepackage{refcheck}
+\usepackage{mathrsfs}
+\usepackage[normalem]{ulem}
+
+%\usepackage{latexsym}
+%\usepackage{amssymb,amsbsy,amsmath,amsfonts,amssymb,amscd,amsthm}
+%\usepackage{amsmath,amssymb,amsthm,amsfonts,mathrsfs,wasysym,latexsym,lineno, subfigure,color}
+%\usepackage{graphicx}
+%%\usepackage{times}
+%\usepackage{mathptmx}
+\usepackage{txfonts}
+%\usepackage{pxfonts}
+\usepackage{enumerate}
+
+%\usepackage{amsmath,bm}
+%\usepackage[notref,notcite]{showkeys}
+%\usepackage{indentfirst,latexsym,amsmath,amssymb,fancyhdr,txfonts,setspace}
+\usepackage[numbers,sort&compress]{natbib}
+\topmargin=-25mm \oddsidemargin3mm \evensidemargin3mm
+\textheight240mm \textwidth170mm
+\captionsetup[table]{labelfont=bf}
+\captionsetup[figure]{labelfont=bf}
+\captionsetup{font={footnotesize}}
+\captionsetup{width=0.85\textwidth}
+
+%\usepackage{showkeys}
+
+%\makeatletter \topmargin=0mm\headheight=0mm\headsep=0mm
+%\textheight=221mm \textwidth=160mm
+%\oddsidemargin =0mm \evensidemargin =0mm \sloppy
+%\brokenpenalty=10000
+%\renewcommand{\baselinestretch}{1.3}
+%\newcommand{\vs}{\vspace{.1in}}
+\numberwithin{equation}{section}
+\newcommand{\R}{{\mathbb R}}
+\newcommand{\Z}{{\mathbb Z}}
+\newcommand{\N}{{\mathbb N}}
+\newcommand{\C}{{\mathbb C}}
+\newcommand{\md}{\mbox{d}}
+\newcommand{\be}{\begin{equation}}
+\newcommand{\ee}{\end{equation}}
+\newcommand{\mr}{\mathbb{R}}
+\newcommand{\mc}{\mathcal}
+\newcommand{\mb}{\mathbb}
+\newcommand{\mx}{\mbox}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\tr}{\triangle}
+\newcommand{\pt}{\partial}
+\newcommand{\ds}{\displaystyle}
+\newcommand{\no}{\nonumber}
+%\newcommand{\be}{\begin{eqnarray}}
+\newcommand{\ben}{\begin{eqnarray*}}
+%\newcommand{\en}{\end{eqnarray}}
+\newcommand{\enn}{\end{eqnarray*}}
+\newcommand{\ba}{\backslash}
+%\newcommand{\pa}{\partial}
+\newcommand{\un}{\underline}
+\newcommand{\ov}{\overline}
+\newcommand{\g}{\gamma}
+\newcommand{\G}{\Gamma}
+\newcommand{\eps}{\epsilon}
+%\newcommand{\vep}{\varepsilon}
+\newcommand{\Om}{\Omega}
+\newcommand{\om}{\omega}
+\newcommand{\sig}{\sigma}
+\newcommand{\ka}{\kappa}
+\newcommand{\al}{\alpha}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\va}{\varepsilon}
+\newcommand{\ti}{\tilde}
+\newcommand{\wzbw}{\hfill\rule{1ex}{1ex}}
+\newcommand{\sgn}{{\rm sgn}\,}
+\newcommand{\var}{\varphi}
+\newcommand{\lge}{\langle}
+\newcommand{\rge}{\rangle}
+\newcommand{\tha}{\theta}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{theorem}{\textbf Theorem}[section]
+\newtheorem{lemma}{\textbf Lemma}[section]
+\newtheorem{rem}{\textbf Remark}[section]
+\newtheorem{corollary}{\textbf Corollary}[section]
+\newtheorem{propty}{\textbf Property}[section]
+%\newtheorem{prop}{\textbf Proposition}[section]
+\newtheorem{defin}{\textbf Definition}[section]
+\newtheorem{conjecture}{Conjecture}
+%\newtheorem{proof}{Proof}
+ \numberwithin{equation}{section}
+%\newtheorem*{problem}{Problem}
+%\theoremstyle{definition}
+%\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}{Remark}[section]
+%
+\def\endProof{{\hfill$\Box$}}
+%
+%\newcounter{remark}
+%\setcounter{remark}{0}
+%\newenvironment{remark}%
+%{\par \stepcounter{remark} {\it Remark
+%\arabic{section}.\arabic{remark}.}~}{\rm \endProof\par}
+%%\newtheorem*{keywords}{\textbf Keywords}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%\def\R{\mathbb{R}}
+%\def\Da{\Lambda^\alpha}
+%\newcommand{\rf}[1]{{\rm (}\ref{#1}{\rm )}}
+%\allowdisplaybreaks
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\theequation}{\arabic{section}.\arabic{equation}}
+
+\graphicspath{{Figures/}}
+
+\begin{document}
+
+\title{\textbf{your tiltle}} 
+\author{Meng Li \thanks{Department of Mathematics, Southwestern University of Finance and Economics, 555 Liutai Ave, Wenjiang, Chengdu, Sichuan 611130, China; Email address}
+and Yao Xiong \thanks{Department of Mathematics, Southwestern University of Finance and Economics, 555 Liutai Ave, Wenjiang, Chengdu, Sichuan 611130, China;  Email address}
+        }
+%\date{}
+
+\maketitle
+\vspace{-8mm}
+\begin{abstract}
+This paper investigates....
+\end{abstract}
+
+%\begin{quote}
+%
+%\end{quote}
+%
+%\noindent
+%{\sc MSC}: {35A01, 35B40, 35K57, 35Q92, 92C17}\\
+%
+%\noindent
+{\sc Keywords}:  
+
+\maketitle
+
+\section{Introduction and Main Results}
+In this paper, we investigate... 
+
+\section{Dynamics and Pattern Formation of Single Species}
+You need to write down the particle model for each subsection
+
+\subsection{Swarm through a deterministic model}
+\subsection{Swarm through a stochastic model}
+\subsection{Swarm with an absorbing barrier}
+We study deterministic and stochastic birds landing on a lake
+\subsection{Swarm with an reflecting barrier}
+We consider deterministic and stochastic cats moving against a wall
+\subsection{Swarm with an reflecting barrier with a small gate}
+We consider deterministic and stochastic cats moving through a gate
+
+\section{Dynamics and Pattern Formation of Two-Species}
+
+You can repeat the modelings above for competing and predating species.
+\subsection{Competing Species}
+
+\subsection{Predator-Prey Dynamics}
+
+
+\section{Introduction and Main Results}
+
+ 
+\section*{Acknowledgements}
+We would like to thank  
+
+\bibliographystyle{abbrv}
+%\bibliography{references}
+\begin{thebibliography}{*}
+\bibitem{BTSIAM2011}
+A. J. Bernoff and C. M. Topaz,
+\emph{A primer of swarm equilibria}, SIAM J. Appl. Dyn. Syst., 10 (2011), 212-250. 
+
+\end{thebibliography}
+
+\end{document}
