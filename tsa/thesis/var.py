@@ -30,7 +30,7 @@ mdata = pd.DataFrame({
     'GDP': data['GDP(亿元)']
 })
 mdata.index = pd.DatetimeIndex(yearly)
-mdata = mdata.dropna()
+mdata = mdata.dropna().sort_index()
 
 num = mdata['num']
 cost = mdata['cost']
@@ -48,7 +48,7 @@ trend_plot(GDP)
 
 
 def ADF_test(series):
-    print(ADF(series, trend='nc').summary())
+    print(ADF(series).summary())
 
 
 ADF_test(mdata['num'])
