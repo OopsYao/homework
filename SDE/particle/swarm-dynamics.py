@@ -3,10 +3,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 from celluloid import Camera
 from progressbar import progressbar
+import anikit
 
 N = 800
-dt = 0.01
-T = 2
+T = 20
+dt = T / anikit.FRAMES
 
 
 def F(r, n=2):
@@ -19,22 +20,26 @@ dB = np.random.randn(int(T / dt), N, 2) * (dt ** .5)
 Xt = np.tile(.1, (N, 2))
 
 fig, ax = plt.subplots()
-ax.set_aspect('equal')
+ax.axis('off')
+fig.tight_layout()
 camera = Camera(fig)
-for t in progressbar(range(int(T / dt))):
-    plt.scatter(*(x.T), s=5, color='b')
-    camera.snap()
-
+for t in progressbar(range(anikit.FRAMES)):
     r = delta_matrix(x)
     r_norm = np.expand_dims(norm(r), axis=-1)
 
     with np.errstate(divide='ignore', invalid='ignore'):
-        v = np.nansum(F(r_norm) / r_norm * r, axis=1) / N + Xt
-    x += v * dt
+        v = np.nansum(F(r_norm) / r_norm * r, axis=1) / N + Xt / 10
+
+    # ax.quiver(*(x.T), *(v.T), color='black', width=.003)
+    ax.scatter(*(x.T), color='black')
+    camera.snap()
+
     # Bessel process
-    Xt += dB[t] + dt / (2 * Xt)
+    # Xt += dB[t] + dt / (2 * Xt)
     # Brownian motion
-    # Xt += dB[t]
+    Xt += dB[t]
+
+    x += v * dt
 animation = camera.animate()
-plt.show()
-# animation.save('particle/swarm-BM.mp4', fps=int(T / dt / 10))
+# plt.show()
+animation.save('particle/swarm-BM10.mp4', fps=anikit.FPS, dpi=200)
