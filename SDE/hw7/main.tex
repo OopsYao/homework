@@ -1,6 +1,10 @@
 \newcommand{\trans}{\mathrm T}
 
     \problem
+    \begin{question}
+        Use It\^o's lemma to show
+        \[\int_0^T W_sdW_s=\frac{1}{2}W^2_T-\frac{1}{2}T.\]
+    \end{question}
     \begin{proof}
         Denote
         \[f(t,W_t):=\frac{1}{2}W_t^2-\frac{1}{2}t\]
@@ -16,6 +20,12 @@
     \end{proof}
 
     \problem
+    \begin{question}
+        Use It\^o's lemma to verify that the Geometric Brownian Motion
+        \[S_t=S_0e^{(\mu-\sigma^2/2)t+\sigma W_t}\]
+        satisfies stochastic differential equation
+        \[dS_t= \mu S_t dt+\sigma S_tdW_t.\]
+    \end{question}
     \begin{proof}
         Denote
         \[f(t,W_t):=S_t\]
@@ -39,6 +49,18 @@
     \end{proof}
 
     \problem
+    \begin{question}
+        Let $X_t$ and $Y_t$ be two stochastic processes.  Use
+        \begin{enumerate}[label=(\alph*)]
+        \item the definition
+        \item the It\^o's lemma
+        \end{enumerate}
+        to show that
+        \[d\Big(\frac{X_t}{Y_t}\Big)=\frac{Y_tdX_t-X_tdY_t-dX_tdY_t}{Y_t^2}
+        +\frac{X_t}{Y_t^3}(dY_t)^2.\]
+        This is called the quotient rule.  Now find $d(\frac{X_t}{f(t)})$
+        for $f$ being a deterministic function of $t$.
+    \end{question}
     \begin{subproblem}[(\alph*)]
         \item
         \begin{proof}
@@ -92,6 +114,21 @@
     \end{subproblem}
 
     \problem
+    \begin{question}
+        Let $W^{(1)}_t$ and $W^{(2)}_t$ be two independent Brownian Motions
+        and assume that there are two It\^o diffusions $X^{(1)}_t$ and $X^{(2)}_t$ governed by
+        \[dX^{(1)}_t=\mu_1(t,W^{(1)}_t)dt+\sigma_1(t,W^{(1)}_t)dW^{(1)}_t\]
+        and
+        \[dX^{(2)}_t=\mu_2(t,W^{(2)}_t)dt+\sigma_2(t,W^{(2)}_t)dW^{(2)}_t.\]
+        \begin{enumerate}[label=(\alph*)]
+        \item Find the It\^o's formula for $df(t,X^{(1)},X^{(2)})$
+        \item Generalize this formula for $df(t,X^{(1)},...,X^{(n)})$ with
+        \[dX^{(i)}_t=\mu_i(t,W^{(i)}_t)dt+\sigma_i(t,W^{(i)}_t)dW^{(i)}_t\]
+        for $n$ mutually independent Brownian Motions $W^{(i)}_t$, $i=1,2...,n$.
+        \item Do the same when the correlation coefficient of $W^{(i)}_t$
+        and $W^{(j)}_t$ is $\delta_{ij}$.
+\end{enumerate}
+    \end{question}
     \begin{subproblem}[(\alph*)]
         \item
         Since $X_t^{(1)},X_t^{(2)}$ are two It\^o diffusions,
@@ -262,11 +299,19 @@
     \end{subproblem}
 
     \problem
+    \begin{question}
+        Find $d(tW_t^2)$
+    \end{question}
     By It\^o's lemma, we have that
     \[\diff (tW_t^2)=W_t^2\diff t+2tW_t\diff W_t+\frac{2t}{2}\diff t
     =(W_t^2+t)\diff t+2tW_t\diff W_t\]
 
     \problem
+    \begin{question}
+        Let $X_t$ be an It\^o diffusion and $f(t)$ a deterministic function.
+        Prove that $df(t)dX_t=0$.  Hint: this mean the co--variance is zero,
+        so what is the definition?
+    \end{question}
     \begin{proof}
         Denote
         \[\diff X_t=\mu(t,W_t)\diff t+\sigma(t,W_t)\diff W_t\]
@@ -279,6 +324,11 @@
     \end{proof}
 
     \problem
+    \begin{question}
+        Show that
+        \[\int_0^Te^{\frac{t}{2}+iW_t}dW_t=i(1-e^{\frac{T}{2}+iW_T}).\]
+        Hint: Use Euler's formula.
+    \end{question}
     \newcommand{\img}{\mathrm i}
     \begin{proof}
         We have from Euler's formula that,
@@ -319,6 +369,13 @@
     \end{proof}
 
     \problem
+    \begin{question}
+        Use Integration by parts to show that
+        \[\int_0^T\frac{1}{1+W^2_t}dW_t=\arctan W_T+\int_0^T\frac{W_t}{(1+W^2_t)^2}dt,
+        \forall T>0.\]
+        Now verify that
+        \[E(\arctan W_T)=-\int_0^T E\Big(\frac{W_t}{(1+W^2_t)^2}\Big)dt.\]
+    \end{question}
     \begin{proof}
         Denote
         \[f(t):=1,g(W_t):=\arctan W_t\]
@@ -343,6 +400,12 @@
     =-\int_0^TE\left(\frac{W_t}{(1+W_t^2)^2}\right)\diff t\]
 
     \problem
+    \begin{question}
+        Show that
+        \[\int_0^T W_te^{W_t}dW_t=W_Te^{W_T}+1-e^{W_T}-\frac{1}{2}\int_0^T e^{W_t}(1+W_t)dt.\]
+        Now find $E(W_te^{W_t})$, Cov$(W_t,e^{W_t})$ and Corr$(W_t,e^{W_t})$.  Find the limit
+        of Corr$(W_t,e^{W_t})$ as $t\rightarrow 0 $ and $t\rightarrow \infty$.
+    \end{question}
     \begin{proof}
         Denote
         \[g(W_t):=(W_t-1)\e^{W_t}\]
@@ -408,6 +471,15 @@
     \end{aligned}\]
 
     \problem
+    \begin{question}
+        Show that
+        \[\int_0^T \frac{2W_t}{1+W_t^2}dW_t=\ln (1+W_T^2)-\int_0^T \frac{1-W_t^2}{(1+W_t^2)^2}dt,\]
+        and
+        \[-\frac{T}{8}\leq E(\ln (1+W_T^2))\leq T.\]
+        You can also use Jensen's inequality to show that
+        \[ E(\ln (1+W_T^2))\leq \ln (1+T).\]
+        Is there a contradiction in the upper bounds in two estimates above?
+    \end{question}
     \begin{proof}
         We have from integration by parts that
         \[\begin{aligned}
@@ -440,6 +512,9 @@
     \[\ln(1+T)\leq T\]
 
     \problem
+    \begin{question}
+        Evaluate the stochastic integral \[\int_a^b t^{-\frac{3}{2}}W_te^{-\frac{W^2_t}{2t}}dW_t.\]
+    \end{question}
     Denote
     \[\begin{aligned}
         f(t)&=t^{-\frac{1}{2}}\\

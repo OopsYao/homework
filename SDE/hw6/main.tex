@@ -2,6 +2,16 @@
 \newcommand{\cov}{\mathrm{Cov}}
 
     \problem
+    \begin{question}
+        Let us recall that, we say a function $f(t)$, $t\in(a,b)$ is
+        of bounded variation if there exists a finite number $C$ such
+        that for any partition $\pi_n=\{t_i\}^{n}_{i=0}$ of $(a,b)$
+        \[\sum^{n-1}_{i=0}|f(t_{i+1})-f(t_i)|<C.\]
+        Prove that a Wiener process (almost surely) does not have a
+        bounded variation.  Hint: argue by contradiction.  Suppose
+        that it has a bounded variation, then you can show that its
+        quadratic variation converges to zero almost surely, which is impossible.
+    \end{question}
     \begin{proof}
         We argue by contradiction\sidenote{The opposite of statement
         that a.s. does not have a bounded variation should be that
@@ -40,6 +50,18 @@
     \skipproblem
 
     \problem
+    \begin{question}
+        We know that $(dW_t)^2=dt$ is (and also should be) understood as the differential form of the quadratic variation $[W_t,W_t]|_T=T$, or precisely the mean square limit as
+        \[m.s.-\lim_{n\rightarrow \infty} \sum^{n-1}_{k=0}(W_{t_{k+1}}-W_{t_k})^2=T.\]
+        Similarly one should understand $dtdW_t=0$ in previous HW as
+        \[m.s.-\lim_{n\rightarrow \infty} \sum^{n-1}_{k=0}(t_{k+1}-t_{k})(W_{t_{k+1}}-W_{t_k})=0.\]
+
+        (1).  How do you understand the following differential identity
+        \[d(W_t^3)=3W_t^2dW_t+3W_tdt.\]
+        Though you do not that why this holds.
+
+        (2).  Prove your claim in (1).
+    \end{question}
     \begin{subproblem}[(\arabic*).]
         \item
         It should be understood as for any arbitrary $T>0$,
@@ -89,6 +111,23 @@
     \end{subproblem}
 
     \problem
+    \begin{question}
+        Some textbooks define the Stratonovich integral as
+        \[\int_0^t f(s,W_s) \circ dW_s=m.s.-\lim_{n\rightarrow \infty}
+        \sum_{i=0}^{n-1}\frac{f(t_i,W_{t_i})+f(t_{i+1},W_{t_{i+1}})}{2}(W_{t_{i+1}}-W_{t_i}),\]
+        i.e., choosing the mean value of $f(s,W_s)$ at the end points,
+        instead of the value at the middle point.  For $f(s,W_s)=W_s$,
+        in this setting, we can easily see that
+        \[\int_0^t  W_s \circ dW_s= m.s.-\lim_{n\rightarrow \infty}\sum_{i=0}^{n-1}
+        \frac{W_{t_{i+1}}+W_{t_i}}{2}(W_{t_{i+1}}-W_{t_i})
+        = m.s.-\lim_{n\rightarrow \infty}\frac{1}{2}\sum_{i=0}^{n-1}(W^2_{t_{i+1}}-W^2_{t_i})
+        =\frac{W_t^2}{2}.\]
+        What if you choose the value of
+        $\lambda f(t_i,W_{t_i})+(1-\lambda)f(t_{i+1},W_{t_{i+1}}),\lambda\in[0,1]$.
+        Find the Stratonovich integral
+        \[\int_0^t  W_s \circ d_\lambda W_s.\]
+        Compare it with the previous general Stratonovich integral. 
+    \end{question}
     Motivated by the symmetry, we denote
     \newcommand{\sumhead}{\sum_{i=0}^{n-1}}
     \newcommand{\limhead}{\lim_{n\to\infty}}
@@ -119,6 +158,16 @@
     which is the same as choosing the value of $\lambda$-point.
 
     \problem
+    \begin{question}
+        Denote
+        \[X_t:=\int_0^t W_sdW_s, \forall t>0,\]
+        and then we already know that
+        \[X_t=\frac{W_t^2}{2}-\frac{t}{2}\]
+        hence can find its expectation and variance.
+
+        Now, find $E(X_t)$ and Var$(X_t)$ by the its mean square limit property,
+        not using the explicit formula above.
+    \end{question}
     \label{var and e}
     \newcommand{\wj}{W_{t_j}}
     \newcommand{\wjj}{W_{t_{j+1}}}
@@ -177,6 +226,20 @@
     \[\var(X_t)=E(X_t^2)=\frac{t^2}{2}\]
 
     \problem
+    \begin{question}
+        In order to prove the following connection between It\^o and Stratonovich integrals
+        \[\int_0^t f(s,W_s) \circ dW_s=\int_0^t f(s,W_s) dW_s+\frac{1}{2}\int_0^t \frac{\partial f(s,W_s)}{\partial W_s} ds,\]
+        it is necessary to show that the all the Higher Order Terms converges to zero.  Denote
+        \[\Delta W^{i+1}_{i}=W_{t_{i+1}}-W_{t_i}, \Delta W^{i+\frac{1}{2}}_{i}=W_{t_{i+\frac{1}{2}}}-W_{t_i}.\]
+        Prove that
+        \begin{enumerate}[label=(\alph*)]
+        \item $m.s.-\lim_{n\rightarrow \infty}\sum_{i=0}^{n-1} \frac{\partial^2 f(t_i,W_{t_i})}{\partial t^2}(\frac{\Delta t}{2})^2\Delta W^{i+1}_{i}=0$;
+        \item $m.s.-\lim_{n\rightarrow \infty}\sum_{i=0}^{n-1} \frac{\partial^2 f(t_i,W_{t_i})}{\partial t\partial W_t}\frac{\Delta t}{2}(\Delta W^{i+\frac{1}{2}}_{i}) \Delta W^{i+1}_{i}=0$;
+        \item $m.s.-\lim_{n\rightarrow \infty}\sum_{i=0}^{n-1} \frac{\partial^2 f(t_i,W_{t_i})}{\partial W^2_t}\big(\Delta W^{i+\frac{1}{2}}_{i}\big)^2\Delta W^{i+1}_{i}=0$;
+        \item  $m.s.-\lim_{n\rightarrow \infty}\sum_{i=0}^{n-1} \frac{\partial^{k+l} f(t_i,W_{t_i})}{\partial^k t \partial^l W_t}(\frac{\Delta t}{2})^k\big(\Delta W^{i+\frac{1}{2}}_{i}\big)^l\Delta W^{i+1}_{i}=0$, $\forall k,l\geq 2$
+        ---this is optional and only for strongly motivated students.
+        \end{enumerate}
+    \end{question}
     \newcommand{\ptt}[1]{%
         \frac{\partial^2f(t_{#1},W_{t_{#1}})}{\partial t^2}
     }
@@ -389,6 +452,11 @@
     \end{subproblem}
 
     \problem
+    \begin{question}
+        Prove that the It\^o integral $\int_0^t f(s,W_s)dW_s$ is $\mathcal F_t$--predictable, i.e.,
+        \[E\Big(\int_0^t f(u,W_u)dW_u |\mathcal F_s\Big)=\int_0^s f(u,W_u)dW_u.\]
+        Hint: the partition property. 
+    \end{question}
     \begin{proof}
         \newcommand{\conde}[1]{E\left(\left. #1\right|\mathcal F_s\right)}
         By partition property, we have that
@@ -420,6 +488,15 @@
 
 
     \problem
+    \begin{question}
+        Let $\{X_n(t)\}$ be a sequence of square integrable
+        and adapted/non-anticipating stochastic processes and
+        it converges to $X(t)$ in the following sense
+        \[\lim_{n\rightarrow \infty}E\Big(\int_a^b |X_n-X|^2 dt\Big)=0.\]
+        Prove that in mean square as $n\rightarrow\infty$
+        \[\int_a^b X_n(t)dW_t\rightarrow \int_a^b X(t)dW_t.\]
+        Hint: Use Isometry identity. 
+    \end{question}
     \begin{proof}
         By isometry identity
         \[\begin{aligned}
@@ -442,6 +519,12 @@
     \end{proof}
 
     \problem
+    \begin{question}
+        Find
+        \[E\Big(\int_0^TW_sdW_s\Big)\text{~and~}\text{Var}\Big(\int_0^TW_sdW_s\Big).\]
+        Verify the Isometry property 
+        \[E\Big(\Big(\int_0^TW_sdW_s\Big)^2\Big)=E\Big(\int_0^TW^2_sdW_s\Big).\]
+    \end{question}
     In problem \ref{var and e} we know that
     \[\begin{aligned}
         E\left(\int_0^TW_s\diff W_s\right)&=0\\
@@ -460,6 +543,11 @@
     which coincides with result we obtained above.
 
     \problem
+    \begin{question}
+        Find the expectation and variance of the following integrals
+        (if necessary you need to specify the condition on the parameters)
+        \[(1).  X=\int_1^T \frac{1}{\sqrt s}dW_s; \quad \quad (2).  Y= \int_0^T s^\alpha dW_s.\]
+    \end{question}
     \begin{subproblem}[(\arabic*).]
         \item
         Since It\^o integral has zero-mean, then
@@ -541,6 +629,10 @@
     \end{subproblem}
 
     \problem
+    \begin{question}
+        Find constant $\alpha$ such
+        \[m.s.-\lim_{t\rightarrow 0}\frac{1}{t^\alpha}\int_0^t sdW_s=0\]
+    \end{question}
     By isometry identity, we have that
     \[\begin{aligned}
         E\left(
@@ -562,6 +654,10 @@
     \[\text{m.s.-}\lim_{t\to0}\frac{1}{t^\alpha}\int_0^ts\diff W_s=0\]
 
     \problem
+    \begin{question}
+        Let $f(t)$ be a function integrable in $(a,b)$.  Find
+        \[\text{Cov}\Big(W_t,\int_0^t f(s)dW_s\Big).\] 
+    \end{question}
     It easy to see that
     \[W_t=\int_0^t\diff W_s\]
     as $\sum_{i=0}^{n-1}(\deltaw)=W_t$,
@@ -581,6 +677,14 @@
 
     \problem
     \label{dZt}
+    \begin{question}
+        Let $Z_t$ be the integrated Brownian Motion
+        \[Z_t=\int_0^t W_sds.\]
+        Show that
+        \[dZ_t=W_tdt.\]
+        Hint:  Just use the definition of $dZ_t$ and the apply
+        the intermediate value theorem and the continuity of $W_s$ as a function of $s$.
+    \end{question}
     \begin{proof}
         By partition property,
         \[Z_{t+\diff t}=\int_0^{t+\diff t}W_s\diff s
@@ -598,6 +702,14 @@
 
     \problem
     \label{pr:over dt}
+    \begin{question}
+        Let $A_t$ be the average of the Brownian motion over $(0,t)$
+        \[A_t=\frac{1}{t}Z_t=\frac{1}{t}\int_0^t W_sds.\]
+        Show that
+        \[dA_t=\frac{1}{t}\Big(W_t-\frac{1}{t}Z_t\Big)dt.\]
+        Hint: here and in the sequel you might want to use the fact that $W_t$
+        is continuous in $t$.
+    \end{question}
     \begin{proof}
         Since $W_t$ is continuous w.r.t. $t$, then the
         integral $\int_0^tW_s\diff s$ is continuous too.
@@ -616,6 +728,11 @@
     \end{proof}
 
     \problem
+    \begin{question}
+        Let $G_t$ be the average of the geometric Brownian motion over $(0,t)$
+        \[G_t= \frac{1}{t}\int_0^t e^{W_s}ds.\]
+        Find $dG_t$.
+    \end{question}
     \begin{proof}
         Similar to problem \ref{dZt},
         we obtain
@@ -627,6 +744,10 @@
     \end{proof}
 
     \problem
+    \begin{question}
+        Find the following differentials by definition
+        \[d(e^{W_t}); d((t+W_t)^k); d\Big(\frac{1}{t^\alpha}\int_0^te^{W_s}ds\Big)\]
+    \end{question}
     By definition,
     \[\begin{aligned}
         \diff\e^{W_t}&=\e^{W_{t+\diff t}}-\e^{W_t}\\
@@ -703,6 +824,12 @@
     \end{aligned}\]
 
     \problem
+    \begin{question}
+        Let $R_t=\sqrt{X^2_t+Y^2_t}$ be the Bessel process, where $X_t$ and $Y_t$
+        are two independent Brownian motions.  Find $dR_t$ and show that $R_t$
+        satisfies the following stochastic differential equation
+        \[dR_t=dW_t+\frac{1}{2}\frac{dt}{R_t}.\]
+    \end{question}
     \begin{proof}
         By definition,
         \[\begin{aligned}
