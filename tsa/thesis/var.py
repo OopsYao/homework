@@ -3,6 +3,7 @@ import pandas as pd
 
 from arch.unitroot import ADF
 from statsmodels.tsa.api import VAR
+import statsmodels.formula.api as smf
 
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -22,29 +23,24 @@ def split_line(text=None):
         ''')
 
 
+LIT_NUM = '国内游客(百万人次)'
+LIT_COST = '国内旅游人均花费(元)'
+LIT_GDP = '人均国内生产总值(元)'
+
 data = pd.read_csv('thesis/tourists.csv')
 yearly = pd.to_datetime({'year': data['年份'], 'month': 1, 'day': 1})
 mdata = pd.DataFrame({
-    'num': data['国内游客(百万人次)'],
-    'cost': data['国内旅游总花费(亿元)'],
-    'GDP': data['GDP(亿元)']
+    'num': data[LIT_NUM],
+    'cost': data[LIT_COST],
+    'GDP': data[LIT_GDP]
 })
 mdata.index = pd.DatetimeIndex(yearly)
 mdata = mdata.dropna().sort_index()
+mdata = np.log(1 + mdata)
 
 num = mdata['num']
 cost = mdata['cost']
 GDP = mdata['GDP']
-
-
-def trend_plot(series):
-    plt.figure()
-    series.plot()
-
-
-trend_plot(num)
-trend_plot(cost)
-trend_plot(GDP)
 
 
 def ADF_test(series):
@@ -55,18 +51,24 @@ ADF_test(mdata['num'])
 ADF_test(mdata['cost'])
 ADF_test(mdata['GDP'])
 
+# ADF test for delta
+ADF_test(mdata['num'].diff().dropna())
+ADF_test(mdata['cost'].diff().dropna())
+ADF_test(mdata['GDP'].diff().dropna())
+
+# Cointegration
+co_res = smf.ols(formula='GDP ~ cost + num - 1', data=mdata).fit()
+print(co_res.summary())
+ADF_test(co_res.resid)
 
 # Fit with VAR
-results = VAR(mdata).fit(verbose=True, trend='nc')
+VAR_model = VAR(mdata)
+results = VAR_model.fit(verbose=True)
 results.plot()
 print(results.summary())
 # Selected lag order
 print('Auto-selected Order:', results.k_ar)
-
-# Stability
-print()
-print('Stability test:')
-print(results.is_stable(True))
+print(VAR_model.select_order().summary())
 
 # Residual normality
 print()
@@ -75,19 +77,33 @@ print(results.test_normality().summary())
 # Granger causality
 names = ['num', 'cost', 'GDP']
 print()
-for n in names:
-    print('Granger for', n)
-    # Factor `n` caused by its complement
-    print(results.test_causality(n, list(set(names) - set(n))).summary())
+
+for n1 in names:
+    for n2 in names:
+        if n1 != n2:
+            print(results.test_causality(n1, n2).summary())
+symbols = ['\\NUM', '\\COST', '\\GDP']
+for n1 in symbols:
+    for n2 in symbols:
+        if n1 != n2:
+            print(f'${n2}$不能Granger引起${n1}$')
+
+# Stability
+print()
+print('Stability test:')
+if results.is_stable(True):
+    print('Stable :)')
+else:
+    print('Non-stable')
 
 # Impulse Response Analysis
-irf = results.irf(10)
-irf.plot(orth=False)
+irf = results.irf(20)
+irf.plot()
 
 # Forecast Error Variance Decomposition
-fevd = results.fevd(5)
+fevd = results.fevd(20)
 print()
 print(fevd.summary())
 fevd.plot()
 
-# plt.show()
+plt.show()
