@@ -4,14 +4,14 @@ import matplotlib.pyplot as plt
 from progressbar import progressbar
 from celluloid import Camera
 from utils import delta_matrix, norm, expand
-import anikit
+from anikit import FrameKit
 
 D = 2  # Dimension
 N = 400  # Number of prey
 N2 = 3
 
 # Randomly initial distribution
-x = 2* np.random.rand(N, D)
+x = 2 * np.random.rand(N, D)
 # z = np.random.rand(N2, D)
 z = np.array([
     [-0.1, 0.5],
@@ -24,14 +24,15 @@ b = 0.2
 p = 3
 q = 2
 c = 2.5
-T = 10
-dt = T / anikit.FRAMES
+T = 20
+frakit = FrameKit(T)
+dt = frakit.dt
 
 fig, ax = plt.subplots()
 ax.axis('off')
 fig.tight_layout()
 camera = Camera(fig)
-for t in progressbar(range(anikit.FRAMES)):
+for t in progressbar(range(frakit.frames)):
 
     m = delta_matrix(x)
     m_norm = expand(norm(m, 2))
@@ -60,4 +61,4 @@ for t in progressbar(range(anikit.FRAMES)):
 
 animation = camera.animate()
 # plt.show()
-animation.save(f'particle/prey/prey-pradator{c}.mp4', fps=anikit.FPS, dpi=200)
+animation.save(f'particle/prey/prey-pradator{c}.mp4', fps=frakit.FPS, dpi=200)
