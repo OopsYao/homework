@@ -3,14 +3,15 @@ import numpy as np
 import matplotlib.pyplot as plt
 from celluloid import Camera
 from progressbar import progressbar
-import anikit
-from utils import expand
+from anikit import FrameKit, ShootPlot
+from utils import expand, vector_rescale
 import seaborn as sns
 
 N = 800
-T = 100
-dt = T / anikit.FRAMES
-g = .025 # Gravity
+T = 201
+frakit = FrameKit(T, 10)
+dt = frakit.dt
+g = .5  # Gravity
 
 
 def F(r, n=2):
@@ -43,19 +44,19 @@ def dist_plot(x):
     sns.distplot(x, hist=False, kde=True, bins=int(180/5), rug=True)
 
 
-def evolve(t, barr_type=None):
+def evolve(f, barr_type=None):
     global Xt, x, v
     # Bessel process
-    # Xt += dB[t] + dt / (2 * Xt)
+    # Xt += dB[f] + dt / (2 * Xt)
     # Brownian motion
-    Xt += dB[t]
+    Xt += dB[f]
     x += v * dt
 
     r = delta_matrix(x)
-    r_norm = np.expand_dims(norm(r), axis=-1)
+    r_norm = expand(norm(r))
 
     with np.errstate(divide='ignore', invalid='ignore'):
-        v = np.nansum(F(r_norm) / r_norm * r, axis=1) / N + (0, -g) + Xt / 15
+        v = np.nansum(F(r_norm) / r_norm * r, axis=1) / N + (0, -g)
 
     if barr_type != None:
         # if vertical position is around barrier
@@ -72,20 +73,30 @@ def evolve(t, barr_type=None):
             v = np.where(expand(bdd[:, 1]), 0, v)
 
 
-fig, ax = plt.subplots()
-ax.axis('off')
-fig.tight_layout()
-camera = Camera(fig)
-for t in progressbar(range(anikit.FRAMES)):
-    evolve(t, 'absorbing')
-    ax.plot([-1, 1], [barrier, barrier])
-    # ax.quiver(*(x.T), *(v.T) / 100, color='black', width=.003)
-    ax.scatter(*(x.T), color='black')
-    camera.snap()
+# fig, ax = plt.subplots()
+# ax.axis('off')
+# fig.tight_layout()
+# camera = Camera(fig)
 
-# ax.quiver(*(x.T), *(v.T) / 100, color='black', width=.003)
-animation = camera.animate(interval=2)
-on_barrier = barrier_dist(x)
-dist_plot(on_barrier)
+shoot = [0, 10, 20, 30, 40, 400]
+for f in progressbar(range(frakit.frames)):
+    evolve(f, 'absorbing')
+    t = f * dt
+    # ax.scatter(*(x.T), color='black')
+
+    for s in shoot:
+        if abs(t - s) < dt / 2:
+            sp = ShootPlot()
+            sp.text(f't={t}')
+            ax = sp.ax
+            ax.plot([-1, 1], [barrier, barrier], color='blue')
+            ax.quiver(*(x.T), *(vector_rescale(v).T), color='black', scale=50)
+            # plt.figure()
+            # plt.scatter(*(x.T), color='black')
+    # camera.snap()
+
+# animation = camera.animate(interval=2)
+# on_barrier = barrier_dist(x)
+# dist_plot(on_barrier)
 plt.show()
-# animation.save('particle/swarm/absorbing.mp4', fps=anikit.FPS, dpi=200)
+# animation.save('particle/swarm/absorbing.mp4', fps=frakit.FPS, dpi=200)

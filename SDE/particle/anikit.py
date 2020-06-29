@@ -1,8 +1,9 @@
 import matplotlib as mpl
+import matplotlib.pyplot as plt
 import numpy as np
 import unittest
 
-mpl.rcParams['figure.figsize'] = [6.0, 6.0]
+# mpl.rcParams['figure.figsize'] = [6.0, 6.0]
 mpl.rcParams['lines.markersize'] = np.sqrt(5)
 
 REAL_TIME = 6
@@ -39,6 +40,32 @@ class FrameKit:
             if self.dt > DEFAULT_DT:
                 self.dt = DEFAULT_DT
                 self.frames = int(T / self.dt)
+
+
+class ShootPlot():
+    def __init__(self):
+        self.fig, self.ax = plt.subplots()
+        self.fig.tight_layout()
+        self.ax.axis('equal')
+        # self.ax.set_aspect('equal', 'box')
+        # self.ax.set_aspect('equal')
+
+        # Hide the right and top spines
+        self.ax.spines['right'].set_visible(False)
+        self.ax.spines['top'].set_visible(False)
+
+        # Only show ticks on the left and bottom spines
+        self.ax.yaxis.set_ticks_position('left')
+        self.ax.xaxis.set_ticks_position('bottom')
+
+    def text(self, str):
+        self.ax.text(.1, .9, str,
+                     horizontalalignment='center',
+                     verticalalignment='center',
+                     transform=self.ax.transAxes,
+                     bbox=dict(boxstyle="round",
+                               ec=(0, 0, 0, 0),
+                               fc=(.9, .9, .9, .7)))
 
 
 class TestSuite(unittest.TestCase):
