@@ -68,8 +68,8 @@ for t in progressbar(range(anikit.FRAMES)):
     x += vx * dt
     y += vy * dt
 
-animation = camera.animate()
-# plt.show()
+animation = camera.animate(interval=0)
+plt.show()
 print('Saving to mp4...', end='\r')
 animation.save(f'particle/two-species{b[2]}.mp4', dpi=200, fps=anikit.FPS)
 print('Done!')

@@ -30,6 +30,12 @@ def expand(ndarray):
     return np.expand_dims(ndarray, axis=-1)
 
 
+def vector_rescale(v):
+    r = norm(v)
+    with np.errstate(divide='ignore'):
+        v = v * expand(np.log(1 + r) / r)
+        return np.nan_to_num(v)
+
 class TestSuite(unittest.TestCase):
 
     def test_delta_matrix(self):
@@ -61,7 +67,7 @@ class TestSuite(unittest.TestCase):
 
         asp = np.array([
             [1 / 4, 1, 1 / 2],
-            [1 / 6, 7 / 12, 1 / 3 ]
+            [1 / 6, 7 / 12, 1 / 3]
         ]) * np.pi
         npt.assert_almost_equal(blind(v, x), np.cos(asp))
 
