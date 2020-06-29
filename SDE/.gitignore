@@ -4,4 +4,4 @@ wrapper.pdf
 __pycache__
 
 # Particle video file
-particle/*.mp4
+particle/*/*.mp4

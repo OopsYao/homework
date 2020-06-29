@@ -8,16 +8,23 @@ import anikit
 
 D = 2  # Dimension
 N = 400  # Number of prey
+N2 = 3
 
 # Randomly initial distribution
-x = np.random.rand(N, D)
-z = np.random.rand(D)
+x = 2* np.random.rand(N, D)
+# z = np.random.rand(N2, D)
+z = np.array([
+    [-0.1, 0.5],
+    [2.1, 0.7],
+    [-0.1, 0.3],
+])
 
 a = 1
 b = 0.2
 p = 3
+q = 2
 c = 2.5
-T = 20
+T = 10
 dt = T / anikit.FRAMES
 
 fig, ax = plt.subplots()
@@ -35,9 +42,11 @@ for t in progressbar(range(anikit.FRAMES)):
     # axis 1 is the dummy varible
     social = social.sum(axis=1) / N
 
-    zx = x - np.tile(z, (N, 1))
-    vx = social + b * zx / expand(norm(zx, 2))
-    vz = c / N * (zx / expand(norm(zx, p))).sum(axis=0)
+    zx = delta_matrix(x, z)
+    zx_norm = expand(norm(zx))
+
+    vx = social + b * (zx / (zx_norm ** q)).sum(axis=1)
+    vz = c / N * (zx / (zx_norm ** p)).sum(axis=0)
 
     # ax.quiver(*(x.T), *(vx.T))
     # ax.quiver(*(z.T), *(vz.T), color='blue', width=.003)
@@ -51,4 +60,4 @@ for t in progressbar(range(anikit.FRAMES)):
 
 animation = camera.animate()
 # plt.show()
-animation.save(f'particle/prey-pradator{c}.mp4', fps=anikit.FPS, dpi=200)
+animation.save(f'particle/prey/prey-pradator{c}.mp4', fps=anikit.FPS, dpi=200)
