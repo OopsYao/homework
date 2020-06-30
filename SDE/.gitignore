@@ -5,3 +5,5 @@ __pycache__
 
 # Particle video file
 particle/*/*.mp4
+particle/swarm
+particle/prey

@@ -32,7 +32,7 @@ def expand(ndarray):
 
 def vector_rescale(v):
     r = norm(v)
-    with np.errstate(divide='ignore'):
+    with np.errstate(divide='ignore', invalid='ignore'):
         # v = v * expand(np.log(1 + r) / r)
         v = v / expand(r)
         return np.nan_to_num(v)

@@ -6,12 +6,19 @@ from progressbar import progressbar
 from anikit import FrameKit, ShootPlot
 from utils import expand, vector_rescale
 import seaborn as sns
+from scipy.stats import norm as sci_norm
+
+STO = False
+BARR = None
+
+print('sto' if STO else 'det', BARR)
 
 N = 800
-T = 201
-frakit = FrameKit(T, 10)
+T = 401
+frakit = FrameKit(T)
 dt = frakit.dt
-g = .5  # Gravity
+g = .1  # Gravity
+mu = .05  # Random scale parameter
 
 
 def F(r, n=2):
@@ -31,17 +38,19 @@ eps = 0.03
 
 
 def barrier_dist(x):
-    bdd = np.abs(x - barrier) < [0, eps]
-    bdd = expand(bdd.sum(axis=-1))
+    bdd = np.abs(x - barrier) < [- np.inf, eps]
+    bdd = expand(bdd[:, 1])
     # [[nan, nan], [x, barrier], ...]
-    y = np.where(bdd, x, np.nan)[:, 0]
-    dist = y[~np.isnan(y)]
+    h = np.where(bdd, x, np.nan)[:, 0]
+    # Drop nan
+    dist = h[~np.isnan(h)]
     return dist
 
 
 def dist_plot(x):
     plt.figure()
-    sns.distplot(x, hist=False, kde=True, bins=int(180/5), rug=True)
+    sns.distplot(x, hist=False, kde=True, bins=int(
+        180/5), rug=True, fit=sci_norm)
 
 
 def evolve(f, barr_type=None):
@@ -56,13 +65,20 @@ def evolve(f, barr_type=None):
     r_norm = expand(norm(r))
 
     with np.errstate(divide='ignore', invalid='ignore'):
-        v = np.nansum(F(r_norm) / r_norm * r, axis=1) / N + (0, -g)
+        v = np.nansum(F(r_norm) / r_norm * r, axis=1) / N
+        if barr_type != None:
+            v += (0, -g)
+        if STO:
+            v += mu * Xt
 
     if barr_type != None:
         # if vertical position is around barrier
         bdd = np.abs(x - barrier) < [-np.inf, eps]
 
         if barr_type == 'reflect':
+            # bdd = x < (-np.inf, barrier)
+            v = np.where(bdd, -v, v)
+        elif barr_type == 'reflect-gate':
             # Reflect barrier
             # Exclude those on gate
             ongate = expand(np.abs(x[:, 0] - gate) < .1)
@@ -78,25 +94,44 @@ def evolve(f, barr_type=None):
 # fig.tight_layout()
 # camera = Camera(fig)
 
-shoot = [0, 10, 20, 30, 40, 400]
+shoot = [0, 10, 20, 30, 40, 100, 400, 1000, 5000]
 for f in progressbar(range(frakit.frames)):
-    evolve(f, 'absorbing')
+    evolve(f, BARR)
+
     t = f * dt
-    # ax.scatter(*(x.T), color='black')
 
     for s in shoot:
         if abs(t - s) < dt / 2:
             sp = ShootPlot()
             sp.text(f't={t}')
             ax = sp.ax
-            ax.plot([-1, 1], [barrier, barrier], color='blue')
-            ax.quiver(*(x.T), *(vector_rescale(v).T), color='black', scale=50)
-            # plt.figure()
-            # plt.scatter(*(x.T), color='black')
+            ax.quiver(*(x.T), *(vector_rescale(v).T),
+                      color='black', scale=50, pivot='mid')
+
+            if BARR != None:
+                xmin, xmax = ax.get_xlim()
+                if BARR == 'reflect-gate':
+                    ax.plot([xmin, -.1], [barrier, barrier],
+                            color='blue', label='barrier')
+                    ax.plot([.1, xmax], [barrier, barrier], color='blue')
+                else:
+                    ax.plot([xmin, xmax], [barrier, barrier],
+                            color='blue', label='barrier')
+                ax.legend()
+
+            ax.axis('off')
+            ax.set_aspect('equal', 'box')
+            sp.fig.savefig(
+                f'particle/swarm/{"sto.mu=" + str(mu) if STO else "det"}{"-" + BARR + ".g=" + str(g) if BARR != None else ""}.t={s}.pdf')
+    if abs(t - max(shoot)) < dt / 2 and BARR == 'absorbing':
+        plt.figure()
+        on_barrier = barrier_dist(x)
+        dist_plot(on_barrier)
+        plt.savefig(
+            f'particle/swarm/{"sto.mu=" + str(mu) if STO else "det"}-barrier-dist.t={t}.pdf')
+
     # camera.snap()
 
 # animation = camera.animate(interval=2)
-# on_barrier = barrier_dist(x)
-# dist_plot(on_barrier)
-plt.show()
+# plt.show()
 # animation.save('particle/swarm/absorbing.mp4', fps=frakit.FPS, dpi=200)
