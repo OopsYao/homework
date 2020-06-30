@@ -95,7 +95,7 @@ def evolve(f, barr_type=None):
 # ax.axis('off')
 # fig.tight_layout()
 # camera = Camera(fig)
-shoot = [0, 10, 20, 30, 40, 100, 400, 1000, 5000]
+shoot = [0, 10, 20, 30, 40, 50, 100, 400, 1000, 5000]
 for f in progressbar(range(frakit.frames)):
     evolve(f, BARR)
 
@@ -109,16 +109,16 @@ for f in progressbar(range(frakit.frames)):
             ax.quiver(*(x.T), *(vector_rescale(v).T),
                       color='black', scale=50, pivot='mid')
 
-            # if BARR != None:
-            #     xmin, xmax = ax.get_xlim()
-            #     if BARR == 'reflect-gate':
-            #         ax.plot([xmin, -.1], [barrier, barrier],
-            #                 color='blue', label='barrier')
-            #         ax.plot([.1, xmax], [barrier, barrier], color='blue')
-            #     else:
-            #         ax.plot([xmin, xmax], [barrier, barrier],
-            #                 color='blue', label='barrier')
-            #     ax.legend()
+            if BARR != None:
+                xmin, xmax = ax.get_xlim()
+                if BARR == 'reflect-gate':
+                    ax.plot([xmin, -.1], [barrier, barrier],
+                            color='blue', label='barrier')
+                    ax.plot([.1, xmax], [barrier, barrier], color='blue')
+                else:
+                    ax.plot([xmin, xmax], [barrier, barrier],
+                            color='blue', label='barrier')
+                ax.legend()
 
             ax.axis('off')
             ax.set_aspect('equal', 'box')
