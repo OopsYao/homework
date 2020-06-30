@@ -32,23 +32,43 @@ ax.axis('off')
 fig.tight_layout()
 camera = Camera(fig)
 sp = ShootPlot()
+
+
+def prey_social(r):
+    with np.errstate(divide='ignore', invalid='ignore'):
+        return 1 / r - a * r
+
+
+def prey_predator(r):
+    return N2 * b / (r ** (q - 1))
+
+
+def predator_social(r):
+    return 0
+
+
+def predator_prey(r):
+    return - c / (r ** (p - 1))
+
+
 for f in progressbar(range(frakit.frames)):
     t = f * dt
 
-    m = delta_matrix(x)
-    m_norm = expand(norm(m, 2))
+    xx = delta_matrix(x)
+    xx_norm = expand(norm(xx))
+
+    xz = delta_matrix(x, z)
+    zx = - np.moveaxis(xz, 0, 1)
+
+    xz_norm = norm(xz)
+    zx_norm = xz_norm.T
+    xz_norm = expand(xz_norm)
+    zx_norm = expand(zx_norm)
+
     with np.errstate(divide='ignore', invalid='ignore'):
-        social = (1 / m_norm - a) * m
-        social = np.nan_to_num(social)
-
-    # axis 1 is the dummy varible
-    social = social.sum(axis=1) / N
-
-    zx = delta_matrix(x, z)
-    zx_norm = expand(norm(zx))
-
-    vx = social + b * (zx / (zx_norm ** q)).sum(axis=1)
-    vz = c / N * (zx / (zx_norm ** p)).sum(axis=0)
+        vx = np.nansum(prey_social(xx_norm) / xx_norm * xx, 1) / N + \
+            np.nansum(prey_predator(xz_norm) / xz_norm * xz, 1) / N2
+        vz = np.nansum(predator_prey(zx_norm) / zx_norm * zx, 1) / N
 
     for s in range(T):
         if abs(t - s) < dt / 2:
@@ -59,7 +79,7 @@ for f in progressbar(range(frakit.frames)):
             sp.text('t=%.2f' % t)
             sp.fig.savefig(f'particle/prey/c={c}.t={t}.pdf')
             sp.ax.cla()
-        
+
     # camera.snap()
     x += vx * dt
     z += vz * dt
