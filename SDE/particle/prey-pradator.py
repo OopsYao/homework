@@ -4,6 +4,7 @@ from progressbar import progressbar
 from celluloid import Camera
 from utils import delta_matrix, norm, expand
 from anikit import FrameKit, ShootPlot
+from forcelib import Morse, hyper_tang
 
 D = 2  # Dimension
 N = 400  # Number of prey
@@ -18,11 +19,6 @@ z = np.array([
     [-0.1, 0.3],
 ])
 
-a = 1
-b = 0.2
-p = 3
-q = 2
-c = 1.5
 T = 41
 frakit = FrameKit(T)
 dt = frakit.dt
@@ -34,13 +30,27 @@ camera = Camera(fig)
 sp = ShootPlot()
 
 
+c = .8
+
+
+def tanh_force(r):
+    a = 10
+    b = .1
+    return np.tanh(a * (1 - r)) + b
+
+
 def prey_social(r):
+    a = 1
     with np.errstate(divide='ignore', invalid='ignore'):
         return 1 / r - a * r
+    # return tanh_force(r)
 
 
 def prey_predator(r):
-    return N2 * b / (r ** (q - 1))
+    # b = 0.2
+    # q = 2
+    # return N2 * b / (r ** (q - 1))
+    return N2 * Morse(r, 1, 1, .1, 1)
 
 
 def predator_social(r):
@@ -48,7 +58,9 @@ def predator_social(r):
 
 
 def predator_prey(r):
-    return - c / (r ** (p - 1))
+    # p = 3
+    # return - c / (r ** (p - 1))
+    return - c * hyper_tang(r, 1, 1)
 
 
 for f in progressbar(range(frakit.frames)):
@@ -56,6 +68,9 @@ for f in progressbar(range(frakit.frames)):
 
     xx = delta_matrix(x)
     xx_norm = expand(norm(xx))
+
+    zz = delta_matrix(z)
+    zz_norm = expand(norm(zz))
 
     xz = delta_matrix(x, z)
     zx = - np.moveaxis(xz, 0, 1)
@@ -68,7 +83,8 @@ for f in progressbar(range(frakit.frames)):
     with np.errstate(divide='ignore', invalid='ignore'):
         vx = np.nansum(prey_social(xx_norm) / xx_norm * xx, 1) / N + \
             np.nansum(prey_predator(xz_norm) / xz_norm * xz, 1) / N2
-        vz = np.nansum(predator_prey(zx_norm) / zx_norm * zx, 1) / N
+        vz = np.nansum(predator_social(zz_norm) / zz_norm * zz, 1) / N2 + \
+            np.nansum(predator_prey(zx_norm) / zx_norm * zx, 1) / N
 
     for s in range(T):
         if abs(t - s) < dt / 2:
