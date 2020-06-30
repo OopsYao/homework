@@ -1,10 +1,9 @@
 import numpy as np
-from numpy import linalg as LA
 import matplotlib.pyplot as plt
 from progressbar import progressbar
 from celluloid import Camera
 from utils import delta_matrix, norm, expand
-from anikit import FrameKit
+from anikit import FrameKit, ShootPlot
 
 D = 2  # Dimension
 N = 400  # Number of prey
@@ -23,8 +22,8 @@ a = 1
 b = 0.2
 p = 3
 q = 2
-c = 2.5
-T = 20
+c = 1.5
+T = 41
 frakit = FrameKit(T)
 dt = frakit.dt
 
@@ -32,7 +31,9 @@ fig, ax = plt.subplots()
 ax.axis('off')
 fig.tight_layout()
 camera = Camera(fig)
-for t in progressbar(range(frakit.frames)):
+sp = ShootPlot()
+for f in progressbar(range(frakit.frames)):
+    t = f * dt
 
     m = delta_matrix(x)
     m_norm = expand(norm(m, 2))
@@ -49,16 +50,20 @@ for t in progressbar(range(frakit.frames)):
     vx = social + b * (zx / (zx_norm ** q)).sum(axis=1)
     vz = c / N * (zx / (zx_norm ** p)).sum(axis=0)
 
-    # ax.quiver(*(x.T), *(vx.T))
-    # ax.quiver(*(z.T), *(vz.T), color='blue', width=.003)
-    ax.scatter(*(x.T), color='black')
-    ax.scatter(*(z.T), color='blue')
-    plt.text(-.5, 1.5, 't=%.2f' % (t * dt))
-    camera.snap()
-
+    for s in range(T):
+        if abs(t - s) < dt / 2:
+            sp.quiver(x, vx)
+            sp.quiver(z, vz, color='blue')
+            sp.ax.axis('off')
+            sp.ax.set_aspect('equal', 'box')
+            sp.text('t=%.2f' % t)
+            sp.fig.savefig(f'particle/prey/c={c}.t={t}.pdf')
+            sp.ax.cla()
+        
+    # camera.snap()
     x += vx * dt
     z += vz * dt
 
-animation = camera.animate()
+# animation = camera.animate()
 # plt.show()
-animation.save(f'particle/prey/prey-pradator{c}.mp4', fps=frakit.FPS, dpi=200)
+# animation.save(f'particle/prey/prey-pradator{c}.mp4', fps=frakit.FPS, dpi=200)

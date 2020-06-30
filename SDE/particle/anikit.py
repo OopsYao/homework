@@ -2,6 +2,7 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 import numpy as np
 import unittest
+from utils import vector_rescale
 
 # mpl.rcParams['figure.figsize'] = [6.0, 6.0]
 mpl.rcParams['lines.markersize'] = np.sqrt(5)
@@ -47,6 +48,7 @@ class ShootPlot():
         self.fig, self.ax = plt.subplots()
         self.fig.tight_layout()
         self.ax.axis('equal')
+        self.ax.axis('off')
         # self.ax.set_aspect('equal', 'box')
         # self.ax.set_aspect('equal')
 
@@ -57,6 +59,10 @@ class ShootPlot():
         # Only show ticks on the left and bottom spines
         self.ax.yaxis.set_ticks_position('left')
         self.ax.xaxis.set_ticks_position('bottom')
+
+    def quiver(self, x, v, color='black'):
+        self.ax.quiver(*(x.T), *(vector_rescale(v).T),
+                       color=color, scale=50, pivot='mid')
 
     def text(self, str):
         self.ax.text(.1, .9, str,
