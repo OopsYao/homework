@@ -73,27 +73,28 @@ def evolve(f, barr_type=None):
 
     if barr_type != None:
         # if vertical position is around barrier
-        bdd = np.abs(x - barrier) < [-np.inf, eps]
+        x_next = x + v * dt
+        # Invalide: cross the barrier
+        invalid = (x_next[:, 1] < barrier) ^ (x[:, 1] < barrier)
 
-        if barr_type == 'reflect':
-            # bdd = x < (-np.inf, barrier)
-            v = np.where(bdd, -v, v)
-        elif barr_type == 'reflect-gate':
-            # Reflect barrier
-            # Exclude those on gate
-            ongate = expand(np.abs(x[:, 0] - gate) < .1)
-            bdd = ~ongate & bdd
-            v = np.where(bdd, -v, v)
-        else:
+        if barr_type == 'absorbing':
             # Absorbing barrier
-            v = np.where(expand(bdd[:, 1]), 0, v)
+            v = np.where(expand(invalid), 0, v)
+        else:
+            # Reflecting barrier
+            if barr_type == 'reflect-gate':
+                # Exclude those via gate: if before or after are within gate
+                exclude = (np.abs(x_next[:, 0] - gate)
+                           < .1) | (np.abs(x[:, 0] - gate) < .1)
+                invalid &= ~ exclude
+            bdd = np.hstack((np.tile(False, (N, 1)), expand(invalid)))
+            v = np.where(bdd, -v, v)
 
 
 # fig, ax = plt.subplots()
 # ax.axis('off')
 # fig.tight_layout()
 # camera = Camera(fig)
-
 shoot = [0, 10, 20, 30, 40, 100, 400, 1000, 5000]
 for f in progressbar(range(frakit.frames)):
     evolve(f, BARR)
@@ -108,16 +109,16 @@ for f in progressbar(range(frakit.frames)):
             ax.quiver(*(x.T), *(vector_rescale(v).T),
                       color='black', scale=50, pivot='mid')
 
-            if BARR != None:
-                xmin, xmax = ax.get_xlim()
-                if BARR == 'reflect-gate':
-                    ax.plot([xmin, -.1], [barrier, barrier],
-                            color='blue', label='barrier')
-                    ax.plot([.1, xmax], [barrier, barrier], color='blue')
-                else:
-                    ax.plot([xmin, xmax], [barrier, barrier],
-                            color='blue', label='barrier')
-                ax.legend()
+            # if BARR != None:
+            #     xmin, xmax = ax.get_xlim()
+            #     if BARR == 'reflect-gate':
+            #         ax.plot([xmin, -.1], [barrier, barrier],
+            #                 color='blue', label='barrier')
+            #         ax.plot([.1, xmax], [barrier, barrier], color='blue')
+            #     else:
+            #         ax.plot([xmin, xmax], [barrier, barrier],
+            #                 color='blue', label='barrier')
+            #     ax.legend()
 
             ax.axis('off')
             ax.set_aspect('equal', 'box')
