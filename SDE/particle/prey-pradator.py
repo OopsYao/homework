@@ -8,15 +8,15 @@ from forcelib import Morse, hyper_tang
 
 D = 2  # Dimension
 N = 400  # Number of prey
-N2 = 3
+N2 = 1
 
 # Randomly initial distribution
 x = 2 * np.random.rand(N, D)
 # z = np.random.rand(N2, D)
 z = np.array([
     [-0.1, 0.5],
-    [2.1, 0.7],
-    [-0.1, 0.3],
+    # [2.1, 0.7],
+    # [-0.1, 0.3],
 ])
 
 T = 41
@@ -30,27 +30,21 @@ camera = Camera(fig)
 sp = ShootPlot()
 
 
-c = .8
-
-
-def tanh_force(r):
-    a = 10
-    b = .1
-    return np.tanh(a * (1 - r)) + b
+c = 1.5
 
 
 def prey_social(r):
     a = 1
     with np.errstate(divide='ignore', invalid='ignore'):
         return 1 / r - a * r
-    # return tanh_force(r)
+    # return Morse(r, 1, 1, .1, 1)
 
 
 def prey_predator(r):
     # b = 0.2
     # q = 2
     # return N2 * b / (r ** (q - 1))
-    return N2 * Morse(r, 1, 1, .1, 1)
+    return N2 * hyper_tang(r, 1, 1.5) / 2
 
 
 def predator_social(r):
@@ -93,7 +87,7 @@ for f in progressbar(range(frakit.frames)):
             sp.ax.axis('off')
             sp.ax.set_aspect('equal', 'box')
             sp.text('t=%.2f' % t)
-            sp.fig.savefig(f'particle/prey/c={c}.t={t}.pdf')
+            sp.fig.savefig(f'particle/prey/one-predator.c={c}.t={t}.pdf')
             sp.ax.cla()
 
     # camera.snap()
