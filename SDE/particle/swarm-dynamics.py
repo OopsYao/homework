@@ -8,8 +8,7 @@ from utils import expand, vector_rescale
 import seaborn as sns
 from scipy.stats import norm as sci_norm
 
-STO = False
-BARR = 'absorbing'
+BARR = None
 
 
 N = 800
@@ -82,26 +81,25 @@ class NumCounter:
         return self._t_series, self._n_series
 
 
-def evolve(f, barr_type=None):
-    global Xt, x, v
-    # Bessel process
-    # Xt += dB[f] + dt / (2 * Xt)
-    # Brownian motion
+def evolve(f):
+    global x, v
+
     x += v * dt
-    if STO:
-        x += mu * dB[f] * (v != 0)
 
     r = delta_matrix(x)
     r_norm = expand(norm(r))
 
+    # social force in v
     with np.errstate(divide='ignore', invalid='ignore'):
         v = np.nansum(F(r_norm) / r_norm * r, axis=1) / N
-        if barr_type != None:
+        if BARR != None:
             v += get_repulsion(x, 'gravity')
 
-    if barr_type != None:
+    dx = v * dt + mu * dB[f]
+    # Fix barr velocity (to fix the position)
+    if BARR != None:
         # if vertical position is around barrier
-        x_next = x + v * dt
+        x_next = x + dx
         # Invalid: cross the barrier
         invalid = (x_next[:, 1] < barrier) ^ (x[:, 1] < barrier)
         # # barrier with eps
@@ -110,9 +108,9 @@ def evolve(f, barr_type=None):
         # invalid = (pr > barrier + eps) & (nx < barrier)
         # invalid |= (pr < barrier) & (nx > barrier)
 
-        if barr_type == 'absorbing':
+        if BARR == 'absorbing':
             # Absorbing barrier
-            v = np.where(expand(invalid), 0, v)
+            dx *= ~ expand(invalid)
         else:
             # Reflecting barrier
             if barr_type == 'reflect-gate':
@@ -121,7 +119,11 @@ def evolve(f, barr_type=None):
                            2) | (np.abs(x[:, 0] - gate) < gate_len / 2)
                 invalid &= ~ exclude
             bdd = np.hstack((np.tile(False, (N, 1)), expand(invalid)))
-            v = np.where(bdd, -4 * v, v)
+            # v = np.where(bdd, -4 * v, v)
+            dx = np.where(bdd, - dx, dx)
+
+    # This is the real velocity at time t (contain social force and random term, i.e., dx = v * dt)
+    v = dx / dt
 
 
 sp = ShootPlot()
@@ -167,7 +169,7 @@ def trial():
                     sp.quiver(x, v)
                     # draw_barr(sp.ax)
                     sp.fig.savefig(
-                        f'particle/swarm/{"sto.mu=" + str(mu) if STO else "det"}{"-" + BARR if BARR != None else ""}.t={s}.pdf')
+                        f'particle/swarm/{BARR}-mu={mu}.a={a}.T={T}.t={s}.pdf')
                     sp.clear()
 
     else:
@@ -176,19 +178,19 @@ def trial():
             on_barrier = barrier_dist(x)
             dist_plot(on_barrier)
             plt.savefig(
-                f'particle/swarm/{"sto.mu=" + str(mu) if STO else "det"}-barrier-dist.t={t}.pdf')
+                f'particle/swarm/barrier-dist.mu={mu}.t={t}.pdf')
 
     if VIDEO_MODE:
         ani = sp.animate()
         ani.save(
-            f'particle/swarm/{"sto.mu=" + str(mu) if STO else "det"}-{BARR}.a={a}.mp4', fps=frakit.FPS, dpi=200)
+            f'particle/swarm/{BARR}-mu={mu}.a={a}.T={T}.mp4', fps=frakit.FPS, dpi=200)
 
 
 if __name__ == '__main__':
-    BARR = None
-    mu = 0
-    T = 15
-    a = .1
+    BARR = 'reflect'
+    mu = 0.05
+    T = 31
+    a = 1
     VIDEO_MODE = True
     print(f'mu={mu}, a={a}, T={T}, {BARR} barrier')
     trial()
