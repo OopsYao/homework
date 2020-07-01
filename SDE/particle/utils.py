@@ -14,9 +14,9 @@ def delta_matrix(x, y=None):
     return np.moveaxis(x, 0, 1) - y
 
 
-def norm(matrix, p=1):
+def norm(matrix, p=1, keepdims=False):
     # Norm along the last axis
-    norm_matrix = LA.norm(matrix, axis=-1) ** p
+    norm_matrix = LA.norm(matrix, axis=-1, keepdims=keepdims) ** p
     return norm_matrix
 
 
@@ -36,6 +36,7 @@ def vector_rescale(v):
         # v = v * expand(np.log(1 + r) / r)
         v = v / expand(r)
         return np.nan_to_num(v)
+
 
 class TestSuite(unittest.TestCase):
 
