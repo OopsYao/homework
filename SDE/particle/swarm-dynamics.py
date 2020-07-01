@@ -36,7 +36,7 @@ v = 0
 
 barrier = -1.1
 gate = 0
-eps = 0.03
+eps = 0.05
 gate_len = .2
 
 
@@ -93,7 +93,7 @@ def evolve(f):
     with np.errstate(divide='ignore', invalid='ignore'):
         v = np.nansum(F(r_norm) / r_norm * r, axis=1) / N
         if BARR != None:
-            v += get_repulsion(x, 'gravity')
+            v += get_repulsion(x, 'fire' if 'gate' in BARR else 'gravity')
 
     dx = v * dt + mu * dB[f]
     # Fix barr velocity (to fix the position)
@@ -101,12 +101,12 @@ def evolve(f):
         # if vertical position is around barrier
         x_next = x + dx
         # Invalid: cross the barrier
-        invalid = (x_next[:, 1] < barrier) ^ (x[:, 1] < barrier)
-        # # barrier with eps
-        # pr = x[:, 1]
-        # nx = x_next[:, 1]
-        # invalid = (pr > barrier + eps) & (nx < barrier)
-        # invalid |= (pr < barrier) & (nx > barrier)
+        # invalid = (x_next[:, 1] < barrier) ^ (x[:, 1] < barrier)
+        # barrier with eps (vague judgement, not so strict)
+        pr = x[:, 1]
+        nx = x_next[:, 1]
+        invalid = (pr > barrier) & (nx < barrier + eps)
+        invalid |= (pr < barrier) & (nx > barrier - eps)
 
         if 'absorb' in BARR:
             # Absorbing barrier
@@ -187,9 +187,10 @@ def trial():
 
 
 if __name__ == '__main__':
-    BARR = 'reflect'
+    BARR = 'absorbing'
     mu = 0.05
-    T = 31
+    # mu = 0
+    T = 20
     a = 1
     VIDEO_MODE = True
     print(f'mu={mu}, a={a}, T={T}, {BARR} barrier')
