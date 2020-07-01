@@ -14,30 +14,30 @@ BARR = None
 N = 800
 T = 31
 g = .1  # Gravity
-mu = .05  # Random scale parameter
+mu = .03  # Random scale parameter
 a = 1
 
 
 def init():
-    global frakit, dt, dB
+    global frakit, dt, dB, x, v
     frakit = FrameKit(T)
     dt = frakit.dt
     dB = np.random.randn(int(T / dt), N, 2) * (dt ** .5)
     dB = np.vstack((np.tile(0, (1, N, 2)), dB))
 
+    # Initial [-1, 1] x [-1, 1]
+    x = 2 * np.random.rand(N, 2) - np.tile(1, (N, 2))
+    v = 0
 
 def F(r, a=1, n=2):
     return a / r ** (n - 1) - r
 
 
-# Initial [-1, 1] x [-1, 1]
-x = 2 * np.random.rand(N, 2) - np.tile(1, (N, 2))
-v = 0
 
 barrier = -1.1
 gate = 0
 eps = 0.05
-gate_len = .2
+gate_len = .4
 
 
 def barrier_dist(x):
@@ -68,17 +68,17 @@ def get_repulsion(x, form='gravity'):
 class NumCounter:
     def __init__(self):
         self._t_series = []
-        self._n_series = []
+        self._r_series = []
 
-    def _num_inside(self, x):
-        return (x[:, 1] >= barrier).sum()
+    def _ratio_outside(self, x):
+        return (x[:, 1] <= barrier).sum() / N
 
-    def add(self, t, n):
+    def add(self, t, x):
         self._t_series.append(t)
-        self._n_series.append(n)
+        self._r_series.append(self._ratio_outside(x))
 
     def export(self):
-        return self._t_series, self._n_series
+        return self._t_series, self._r_series
 
 
 def evolve(f):
@@ -133,7 +133,8 @@ shoot = [0, 10, 20, 30, 40, 50, 100, 400, 1000, 5000]
 
 def draw_barr(ax):
     if BARR != None:
-        xmin, xmax = ax.get_xlim()
+        # xmin, xmax = ax.get_xlim()
+        xmin, xmax = -2, 2
         if 'gate' in BARR:
             ax.plot([xmin, gate - gate_len / 2], [barrier, barrier],
                     color='blue', label='barrier')
@@ -146,28 +147,27 @@ def draw_barr(ax):
         # ax.legend(loc='upper right')
 
 
-def trial():
+def trial(counter=None):
     init()
     for f in progressbar(range(frakit.frames)):
         evolve(f)
 
         t = f * dt
+        if 'gate' in BARR and counter != None:
+            counter.add(t, x)
+            continue
 
         if VIDEO_MODE:
             sp.scatter(x)
             sp.text('t=%.2f' % t)
-            # draw_barr(sp.ax)
-            # xmin, xmax = sp.ax.get_xlim()
-            if BARR != None:
-                sp.ax.plot([-2, 2], [barrier, barrier],
-                           color='blue', label='barrier')
+            draw_barr(sp.ax)
             sp.snap()
         else:
             for s in shoot:
                 if abs(t - s) < dt / 2:
                     sp.text(f't={t}')
                     sp.quiver(x, v)
-                    # draw_barr(sp.ax)
+                    draw_barr(sp.ax)
                     sp.fig.savefig(
                         f'particle/swarm/{BARR}-mu={mu}.a={a}.T={T}.t={s}.pdf')
                     sp.clear()
@@ -183,15 +183,29 @@ def trial():
     if VIDEO_MODE:
         ani = sp.animate()
         ani.save(
-            f'particle/swarm/{BARR}-mu={mu}.a={a}.T={T}.mp4', fps=frakit.FPS, dpi=200)
+            f'particle/swarm/{BARR}{"=" + str(gate_len) if "gate" in BARR else ""}-mu={mu}.a={a}.T={T}.mp4', fps=frakit.FPS, dpi=200)
 
 
 if __name__ == '__main__':
-    BARR = 'absorbing'
-    mu = 0.05
-    # mu = 0
-    T = 20
+    BARR = 'gate'
+    # mu = 0.05
+    mu = 0
+    T = 23
     a = 1
     VIDEO_MODE = True
-    print(f'mu={mu}, a={a}, T={T}, {BARR} barrier')
+    gate_len = .6
+    print(f'mu={mu}, a={a}, T={T}, {BARR} barrier{", gatelen" + str(gate_len) if "gate" in BARR else ""}')
     trial()
+
+    # Escape rate study
+    # plt.figure()
+    # for l in [.2, .4, .6]:
+    #     gate_len = l
+    #     print(f'mu={mu}, a={a}, T={T}, {BARR} barrier{", gatelen" + str(gate_len) if "gate" in BARR else ""}')
+    #     counter = NumCounter()
+    #     trial(counter)
+    #     plt.plot(*counter.export(), label=f'gate width={gate_len}')
+    # plt.legend()
+    # plt.xlabel('t')
+    # plt.ylabel('Escape rate')
+    # plt.show()
