@@ -108,12 +108,12 @@ def evolve(f):
         # invalid = (pr > barrier + eps) & (nx < barrier)
         # invalid |= (pr < barrier) & (nx > barrier)
 
-        if BARR == 'absorbing':
+        if 'absorb' in BARR:
             # Absorbing barrier
             dx *= ~ expand(invalid)
         else:
             # Reflecting barrier
-            if barr_type == 'reflect-gate':
+            if 'gate' in BARR:
                 # Exclude those via gate: if before or after are within gate
                 exclude = (np.abs(x_next[:, 0] - gate) < gate_len /
                            2) | (np.abs(x[:, 0] - gate) < gate_len / 2)
@@ -134,7 +134,7 @@ shoot = [0, 10, 20, 30, 40, 50, 100, 400, 1000, 5000]
 def draw_barr(ax):
     if BARR != None:
         xmin, xmax = ax.get_xlim()
-        if BARR == 'reflect-gate':
+        if 'gate' in BARR:
             ax.plot([xmin, gate - gate_len / 2], [barrier, barrier],
                     color='blue', label='barrier')
             ax.plot([gate + gate_len / 2, xmax],
@@ -149,7 +149,7 @@ def draw_barr(ax):
 def trial():
     init()
     for f in progressbar(range(frakit.frames)):
-        evolve(f, BARR)
+        evolve(f)
 
         t = f * dt
 
