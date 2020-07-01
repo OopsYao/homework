@@ -11,15 +11,20 @@ from scipy.stats import norm as sci_norm
 STO = False
 BARR = 'absorbing'
 
-print('sto' if STO else 'det', BARR)
 
 N = 800
 T = 31
-frakit = FrameKit(T)
-dt = frakit.dt
 g = .1  # Gravity
 mu = .05  # Random scale parameter
 a = 1
+
+
+def init():
+    global frakit, dt, dB
+    frakit = FrameKit(T)
+    dt = frakit.dt
+    dB = np.random.randn(int(T / dt), N, 2) * (dt ** .5)
+    dB = np.vstack((np.tile(0, (1, N, 2)), dB))
 
 
 def F(r, a=1, n=2):
@@ -29,11 +34,6 @@ def F(r, a=1, n=2):
 # Initial [-1, 1] x [-1, 1]
 x = 2 * np.random.rand(N, 2) - np.tile(1, (N, 2))
 v = 0
-dB = np.random.randn(int(T / dt), N, 2) * (dt ** .5)
-dB = np.vstack((np.tile(0, (1, N, 2)), dB))
-Bt = np.cumsum(dB, axis=0)
-# Stochastic process initial value
-Xt = np.tile(.1, (N, 2))
 
 barrier = -1.1
 gate = 0
@@ -144,38 +144,51 @@ def draw_barr(ax):
         # ax.legend(loc='upper right')
 
 
-for f in progressbar(range(frakit.frames)):
-    evolve(f, BARR)
+def trial():
+    init()
+    for f in progressbar(range(frakit.frames)):
+        evolve(f, BARR)
 
-    t = f * dt
+        t = f * dt
+
+        if VIDEO_MODE:
+            sp.scatter(x)
+            sp.text('t=%.2f' % t)
+            # draw_barr(sp.ax)
+            # xmin, xmax = sp.ax.get_xlim()
+            if BARR != None:
+                sp.ax.plot([-2, 2], [barrier, barrier],
+                           color='blue', label='barrier')
+            sp.snap()
+        else:
+            for s in shoot:
+                if abs(t - s) < dt / 2:
+                    sp.text(f't={t}')
+                    sp.quiver(x, v)
+                    # draw_barr(sp.ax)
+                    sp.fig.savefig(
+                        f'particle/swarm/{"sto.mu=" + str(mu) if STO else "det"}{"-" + BARR if BARR != None else ""}.t={s}.pdf')
+                    sp.clear()
+
+    else:
+        if BARR == 'absorbing' and t == 50:
+            plt.figure()
+            on_barrier = barrier_dist(x)
+            dist_plot(on_barrier)
+            plt.savefig(
+                f'particle/swarm/{"sto.mu=" + str(mu) if STO else "det"}-barrier-dist.t={t}.pdf')
 
     if VIDEO_MODE:
-        sp.scatter(x)
-        sp.text('t=%.2f' % t)
-        # draw_barr(sp.ax)
-        # xmin, xmax = sp.ax.get_xlim()
-        sp.ax.plot([-2, 2], [barrier, barrier],
-                   color='blue', label='barrier')
-        sp.snap()
-    else:
-        for s in shoot:
-            if abs(t - s) < dt / 2:
-                sp.text(f't={t}')
-                sp.quiver(x, v)
-                # draw_barr(sp.ax)
-                sp.fig.savefig(
-                    f'particle/swarm/{"sto.mu=" + str(mu) if STO else "det"}{"-" + BARR if BARR != None else ""}.t={s}.pdf')
-                sp.clear()
+        ani = sp.animate()
+        ani.save(
+            f'particle/swarm/{"sto.mu=" + str(mu) if STO else "det"}-{BARR}.a={a}.mp4', fps=frakit.FPS, dpi=200)
 
-else:
-    if BARR == 'absorbing' and t == 50:
-        plt.figure()
-        on_barrier = barrier_dist(x)
-        dist_plot(on_barrier)
-        plt.savefig(
-            f'particle/swarm/{"sto.mu=" + str(mu) if STO else "det"}-barrier-dist.t={t}.pdf')
 
-if VIDEO_MODE:
-    ani = sp.animate()
-    ani.save(
-        f'particle/swarm/{"sto.mu=" + str(mu) if STO else "det"}-{BARR}.a={a}.mp4', fps=frakit.FPS, dpi=200)
+if __name__ == '__main__':
+    BARR = None
+    mu = 0
+    T = 15
+    a = .1
+    VIDEO_MODE = True
+    print(f'mu={mu}, a={a}, T={T}, {BARR} barrier')
+    trial()
