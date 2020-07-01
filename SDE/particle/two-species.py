@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 from matplotlib.figure import figaspect
 from celluloid import Camera
 import anikit
+from anikit import ShootPlot, FrameKit
 
 
 def V_neg_prime(s):
@@ -15,7 +16,7 @@ def V_neg_prime(s):
 
 
 a = [10, 10, 2]
-b = [.1, .1, .3]
+b = [.1, .1, -.7]
 
 
 def g(s, i):
@@ -29,19 +30,21 @@ def g(s, i):
 N1 = 200
 N2 = 200
 mu = N2 / N1
-T = 300
-dt = T / anikit.FRAMES
+T = 301
+frakit = FrameKit(T)
+dt = frakit.dt
 
 x = np.random.rand(N1, 2)
 y = np.random.rand(N2, 2)
-w, h = figaspect(1.)
-fig, ax = plt.subplots(figsize=(w, h))
+# w, h = figaspect(1.)
+# fig, ax = plt.subplots(figsize=(w, h))
 
-ax.axis('off')
-fig.tight_layout()
-camera = Camera(fig)
+# ax.axis('off')
+# fig.tight_layout()
+# camera = Camera(fig)
 
-for t in progressbar(range(anikit.FRAMES)):
+sp = ShootPlot()
+for t in progressbar(range(frakit.frames)):
     mx = delta_matrix(x)
     my = delta_matrix(y)
     mxy = delta_matrix(x, y)
@@ -60,17 +63,28 @@ for t in progressbar(range(anikit.FRAMES)):
     vx /= N1
     vy /= N1
 
-    plt.scatter(*(x.T), s=5, color='purple')
-    plt.scatter(*(y.T), s=5, color='black')
-    ax.text(-.1, 1.1, 't=%.1f' % (t * dt))
-    camera.snap()
+    for s in [0, 10, 20, 30, 40, 50, 60, 70, 100, 150, 200, 300, 600, 1000]:
+        if abs(t * dt - s) < dt / 2:
+            sp.quiver(x, vx, color='purple')
+            sp.quiver(y, vy)
+            sp.text('t=%.1f' % (t * dt))
+            sp.ax.set_aspect('equal', 'box')
+            sp.ax.axis('off')
+            sp.fig.savefig(
+                f'particle/two/b3={b[2]}.mu={mu}.t={t * dt}.pdf')
+            sp.ax.cla()
+
+    # plt.scatter(*(x.T), s=5, color='purple')
+    # plt.scatter(*(y.T), s=5, color='black')
+    # ax.text(-.1, 1.1, 't=%.1f' % (t * dt))
+    # camera.snap()
 
     x += vx * dt
     y += vy * dt
 
-animation = camera.animate(interval=0)
-plt.show()
-print('Saving to mp4...', end='\r')
-animation.save(f'particle/two-species{b[2]}.mp4', dpi=200, fps=anikit.FPS)
-print('Done!')
-print('\033[F\033[K')
+# animation = camera.animate(interval=0)
+# plt.show()
+# print('Saving to mp4...', end='\r')
+# animation.save(f'particle/two-species{b[2]}.mp4', dpi=200, fps=frakit.FPS)
+# print('Done!')
+# print('\033[F\033[K')

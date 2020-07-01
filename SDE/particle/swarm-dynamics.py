@@ -9,12 +9,12 @@ import seaborn as sns
 from scipy.stats import norm as sci_norm
 
 STO = False
-BARR = None
+BARR = 'absorbing'
 
 print('sto' if STO else 'det', BARR)
 
 N = 800
-T = 401
+T = 51
 frakit = FrameKit(T)
 dt = frakit.dt
 g = .1  # Gravity
@@ -124,12 +124,13 @@ for f in progressbar(range(frakit.frames)):
             ax.set_aspect('equal', 'box')
             sp.fig.savefig(
                 f'particle/swarm/{"sto.mu=" + str(mu) if STO else "det"}{"-" + BARR + ".g=" + str(g) if BARR != None else ""}.t={s}.pdf')
-    if abs(t - max(shoot)) < dt / 2 and BARR == 'absorbing':
-        plt.figure()
-        on_barrier = barrier_dist(x)
-        dist_plot(on_barrier)
-        plt.savefig(
-            f'particle/swarm/{"sto.mu=" + str(mu) if STO else "det"}-barrier-dist.t={t}.pdf')
+
+            if BARR == 'absorbing' and t == 50:
+                plt.figure()
+                on_barrier = barrier_dist(x)
+                dist_plot(on_barrier)
+                plt.savefig(
+                    f'particle/swarm/{"sto.mu=" + str(mu) if STO else "det"}-barrier-dist.t={t}.pdf')
 
     # camera.snap()
 

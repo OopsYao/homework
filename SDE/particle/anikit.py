@@ -47,10 +47,9 @@ class ShootPlot():
     def __init__(self):
         self.fig, self.ax = plt.subplots()
         self.fig.tight_layout()
-        self.ax.axis('equal')
+        # self.ax.axis('equal')
         self.ax.axis('off')
-        # self.ax.set_aspect('equal', 'box')
-        # self.ax.set_aspect('equal')
+        self.ax.set_aspect('equal', 'box')
 
         # Hide the right and top spines
         self.ax.spines['right'].set_visible(False)
