@@ -9,26 +9,28 @@ import seaborn as sns
 from scipy.stats import norm as sci_norm
 
 STO = False
-BARR = 'absorbing'
+BARR = None
 
 print('sto' if STO else 'det', BARR)
 
 N = 800
-T = 51
+T = 16
 frakit = FrameKit(T)
 dt = frakit.dt
 g = .1  # Gravity
-mu = .05  # Random scale parameter
+mu = .01  # Random scale parameter
+a = 2
 
 
-def F(r, n=2):
-    return 1 / r ** (n - 1) - r
+def F(r, a=1, n=2):
+    return a / r ** (n - 1) - r
 
 
 # Initial [-1, 1] x [-1, 1]
 x = 2 * np.random.rand(N, 2) - np.tile(1, (N, 2))
 v = 0
 dB = np.random.randn(int(T / dt), N, 2) * (dt ** .5)
+dB = np.vstack((dB, np.tile(0, (1, N, 2))))
 # Stochastic process initial value
 Xt = np.tile(.1, (N, 2))
 
@@ -58,8 +60,9 @@ def evolve(f, barr_type=None):
     # Bessel process
     # Xt += dB[f] + dt / (2 * Xt)
     # Brownian motion
-    Xt += dB[f]
     x += v * dt
+    if STO:
+        x += dB[f]
 
     r = delta_matrix(x)
     r_norm = expand(norm(r))
@@ -68,8 +71,6 @@ def evolve(f, barr_type=None):
         v = np.nansum(F(r_norm) / r_norm * r, axis=1) / N
         if barr_type != None:
             v += (0, -g)
-        if STO:
-            v += mu * Xt
 
     if barr_type != None:
         # if vertical position is around barrier
@@ -95,44 +96,57 @@ def evolve(f, barr_type=None):
 # ax.axis('off')
 # fig.tight_layout()
 # camera = Camera(fig)
+
+sp = ShootPlot()
+VIDEO_MODE = False
 shoot = [0, 10, 20, 30, 40, 50, 100, 400, 1000, 5000]
+
+
+def draw_barr(ax):
+    if BARR != None:
+        xmin, xmax = ax.get_xlim()
+        if BARR == 'reflect-gate':
+            ax.plot([xmin, -.1], [barrier, barrier],
+                    color='blue', label='barrier')
+            ax.plot([.1, xmax], [barrier, barrier], color='blue')
+        else:
+            ax.plot([xmin, xmax], [barrier, barrier],
+                    color='blue', label='barrier')
+        ax.legend()
+
+
 for f in progressbar(range(frakit.frames)):
     evolve(f, BARR)
 
     t = f * dt
 
-    for s in shoot:
-        if abs(t - s) < dt / 2:
-            sp = ShootPlot()
-            sp.text(f't={t}')
-            ax = sp.ax
-            ax.quiver(*(x.T), *(vector_rescale(v).T),
-                      color='black', scale=50, pivot='mid')
+    if VIDEO_MODE:
+        sp.text('t=%.2f' % t)
+        sp.ax.scatter(*(x.T), color='black')
+        draw_barr(sp.ax)
+        sp.snap()
+    else:
+        for s in shoot:
+            if abs(t - s) < dt / 2:
+                sp.text(f't={t}')
+                sp.quiver(x, v)
+                draw_barr(sp.ax)
+                sp.fig.savefig(
+                    f'particle/swarm/{"sto.mu=" + str(mu) if STO else "det"}{"-" + BARR if BARR != None else ""}.t={s}.pdf')
+                sp.clear()
 
-            if BARR != None:
-                xmin, xmax = ax.get_xlim()
-                if BARR == 'reflect-gate':
-                    ax.plot([xmin, -.1], [barrier, barrier],
-                            color='blue', label='barrier')
-                    ax.plot([.1, xmax], [barrier, barrier], color='blue')
-                else:
-                    ax.plot([xmin, xmax], [barrier, barrier],
-                            color='blue', label='barrier')
-                ax.legend()
+else:
+    if BARR == 'absorbing' and t == 50:
+        plt.figure()
+        on_barrier = barrier_dist(x)
+        dist_plot(on_barrier)
+        plt.savefig(
+            f'particle/swarm/{"sto.mu=" + str(mu) if STO else "det"}-barrier-dist.t={t}.pdf')
 
-            ax.axis('off')
-            ax.set_aspect('equal', 'box')
-            sp.fig.savefig(
-                f'particle/swarm/{"sto.mu=" + str(mu) if STO else "det"}{"-" + BARR + ".g=" + str(g) if BARR != None else ""}.t={s}.pdf')
-
-            if BARR == 'absorbing' and t == 50:
-                plt.figure()
-                on_barrier = barrier_dist(x)
-                dist_plot(on_barrier)
-                plt.savefig(
-                    f'particle/swarm/{"sto.mu=" + str(mu) if STO else "det"}-barrier-dist.t={t}.pdf')
-
-    # camera.snap()
+ani = sp.animate()
+ani.save(
+    f'particle/swarm/{"sto.mu=" + str(mu) if STO else "det"}-nobarrier.a={a}.mp4', fps=frakit.FPS, dpi=200)
+# camera.snap()
 
 # animation = camera.animate(interval=2)
 # plt.show()

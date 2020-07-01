@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import unittest
 from utils import vector_rescale
+from celluloid import Camera
 
 # mpl.rcParams['figure.figsize'] = [6.0, 6.0]
 mpl.rcParams['lines.markersize'] = np.sqrt(5)
@@ -47,6 +48,26 @@ class ShootPlot():
     def __init__(self):
         self.fig, self.ax = plt.subplots()
         self.fig.tight_layout()
+
+        self._ax_init()
+
+        self._camera = Camera(self.fig)
+
+    def quiver(self, x, v, color='black'):
+        self.ax.quiver(*(x.T), *(vector_rescale(v).T),
+                       color=color, scale=50)
+        self._ax_init()
+
+    def text(self, str):
+        self.ax.text(.1, .9, str,
+                     horizontalalignment='center',
+                     verticalalignment='center',
+                     transform=self.ax.transAxes,
+                     bbox=dict(boxstyle="round",
+                               ec=(0, 0, 0, 0),
+                               fc=(.9, .9, .9, .7)))
+
+    def _ax_init(self):
         # self.ax.axis('equal')
         self.ax.axis('off')
         self.ax.set_aspect('equal', 'box')
@@ -59,18 +80,18 @@ class ShootPlot():
         self.ax.yaxis.set_ticks_position('left')
         self.ax.xaxis.set_ticks_position('bottom')
 
-    def quiver(self, x, v, color='black'):
-        self.ax.quiver(*(x.T), *(vector_rescale(v).T),
-                       color=color, scale=50, pivot='mid')
+    def scatter(self, x, *args, **kwargs):
+        self.ax.scatter(*(x.T), args, kwargs)
+        self._ax_init()
 
-    def text(self, str):
-        self.ax.text(.1, .9, str,
-                     horizontalalignment='center',
-                     verticalalignment='center',
-                     transform=self.ax.transAxes,
-                     bbox=dict(boxstyle="round",
-                               ec=(0, 0, 0, 0),
-                               fc=(.9, .9, .9, .7)))
+    def clear(self):
+        self.ax.cla()
+
+    def snap(self):
+        self._camera.snap()
+
+    def animate(self):
+        return self._camera.animate()
 
 
 class TestSuite(unittest.TestCase):
