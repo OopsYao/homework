@@ -112,8 +112,8 @@ class ShootPlot():
                                pad=0.6, sep=2, linekw=dict(color="blue"),)
         self.ax.add_artist(ob)
 
-    def scatter(self, x, *args, **kwargs):
-        self.ax.scatter(*(x.T), color='black')
+    def scatter(self, x, color='black', *args, **kwargs):
+        self.ax.scatter((x.T)[0], (x.T)[1], color=color)
         self._ax_init()
 
     def clear(self):

@@ -29,9 +29,9 @@ def init():
     x = 2 * np.random.rand(N, 2) - np.tile(1, (N, 2))
     v = 0
 
+
 def F(r, a=1, n=2):
     return a / r ** (n - 1) - r
-
 
 
 barrier = -1.1
@@ -153,7 +153,7 @@ def trial(counter=None):
         evolve(f)
 
         t = f * dt
-        if 'gate' in BARR and counter != None:
+        if BARR != None and 'gate' in BARR and counter != None:
             counter.add(t, x)
             continue
 
@@ -183,18 +183,18 @@ def trial(counter=None):
     if VIDEO_MODE:
         ani = sp.animate()
         ani.save(
-            f'particle/swarm/{BARR}{"=" + str(gate_len) if "gate" in BARR else ""}-mu={mu}.a={a}.T={T}.mp4', fps=frakit.FPS, dpi=200)
+            f'particle/swarm/{BARR}{"=" + str(gate_len) if BARR != None and "gate" in BARR else ""}-mu={mu}.a={a}.T={T}.mp4', fps=frakit.FPS, dpi=200)
 
 
 if __name__ == '__main__':
-    BARR = 'gate'
+    BARR = None
     # mu = 0.05
     mu = 0
-    T = 23
-    a = 1
+    T = 16
+    a = 10
     VIDEO_MODE = True
-    gate_len = .6
-    print(f'mu={mu}, a={a}, T={T}, {BARR} barrier{", gatelen" + str(gate_len) if "gate" in BARR else ""}')
+    gate_len = .2
+    print(f'mu={mu}, a={a}, T={T}, {BARR} barrier{", gatelen" + str(gate_len) if BARR != None and "gate" in BARR else ""}')
     trial()
 
     # Escape rate study
