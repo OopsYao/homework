@@ -16,7 +16,7 @@ x = 2 * np.random.rand(N, D)
 z = np.array([
     [-0.1, 0.5],
     [2.1, 0.7],
-    # [-0.1, 0.3],
+    [-0.1, 0.3],
 ])
 N2 = len(z)
 
@@ -32,7 +32,7 @@ sp = ShootPlot()
 camera = Camera(sp.fig)
 
 
-c = 100
+c = 10
 VIDEO_MODE = True
 DRY_RUN = False
 
@@ -52,9 +52,9 @@ def prey_predator(r):
 
 
 def predator_social(r):
-    return 0
+    # return 0
     # return Morse(r, 1, 1, .1, 1)
-    # return hyper_tang(r, 1, .7)
+    return hyper_tang(r, 1, .7)
 
 
 def predator_prey(r):
