@@ -17,6 +17,7 @@
     \forloop{x}{1}{\value{x}<13}{
         {
         \chapter{Homework \arabic{x}}
+        \setcounter{problem}{0}
         \subimport{hw\arabic{x}}{main}
         }
     }

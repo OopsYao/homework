@@ -1,4 +1,13 @@
     \problem
+    \begin{question}
+    Use the heat equation method to find
+    \begin{enumerate}[label=(\alph*)]
+    \item $\int_0^T e^{-\frac{\lambda^2 t}{2}\pm \lambda W_t}dW_t$;
+    \item $\int_0^T e^{\frac{\lambda^2 t}{2}} \cos (\lambda W_t)dW_t$;
+    \item $\int_0^T e^{\frac{\lambda^2 t}{2}} \sin (\lambda W_t)dW_t$.
+    \end{enumerate}
+    Remark: well, the solutions have been given in lecture, but I would like yo to work on them from the opposite, say, we assume that $\varphi$ satisfies $\frac{\partial \varphi}{\partial x}=e^{-\frac{\lambda^2 t}{2}+\lambda x}$ and the inverse heat equation, then...
+    \end{question}
     \begin{subproblem}[(\alph*)]
         \item
         We know from heat equation method that
@@ -106,6 +115,15 @@
     \end{subproblem}
 
     \problem
+    \begin{question}
+        Solve the following stochastic differential equations and your solution $X_t$ should be in the form of an integrated It\^o diffusion, (e.g. $\int_0^t W_sds$ which is just a Riemann integral and easy to calculate), but not stochastic integral (e.g., $\int_0^t W_sdW_s$, which is an It\^o integral and, in general, hard to calculate).  Indeed, this is the main idea/motivation of the stochastic integration by parts.
+
+        (a)  $dX_t=dt+W_tdW_t, X_0=1$;
+
+        (b) $dX_t=(W_t-1)dt+W_t^2dW_t$, $X_0=0$;
+
+        (c)  $dX_t=(W_t+3t^2)dt+tdW_t$, $X_0=0$;
+    \end{question}
     \begin{subproblem}[(\alph*)]
         \item
         We have from It\^o's lemma that
@@ -141,6 +159,12 @@
     \end{subproblem}
 
     \problem
+    \begin{question}
+        Evaluate the stochastic integral
+        \[\int_a^b \frac{\partial f(t,W_t)}{\partial W_t}dW_t\]
+        if $f(t,x)$ satisfies the following ``heat equation with a source"
+        \[\frac{\partial f}{\partial t}+\frac{1}{2}\frac{\partial ^2f}{\partial x^2}=G(t).\]
+    \end{question}
     We have from integration by parts that
     \[\begin{aligned}
         \int_a^b\frac{\partial f(t,W_t)}{\partial W_t}\diff W_t
@@ -154,6 +178,28 @@
     \[\frac{\partial f}{\partial t}+\frac{1}{2}\frac{\partial^2 f}{\partial x^2}=G(t)\]
 
     \problem
+    \begin{question}
+        Let us try to apply the heat equation to the following problem 
+        \[\int_0^T W_t^2dW_t.\]
+        To this end, we observe that $f(x)=x^2$ and therefore we would like to find $f(t,x)$ that satisfies
+        \begin{equation}
+        \left\{
+        \begin{array}{ll}
+        \frac{\partial \varphi}{\partial x}=x^2,&\\
+        \frac{\partial \varphi}{\partial t}+\frac{1}{2}\frac{\partial^2 \varphi}{\partial x^2}=0.&
+        \end{array}
+        \right.
+        \end{equation}
+        From the first equation we find that $f$ takes the form
+        \[\varphi(t,x)=\frac{x^3}{3}+c(t),\]
+        where $c(t)$ is a function of variable $t$.  Substituting this form into the heat equation gives us $c'(t)=-x$ hence
+        \[c(t)=-tx+c_0,\]
+        $c_0$ being an arbitrary constant.  However, this is impossible because $c(t)$ should only be a function of $t$ as we have mentioned above.  This tends to suggest that the heat equation method does not apply anymore.
+
+        It is worth noting that the heat equation method indeed works after minor modifications.  To illustrate how, let us write
+        \[\int_0^T W_t^2dW_t=\int_0^T W_t^2+g(t)dW_t-\int_0^T g(t)dW_t\]
+        for some $g(t)$ to be determined.  Since $\int_0^T g(t)dW_t$ is Wiener and its distraction is known, we only need to evaluate $\int_0^T W_t^2+g(t)dW_t$.  Now finish this by using heat equation method for this new integral.
+    \end{question}
     The corresponded heat equation is
     \[\left\{\begin{aligned}
         &\frac{\partial\varphi}{\partial t}
@@ -178,6 +224,9 @@
     =\frac{W_T^3}{3}-\int_0^TW_t\diff t\]
 
     \problem
+    \begin{question}
+        Find $E(W_t^2e^{W_t})$ and $E(W_te^{kW_t})$ with $k\in\mathbb R$.
+    \end{question}
     Denote $X_t:=W_t\e^{kW_t}$, then we have from It\^o's lemma that
     \[\begin{aligned}
         \diff X_t&=(1+kW_t)\e^{kW_t}\diff W_t
@@ -215,6 +264,9 @@
     \[E(W_t^2\e^{W_t})=E(Y_t)=t(1+t)\e^{\frac{t}{2}}\]
 
     \problem
+    \begin{question}
+        Show that $E(W_t^{2k})=\frac{(2k)!}{2^kk!}t^k$ and $E(W_t^{2k+1})=0$;
+    \end{question}
     \begin{proof}
         It is easy to see that $E(W_t^{2k+1})=0$ due to the symmetric distribution
         of $W_t$. And to show the even order case, we argue by mathmatical induction.
@@ -247,6 +299,9 @@
     \end{proof}
 
     \problem
+    \begin{question}
+        Find $E(\sin (t+\sigma W_t))$ and $E(\cos (t+\sigma W_t))$ with $\sigma \in\mathbb R$.
+    \end{question}
     \newcommand{\X}{\boldsymbol Z}
     Denote $X_t:=\sin(t+\sigma W_t),Y_t:=\cos(t+\sigma W_t)$,
     then we have from It\^o's lemma that
@@ -309,6 +364,12 @@
     i.e., $E(\sin(t+\sigma W_t))=\sin t,E(\cos(t+\sigma W_t))=\cos t$.
 
     \problem
+    \begin{question}
+        Use the SDE of Brownian motion to show that for $a\neq 0$
+        \[\int_{-\infty}^\infty xe^{-ax^2+bx}dx=\sqrt{\frac{\pi}{a}}\Big(\frac{b}{2a}\Big)e^\frac{b^2}{4a}\]
+        and
+        \[\int_{-\infty}^\infty x^2e^{-ax^2+bx}dx=\sqrt{\frac{\pi}{a}}\frac{1}{2a}\Big(1+\frac{b^2}{2a}\Big)e^\frac{b^2}{4a}.\]
+    \end{question}
     \begin{proof}
         We hold the truth that
         \[\begin{aligned}

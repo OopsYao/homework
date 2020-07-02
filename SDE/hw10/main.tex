@@ -1,6 +1,18 @@
 \newcommand{\arcsinh}{\mathrm{arcsinh}}
 
     \problem
+    \begin{question}
+        Let us revisit the following SDE with general drift and volatility
+        \begin{equation}\label{generalSDE}
+        \left\{
+        \begin{array}{ll}
+        dX_t=a(t,X_t)dt+b(t,X_t)dW_t,& t\geq0,\\
+        X_0=x_0, x_0\in\mathbb R,
+        \end{array}
+        \right.
+        \end{equation}
+        where $a$ and $b$ are continuous functions which are uniformly Lipschitz continuous in $x$ with Lipschitz coefficient $K$ as described in class.  Prove that (\ref{generalSDE}) exists at least one solution $X_t$ by the successive approximation approach.
+    \end{question}
     \begin{proof}
         Consider the solution in a given interval $[0,T]$.
         For any fixed but arbitrary $\omega\in\Omega$,
@@ -70,6 +82,17 @@
     \end{proof}
 
     \problem
+    \begin{question}
+        Let $X_t$ satisfy the SDE
+        \[dX_t=f(t,X_t)dt+g(t)X_tdW_t,\]
+        $f$ and $g$ being continuous deterministic functions.  Verify that the integrating factor
+        \[I(t)=e^{-\int_0^t g(s)dW_s+\frac{1}{2}\int_0^tg^2(s)ds},\]
+        satisfies
+        \[d(I_tX_t)=I_tf(t,X_t).\]
+        Remark: In order to understand the integrating factor of SDE, it is better that you understand that of the ODE first (and also how to derive this integrating factor as we have illustrated in class).  Then in light of this identity, $Y_t=I_tX_t$ satisfies
+        \[dY_t=I_tf(t,Y_t/I_t)dt\]
+        which (might) can be solved by the methods we know.  It seems necessary to mention that, sometimes there are several methods that one can solve a SDE and sometimes not, therefore it is necessary for you to know how to tackle one problem from different approaches in order to better understandings.
+    \end{question}
     Denote
     \[A_t:=-\int_0^tg(s)\diff W_s+\frac{1}{2}\int_0^tg^2(s)\diff s\]
     then $A_t$ is an It\^o process as
@@ -93,6 +116,15 @@
     \end{aligned}\]
 
     \problem
+    \begin{question}
+        Solve the following SDEs by the method of integrating factors
+        \begin{enumerate}[label=(\alph*)]
+        \item $dX_t=\alpha X_tdW_t$;
+        \item $dX_t=rdt+\alpha X_tdW_t$;
+        \item $dX_t=X_tdt+\alpha X_tdW_t$;
+        \item $dX_t=\frac{1}{X_t}dt+\alpha X_tdW_t$, $X_0>0$.
+        \end{enumerate}
+    \end{question}
     \begin{subproblem}[(\alph*)]
         \item
         We have that
@@ -146,6 +178,9 @@
     \end{subproblem}
 
     \problem
+    \begin{question}
+        Plot the blow-up solution for SDE; 
+    \end{question}
     Here we plot the graph of a path of $X_t=1/(1-W_t)$, see \cref{fig:blowup}.
     \begin{figure}[h]
         \centering
@@ -159,6 +194,17 @@
     }
 
     \problem
+    \begin{question}
+        The following SDE serves as a counter--example of non-existence of solution after when $W_t$ hits $1$
+        \[dX_t=X_t^3dt+X_t^2dW_t, X_0=1.\] 
+        i) verify that $X_t=\frac{1}{1-W_t}$ is the solution for $t\in(0,1)$, i.e., it is a solution and it is unique.  Remark: the solution does not exist after $T$, but it exists and is unique before this time;
+        
+        ii) solve the SDE from scratch paper to get the solution above; hint: try $X_t=f(t,W_t)$; 
+        
+        iii) test that the solution blow-up by either solving the SDE numerically or plotting the explicit solution above; you might want to record the first time that $W_t$ hits $1$, i.e., the blow-up time; 
+        
+        iv) note that the time $T$ above is also a random variable now that it depends on the path of $W_t$.  It is called the stopping time as we shall see later in the class.  Can you numerically give an estimate of the mean of $T$?  One way you can do is to, for each trial, record the first time $X_t$ surpass a predetermined large value, say $X_t=10^{16}$.  Then find the average of all the trials;
+    \end{question}
     \begin{subproblem}[\roman*)]
         \item
         We have from Taylor's expansion that
@@ -234,6 +280,13 @@
     \end{subproblem}
 
     \problem
+    \begin{question}
+        Consider the SDE
+        \[dX_t=\Big(\sqrt{1+X^2_t}+\frac{1}{2}X_t\Big)dt+\sqrt{1+X^2_t}dW_t, X_0=x_0.\]
+        (a).  Show that there exists a unique solution to this problem;
+
+        (b).  Solve this SDE.
+    \end{question}
     \begin{subproblem}
         \item
         \begin{proof}
@@ -298,6 +351,22 @@
     \end{subproblem}
     
     \problem
+    \begin{question}
+        Use any method you like to solve \emph{two} of the following SDEs with initial condition $X_0$ for each problem, unless otherwise stated
+        \begin{enumerate}[label=(\alph*)]
+        \item $dX_t=(4X_t-1)dt+2dW_t$;
+        \item $dX_t=(3X_t-2)dt+e^{3t}dW_t$;
+        \item $dX_t=(X_t+1)dt+e^t W_t dW_t$;
+        \item $dX_t=(4X_t+t)dt+e^{4t}dW_t$;
+        \item $t^3 dX_t=(3t^2X_t+t)dt+t^6dW_t$, $X_1=0$;
+        \item $dX_t=(\frac{1}{2}X_t+t)dt+e^t \sin W_tdW_t$;
+        \item $dX_t=-X_tdt+e^{-t}dW_t$;
+        \item $dX_t=X_t^3dt+X_t^2dW_t$, $X_0=1$;
+        \item $dX_t=\Big(\sqrt{X^2_t+1}+\frac{1}{2}X_t\Big)dt+\sqrt{X^2_t+1}dW_t$;
+        \item $d(\ln r_t)=(\theta(t)-\alpha(t)\ln r_t)dt+\sigma(t)dW_t$;  this is called Black--Karasinki Model
+        \end{enumerate}
+        Remark: It is strongly recommended that you apply all the methods learnt to work out each problem if applicable, though not required for the HW; moreover, it is also a good practice for you to evaluate the mean and variance with or without solving the SDEs; find the covariance and distribution etc....
+    \end{question}
     \begin{subproblem}
         \item[(a)]
         We rewrite the SDE as

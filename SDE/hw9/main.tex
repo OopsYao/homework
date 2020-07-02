@@ -1,4 +1,9 @@
     \problem
+    \begin{question}
+        Check if the following equation is exact
+        \[dX_t=(2tW_t^3+3t^2(1+W_t))dt+(3t^2W_t^2+1)dW_t, X_0=0.\]
+        Then find the solution of this SDE.
+    \end{question}
     Denote the drift pattern $a(t,W_t)=2tx^3+3t^2(1+x)$
     and the volatility pattern $b(t,x)=3t^2x^2+1$, then
     it easy to see that
@@ -23,6 +28,19 @@
     \[X_t=X_0+f(s,W_s)|_0^t=t^2W_t^3+W_t+t^3\]
 
     \problem
+    \begin{question}
+        Solve any two of the following SDEs; comply the initial conditions if necessary.
+
+        (2.1) $dX_t=(W_t+3t^2)dt+tdW_t$;
+
+        (2.2) $e^{-2t}dX_t=(1+2W_t^2)dt+2W_tdW_t$;
+
+        (2.3) $dX_t=(1+W_t)dt+(t+2W_t)dW_t,X_0=0$;
+
+        (2.4) $dX_t=\Big(1+\frac{1}{2\sqrt t}W_t\Big)dt+\sqrt t dW_t, X_1=0$;
+
+        (2.5) $t^3dX_t=(3t^2X_t+t)dt+t^6dW_t,X_1=0$;
+    \end{question}
     \begin{subproblem}[(2.\arabic*)]
         \item
         Denote $f(t,x)$ is a function that satisfies the following
@@ -54,6 +72,24 @@
     \end{subproblem}
 
     \problem
+    \begin{question}
+        Solve any three of the following linear SDEs
+        (3.1) $dX_t=(2-X_t)dt+e^{-t}W_tdW_t$;
+
+        (3.2) $dX_t=(1+\frac{X_t}{2})dt+e^t\cos W_tdW_t$;
+
+        (3.3) $dX_t=(4X_t-1)dt+2dW_t$;
+
+        (3.4) $dX_t=(3X_t-2)dt+e^{3t}dW_t$;
+
+        (3.5) $dX_t=(X_t+1)dt+e^t X_tdW_t$;
+
+        (3.6) $dX_t=(4X_t+t)dt+e^{4t}dW_t$;
+
+        (3.7) $dX_t=(\frac{1}{2}X_t+t)dt+e^t\sin W_tdW_t$;
+
+        (3.8) $dX_t=-X_tdt+e^{-t}dW_t$;
+    \end{question}
     \begin{subproblem}[(3.\arabic*)]
         \item
         We rewrite the equation as
@@ -114,6 +150,11 @@
     \end{subproblem}
 
     \problem
+    \begin{question}
+        Use the method of variation of parameter to solve for
+        \[dX_t=\alpha X_t dW_t, X_0=1.\]
+        Finish what we did by choosing $X_t=e^{\alpha W_t+C(t,W_t)}$ instead.
+    \end{question}
     Denote $f(t,W_t)=\alpha W_t+C(t,W_t)$, then we have from
     It\^o's lemma directly that
     \[\begin{aligned}
@@ -142,6 +183,36 @@
     where $C$ is an arbitrary constant.
 
     \problem
+    \begin{question}
+        Let us revisit the Ornstein--Uhlenbeck process $X_t$ that satisfies
+        \begin{equation}\label{OU}
+        dX_t=(r-\mu X_t)dt+\sigma dW_t,X_0=x_0.
+        \end{equation}
+        We know well the explicit solution, and the associated distribution.  If one wants to apply this process to describe a time series, then it leaves the parameters $r,\mu$ and $\sigma$ to be estimated or calibrated.
+
+        To see how to implement this maneuver, let us consider the ODE with $\sigma=0$ set zero above.  Suppose we have a series of 100 observed data $\{x_i\}$ with time step size $\Delta t$
+        \[X_{t_1}=x_1,X_{t_2}=x_2,...,X_{t_{100}}=x_{100}.\]
+        The forward Euler discretization of the ODE reads
+        \[\frac{X_{t+1}-X_{t}}{\Delta t}=r-\mu X_{t}\]
+        and leads us to the iteration out of $X_0=x_0$
+        \[\hat X_{t+1}=\hat X_{t}+(r-\mu \hat X_{t})\Delta t.\]
+        Now we collect two data series: the theoretical $\{\hat X_t\}$ and the observed $\{x_{t}\}$, and parameters $r,\mu$ to be evaluated.  This can be done by minimizing the least square or distance between $\{\hat X_t\}$ and the observed $\{x_{t}\}$.
+
+        When $\sigma\neq0$, we can have a similar discretization
+        \[\hat X_{t+1}=\hat X_{t}+(r-\mu \hat X_{t})\Delta t+\sigma (W_{t+\Delta t}-W_t)\]
+        but with two parameters to be estimated.  $\mu$ can be estimated by the mean, and $\sigma$ can be estimated by the variance.  Note that this series is only a single path of the resulting process.  The data can be calibrated now that we know the distribution of $X_t$; if we don't, one can run the iterations above for $N$ times choosing $N$ large to create sufficiently approximation of the statistics.
+        \begin{figure}[h!]
+        \centering
+        \includegraphics[width=1\textwidth]{data.eps}\\
+        \caption{Data with 500 observed values}\label{data}
+        \end{figure}
+
+        Following the arguments above, try to fit the data through (\ref{OU}) by 
+
+        i) choosing $\sigma=0$;
+
+        ii) choosing $\sigma\neq0$;
+    \end{question}
     We can rewrite the iteration expression as
     \[\hat X_{t+1}=
     \beta_0+\beta_1\hat X_t

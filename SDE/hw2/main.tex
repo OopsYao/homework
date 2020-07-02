@@ -131,19 +131,24 @@
         \[...,-3\Delta x, -2\Delta x, -\Delta x, 0,\Delta x,2\Delta x,3\Delta x,...\]
         with a unit size $\Delta x$ over a unit time $\Delta t$ such that 
         the probability it moves to left and to the right equals 1.
+
+        \begin{figure}[h!]
+        \centering
+        \includegraphics[width=\textwidth]{grid.png}\\
+        \end{figure}
         
         Here the randomness is ascertained by specification of
         the 50\% probability of each jump to either direction. 
         The illustration above carries not only for the origin but also any location.
 
-        % TODO Fix figure
-        \begin{tikzpicture}
-        \draw (-5,0) -- (5,0) node[anchor=north west] {$x$};
-        \draw[thick,->] (-5,0) -- (5,0)
-         node[pos=0.25]{0}  node[pos=0.5]{$x$} node[pos=0.9]{9/10};
-          \draw[thick, ->] (0,0.2) arc (0:185:1);
-          \draw[thick, ->] (0,0.2) arc (1:185:2);
-        \end{tikzpicture}
+        % % TODO Fix figure
+        % \begin{tikzpicture}
+        % \draw (-5,0) -- (5,0) node[anchor=north west] {$x$};
+        % \draw[thick,->] (-5,0) -- (5,0)
+        %  node[pos=0.25]{0}  node[pos=0.5]{$x$} node[pos=0.9]{9/10};
+        %   \draw[thick, ->] (0,0.2) arc (0:185:1);
+        %   \draw[thick, ->] (0,0.2) arc (1:185:2);
+        % \end{tikzpicture}
 
         Let us introduce the collection of a binary i.i.d. distribution
         $\{X_i(\omega)\}_{i=1}^n$ such that

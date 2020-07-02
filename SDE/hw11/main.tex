@@ -1,4 +1,25 @@
 \problem
+\begin{question}
+    Let us consider the following 1D classical heat equation
+    \begin{equation}\label{heat}
+    \left\{
+    \begin{array}{ll}
+    u_t=Du_{xx},& x\in \mathbb R, t>0, \\
+    u(0,x)=\varphi(x),& x\in \mathbb R.
+    \end{array}
+    \right.
+    \end{equation}
+    where $D$ is a positive constant, $\varphi$ is a function that decays exponentially as $|x|\rightarrow \infty$.  Then the solution of (\ref{heat}) is given by
+    \begin{equation}\label{heatsol}
+    u(t,x)=\frac{1}{\sqrt{4\pi Dt}}\int_{\mathbb R} e^{\frac{(x-y)^2}{4Dt}}\varphi(y) dy.
+    \end{equation}
+
+    i) use the probabilistic representation for the reverse heat equation to write $u(x,t)$ in terms of a conditional expectation.  Explain this result in a physical model.  Note $D$ is not necessarily $\frac{1}{2}$;
+
+    ii) evaluate the expectation in i) and show that it gives rise to (\ref{heatsol});
+
+    iii) numerical studies through Monte Carlo simulations: set $D=1$ and $\varphi$ be the characteristic function such that $\varphi\equiv 1$ for $|x|<1$ and $\varphi\equiv0$ for $|x|\geq1$.  Plot the solution $u(t,x)$ by evaluating the expectation in i) for $t=0.01,0.1, 0.5$ and $1$.  This should give us four curves of $x$ which describe the evolution of $u(t,x)$.  Beautify your plots when necessary.
+\end{question}
 \begin{subproblem}
     \item
     For an arbitrary $T>0$, denote $v(t,x)=u(T-t,\sqrt{2D}x)$,
@@ -59,6 +80,9 @@
 \end{subproblem}
 
 \problem
+\begin{question}
+    Find the It\^o diffusion corresponding to the generator $Af(x)=f''(x)+f'(x)$;
+\end{question}
 Denote that $X_t$ is an It\^o process
  driven by $\diff X_t=\mu(t,W_t,X_t)\diff t+\sigma(t,W_t,X_t)\diff W_t$
 with initial value $X_0=x$.
@@ -82,6 +106,9 @@ s.t. $\mu(0,0,x)=1,\sigma^2(0,0,x)=2$ to
 our goal.
 
 \problem
+\begin{question}
+    Let $X_t$ and $Y_t$ be two one--dimensional independent It\^o diffusions with infinitesimal generators $A_X$ and $A_Y$.  Prove that the infinitesimal generator of $Z_t=(X_t,Y_t)$ is $A_Z=A_X+A_Y$.
+\end{question}
 \begin{proof}
     Denote that the two independent It\^o diffusion are driven by
     \[\diff X_t=\mu_1\diff t+\sigma_1\diff W_t^{(1)},
@@ -127,6 +154,23 @@ our goal.
 \end{proof}
 
 \problem
+\begin{question}
+    Consider the following parabolic equation
+    \begin{equation}
+    \left\{
+    \begin{array}{ll}
+    u_t+u_x+\frac{1}{2}u_{xx}=-1,&x\in\mathbb R,t\in(0,T),\\
+    u(T,x)=0,&x\in\mathbb R.
+    \end{array}
+    \right.
+    \end{equation}
+    Represent the solution in terms of conditional expectation by
+    \begin{enumerate}[label=(\alph*)]
+    \item Feynman--Kac formula;
+    \item infinitesimal generator;
+    \end{enumerate}
+    Then find the solution by evaluating this conditional expectation.  Hint: you should verify that your solution satisfies the PDE by substituting it into the equation.
+\end{question}
 \begin{subproblem}[(\alph*)]
     \item
     It easy to find that the functions in Feymann-Kac formula
@@ -174,6 +218,17 @@ our goal.
 \end{subproblem}
 
 \problem
+\begin{question}
+    Find the It\^o diffusion $X_t$ associated with the infinitesimal generator $\frac{\partial }{\partial t}+\mu x \frac{\partial }{\partial x}+\frac{1}{2}\sigma^2x^2 \frac{\partial^2}{\partial x^2}$ and then use it to find the solution to
+    \begin{equation}
+    \left\{
+    \begin{array}{ll}
+    \frac{\partial u}{\partial t}+\mu x \frac{\partial u}{\partial x}+\frac{1}{2}\sigma^2x^2 \frac{\partial^2 u}{\partial x^2}=-x,&x\in\mathbb R,t\in(0,T),\\
+    u(T,x)=0,&x\in\mathbb R.
+    \end{array}
+    \right.
+    \end{equation}
+\end{question}
 Denote an It\^o diffusion $X_t$ driven by
 \begin{equation}
     \label{eq:a b Ito}
@@ -208,6 +263,18 @@ Finally, we obatin $u(t,x)$ as
 =\frac{x}{\mu}\left(\e^{\mu(T-t)}-1\right)\]
 
 \problem
+\begin{question}
+    Let $\Omega \subset\mathbb R^n$, $n\geq1$, be a bounded domain with smooth boundary $\partial\Omega$.  According to PDE theory, there exists a smooth solution $u=u(x)$ of the following equation
+    \begin{equation}
+    \left\{
+    \begin{array}{ll}
+    -\frac{1}{2}\Delta u=1,&x\in\Omega,\\
+    u=0,&x\in\partial \Omega.
+    \end{array}
+    \right.
+    \end{equation}
+    Prove that for each point $x\in\Omega$, $u(x)=E(\tau_x)$, where $\tau_x$ is the first time that a Brownian motion starting at $x$ hits $\partial \Omega$.
+\end{question}
 We know that for the Brownian motion the infinitesimal generator
 $\mathcal A$ is $\Delta/2$, hence if we denote that $X_t=x+W_t$, then
 we have that
@@ -221,6 +288,20 @@ i.e.,
 \[u(x)=E(\tau_x)\]
 
 \problem
+\begin{question}
+    Consider the following equation
+    \begin{equation}
+    \left\{
+    \begin{array}{ll}
+    -\frac{1}{2}\Delta u+cu=f,&x\in\Omega,\\
+    u=0,&x\in\partial \Omega,
+    \end{array}
+    \right.
+    \end{equation}
+    where $c=c(x)$ and $f=f(x)$ are smooth functions, and $c\geq0$ in $\Omega$.  Prove that, for each $x\in \Omega$,
+    \[u(x)=E\Big(\int_0^{\tau_x}f(X_t)e^{-\int_0^t ic(X_s) ds}dt\Big),\]
+    where $X_t=W_t+x$, i.e., the n-D Brownian motion statuting at $x$ and $\tau_x$ is the first time that $X_t$ hits $\partial \Omega$.  Hint: find $d\big(u(X_t)e^{-\int_0^t c(X_s) ds} \big)$ first and then mimic the proof of Feynman--Kac Theorem.  This is an extension of the previous problem.
+\end{question}
 \begin{proof}
     Denote $Y_t=u(X_t)\e^{\int_0^tc(X_s)\diff s}$,
     then $Y_0=u(x)$ and
