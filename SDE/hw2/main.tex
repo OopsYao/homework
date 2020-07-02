@@ -132,23 +132,31 @@
         with a unit size $\Delta x$ over a unit time $\Delta t$ such that 
         the probability it moves to left and to the right equals 1.
 
-        \begin{figure}[h!]
-        \centering
-        \includegraphics[width=\textwidth]{grid.png}\\
-        \end{figure}
-        
+        \[\begin{tikzpicture}
+            \draw[very thick,->](-5,0)--(5,0) node[right]{$x$};
+            \draw  node[]at(0,-0.3){0};
+            \draw  node[]at(-1,-0.3){$-\Delta x$};
+            \draw  node[]at(-2,-0.3){$-2\Delta x$};
+            \draw  node[]at(-3,-0.3){$-3\Delta x$};
+            \draw  node[]at(1,-0.3){$\Delta x$};
+            \draw  node[]at(2,-0.3){$2\Delta x$};
+            \draw  node[]at(3,-0.3){$3\Delta x$};
+            \draw  node[]at(0,0){$\bullet$};
+            \draw  node[]at(-1,0){$\bullet$};
+            \draw  node[]at(-2,0){$\bullet$};
+            \draw  node[]at(-3,0){$\bullet$};
+            \draw  node[]at(1,0){$\bullet$};
+            \draw  node[]at(2,0){$\bullet$};
+            \draw  node[]at(3,0){$\bullet$};
+            \draw[thick, ->,color=red] (0,0) arc (0:185:0.5);
+            \draw[thick, <-,color=red] (1,0) arc (0:185:0.5);
+            \draw[color=red] node[]at(-0.5,0.8){$p=\frac{1}{2}$};
+            \draw[color=red] node[]at(0.5,0.8){$p=\frac{1}{2}$};
+        \end{tikzpicture}\]
+
         Here the randomness is ascertained by specification of
         the 50\% probability of each jump to either direction. 
         The illustration above carries not only for the origin but also any location.
-
-        % % TODO Fix figure
-        % \begin{tikzpicture}
-        % \draw (-5,0) -- (5,0) node[anchor=north west] {$x$};
-        % \draw[thick,->] (-5,0) -- (5,0)
-        %  node[pos=0.25]{0}  node[pos=0.5]{$x$} node[pos=0.9]{9/10};
-        %   \draw[thick, ->] (0,0.2) arc (0:185:1);
-        %   \draw[thick, ->] (0,0.2) arc (1:185:2);
-        % \end{tikzpicture}
 
         Let us introduce the collection of a binary i.i.d. distribution
         $\{X_i(\omega)\}_{i=1}^n$ such that
