@@ -143,39 +143,39 @@ def barrier_dist(x):
 
 
 if __name__ == '__main__':
+    dt = .1
+
     # Initial [-1, 1] x [-1, 1]
     x0 = 2 * np.random.rand(N, 2) - np.tile(1, (N, 2))
 
-    barr_type = ABSORB
-    gate_len = 0
+    barr_type = REFLECT
+    gate_len = 0.2
 
     mu = 0.05
-
-    dt = .1
     a = 1
 
-    head = np.linspace(0, 3, 50)
-    body = np.linspace(4, 1600, 10)
-    # tail = np.linspace(11, 1600, 10)
-    watch = np.hstack((head, body))
+    watch = np.hstack((
+        np.linspace(0, 3, 50),
+        np.linspace(3, 20, 10),
+        np.linspace(20, 100, 10),
+        np.linspace(100, 800, 10),
+        np.linspace(800, 1600, 10),
+    ))
     jobname = f'{barr_type if barr_type == NO_BARR or gate_len == 0 else "gate=" + str(gate_len)}.mu={mu}.a={a}'
     print(jobname)
     sp = ShootPlot()
     sp.fig.set_figheight(4)
     sp.fig.set_figwidth(4)
     sys_iter = system_generator(x0, dt)
-    # last_shot = x0
     for s, x, v in snap_iter(watch, sys_iter, dt):
-        # last_shot = x
         sp.quiver(x, v)
         draw_barr(sp.ax)
-        sp.fig.savefig(
-            f'particle/swarm/{jobname}.t={round(s, 2)}.pdf')
+        sp.save(f'particle/swarm/{jobname}.t={s:.2f}.pdf')
         sp.clear()
     else:
         if barr_type == ABSORB:
             barrier_dist(x)
-            plt.savefig(f'particle/swarm/dist.mu={mu}.a={a}.t={s}.pdf')
+            plt.savefig(f'particle/swarm/dist.mu={mu}.a={a}.t={s:.2f}.pdf')
 
     # t1, r1 = escape_ratio(.1, x0)
     # t2, r2 = escape_ratio(.2, x0)

@@ -100,13 +100,8 @@ class ShootPlot():
         self.ax.axis('off')
         self.ax.set_aspect('equal', 'box')
 
-        # # Hide the right and top spines
-        # self.ax.spines['right'].set_visible(False)
-        # self.ax.spines['top'].set_visible(False)
-
-        # # Only show ticks on the left and bottom spines
-        # self.ax.yaxis.set_ticks_position('left')
-        # self.ax.xaxis.set_ticks_position('bottom')
+        self.ax.get_xaxis().set_visible(False)
+        self.ax.get_yaxis().set_visible(False)
 
         ob = AnchoredHScaleBar(size=1/4, label="1/4 unit", loc=1, frameon=True,
                                pad=0.6, sep=2, linekw=dict(color="blue"),)
@@ -118,6 +113,10 @@ class ShootPlot():
 
     def clear(self):
         self.ax.cla()
+    
+    def save(self, path):
+        self.fig.savefig(path, bbox_inches='tight', pad_inches=0)
+
 
     def snap(self):
         self._camera.snap()
