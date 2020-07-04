@@ -75,7 +75,7 @@ class AnchoredHScaleBar(matplotlib.offsetbox.AnchoredOffsetbox):
 class ShootPlot():
     def __init__(self):
         self.fig, self.ax = plt.subplots()
-        self.fig.tight_layout()
+        self.fig.tight_layout(pad=0)
 
         self._ax_init()
 
@@ -83,7 +83,7 @@ class ShootPlot():
 
     def quiver(self, x, v, color='black'):
         self.ax.quiver(*(x.T), *(vector_rescale(v).T),
-                       color=color, scale=50)
+                       color=color, scale=50, minlength=3)
         self._ax_init()
 
     def text(self, str):

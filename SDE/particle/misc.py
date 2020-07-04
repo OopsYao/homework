@@ -18,7 +18,7 @@ def snap_iter(shot_list, system_iterator, dt=None):
             s = next(gen)
             f = 0
             for t, x, v in system_iterator:
-                if s <= t:
+                while s <= t:
                     yield s, x, v
                     s = next(gen)
                 f += 1
@@ -34,13 +34,15 @@ if __name__ == '__main__':
         v = 0
         x = 0
         t = 0
-        while True:
+        i = 0
+        while i < 10:
             time.sleep(.11)
+            i += 1
             yield t, v, x
             v += .1
             x += v * dt
             t += dt
 
-    for s, x, v in snap_iter([0, .1, .2], infinite_gen(dt), dt):
+    for s, x, v in snap_iter([0, .1, .2], infinite_gen(dt)):
         time.sleep(1)
         pass
