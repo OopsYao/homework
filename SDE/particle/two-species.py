@@ -16,7 +16,7 @@ def V_neg_prime(s):
 
 
 a = [10, 10, 2]
-b = [.1, .1, -.7]
+b = [.1, .1, .3]
 
 
 def g(s, i):
@@ -65,9 +65,9 @@ for t in progressbar(range(frakit.frames)):
 
     for s in [0, 10, 20, 30, 40, 50, 60, 70, 100, 150, 200, 300, 600, 1000]:
         if abs(t * dt - s) < dt / 2:
-            sp.quiver(x, vx, color='purple')
+            sp.quiver(x, vx, color='blue')
             sp.quiver(y, vy)
-            sp.text('t=%.1f' % (t * dt))
+            # sp.text('t=%.1f' % (t * dt))
             sp.ax.set_aspect('equal', 'box')
             sp.ax.axis('off')
             sp.fig.savefig(

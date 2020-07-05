@@ -81,9 +81,9 @@ class ShootPlot():
 
         self._camera = Camera(self.fig)
 
-    def quiver(self, x, v, color='black'):
+    def quiver(self, x, v, **kwargs):
         self.ax.quiver(*(x.T), *(vector_rescale(v).T),
-                       color=color, scale=50, minlength=3)
+                       scale=50, **kwargs)
         self._ax_init()
 
     def text(self, str):
@@ -113,10 +113,9 @@ class ShootPlot():
 
     def clear(self):
         self.ax.cla()
-    
+
     def save(self, path):
         self.fig.savefig(path, bbox_inches='tight', pad_inches=0)
-
 
     def snap(self):
         self._camera.snap()

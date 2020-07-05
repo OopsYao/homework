@@ -1,38 +1,27 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from progressbar import progressbar
-from celluloid import Camera
 from utils import delta_matrix, norm, expand
-from anikit import FrameKit, ShootPlot
+from anikit import ShootPlot
 from forcelib import Morse, hyper_tang
+from misc import snap_iter
 
 D = 2  # Dimension
 N = 400  # Number of prey
 # N2 = 1
 
 # Randomly initial distribution
+np.random.seed(0)
 x = 2 * np.random.rand(N, D)
 # z = np.random.rand(N2, D)
 z = np.array([
     [-0.1, 0.5],
-    [2.1, 0.7],
-    [-0.1, 0.3],
+    # [2.1, 0.7],
+    # [-0.1, 0.3],
+    # [2.1, 0.1],
 ])
 N2 = len(z)
 
-T = 21
-frakit = FrameKit(T, 6)
-dt = frakit.dt
-
-# fig, ax = plt.subplots()
-# ax.axis('off')
-# ax.set_aspect('equal', 'box')
-# fig.tight_layout()
-sp = ShootPlot()
-camera = Camera(sp.fig)
-
-
-c = 10
+c = 2
 VIDEO_MODE = True
 DRY_RUN = False
 
@@ -63,73 +52,100 @@ def predator_prey(r):
     return - c * hyper_tang(r, 1, 1)
 
 
-z_trace = [z[0]]
-v_trace = []
-t_series = []
-for f in progressbar(range(frakit.frames)):
-    t = f * dt
+def system_generator(x0, z0, dt):
+    t = 0
+    x = x0
+    z = z0
 
-    xx = delta_matrix(x)
-    xx_norm = expand(norm(xx))
+    while True:
+        xx = delta_matrix(x)
+        xx_norm = expand(norm(xx))
 
-    zz = delta_matrix(z)
-    zz_norm = expand(norm(zz))
+        zz = delta_matrix(z)
+        zz_norm = expand(norm(zz))
 
-    xz = delta_matrix(x, z)
-    zx = - np.moveaxis(xz, 0, 1)
+        xz = delta_matrix(x, z)
+        zx = - np.moveaxis(xz, 0, 1)
 
-    xz_norm = norm(xz)
-    zx_norm = xz_norm.T
-    xz_norm = expand(xz_norm)
-    zx_norm = expand(zx_norm)
+        xz_norm = norm(xz)
+        zx_norm = xz_norm.T
+        xz_norm = expand(xz_norm)
+        zx_norm = expand(zx_norm)
 
-    with np.errstate(divide='ignore', invalid='ignore'):
-        vx = np.nansum(prey_social(xx_norm) / xx_norm * xx, 1) / N + \
-            np.nansum(prey_predator(xz_norm) / xz_norm * xz, 1) / N2
-        vz = np.nansum(predator_social(zz_norm) / zz_norm * zz, 1) / N2 + \
-            np.nansum(predator_prey(zx_norm) / zx_norm * zx, 1) / N
+        with np.errstate(divide='ignore', invalid='ignore'):
+            vx = np.nansum(prey_social(xx_norm) / xx_norm * xx, 1) / N + \
+                np.nansum(prey_predator(xz_norm) / xz_norm * xz, 1) / N2
+            vz = np.nansum(predator_social(zz_norm) / zz_norm * zz, 1) / N2 + \
+                np.nansum(predator_prey(zx_norm) / zx_norm * zx, 1) / N
 
-    if not DRY_RUN:
-        if VIDEO_MODE:
-            # sp.ax.scatter(*(x.T), color='black')
-            # sp.ax.scatter(*(z.T), color='red')
-            sp.scatter(x, color='black')
-            sp.scatter(z, color='red')
-            sp.text('t=%.2f' % t)
-            camera.snap()
-        else:
-            for s in range(T):
-                if abs(t - s) < dt / 2:
-                    sp.quiver(x, vx)
-                    sp.quiver(z, vz, color='blue')
-                    sp.ax.axis('off')
-                    sp.ax.set_aspect('equal', 'box')
-                    sp.text('t=%.2f' % t)
-                    sp.fig.savefig(
-                        f'particle/prey/tanh-two-predator.c={c}.t={t}.pdf')
-                    sp.ax.cla()
+        yield t, x, z, vx, vz
 
-    v_trace.append(vz[0])
+        x = x + vx * dt
+        z = z + vz * dt
+        t += dt
 
-    x += vx * dt
-    z += vz * dt
-    t_series.append(t)
-    z_trace.append(z[0])
 
-if VIDEO_MODE:
-    animation = camera.animate()
-    animation.save(
-        f'particle/prey/two-prey-pradator{c}.mp4', fps=frakit.FPS, dpi=200)
+if __name__ == '__main__':
+    dt = 0.02
+    c = 10
+    sp = ShootPlot()
+    for s, x, z, vx, vz in snap_iter(
+        np.hstack((
+            np.linspace(0, 2, 50),
+            np.linspace(2, 10, 20),
+            np.linspace(10, 100, 10),
+            np.linspace(100, 300, 10),
+        )),
+        system_generator(x, z, dt),
+        dt
+    ):
+        sp.quiver(x, vx, color='black')
+        sp.quiver(z, vz, color='red', minlength=1)
+        sp.save(f'particle/prey/N2={N2}.c={c}.t={s:.2f}.pdf')
+        sp.clear()
+    #     sp.scatter(x)
+    #     sp.scatter(z, color='blue')
+    #     sp.text(f't={s:.2f}')
+    #     sp.snap()
+    # ani = sp.animate()
+    # ani.save(f'particle/prey/N2={N2}.c={c}.mp4', dpi=200, fps=60)
 
-if DRY_RUN:
-    z_trace = np.array(z_trace)
-    v_trace = np.array(v_trace)
-    plt.figure()
-    # plt.plot(t, z_trace[:, 0], label='horizontal')
-    # plt.plot(t, z_trace[:, 1], label='vertical')
-    plt.plot(t_series, v_trace[:, 0], label='horizontal')
-    plt.plot(t_series, v_trace[:, 1], label='vertical')
-    plt.ylabel('v')
-    plt.xlabel('t')
-    plt.legend()
-    plt.show()
+    # z_trace = []
+    # t_trace = []
+    # for s, x, z, vx, vz in snap_iter(
+    #     np.linspace(0, 40, 2000),
+    #     system_generator(x, z, dt),
+    #     dt
+    # ):
+    #     z_trace.append(z)
+    #     t_trace.append(s)
+    # z_trace = np.array(z_trace)
+    # z_trace = np.moveaxis(z_trace, 0, 1)
+
+    # # fig, ax = plt.subplots(1, 2)
+    # plt.figure(figsize=(10, 4))
+    # plt.subplot(121)
+    # color_scheme = ['black',  'red', 'green', 'blue', 'black']
+    # i = 0
+    # for pred in z_trace:
+    #     plt.plot(t_trace, pred[:, 0], color=color_scheme[i],
+    #              label=f'predator {i + 1} vx')
+    #     plt.plot(t_trace, pred[:, 1], color=color_scheme[i],
+    #              linestyle='--', label=f'predator {i + 1} vy')
+    #     i += 1
+    # plt.legend()
+    # plt.xlabel('t')
+    # plt.ylabel('v')
+
+    # plt.subplot(122)
+    # i = 0
+    # for pred in z_trace:
+    #     plt.plot(pred[:, 0], pred[:, 1], color=color_scheme[i],
+    #              label=f'predator {i + 1}')
+    #     i += 1
+    # plt.legend()
+    # plt.xlabel('x')
+    # plt.ylabel('y')
+    # plt.tight_layout(pad=0)
+    # plt.savefig(f'func-pre{N2}.c={c}.pdf')
+    # plt.show()

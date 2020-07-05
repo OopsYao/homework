@@ -17,9 +17,9 @@ def snap_iter(shot_list, system_iterator, dt=None):
         try:
             s = next(gen)
             f = 0
-            for t, x, v in system_iterator:
-                while s <= t:
-                    yield s, x, v
+            for item in system_iterator:
+                while s <= item[0]:
+                    yield s, *item[1:]
                     s = next(gen)
                 f += 1
                 bar.update(f)
@@ -43,6 +43,6 @@ if __name__ == '__main__':
             x += v * dt
             t += dt
 
-    for s, x, v in snap_iter([0, .1, .2], infinite_gen(dt)):
+    for s, x, v in snap_iter([0, .1, .2], infinite_gen(dt), dt):
         time.sleep(1)
         pass
