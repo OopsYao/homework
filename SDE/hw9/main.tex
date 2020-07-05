@@ -203,6 +203,9 @@
         but with two parameters to be estimated.  $\mu$ can be estimated by the mean, and $\sigma$ can be estimated by the variance.  Note that this series is only a single path of the resulting process.  The data can be calibrated now that we know the distribution of $X_t$; if we don't, one can run the iterations above for $N$ times choosing $N$ large to create sufficiently approximation of the statistics.
         \begin{figure}[h!]
         \centering
+        % Fix eps problem on server
+        % See https://tex.stackexchange.com/questions/76455/converted-xxx-eps-converted-to-pdf-not-found
+        \epstopdfsetup{outdir=./}
         \includegraphics[width=1\textwidth]{data.eps}\\
         \caption{Data with 500 observed values}\label{data}
         \end{figure}
